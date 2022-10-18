@@ -31,9 +31,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
 	<!-- 스프링 빈을 태그로 등록하지 않고 자동으로 검색(auto scan) -->
-	<context:component-scan
-		base-package="com.ranzo.power" />
+	<context:component-scan base-package="com.ranzo.power" />
 
 	<!-- 파일업로드에 필요한 bean -->
 	<beans:bean id="multipartResolver"
@@ -41,13 +41,13 @@
 		<!-- 파일업로드 최대 용량(byte) -->
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
+	
 	<!-- 파일업로드를 위한 디렉토리 설정 -->
 	<!-- String uploadPath=new String("c:/dev/upload"); -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="c:/dev/upload" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.ranzo.power" />
 	
 	
 	
