@@ -1,0 +1,234 @@
+--멤버
+DROP TABLE MEMBER_TB;
+
+create table MEMBER_TB (
+userid varchar2(50) not null primary key,
+passwd varchar2(50) not null,
+name varchar2(50) not null,
+email varchar2(50),
+gender varchar2(10),
+hp varchar2(50),
+zipcode varchar2(7),
+addr1 varchar2(200),
+addr2 varchar2(200),
+join_date date default sysdate
+);
+
+insert into MEMBER_TB (userid,passwd,name,email) values ('kim','1234','김철수','kim@naver.com');
+insert into MEMBER_TB (userid,passwd,name,email) values ('hong','1234','홍길동','hong@nate.com');
+
+--로그인 처리
+select name from MEMBER_TB
+where userid='kim' and passwd='1234';
+
+
+
+
+
+--전시
+DROP TABLE EXHIBITION_TB;
+
+create table EXHIBITION_TB(
+code varchar2(50) primary key, 
+location varchar2(200), -- 전시 지역
+gallery varchar2(200), -- 전시관
+title varchar2(200), -- 전시 제목
+summary varchar2(500), -- 전시 소개/소제목
+thumnail varchar2(500),  -- 포스터 이미지 링크
+start_date date, -- 전시 시작일
+end_date date, -- 전시 종료일
+hit number default 0 --조회수
+);
+
+insert into EXHIBITION_TB (code, location, gallery,  title, summary, thumnail, start_date, end_date) values(
+'testcode01', '경기', '현대백화점 킨텍스점 9층 문화홀', '루이스 웨인展 in 일산', '고양이를 그린 사랑의 화가', 
+'http://image.toast.com/aaaaab/ticketlink/TKL_6/lw314_382.png',
+'2020/08/27', '2022/10/23'
+);
+
+insert into EXHIBITION_TB (code, location, gallery, title, thumnail, start_date, end_date) values(
+'testcode02', '서울', '마이아트 뮤지엄', '프랑코 폰타나', 
+'http://image.toast.com/aaaaab/ticketlink/TKL_4/ff_pst0927.jpg',
+'2022/09/30', '2023/03/01'
+);
+
+insert into EXHIBITION_TB (code, location, gallery, title, summary, thumnail, start_date, end_date) values(
+'testcode03', '서울', 'K현대미술관 전시실 지하 1F/1.5F', '데미안', 'The Dream of Sinclair',
+'http://image.toast.com/aaaaab/ticketlink/TKL_7/de_pst0607.jpg',
+'2022/06/08', '2022/12/08'
+);
+
+SELECT * FROM EXHIBITION_TB;
+
+--filter & sort
+select code, location, gallery, title, summary, start_date, end_date
+from EXHIBITION_TB
+where location in('서울', '제주')
+order by end_date;
+
+
+
+
+
+--위시리스트
+DROP TABLE WISHLIST_TB;
+
+CREATE TABLE WISHLIST_TB(
+no number primary key,
+userid varchar2(50) not null, -- 찜한 사람
+product varchar2(50) not null, -- 찜한 전시
+reg_date date default sysdate, -- 찜한 날
+
+foreign key(userid) references MEMBER_TB(userid) on delete cascade,
+foreign key(product) references EXHIBITION_TB(code) on delete cascade
+);
+
+--위시리스트 코드 발급용 시퀀스
+create sequence seq_wishlist start with 1 increment by 1;
+
+
+INSERT INTO WISHLIST_TB (no, userid, product) VALUES (SEQ_WISHLIST.nextval, 'kim','testcode02');
+INSERT INTO WISHLIST_TB (no, userid, product, reg_date) VALUES (SEQ_WISHLIST.nextval, 'hong','testcode01','2022/09/30');
+INSERT INTO WISHLIST_TB (no, userid, product) VALUES (SEQ_WISHLIST.nextval, 'hong','testcode02');
+
+SELECT * FROM WISHLIST_TB;
+
+
+
+
+--리뷰
+DROP TABLE REVIEW_TB CASCADE CONSTRAINTS;
+
+CREATE TABLE REVIEW_TB(
+bno number primary key, --seq_review
+product varchar2(50) not null, -- 제품
+userid varchar2(50) not null, -- 작성자
+title varchar2(200), --제목
+content clob, --내용
+reg_date date default sysdate, --작성일자 
+filename varchar2(2000),
+filesize number default 0,
+rating number default 5,
+thumb number default 0,
+viewcnt number default 0,
+
+foreign key(product) references EXHIBITION_TB(code),
+foreign key(userid) references MEMBER_TB(userid)
+);
+
+--시퀀스
+DROP SEQUENCE seq_review;
+create sequence seq_review start with 1 increment by 1;
+
+INSERT INTO REVIEW_TB(bno, product, userid, title, content) VALUES(SEQ_REVIEW.nextval, 'testcode01','kim', 'review title1', 'review kim 1 ');
+INSERT INTO REVIEW_TB(bno, product, userid, title, content) VALUES(SEQ_REVIEW.nextval, 'testcode03','kim', 'review title3', 'review kim 3');
+INSERT INTO REVIEW_TB(bno, product, userid, title, content) VALUES(SEQ_REVIEW.nextval, 'testcode03','hong', 'review title3', 'review hong 3');
+
+SELECT * FROM REVIEW_TB;
+
+
+--리뷰 답글
+DROP TABLE REVIEW_REPLY_TB;
+
+CREATE TABLE REVIEW_REPLY_TB(
+rno number primary key, -- seq_review_reply
+bno number default 0,
+replytext varchar2(1000) not null,
+replyer varchar2(50) not null,
+reg_date date default sysdate,
+update_date date default sysdate
+);
+
+
+--시퀀스
+create sequence seq_review_reply start with 1 increment by 1;
+
+
+
+--리뷰 첨부
+CREATE TABLE REVIEW_ATTACH_TB(
+full_name varchar2(150) primary key,
+bno number not null,
+regdate date default sysdate
+);
+
+
+
+
+
+-- QNA
+DROP TABLE REVIEW_TB CASCADE CONSTRAINTS;
+
+CREATE TABLE QNA_TB(
+bno number primary key, -- seq_qna
+product varchar2(50) not null, -- 제품
+userid varchar2(50) not null, -- 작성자
+title varchar2(200), --제목
+content clob, 
+reg_date date default sysdate, --작성일자 
+filename varchar2(2000),
+filesize number default 0,
+viewcnt number default 0,
+reply_state varchar2(50),
+
+foreign key(product) references EXHIBITION_TB(code),
+foreign key(userid) references MEMBER_TB(userid)
+);
+
+--시퀀스
+create sequence seq_qna start with 1 increment by 1;
+
+
+
+--QNA 답글
+DROP TABLE REVIEW_REPLY_TB;
+
+CREATE TABLE REVIEW_REPLY_TB(
+rno number primary key, -- seq_qna_reply
+bno number default 0,
+replytext varchar2(1000) not null,
+replyer varchar2(50) not null,
+reg_date date default sysdate,
+update_date date default sysdate
+);
+
+
+--시퀀스
+create sequence seq_qna_reply start with 1 increment by 1;
+
+
+
+--QNA 첨부
+CREATE TABLE QNA_ATTACH_TB(
+full_name varchar2(150) primary key,
+bno number not null,
+reg_date date default sysdate
+);
+
+
+
+
+
+--관리자
+DROP TABLE ADMIN_TB;
+
+CREATE TABLE ADMIN_TB(
+adminid number primary key,
+passwd varchar2(50) not null,
+name varchar2(50)
+);
+
+INSERT INTO ADMIN_TB (adminid, passwd, name) VALUES('admin', '1234', '관리자');
+
+
+--?
+CREATE TABLE POPUP_TB(
+no number primary key, -- seq_popup
+title varchar2(200),
+content clob,
+start_date date,
+end_date date
+);
+
+--시퀀스
+create sequence seq_popup start with 1 increment by 1;
