@@ -21,9 +21,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	}
 
 	@Override
-	public ExhibitionDTO detailProduct(int code) {
-		// TODO Auto-generated method stub
-		return null;
+	public ExhibitionDTO detailProduct(String exhibitionCode) {
+		return exhibitionDAO.detailProduct(exhibitionCode);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	}
 
 	@Override
-	public void deleteProduct(int code) {
+	public void deleteProduct(String exhibitionCode) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -45,9 +44,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	}
 
 	@Override
-	public String fileInfo(int code) {
+	public String fileInfo(String exhibitionCode) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

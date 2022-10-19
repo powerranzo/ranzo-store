@@ -21,30 +21,30 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	}
 
 	@Override
-	public ExhibitionDTO detailProduct(int code) {
-		return null;
+	public ExhibitionDTO detailProduct(String exhibitionCode) {
+		return sqlSession.selectOne("exhibition.detail", exhibitionCode);
 	}
 
 	@Override
 	public void updateProduct(ExhibitionDTO dto) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void deleteProduct(int code) {
+	public void deleteProduct(String exhibitionCode) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void insertProduct(ExhibitionDTO dto) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public String fileInfo(int code) {
+	public String fileInfo(String exhibitionCode) {
 		// TODO Auto-generated method stub
 		return null;
 	}

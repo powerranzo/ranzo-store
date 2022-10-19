@@ -11,11 +11,27 @@
 <%@ include file="../include/menu.jsp" %>
 <h2>상품목록</h2>
 
-<c:forEach var="row" items="${list}">
-${row.code}
-${row.title}
-<br>
-</c:forEach>
+	<ul class="shop-list">
+		<c:forEach var="dto" items="${list}">
+			<li>
+				<a href="${path}/shop/exhibition/detail/${dto.code}">
+					<div class="prd-img">
+						<img src="${dto.thumnail}">
+					</div>
+					<div class="prd-info">
+						<span class="prd-title">${dto.title}</span>
+						<span class="prd-place">${dto.gallery}</span>
+						<span class="prd-period">${dto.startDate} ~ ${dto.endDate}</span>
+					</div> 
+					<div> <!-- 관리자용 -->
+						<c:if test="${sessionScope.admin_userid != null }">
+							<br><a href="#">[편집]</a>
+						</c:if>
+					</div>
+				</a>
+			</li>
+		</c:forEach>
+	</ul>
 
 <%-- 
 <table border="1" style="width: 100%;">

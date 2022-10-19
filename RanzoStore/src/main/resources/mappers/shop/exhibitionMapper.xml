@@ -5,9 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="exhibition">
-	<select id="list"
-		resultType="ExhibitionDTO">
+	<select id="list" resultType="ExhibitionDTO">
 		SELECT * FROM EXHIBITION_TB
+	</select>
+	
+	<select id="detail" resultType="ExhibitionDTO">
+		SELECT * FROM EXHIBITION_TB
+		WHERE code = #{exhibitionCode}
 	</select>
 
 </mapper>
