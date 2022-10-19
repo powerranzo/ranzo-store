@@ -4,12 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
-<mapper namespace="message">
- <insert id="create">
-  insert into tbl_message (mid, targetid, sender, message )
-  values ( message_seq.nextval, #{targetid}, #{sender}, #{message} )
- </insert>
- 
+<mapper namespace="qnaboard">
+	<select id="listAll" resultType="QnaBoardDTO">
+		select bno, title, writer, m.name, reg_date, viewcnt
+		from qna_tb q, member_tb m
+		where q.writer = m.userid
+		order by bno desc
+	</select>
 	
 </mapper>
 

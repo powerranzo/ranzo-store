@@ -16,7 +16,25 @@
 		<!-- 연결문자열에 log4jdbc가 추가됨 -->
 		<property name="url"
 			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="spring" />
+		<property name="username" value="ranzo" />
 		<property name="password" value="1234" />
+	</bean>
+
+	<!-- SqlSessionFactory 객체 주입 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactory">
+		<property name="dataSource" ref="dataSource" />
+		<property value="classpath:/mybatis-config.xml"
+			name="configLocation" />
+		<property value="classpath:mappers/**/*Mapper.xml"
+			name="mapperLocations" />
+	</bean>
+
+	<!-- SqlSession 객체 주입 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate"
+		id="sqlSession" destroy-method="clearCache">
+
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
 	</bean>
 </beans>
