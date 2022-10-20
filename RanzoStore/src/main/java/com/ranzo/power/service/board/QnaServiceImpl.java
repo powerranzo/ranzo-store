@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.model.board.dao.QnaDAO;
 import com.ranzo.power.model.board.dto.QnaDTO;
@@ -37,11 +38,19 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	//글쓰기,첨부파일 등록 => 하나의 트랜잭션 단위
+	@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {
+		//qna_tb 테이블에 레코드 추가
 		qnaDao.create(dto);
-
+		//qna_attach_tb 테이블에 레코드 추가
+		String[] files = dto.getFiles();
+		if(files==null) return; //첨부파일 없으면 넘어가기
+		for(String name : files) {
+			qnaDao.addAttach(name); //qna_attach_tb에 insert
+		}
 	}
 
 	@Override
@@ -63,7 +72,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void increaseViewcnt(int bno) throws Exception {
-		// TODO Auto-generated method stub
+		qnaDao.increaseViewcnt(bno);
 
 	}
 
@@ -75,8 +84,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public QnaDTO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return qnaDao.read(bno);
 	}
 
 }

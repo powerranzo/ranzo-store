@@ -75,14 +75,7 @@ $(function(){
 });
 </script>
 
-<style>
-.fileDrop {
-	width: 600px;
-	height: 100px;
-	border: 1px dotted gray;
-	background-color: gray;
-}
-</style>
+
 
 </head>
 <body>
@@ -94,7 +87,7 @@ $(function(){
 		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
 	</div>
 	<div>
-		이름
+		아이디
 		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
 	</div>
 	<div style="width: 700px;">

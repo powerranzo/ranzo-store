@@ -29,7 +29,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
+		sqlSession.insert("qna.addAttach", fullName);
 
 	}
 
@@ -63,7 +63,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public void increaseViewcnt(int bno) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.update("qna.increaseViewcnt", bno);
 
 	}
 
@@ -75,8 +75,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public QnaDTO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("qna.read",bno);
 	}
 
 }

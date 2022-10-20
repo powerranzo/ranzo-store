@@ -42,6 +42,8 @@ td {
 		<td>${row.viewcnt}</td>
 	</tr>
 </c:forEach>
+<!-- 페이지 네비게이션 출력 -->
+
 </table>
 <div align="right">
 <button type="button" id="btnWrite">글쓰기</button>

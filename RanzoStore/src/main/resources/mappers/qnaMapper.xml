@@ -16,6 +16,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into qna_tb (bno,title,content,writer) values
   (seq_qna.nextval,#{title},#{content},#{writer})
 	</insert>
+	
+	<!-- 첨부파일 정보 저장 -->
+	<insert id="addAttach">
+	insert into qna_attach_tb (fullName, bno) values
+	(#{fullName}, seq_qna.currval)
+	</insert>
+	
+	<!-- 레코드 계산 -->
+	
+	<!-- 조회수 증가 처리 -->
+	<update id="increaseViewcnt">
+		update qna_tb set viewcnt=viewcnt+1
+		where bno = #{bno}
+	</update>
+	
+	<select id="read" resultType="QnaDTO">
+		select bno, title, writer, reg_date, viewcnt, content
+		from qna_tb q, member_tb m
+		where q.writer = m.userid and bno=#{bno}
+	</select>
 </mapper>
 
 

@@ -44,7 +44,23 @@ public class QnaController {
 	
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute QnaDTO dto) throws Exception {
+		//세션 추가해야함
+		
 		qnaService.create(dto);
 		return "redirect:/board/qna/list.do";
 	}
+	
+	@RequestMapping("view.do")
+	public ModelAndView view(int bno) throws Exception {
+		//세션 추가해야함
+		
+		//조회수 증가 처리
+		qnaService.increaseViewcnt(bno);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaboard/view");
+		mav.addObject("dto", qnaService.read(bno));
+		return mav;
+	}
+	
+	
 }
