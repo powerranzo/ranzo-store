@@ -75,6 +75,15 @@ $(function(){
 });
 </script>
 
+<style>
+.fileDrop {
+width: 600px;
+height: 100px;
+border: 1px dotted gray;
+background-color: gray;
+}
+</style>
+
 
 
 </head>

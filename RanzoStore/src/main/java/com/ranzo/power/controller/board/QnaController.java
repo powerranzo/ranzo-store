@@ -10,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
@@ -62,5 +64,25 @@ public class QnaController {
 		return mav;
 	}
 	
+	//첨부파일 목록 리턴
+	//ArrayList를 json 배열로 변환하여 리턴
+	@RequestMapping("getAttach/{bno}")
+	@ResponseBody
+	public List<String> getAttach(@PathVariable int bno) {
+		return qnaService.getAttach(bno);
+	}
 	
+	
+	//게시물 수정
+	@RequestMapping("update.do")
+	public String update(QnaDTO dto) throws Exception {
+		if(dto != null) {
+			qnaService.update(dto);
+		}
+		//상세화면으로 리턴
+		return "redirect:/board/qna/view.do?bno="+dto.getBno();
+		
+	}
+		
+		
 }

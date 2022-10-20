@@ -36,6 +36,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from qna_tb q, member_tb m
 		where q.writer = m.userid and bno=#{bno}
 	</select>
+	
+	<!-- 첨부파일 목록 -->
+	<select id="getAttach" resultType="String">
+		select full_name
+		from qna_attach_tb
+		where bno=#{bno}
+		order by reg_date desc	
+	</select>
+	
+	<!-- 첨부파일 레코드 삭제 -->
+	<delete id="deleteFile">
+		delete from qna_attach_tb
+		where full_name= ${full_name}
+	</delete>
+	
+	<!-- 게시물 내용 수정 -->
+	<update id="update">
+		update qna_tb
+		set title=#{title}, content=#{content}
+		where bno=#{bno}
+	</update>
+	
+	<!-- 새로운 첨부파일 추가 -->
+	<insert id="updateAttach">
+		insert into qna_attach_tb (full_name, bno) values
+		(#{full_name}, #{bno})
+	</insert>
 </mapper>
 
 

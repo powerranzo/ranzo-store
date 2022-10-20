@@ -17,14 +17,13 @@ public class QnaServiceImpl implements QnaService {
 	
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
+		qnaDao.deleteFile(fullName);
 
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return qnaDao.getAttach(bno);
 	}
 
 	@Override
@@ -46,16 +45,24 @@ public class QnaServiceImpl implements QnaService {
 		//qna_tb 테이블에 레코드 추가
 		qnaDao.create(dto);
 		//qna_attach_tb 테이블에 레코드 추가
-		String[] files = dto.getFiles();
+		String[] files = dto.getFiles(); //첨부파일 이름 배열
 		if(files==null) return; //첨부파일 없으면 넘어가기
 		for(String name : files) {
 			qnaDao.addAttach(name); //qna_attach_tb에 insert
 		}
 	}
-
+	
+	@Transactional
 	@Override
 	public void update(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		qnaDao.update(dto);
+		
+		String[] files = dto.getFiles(); //첨부파일 이름 배열
+		if(files==null) return; //첨부파일 없으면 넘어가기
+		for(String name : files) {
+			System.out.println("첨부파일 이름 : " + name);
+			qnaDao.updateAttach(name, dto.getBno());
+		}
 
 	}
 

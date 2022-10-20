@@ -1,6 +1,8 @@
 package com.ranzo.power.model.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,14 +19,13 @@ public class QnaDAOImpl implements QnaDAO {
 	
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("qna.deleteFile", fullName);
 
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("qna.getAttach",bno);
 	}
 
 	@Override
@@ -34,8 +35,11 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public void updateAttach(String fullName, int bno) {
-		// TODO Auto-generated method stub
+	public void updateAttach(String fullname, int bno) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("fullname", fullname);
+		map.put("bno", bno);
+		sqlSession.insert("qna.updateAttach", map);
 
 	}
 
@@ -46,8 +50,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public void update(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.update("qna.update",dto);
 	}
 
 	@Override
