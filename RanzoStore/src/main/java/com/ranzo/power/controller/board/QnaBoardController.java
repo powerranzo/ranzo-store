@@ -45,10 +45,9 @@ public class QnaBoardController {
 	
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute QnaBoardDTO dto, HttpSession session) throws Exception {
-		//세션 추가해야함
 		//세션에서 사용자 아이디 가져옴
-		//String writer = (String)session.getAttribute("userid");
-		//dto.setWriter(writer);
+		String writer = (String)session.getAttribute("userid");
+		dto.setWriter(writer);
 		
 		//레코드 저장
 		qnaboardService.create(dto);

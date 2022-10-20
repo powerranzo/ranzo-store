@@ -29,7 +29,7 @@ public class QnaBoardDAOImpl implements QnaBoardDAO {
 
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
+		sqlSession.insert("qnaboard.addAttach", fullName);
 
 	}
 

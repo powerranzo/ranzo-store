@@ -15,7 +15,6 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
@@ -74,9 +73,16 @@ $(function(){
 		});
 	});
 });
-
-
 </script>
+
+<style>
+.fileDrop {
+	width: 600px;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: gray;
+}
+</style>
 
 </head>
 <body>
@@ -85,13 +91,11 @@ $(function(){
 <form id="form1" name="form1" method="post" action="${path}/board/qnaboard/insert.do">
 	<div>
 		제목
-		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요"><br>
-		이름
-		<input name="name" id="name" size="80" value="${dto.name}" placeholder="이름을 입력하세요">
+		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
 	</div>
 	<div style="width: 700px;">
 		내용
-		<textarea name="content" id="content" rows="10" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+		<textarea name="content" id="content" rows="3" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 	</div>
 	<div>
 		첨부파일을 등록하세요
@@ -100,7 +104,7 @@ $(function(){
 	</div>
 	
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList">목록</button>		
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qnaboard/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>
