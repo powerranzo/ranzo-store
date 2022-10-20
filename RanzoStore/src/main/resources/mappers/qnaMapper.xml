@@ -63,6 +63,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into qna_attach_tb (full_name, bno) values
 		(#{full_name}, #{bno})
 	</insert>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete">
+		delete from qna_tb where bno=#{bno}
+	</delete>
+	
 </mapper>
 
 

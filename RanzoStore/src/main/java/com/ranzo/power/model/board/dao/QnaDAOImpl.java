@@ -54,8 +54,8 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public void delete(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+	public void delete(int bno) throws Exception {
+		sqlSession.delete("qna.delete", bno);
 
 	}
 

@@ -81,7 +81,12 @@ public class QnaController {
 		}
 		//상세화면으로 리턴
 		return "redirect:/board/qna/view.do?bno="+dto.getBno();
-		
+	}
+	
+	@RequestMapping("delete.do")
+	public String delete(int bno) throws Exception {
+		qnaService.delete(bno);
+		return "redirect:/board/qna/list.do";
 	}
 		
 		

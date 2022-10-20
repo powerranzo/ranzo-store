@@ -11,7 +11,7 @@ public interface QnaDAO {
 	public void updateAttach(String fullname, int bno); //첨부파일 수정
 	public void create(QnaDTO dto) throws Exception; //글쓰기
 	public void update(QnaDTO dto) throws Exception; //글수정
-	public void delete(QnaDTO dto) throws Exception; //글삭제
+	public void delete(int bno) throws Exception; //글삭제
 	public List<QnaDTO> listAll() throws Exception; //글목록
 	public void increaseViewcnt(int bno) throws Exception; //조회수 증가 처리
 	public int countArticle() throws Exception;//레코드 갯수 계산
