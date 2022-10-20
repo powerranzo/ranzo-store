@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#btnWrite").click(function() {
-		location.href="${path}/board/qnaboard/write.do";
+		location.href="${path}/board/qna/write.do";
 	});
 });
 </script>
@@ -36,8 +36,8 @@ td {
 <c:forEach var="row" items="${map.list}">
 	<tr>
 		<td>${row.bno}</td>
-		<td><a href="${path}/board/qnaboard/view.do?bno=${row.bno}">${row.title}</a></td>
-		<td>${row.name} <span>( ${row.writer} )</span></td>
+		<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+		<td>${row.writer}</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${row.viewcnt}</td>
 	</tr>

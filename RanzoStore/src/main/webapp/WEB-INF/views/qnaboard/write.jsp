@@ -24,7 +24,7 @@ $(function() {
 });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function(){
 	$("#btnSave").click(function(){
 		var str="";
@@ -73,7 +73,7 @@ $(function(){
 		});
 	});
 });
-</script>
+</script> -->
 
 <style>
 .fileDrop {
@@ -88,14 +88,14 @@ $(function(){
 <body>
 <%@ include file="../include/menu.jsp" %>
 <h2>문의하기</h2>
-<form id="form1" name="form1" method="post" action="${path}/board/qnaboard/insert.do">
+<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
 	<div>
 		제목
 		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
 	</div>
 	<div style="width: 700px;">
 		내용
-		<textarea name="content" id="content" rows="3" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+		<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 	</div>
 	<div>
 		첨부파일을 등록하세요
@@ -104,7 +104,7 @@ $(function(){
 	</div>
 	
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qnaboard/list.do'">목록</button>		
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>

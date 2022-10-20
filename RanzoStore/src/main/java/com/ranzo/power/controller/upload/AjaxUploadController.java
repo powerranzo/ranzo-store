@@ -22,14 +22,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ranzo.power.controller.util.MediaUtils;
 import com.ranzo.power.controller.util.UploadFileUtils;
-import com.ranzo.power.service.board.QnaBoardService;
+import com.ranzo.power.service.board.QnaService;
+
 
 @Controller
 public class AjaxUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	
 	@Inject
-	QnaBoardService qnaboardService;
+	QnaService qnaboardService;
 	
 	//업로드 장소
 	@Resource(name = "uploadPath")

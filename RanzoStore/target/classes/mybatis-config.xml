@@ -5,7 +5,7 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias alias="QnaBoardDTO" type="com.ranzo.power.model.board.dto.QnaBoardDTO" />
+		<typeAlias alias="QnaDTO" type="com.ranzo.power.model.board.dto.QnaDTO" />
 	</typeAliases>
 
 </configuration>
