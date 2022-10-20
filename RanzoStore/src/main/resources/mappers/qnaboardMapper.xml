@@ -12,6 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by bno desc
 	</select>
 	
+	<insert id="insert">
+		insert into qna_tb (bno,title,content,writer) values
+		(seq_qna.nextval,#{title},#{content},#{writer})
+	</insert>
+	
 </mapper>
 
 

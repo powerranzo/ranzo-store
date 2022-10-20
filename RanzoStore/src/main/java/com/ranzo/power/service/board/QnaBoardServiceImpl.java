@@ -41,8 +41,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	@Override
 	public void create(QnaBoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		qnaboardDao.create(dto);
 	}
 
 	@Override

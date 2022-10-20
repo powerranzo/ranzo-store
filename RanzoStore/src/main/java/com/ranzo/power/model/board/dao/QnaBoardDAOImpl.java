@@ -41,7 +41,7 @@ public class QnaBoardDAOImpl implements QnaBoardDAO {
 
 	@Override
 	public void create(QnaBoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		sqlSession.insert("qnaboard.insert", dto);
 
 	}
 

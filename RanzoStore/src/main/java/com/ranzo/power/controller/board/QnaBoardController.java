@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,5 +41,17 @@ public class QnaBoardController {
 	@RequestMapping("write.do")
 	public String write() {
 		return "qnaboard/write";
+	}
+	
+	@RequestMapping("insert.do")
+	public String insert(@ModelAttribute QnaBoardDTO dto, HttpSession session) throws Exception {
+		//세션 추가해야함
+		//세션에서 사용자 아이디 가져옴
+		//String writer = (String)session.getAttribute("userid");
+		//dto.setWriter(writer);
+		
+		//레코드 저장
+		qnaboardService.create(dto);
+		return "redirect:/board/qnaboard/list.do";
 	}
 }
