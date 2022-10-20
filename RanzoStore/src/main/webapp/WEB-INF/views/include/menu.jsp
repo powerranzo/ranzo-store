@@ -6,7 +6,8 @@
 	
  <a href="${path}/upload/uploadForm">업로드 테스트</a> | 
  <a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> | 
- <a href="${path}/board/qna/list.do">QnA(찐)</a> | 
+ <a href="${path}/board/qna/list.do">QnA</a> | 
+ <a href="${path}/board/review/list.do">리뷰</a> | 
 
 </div>
 <hr>
