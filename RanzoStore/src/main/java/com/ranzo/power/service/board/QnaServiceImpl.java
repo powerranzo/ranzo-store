@@ -40,7 +40,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void create(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		qnaDao.create(dto);
 
 	}
 

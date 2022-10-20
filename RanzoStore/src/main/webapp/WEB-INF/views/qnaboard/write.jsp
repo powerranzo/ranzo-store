@@ -24,7 +24,7 @@ $(function() {
 });
 </script>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $(function(){
 	$("#btnSave").click(function(){
 		var str="";
@@ -73,7 +73,7 @@ $(function(){
 		});
 	});
 });
-</script> -->
+</script>
 
 <style>
 .fileDrop {
@@ -92,6 +92,10 @@ $(function(){
 	<div>
 		제목
 		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
+	</div>
+	<div>
+		이름
+		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
 	</div>
 	<div style="width: 700px;">
 		내용
