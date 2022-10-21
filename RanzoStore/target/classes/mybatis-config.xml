@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias alias="QnaDTO" type="com.ranzo.power.model.board.dto.QnaDTO" />
+		<typeAlias alias="ReviewDTO" type="com.ranzo.power.model.board.dto.ReviewDTO" />
 	</typeAliases>
 
 </configuration>

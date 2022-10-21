@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 작성하기</title>
+<title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
-		width : 700,
+		width : 600,
 		height : 200
 	});
 });
@@ -55,32 +55,41 @@ background-color: gray;
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>문의하기</h2>
-<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
-	<div>
-		제목
-		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
-	</div>
-	<div>
-		아이디
-		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
-	</div>
-	<div style="width: 700px;">
-		내용
-		<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
-	</div>
+<h2>Review 글쓰기</h2>
+<form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
+	<table>
+		<%-- <tr>
+			<th>별점</th>
+			<td>
+				<input id="rating" name="rating" value="${dto.rating}" placeholder="별점을 입력하세요">
+			</td>
+		</tr> --%>
+		<tr>
+			<th>전시코드</th>
+			<td>				
+			<input id="product" name="product" value="${dto.product}" placeholder="전시명을 입력하세요">
+			</td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td>				
+			<input id="writer" name="writer" value="${dto.writer}" placeholder="이름을 입력하세요">
+			</td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td>
+			<input id="title" name="title" value="${dto.title}" size="70" placeholder="제목을 입력하세요">
+			</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+			<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+			</td>
+		</tr>
+	</table>
 
-		첨부파일을 등록하세요
-		<!-- 파일을 업로드할 영역  -->
-		<div class="fileDrop"></div>
-		<!-- 업로드된 파일 목록을 출력할 영역 -->
-		<div class="uploadedList"></div>	
-
-<!-- 	<div>
-	비밀번호
-	<input type="password" name="passwd" id="passwd" size="80">
-	</div> -->
-	
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
