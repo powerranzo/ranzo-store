@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>QnA 작성하기</title>
 <%@ include file="../include/header.jsp" %>
+<script src="${path}/include/js/common.js"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -102,7 +103,6 @@ background-color: gray;
 		내용
 		<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 	</div>
-
 		첨부파일을 등록하세요
 		<div class="fileDrop"></div>
 		<div class="uploadedList"></div>	

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,13 +35,21 @@ public class QnaController {
 	
 	
 	@RequestMapping("list.do")
-	public ModelAndView list() throws Exception {
-		List<QnaDTO> list = qnaService.listAll();
+	public ModelAndView list(
+			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "") String keyword
+			) throws Exception {
+		
+		
+		List<QnaDTO> list = qnaService.listAll(search_option,keyword);
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list); //map에 자료 저장
 		map.put("count", list.size()); //레코드 개수 파일
+		
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
 		mav.setViewName("qnaboard/list");
 		mav.addObject("map", map); //보낼 데이터
 		return mav;		

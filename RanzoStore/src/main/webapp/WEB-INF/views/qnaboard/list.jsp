@@ -60,12 +60,12 @@ td {
 		<option value="all" 
 			<c:if test="${map.search_option == 'all'}"> selected</c:if>	>이름+내용+제목</option>
 	</select>
-	<input name="keyboard" value="${map.keyword}">
+	<input name="keyboard" size="80" value="${map.keyword}">
 	<input type="submit" value="조회">
 </div>
 
 <div align="right">
-<button type="button" id="btnWrite" onclick="location.href='${path}/board/qna/write.do'">글쓰기</button>
+	<button type="button" id="btnWrite" onclick="location.href='${path}/board/qna/write.do'">글쓰기</button>
 </div>
 
 

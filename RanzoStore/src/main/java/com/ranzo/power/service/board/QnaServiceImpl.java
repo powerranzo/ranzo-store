@@ -74,8 +74,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaDTO> listAll() throws Exception {
-		return qnaDao.listAll();
+	public List<QnaDTO> listAll(String search_option, String keyword) throws Exception {
+		return qnaDao.listAll(search_option, keyword);
 	}
 
 	@Override

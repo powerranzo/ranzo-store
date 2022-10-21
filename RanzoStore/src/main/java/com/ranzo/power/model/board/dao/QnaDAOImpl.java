@@ -60,7 +60,10 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> listAll() throws Exception {
+	public List<QnaDTO> listAll(String search_option, String keyword) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword", "%"+keyword+"%");
 		return sqlSession.selectList("qna.listAll");
 	}
 
