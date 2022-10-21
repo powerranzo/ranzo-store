@@ -1,28 +1,23 @@
 package com.ranzo.power.controller.board;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.QnaService;
 
 @Controller
@@ -40,13 +35,20 @@ public class QnaController {
 			@RequestParam(defaultValue = "") String keyword
 			) throws Exception {
 		
+		//레코드 개수 계산
+		int count = qnaService.countArticle();
+		//페이지 관련 설정
+		Pager pager = new Pager(count,1);
+		int start = pager.getPageBegin();
+		int end = pager.getPageEnd();
 		
-		List<QnaDTO> list = qnaService.listAll(search_option,keyword);
+		
+		List<QnaDTO> list = qnaService.listAll(search_option,keyword,start,end);
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list); //map에 자료 저장
-		map.put("count", list.size()); //레코드 개수 파일
+		map.put("count", count); //레코드 개수 파일
 		
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);

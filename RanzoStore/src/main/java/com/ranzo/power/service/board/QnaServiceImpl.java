@@ -74,8 +74,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaDTO> listAll(String search_option, String keyword) throws Exception {
-		return qnaDao.listAll(search_option, keyword);
+	public List<QnaDTO> listAll(String search_option, String keyword, int start, int end) throws Exception {
+		return qnaDao.listAll(search_option, keyword, start, end);
 	}
 
 	@Override
@@ -86,8 +86,7 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public int countArticle() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaDao.countArticle();
 	}
 
 	@Override

@@ -60,11 +60,13 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> listAll(String search_option, String keyword) throws Exception {
+	public List<QnaDTO> listAll(String search_option, String keyword, int start, int end) throws Exception {
 		Map<String,Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
 		map.put("search_option", search_option);
 		map.put("keyword", "%"+keyword+"%");
-		return sqlSession.selectList("qna.listAll");
+		return sqlSession.selectList("qna.listAll", map);
 	}
 
 	@Override
@@ -75,8 +77,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public int countArticle() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("qna.countArticle");
 	}
 
 	@Override
