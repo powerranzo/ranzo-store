@@ -43,7 +43,7 @@ public class QnaController {
 	public String write() {
 		return "qnaboard/write";
 	}
-	
+
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute QnaDTO dto) throws Exception {
 		//세션 추가해야함

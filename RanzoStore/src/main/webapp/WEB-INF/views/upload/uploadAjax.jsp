@@ -98,13 +98,16 @@ $(function(){ //페이지가 뜨자마자 실행
 	});
 });
 </script>
+
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>Ajax 파일 업로드</h2>
-<!-- 파일 업로드할 영역 -->
+<h2>Ajax File Upload</h2>
+<!-- 파일을 업로드할 영역  -->
 <div class="fileDrop"></div>
-<!-- 업로드된 파일 목록 -->
+
+<!-- 업로드된 파일 목록을 출력할 영역 -->
 <div class="uploadedList"></div>
+
 </body>
 </html>

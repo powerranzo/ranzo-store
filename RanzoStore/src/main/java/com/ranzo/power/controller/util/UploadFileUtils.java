@@ -14,15 +14,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
-	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
+	//로깅
+	private static final Logger logger=LoggerFactory.getLogger(UploadFileUtils.class);
 	
-	//servlet-context.xml에 선언한 스트링 bean 참조
 	public static String uploadFile(String uploadPath, 
 			String originalName, byte[] fileData) throws Exception {
 		//uuid 발급
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() + "_" + originalName;
-		//업로드할 디렉토리 생성
+		// 업로드할 디렉토리 생성
 		String savedPath = calcPath(uploadPath);
 		File target = new File(uploadPath+savedPath, savedName);
 		// 임시 디렉토리에 업로드된 파일을 지정된 디렉토리 복사
@@ -56,6 +56,7 @@ public class UploadFileUtils {
 	}
 
 	public static void makeDir(String uploadPath, String... paths) {
+		// String... 은 가변사이즈 매개변수 (배열의 요소가 몇개든 상관없이 처리)
 		// paths가 바로 위 yearPath, monthPath, datePath 를 다 처리함
 		//디렉토리가 존재하면 skip
 		if(new File(paths[paths.length - 1]).exists()) {

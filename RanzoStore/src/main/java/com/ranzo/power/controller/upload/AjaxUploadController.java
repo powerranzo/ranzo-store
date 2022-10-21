@@ -27,37 +27,39 @@ import com.ranzo.power.service.board.QnaService;
 
 @Controller
 public class AjaxUploadController {
-	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+	//로깅
+	private static final Logger logger
+	=LoggerFactory.getLogger(AjaxUploadController.class);
 	
 	@Inject
-	QnaService qnaboardService;
+	QnaService qnaService;
 	
-	//업로드 장소
+	//업로드 디렉토리
 	@Resource(name = "uploadPath")
-	String uploadPath;
+	String uploadPath; //c:/upload
 	
 	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
 	public String uploadAjax() {
-		return "/upload/uploadAjax";
+		return "/upload/uploadAjax";//포워딩
 	}
-	
 	
 	@ResponseBody //객체를 json 형식으로 데이터 리턴
-	@RequestMapping(value = "upload/uploadAjax"
-		, method = RequestMethod.POST
-		, produces = "text/plain;charset=utf-8")
-	//업로드한 파일정보와 Http 상태코드를 함께 리턴
+	@RequestMapping(value = "/upload/uploadAjax"
+			, method = RequestMethod.POST
+			, produces = "text/plain;charset=utf-8")//한글이 깨지지 않도록 처리
+	//업로드한 파일정보와 Http 상태코드를 함께 리턴 (HttpStatus, HttpHeaders, HttpBody를 포함)
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
-		//data 전송 처리
+		//View의 이름이 아니라 data 자체를 보내는 처리
 		return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, 
 				file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
-		
+		//파일성공여부는 uploadAjax.jsp의 function(data,status,req)으로 넘어감
 	}
+	
 	@ResponseBody
 	@RequestMapping("/upload/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
-		//서버의파일을 다운로드하기 위한 스트림
-		InputStream in = null;
+		//서버의 파일을 다운로드하기 위한 스트림
+		InputStream in = null;//java.io
 		ResponseEntity<byte[]> entity = null;
 		try {
 			//확장자 검사
@@ -104,7 +106,7 @@ public class AjaxUploadController {
 		new File(uploadPath+fileName.replace(
 				'/',File.separatorChar)).delete();
 		//레코드 삭제
-		qnaboardService.deleteFile(fileName);
+		qnaService.deleteFile(fileName);
 		
 		return new ResponseEntity<String>("deleted"
 				,HttpStatus.OK);//uploadAjax.jsp의 if(result=="deleted")와 연결

@@ -19,7 +19,7 @@
 $(function() {
 	$("#content").summernote({
 		width : 700,
-		height : 300
+		height : 200
 	});
 });
 </script>
@@ -27,7 +27,6 @@ $(function() {
 <script type="text/javascript">
 $(function(){ //자동으로 실행되는 코드
 	//댓글 목록 출력
-	//listReply();
 	listReply2();
 	
 	//댓글 쓰기

@@ -11,6 +11,7 @@ public class QnaReplyDTO {
 	private Date reg_date; //작성일
 	private Date update_date; //수정일
 	private String secret_reply; //비밀댓글 여부
+	
 	public int getRno() {
 		return rno;
 	}

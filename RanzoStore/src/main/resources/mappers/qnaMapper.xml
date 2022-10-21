@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 첨부파일 목록 -->
 	<select id="getAttach" resultType="String">
-		select full_name
+		select fullName
 		from qna_attach_tb
 		where bno=#{bno}
 		order by reg_date desc	
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 첨부파일 레코드 삭제 -->
 	<delete id="deleteFile">
 		delete from qna_attach_tb
-		where full_name= ${full_name}
+		where fullName= ${fullName}
 	</delete>
 	
 	<!-- 게시물 내용 수정 -->
@@ -60,8 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 새로운 첨부파일 추가 -->
 	<insert id="updateAttach">
-		insert into qna_attach_tb (full_name, bno) values
-		(#{full_name}, #{bno})
+		insert into qna_attach_tb (fullName, bno) values
+		(#{fullName}, #{bno})
 	</insert>
 	
 	<!-- 게시물 삭제 -->

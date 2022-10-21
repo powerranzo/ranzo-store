@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class QnaDTO {
 	private int bno; //게시글 번호
-	private String product; //전시명
 	private String writer; //작성자id(userid랑 조인)
 	private String 	name; //작성자 이름
 	private String title; //제목
@@ -14,19 +13,13 @@ public class QnaDTO {
 	private int viewcnt; //조회수
 	private String reply_state; //답변상태
 	private String[] files; //첨부파일 이름 배열
-	private String show; //화면 표시 여부(테이블에 없음)
+	private String show; //화면 표시 여부
 	private String ext; //첨부파일의 확장자(테이블에 없음)
 	public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
-	}
-	public String getProduct() {
-		return product;
-	}
-	public void setProduct(String product) {
-		this.product = product;
 	}
 	public String getWriter() {
 		return writer;
@@ -90,8 +83,8 @@ public class QnaDTO {
 	}
 	@Override
 	public String toString() {
-		return "QnaDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", title="
-				+ title + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", reply_state="
-				+ reply_state + ", files=" + Arrays.toString(files) + ", show=" + show + ", ext=" + ext + "]";
+		return "QnaDTO [bno=" + bno + ", writer=" + writer + ", name=" + name + ", title=" + title + ", content="
+				+ content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", reply_state=" + reply_state
+				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", ext=" + ext + "]";
 	}
 }
