@@ -32,13 +32,13 @@ public class QnaController {
 	@RequestMapping("list.do")
 	public ModelAndView list(
 			@RequestParam(defaultValue = "name") String search_option,
-			@RequestParam(defaultValue = "") String keyword
-			) throws Exception {
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 		
 		//레코드 개수 계산
 		int count = qnaService.countArticle();
 		//페이지 관련 설정
-		Pager pager = new Pager(count,1);
+		Pager pager = new Pager(count, curPage);
 		int start = pager.getPageBegin();
 		int end = pager.getPageEnd();
 		
@@ -49,7 +49,7 @@ public class QnaController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list); //map에 자료 저장
 		map.put("count", count); //레코드 개수 파일
-		
+		map.put("pager", pager); //페이지 네비게이션을 위한 변수
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);
 		mav.setViewName("qnaboard/list");
