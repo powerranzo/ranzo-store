@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>uploadAjax</title>
+<title>upload(ajax)</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 .fileDrop {
@@ -13,6 +13,7 @@
  border: 1px dotted blue;
 }
 </style>
+
 <script type="text/javascript">
 function checkImageType(fileName){
 	var pattern=/jpg|png|gif/i; //정규표현식(i는 대소문자 무시)

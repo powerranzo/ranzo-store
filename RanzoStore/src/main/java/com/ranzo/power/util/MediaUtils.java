@@ -1,4 +1,4 @@
-package com.ranzo.power.controller.util;
+package com.ranzo.power.util;
 
 import java.util.HashMap;
 import java.util.Map;

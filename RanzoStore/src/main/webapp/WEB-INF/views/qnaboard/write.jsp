@@ -24,7 +24,7 @@ $(function() {
 });
 </script>
 
-<script type="text/javascript">
+<script>
 $(function(){
 	$("#btnSave").click(function(){
 		var str="";
@@ -39,9 +39,42 @@ $(function(){
 		$("#form1").append(str);
 		document.form1.submit();
 	});
-
+  //파일을 마우스로 드래그하여 업로드 영역에 올라갈때 파일이 열리는 기본 효과 막음
+	$(".fileDrop").on("dragenter dragover",function(e){
+		e.preventDefault();
+	});
+  //마우스로 파일을 드롭할 때 파일이 열리는 기본 효과 막음
+	$(".fileDrop").on("drop",function(e){
+		e.preventDefault();
+		//첫번째 첨부파일
+		var files=e.originalEvent.dataTransfer.files;
+		var file=files[0];
+		//폼 데이터에 첨부파일 추가
+		var formData=new FormData();
+		formData.append("file",file);
+		$.ajax({
+			url: "${path}/upload/uploadAjax",
+			data: formData,
+			dataType: "text",
+			processData: false,
+			contentType: false,
+			type: "post",
+			success: function(data){
+				//console.log(data);
+				//data : 업로드한 파일 정보와 Http 상태 코드
+				var fileInfo=getFileInfo(data);
+				//console.log(fileInfo);
+				var html="<a href='"+fileInfo.getLink+"'>"+
+					fileInfo.fileName+"</a><br>";
+				html += "<input type='hidden' class='file' value='"
+					+fileInfo.fullName+"'>";
+				$("#uploadedList").append(html);
+			}
+		});
+	});
 });
 </script>
+
 
 <style>
 .fileDrop {
@@ -71,20 +104,15 @@ background-color: gray;
 	</div>
 
 		첨부파일을 등록하세요
-		<!-- 파일을 업로드할 영역  -->
 		<div class="fileDrop"></div>
-		<!-- 업로드된 파일 목록을 출력할 영역 -->
 		<div class="uploadedList"></div>	
-
-<!-- 	<div>
-	비밀번호
-	<input type="password" name="passwd" id="passwd" size="80">
-	</div> -->
 	
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>
+
+
 </body>
 </html>

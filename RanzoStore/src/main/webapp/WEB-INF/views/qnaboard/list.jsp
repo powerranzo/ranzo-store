@@ -39,7 +39,7 @@ td {
 	<tr>
 		<td>${row.bno}</td>
 		<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
-		<td>${row.writer}</td>
+		<td>${row.name}(${row.writer})</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${row.viewcnt}</td>
 	</tr>
@@ -47,8 +47,27 @@ td {
 <!-- 페이지 네비게이션 출력 -->
 
 </table>
+
+<div align="left">
+<form name="form1" method="post" action="${path}/board/qna/list.do"></form>
+	<select name="search_option">
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected</c:if>	>이름</option>
+		<option value="title" 
+			<c:if test="${map.search_option == 'title'}"> selected</c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected</c:if>	>내용</option>
+		<option value="all" 
+			<c:if test="${map.search_option == 'all'}"> selected</c:if>	>이름+내용+제목</option>
+	</select>
+	<input name="keyboard" value="${map.keyword}">
+	<input type="submit" value="조회">
+</div>
+
 <div align="right">
 <button type="button" id="btnWrite" onclick="location.href='${path}/board/qna/write.do'">글쓰기</button>
 </div>
+
+
 </body>
 </html>
