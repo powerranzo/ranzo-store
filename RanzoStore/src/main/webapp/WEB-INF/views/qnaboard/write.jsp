@@ -7,16 +7,17 @@
 <title>QnA 작성하기</title>
 <%@ include file="../include/header.jsp" %>
 <script src="${path}/include/js/common.js"></script>
+
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+ -->
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<script type="text/javascript">
+ -->
+<!-- <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
 		width : 700,
@@ -24,7 +25,7 @@ $(function() {
 	});
 });
 </script>
-
+ -->
 <script>
 $(function(){
 	$("#btnSave").click(function(){
@@ -91,18 +92,28 @@ background-color: gray;
 <%@ include file="../include/menu.jsp" %>
 <h2>문의하기</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
-	<div>
-		제목
-		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
-	</div>
-	<div>
-		아이디
-		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
-	</div>
-	<div style="width: 700px;">
-		내용
-		<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
-	</div>
+	<table>
+		<tr>
+			<th>제목</th>
+			<td>
+				<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">	
+			</td>
+		</tr>
+		<tr>
+			<th>아이디</th>
+			<td>
+				<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">		
+			</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>		
+			</td>
+		</tr>
+	</table>
+	
+
 		첨부파일을 등록하세요
 		<div class="fileDrop"></div>
 		<div class="uploadedList"></div>	

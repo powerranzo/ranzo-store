@@ -5,19 +5,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="qna">
-
-	<select id="listAll" resultType="QnaDTO">
+	<select resultType="QnaDTO" id="listAll">
 		select *
 			from (
-			    select rownum as rn, A.*
-			    from (
-			        select bno,title,m.name, writer,reg_date,viewcnt,show
-                    from qna_tb q, member_tb m
-                    where q.writer=m.userid and show='y'
-                    order by bno desc
-			    ) A  
-			 )	where rn between #{start} and #{end}
+					select rownum as rn, A.*
+						from (
+									select bno,title,m.name, writer,reg_date,viewcnt,show
+									from qna_tb q, member_tb m
+									where q.writer=m.userid and show='y'
+									order by bno desc
+						) A
+		) where rn between #{start} and #{end} 
+		
 	</select>
+	
+
 		
 	<insert id="insert">
 	insert into qna_tb (bno,title,content,writer) values
@@ -60,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 첨부파일 레코드 삭제 -->
 	<delete id="deleteFile">
 		delete from qna_attach_tb
-		where fullName= ${fullName}
+		where fullName= #{fullName}
 	</delete>
 	
 	<!-- 게시물 내용 수정 -->

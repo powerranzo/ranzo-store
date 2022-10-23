@@ -258,27 +258,16 @@ background-color: gray;
 		<div id="uploadedList"></div>
 	</div>
 	
-	<div style="width: 700px;" align="center"">
+	<div style="width: 700px;" align="center">
 		<!-- 수정,삭제에 필요한 글번호를 hidden 태그에 저장 -->	
 		<input type="hidden" name="bno" value="${dto.bno}">		
 		<!-- 세션변수 추가 -->
 		<button type="button" id="btnUpdate">수정</button>
 		<button type="button" id="btnDelete">삭제</button>
-		<button type="button" id="btnList">목록</button>
+		<button type="button" id="btnList">목록</button> / 
+		<button type="button" id="btnReply">답변</button>
 	</div>
 </form>
-
-<!-- 댓글 작성 -->
-<div style="width:700px; text-align:center;">
-	 <c:if test="${sessionScope.userid != null }">
-	 	<textarea rows="5" cols="80" id="replytext"
-	 		placeholder="댓글을 작성하세요"></textarea>
-	 	<br>
-	 	<button type="button" id="btnReply">댓글쓰기</button>
-	 </c:if>
-</div>
-<!-- 댓글 목록 -->
-<div id="listReply"></div>
 
 
 </body>

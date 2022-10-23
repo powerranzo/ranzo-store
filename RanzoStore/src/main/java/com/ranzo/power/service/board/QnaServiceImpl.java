@@ -77,9 +77,13 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaDTO> listAll(String search_option, String keyword, int start, int end) throws Exception {
 		return qnaDao.listAll(search_option, keyword, start, end);
 	}
-
+	
+	//조회수 증가 처리
 	@Override
 	public void increaseViewcnt(int bno) throws Exception {
+		//세션처리
+		
+		
 		qnaDao.increaseViewcnt(bno);
 
 	}

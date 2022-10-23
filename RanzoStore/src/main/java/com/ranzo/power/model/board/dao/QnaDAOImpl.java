@@ -35,9 +35,9 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public void updateAttach(String fullname, int bno) {
+	public void updateAttach(String fullName, int bno) {
 		Map<String,Object> map = new HashMap<>();
-		map.put("fullname", fullname);
+		map.put("fullName", fullName);
 		map.put("bno", bno);
 		sqlSession.insert("qna.updateAttach", map);
 

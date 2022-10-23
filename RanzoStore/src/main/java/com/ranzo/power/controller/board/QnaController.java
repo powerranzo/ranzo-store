@@ -101,11 +101,12 @@ public class QnaController {
 		return "redirect:/board/qna/view.do?bno="+dto.getBno();
 	}
 	
+	//게시물 삭제
 	@RequestMapping("delete.do")
 	public String delete(int bno) throws Exception {
 		qnaService.delete(bno);
 		return "redirect:/board/qna/list.do";
 	}
-		
+
 		
 }
