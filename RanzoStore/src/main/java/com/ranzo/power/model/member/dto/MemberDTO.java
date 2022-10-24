@@ -16,8 +16,9 @@ public class MemberDTO {
 	private Date join_date;
 	private Date quit_date; //날짜만
 	private String rn;
-	
-	//getter, setter, toString(), 기본생성자
+
+	private Date join_date;
+
 	public String getUserid() {
 		return userid;
 	}
@@ -78,6 +79,7 @@ public class MemberDTO {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
+
 	public String getQuit() {
 		return quit;
 	}
@@ -96,13 +98,30 @@ public class MemberDTO {
 	public void setRn(String rn) {
 		this.rn = rn;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", name=" + name + ", email=" + email
 				+ ", gender=" + gender + ", hp=" + hp + ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2
 				+ ", quit=" + quit + ", join_date=" + join_date + ", quit_date=" + quit_date + ", rn=" + rn + "]";
 	}
-	public MemberDTO() {
+
+	public MemberDTO(String userid, String passwd, String name, String email, String gender, String hp, String zipcode,
+			String addr1, String addr2, Date join_date) {
+		this.userid = userid;
+		this.passwd = passwd;
+		this.name = name;
+		this.email = email;
+		this.gender = gender;
+		this.hp = hp;
+		this.zipcode = zipcode;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.join_date = join_date;
 	}
-}  
+	public MemberDTO() {
+
+	}
+	
+}
+

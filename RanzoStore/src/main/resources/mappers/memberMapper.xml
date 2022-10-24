@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="member">
+	
+	<!-- 로그인 -->
+	<select id="loginCheck"
+	resultType="String">
+		select name from member_tb
+		where userid=#{userid} and passwd=#{passwd}
+	</select>
+	
+	<!-- 회원 전체 보기 -->
+	<select id="viewMember" 
+	resultType="com.ranzo.power.model.member.dto.MemberDTO">
+		select * from member_tb
+		where userid=#{userid}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertMember">
+		insert into member_tb
+		(userid,passwd,name,email,gender,hp,zipcode,addr1,addr2)
+		values
+		(#{userid},#{passwd},#{name},#{email},#{gender},#{hp},#{zipcode},#{addr1},#{addr2})
+	</insert>
+
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" 
+	resultType="int">
+		select count(*) from member_tb
+		where userid = #{userid}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

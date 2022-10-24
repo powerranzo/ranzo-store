@@ -1,0 +1,143 @@
+@charset "UTF-8";
+/* 
+.search-section ul li {
+}
+
+.filter li{
+	position:relative;순서대로 표시
+	margin: 5px 25px;	
+}
+서브메뉴
+.filter ul {
+	position:absolut;
+	background-color:#f2f2f2;
+	left:0;부모 요소와 왼쪽 좌표값 통일
+	top:40px;부모 요소 40px 아래에 표시
+	width:250px;
+	display:none;
+}
+.filter ul li {
+	float:none;
+}
+ */
+.shop-section {
+	margin-top: 73px;
+}
+
+.shop-section .shop-list li {
+	width: 100%;
+}
+
+.shop-section .shop-list li a {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+마우스 올라간 포스터 불투명도 설정
+.shop-section .shop-list li a .prd-imgbox:before {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	background: black;
+	content: "";
+	opacity: 0;
+	transition: all 0.2s;
+}
+
+마우스 올라간 포스터 불투명도 설정
+.shop-section .shop-list li a .prd-imgbox:hover:before {
+	opacity: 0.3;
+}
+ 
+/* .shop-section .shop-list li .prd-info {
+	position: absolute;
+	top: 0;
+	left: 23px;
+	z-index: 20;
+	opacity: 0;
+	transition: all 0.3s;
+}
+ */
+/* .shop-section .shop-list li a:hover .prd-info {
+	transform: translateY(23px);
+	opacity: 1;
+} */
+
+/* 전시명  */
+.shop-section .shop-list li .prd-info .prd-title {
+	margin-bottom: 8px;
+	font-size: 23px;
+	font-weight: bolder;
+	color: #424242;
+}
+/* 전시관 */
+.shop-section .shop-list li .prd-info .prd-place {
+	font-size: 11px;
+	color: #424242;
+}
+/* 전시기간 */
+.shop-section .shop-list li .prd-info .prd-period {
+	font-size: 11px;
+	color: #424242;
+}
+
+/* 전시 포스터 */
+.shop-section .shop-list li .prd-imgbox {
+	/* 259x320 */
+	display: block;
+	width: 100%;
+	max-width: 100%; 
+	height: auto;
+}
+
+.shop-section .shop-list li a .prd-imgbox .prd-img {
+	border-radius: 20px;
+	object-fit:cover;
+	/* 259x320 */
+	width: 259px;
+	height: 320px;
+}
+.shop-section .shop-list li a .prd-info{
+	display: block;
+	width:100%
+}
+/* 
+태블릿용 CSS
+@media all and (min-width:768px) {
+	.search-section .sort {
+		float: right;
+		width: auto;
+	}
+	.search-section ul li {
+		display: block;
+		float: left;
+		margin-left: 25px;
+		color: #424242;
+	}
+	.shop-section {
+		margin-top: 118px;
+	}
+	.shop-section .shop-list li {
+		float: left;
+		width: 50%;
+	}
+	.shop-section .shop-list li .prd-info {
+		left: 37px;
+	}
+	.shop-section .shop-list li a:hover .prd-info {
+		transform: translateY(37px);
+	}
+}
+
+PC용 CSS
+@media all and (min-width:1132px) {
+	.shop-section .shop-list li {
+		width: 25%;
+	}
+} */
