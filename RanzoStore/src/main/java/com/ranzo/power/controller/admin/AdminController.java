@@ -90,7 +90,7 @@ public class AdminController {
 
 	@GetMapping("/exb_write.do")
 	public String writeExb() {
-		return "admin/admin_exb_write";
+		return "admin/exb_write";
 	}
 
 	@PostMapping("/exb_write.do")
@@ -99,7 +99,7 @@ public class AdminController {
 		dto.setStart_date(format.parse(start_date));
 		dto.setEnd_date(format.parse(end_date)); 
 		adminService.insertExb(dto);
-		return "redirect: admin/admin_exb_list"; 
+		return "redirect: admin/exb_list"; 
 	}
 
 
