@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../views/include/admin_head.jspf"%>
+<%@ include file="../include/admin_head.jspf"%>
 <title>전시 목록</title>
 <script type="text/javascript">
 $(function(){
