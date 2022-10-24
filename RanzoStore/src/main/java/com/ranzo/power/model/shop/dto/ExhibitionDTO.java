@@ -16,20 +16,6 @@ public class ExhibitionDTO {
 	private int sales; //
 	private int rn;
 
-	private String code;
-	private String location;
-	private String gallery;
-	private String title;
-	private String summary;
-	private String thumnail;
-	private Date start_date;
-	private Date end_date;
-	private int hit;
-	
-	
-	public ExhibitionDTO() {
-		
-	}
 	
 	public ExhibitionDTO(String code, String location, String gallery, String title, String summary, String thumnail,	
 			Date start_date, Date end_date, int hit) {

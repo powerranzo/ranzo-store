@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<%@ include file="../views/include/admin_head.jspf"%>
+<%@ include file="../include/admin_head.jspf"%>
 <title>전시 등록</title>
 <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 <script type="text/javascript">

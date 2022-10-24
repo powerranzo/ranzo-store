@@ -15,9 +15,8 @@ public class MemberDTO {
 	private String quit; //default 'n'
 	private Date join_date;
 	private Date quit_date; //날짜만
-	private String rn;
+	private String rn; //row num(테이블에 없음)
 
-	private Date join_date;
 
 	public String getUserid() {
 		return userid;
