@@ -64,7 +64,7 @@ public class AdminController {
 			, RedirectAttributes rttr) {
 		adminService.deleteMember(userids);
 		rttr.addFlashAttribute("searchOp", searchOp);
-		return "redirect:admin/member_list.do";
+		return "redirect:member_list.do";
 	}
 
 	@RequestMapping("/qna_delete")
@@ -73,7 +73,7 @@ public class AdminController {
 		logger.info("qna_delete userid:" + userid);
 		adminService.deleteQna(qna_bno);
 		rttr.addFlashAttribute("userid", userid);
-		return "redirect:admin/member_view.do";
+		return "redirect:member_view.do";
 	}
 
 	@RequestMapping("/exb_list.do")
@@ -99,7 +99,7 @@ public class AdminController {
 		dto.setStart_date(format.parse(start_date));
 		dto.setEnd_date(format.parse(end_date)); 
 		adminService.insertExb(dto);
-		return "redirect: admin/exb_list"; 
+		return "redirect:admin/exb_list"; 
 	}
 
 
