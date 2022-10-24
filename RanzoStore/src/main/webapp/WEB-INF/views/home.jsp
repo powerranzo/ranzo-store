@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
- pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 세션 사용 옵션 -->
@@ -16,6 +13,8 @@
 </head>
 <body>
 <%@ include file="include/menu.jsp" %><h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 	Hello world!  
 </h1>
 
@@ -23,11 +22,7 @@
 <!-- 실제로 서비스되는 디렉토리(배포 디렉토리) -->
 <%= application.getRealPath("/resources/images/") %>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-<meta charset="UTF-8">
-	<title>Home</title>
-<%@ include file="include/header.jsp" %>
+
 <style type="text/css">
 
 .swiper-container {
@@ -116,7 +111,7 @@ function btn2(){
 	Hello world!
 </h1>
 
-<%@ include file="include/menu.jsp" %>
+
 
 <c:if test="${sessionScope.userid != null }">
  <h2>${sessionScope.name}(${sessionScope.userid})님의 방문을 환영합니다.</h2>

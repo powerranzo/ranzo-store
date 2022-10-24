@@ -34,7 +34,6 @@
 		/> <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
 		<property name="username" value="java" /> <property name="password" value="java1234" 
 		/> </bean> -->
-	<!-- SqlSessionFactory 객체 주입 -->	
 
   
 	<!-- SqlSession 객체 주입 -->
@@ -43,9 +42,9 @@
 	</bean>
 
 	<!-- mybatis mapper interface bean을 자동으로 검색 -->
-	<mybatis-spring:scan
+	<!-- <mybatis-spring:scan
 		base-package="com.example.spring02.model.memo" />
-
+ -->
 	<!-- 트랜잭션 관련 설정 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
