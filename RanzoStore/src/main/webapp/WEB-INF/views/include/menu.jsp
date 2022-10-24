@@ -45,4 +45,3 @@
 	 <a href="#"><img alt="" src="${path}/resources/images/searchicon.png" height="20"></a>
 	</div>
 </div>
-

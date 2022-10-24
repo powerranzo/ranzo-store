@@ -170,5 +170,8 @@ new Swiper('.swiper-container', {
 <a href="${path}/reserv/orderlist.do">주문내역 확인하기 test</a>
 
 <%@ include file="include/footer.jsp" %>
+
+	
+	
 </body>
 </html>
