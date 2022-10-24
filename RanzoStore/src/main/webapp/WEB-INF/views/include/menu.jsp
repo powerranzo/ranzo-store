@@ -1,24 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<div style="text-align: center;">
- <a href="${path}">Home</a> |
- <div style="text-align: right;">
-  <c:choose>
-   <c:when test="${sessionScope.userid == null}">
-     <!-- 로그인하지 않은 상태  -->
-    <a href="${path}/member/join.do">회원가입</a> |
-    <a href="${path}/member/login.do">로그인</a> |
-    <a href="${path}/admin/login.do">관리자 로그인</a> |
-   </c:when> 
-   <c:otherwise>
-     <!-- 로그인한 상태 -->
+<div class="header1">
+ <ul>
+	<c:choose>
+		<c:when test="${sessionScope.userid == null}">
+			<!-- 로그인하지 않은 상태  -->		
+			<li><a href="#">LOGIN</a></li>
+			<li><a href="#">BECOME A MEMBER</a></li>
+			<li><a href="#">NOTICE</a></li>
+			<li><a href="#">FAQ</a></li>
+			<li><a href="#">고객센터</a></li>
+		</c:when>
+		<c:otherwise>
+			<!-- 로그인한 상태 -->
      ${sessionScope.name}님이 로그인 중입니다.
-     <a href="${path}/member/view.do?userid=${sessionScope.userid}">회원정보</a> |
-     <a href="${path}/member/logout.do">로그아웃</a> |
-   </c:otherwise>
-  </c:choose> 
- </div>
+			<li><a href="#">LOGOUT</a></li>
+			<li><a href="#">MY PAGE</a></li>
+			<li><a href="#">NOTICE</a></li>
+			<li><a href="#">FAQ</a></li>
+      <li><a href="#">고객센터</a></li>
+		</c:otherwise>
+	</c:choose>
+ </ul>
 </div>
-<hr>
+<div class="header2">
+<div class="menu2" style="float: left;">
+ <a href="${path}"><img alt="" src="${path}/resources/images/logo_icon.png" height="20"></a>
+</div>
+ <div class="menu1">
+	<ul class="menu">
+		<li><a href="#">ABOUT</a></li>
+		<li><a href="#">EXHIBITION</a>
+			<ul class="depth_1">
+				<li><a href="#">현재전시</a></li>
+				<li><a href="#">지난전시</a></li>
+			</ul></li>
+		<li><a href="#">MENU 2</a></li>
+	</ul>
+	</div>
+	<div class="menu2" style="float: right;">
+	 <a href="#"><img alt="" src="${path}/resources/images/calendar_icon.png" height="20"></a>
+	 <a href="#"><img alt="" src="${path}/resources/images/searchicon.png" height="20"></a>
+	</div>
+</div>
