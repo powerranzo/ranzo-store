@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="review">
+	<select id="listAll" resultType="ReviewDTO">
+		select bno, product, title, writer, reg_date, viewcnt
+		from review_tb r, member_tb m
+		where r.writer = m.userid
+		order by bno desc
+	</select>
+	
+	<insert id="insert">
+		insert into review_tb(bno, product, writer, title, content) values
+		(seq_review.nextval, #{product},#{writer}, #{title}, #{content})
+	</insert>
+	
+	
+	<!-- 조회수 증가 처리 -->
+	<update id="increaseViewcnt">
+		update review_tb set viewcnt=viewcnt+1
+		where bno=#{bno}
+	</update>
+	
+	<select id="read" resultType="ReviewDTO">
+		select id="read" resultType="ReviewDTO">
+		select bno, rating, product, title, writer, reg_date, viewcnt
+		from review_tb r, member_tb m
+		where r.writer = m.userid and bno=#{bno}
+	</select>
+
+	
+	<delete id="delete">
+		delete from review_tb
+		where bno=#{bno}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+ pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 세션 사용 옵션 -->
@@ -7,6 +9,20 @@
 
 <html>
 <head>
+
+<meta charset="UTF-8">
+	<title>Home</title>
+<%@ include file="include/header.jsp" %>	
+</head>
+<body>
+<%@ include file="include/menu.jsp" %><h1>
+	Hello world!  
+</h1>
+
+<P>  The time on the server is ${serverTime}. </P>
+<!-- 실제로 서비스되는 디렉토리(배포 디렉토리) -->
+<%= application.getRealPath("/resources/images/") %>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <meta charset="UTF-8">
@@ -175,6 +191,7 @@ new Swiper('.swiper-container', {
 <a href="${path}/reserv/orderlist.do">주문내역 확인하기 test</a>
 
 <%@ include file="include/footer.jsp" %>
+
 
 </body>
 </html>
