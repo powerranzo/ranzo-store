@@ -10,8 +10,8 @@ public class ExhibitionDTO {
 	private String title;
 	private String summary;
 	private String thumnail;
-	private Date startDate;
-	private Date endDate;
+	private Date start_date;
+	private Date end_date;
 	private int hit;
 	
 	
@@ -20,7 +20,7 @@ public class ExhibitionDTO {
 	}
 	
 	public ExhibitionDTO(String code, String location, String gallery, String title, String summary, String thumnail,	
-			Date startDate, Date endDate, int hit) {
+			Date start_date, Date end_date, int hit) {
 		super();
 		this.code = code;
 		this.location = location;
@@ -28,8 +28,8 @@ public class ExhibitionDTO {
 		this.title = title;
 		this.summary = summary;
 		this.thumnail = thumnail;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.start_date = start_date;
+		this.end_date = end_date;
 		this.hit = hit;
 	}
 
@@ -81,20 +81,20 @@ public class ExhibitionDTO {
 		this.thumnail = thumnail;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public Date getstart_date() {
+		return start_date;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setstart_date(Date start_date) {
+		this.start_date = start_date;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public Date getend_date() {
+		return end_date;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setend_date(Date end_date) {
+		this.end_date = end_date;
 	}
 
 	public int getHit() {
