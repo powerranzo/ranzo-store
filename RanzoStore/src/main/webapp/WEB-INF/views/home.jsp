@@ -96,6 +96,10 @@ function btn2(){
 </script>
 </head>
 <body>
+<h1>
+	Hello world!
+</h1>
+
 <%@ include file="include/menu.jsp" %>
 
 <c:if test="${sessionScope.userid != null }">
@@ -171,9 +175,6 @@ new Swiper('.swiper-container', {
 <a href="${path}/reserv/orderlist.do">주문내역 확인하기 test</a>
 
 <%@ include file="include/footer.jsp" %>
-
-	
-	
 
 </body>
 </html>

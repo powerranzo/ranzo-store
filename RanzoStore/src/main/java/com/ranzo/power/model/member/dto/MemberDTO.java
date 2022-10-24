@@ -12,9 +12,13 @@ public class MemberDTO {
 	private String zipcode;
 	private String addr1;
 	private String addr2;
+	private String quit; //default 'n'
 	private Date join_date;
-	
-	//getter,setter,toString(),생성자
+	private Date quit_date; //날짜만
+	private String rn;
+
+	private Date join_date;
+
 	public String getUserid() {
 		return userid;
 	}
@@ -75,12 +79,33 @@ public class MemberDTO {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
+
+	public String getQuit() {
+		return quit;
+	}
+	public void setQuit(String quit) {
+		this.quit = quit;
+	}
+	public Date getQuit_date() {
+		return quit_date;
+	}
+	public void setQuit_date(java.sql.Date quit_date) {
+		this.quit_date = quit_date;
+	}
+	public String getRn() {
+		return rn;
+	}
+	public void setRn(String rn) {
+		this.rn = rn;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", name=" + name + ", email=" + email
 				+ ", gender=" + gender + ", hp=" + hp + ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2
-				+ ", join_date=" + join_date + "]";
+				+ ", quit=" + quit + ", join_date=" + join_date + ", quit_date=" + quit_date + ", rn=" + rn + "]";
 	}
+
 	public MemberDTO(String userid, String passwd, String name, String email, String gender, String hp, String zipcode,
 			String addr1, String addr2, Date join_date) {
 		this.userid = userid;
@@ -99,3 +124,4 @@ public class MemberDTO {
 	}
 	
 }
+

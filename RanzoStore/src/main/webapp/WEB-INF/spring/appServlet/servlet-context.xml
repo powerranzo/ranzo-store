@@ -24,7 +24,9 @@
 	<!-- 리소스 매핑 -->
 
 	<resources location="/WEB-INF/views/include/" mapping="/include/**" />
+	<resources location="/WEB-INF/views/include/" mapping="/include/**" />
 	<resources location="/WEB-INF/views/images/" mapping="/images/**" />
+
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -50,7 +52,7 @@
 		<beans:constructor-arg value="c:/dev/upload" />
 	</beans:bean>
 	
-	
-	
-	
+
+	<context:component-scan base-package="com.ranzo.power" />
+
 </beans:beans>
