@@ -44,9 +44,7 @@
 
 
 	<!-- mybatis mapper interface bean을 자동으로 검색 -->
-	<mybatis-spring:scan
-		base-package="com.example.spring02.model.memo" />
-
+<!-- 	<mybatis-spring:scan base-package="com.power.ranzo.model.memo" /> -->
 	<!-- 트랜잭션 관련 설정 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
