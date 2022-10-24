@@ -5,8 +5,14 @@
 <configuration>
 
 	<typeAliases>
+
 		<typeAlias alias="QnaDTO" type="com.ranzo.power.model.board.dto.QnaDTO" />
 		<typeAlias alias="ReviewDTO" type="com.ranzo.power.model.board.dto.ReviewDTO" />
+ 	  <typeAlias type="com.ranzo.power.model.member.dto.MemberDTO" alias="MemberDTO"/>
+	  <typeAlias type="com.ranzo.power.model.shop.dto.ExhibitionDTO" alias="ExhibitionDTO" />
+ 	  <typeAlias alias="QnaDTO" type="com.ranzo.power.model.board.dto.QnaDTO" />
+    <typeAlias alias="ReviewDTO" type="com.ranzo.power.model.board.dto.ReviewDTO" />
+
 	</typeAliases>
 
 </configuration>

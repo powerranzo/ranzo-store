@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	<select id="countMemberAll" resultType="int">
+	select count(*) from member_tb
+	</select>
+	
+	<select id="countMemberToday" resultType="int">
+	select count(*) from member_tb
+	where to_char(join_date,'YYYY-MM-DD')=#{now}
+	</select>
+	
+	<select id="countMemberQuit" resultType="int">
+	select count(*) from member_tb
+	where quit='y'
+	</select>
+	
+	<select id="getMemberList" resultType="MemberDTO">
+select * from (
+		select M.*, rownum as rn from ( 
+			select userid, passwd, name, email, gender, hp, zipcode,
+			addr1, addr2, quit, join_date, quit_date 
+			from member_tb 
+			<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			 <otherwise>
+			where userid like '%'||#{searchOp.searchKeyword}||'%' or name like '%'||#{searchOp.searchKeyword}||'%' 
+			or addr1 like '%'||#{searchOp.searchKeyword}||'%'
+			 </otherwise>
+			</choose>
+			
+			  and join_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
+                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+            <choose>
+            <when test='searchOp.orderOption.equals("join_date")'>
+            order by join_date desc
+            </when>
+            <otherwise>
+            order by ${searchOp.orderOption}
+            </otherwise>
+            </choose> 
+			) M
+	) where rn between #{start} and #{end}
+			<choose>
+			<when test='searchOp.searchOption2.equals("user")'>
+			and quit='n' 
+			</when>
+			<when test='searchOp.searchOption2.equals("quit")'>
+			and quit='y'
+			</when>
+			</choose>
+	</select>
+	
+	
+<select id="getMemberView" resultType="MemberDTO">
+		select userid, passwd, name, email, gender, hp, zipcode,
+		addr1, addr2, quit, join_date, quit_date
+		from member_tb
+		where userid=#{userid}
+</select>
+
+<select id="getMemberQna" resultType="QnaDTO">
+select * from (
+select Q.*, rownum as rn from (
+	select bno, writer, name, title, content, reg_date, viewcnt,
+	reply_state, show
+	from qna_tb
+	where writer=#{userid}
+	order by reg_date desc
+	) Q
+	) where <![CDATA[rn <= 6]]> 
+</select>
+
+<update id="deleteMember">
+	update member_tb set quit='y', quit_date=#{today}
+	where
+	<foreach collection="userids" item="list" separator="or" index="index"> 
+	userid=#{list} 
+	</foreach>
+</update>
+
+<update id="deleteQna">
+	update qna_tb set show='n' where
+	<foreach collection="qna_bno" item="list" separator="or" index="index"> 
+	bno=#{list}
+	</foreach>
+</update>
+
+<!-- 전시  -->
+<select id="getExbList" resultType="ExhibitionDTO">
+select * from (
+		select E.*, rownum as rn from ( 
+			select code, location, gallery, title, summary, thumnail, start_date,
+			end_date, hit, sales
+			from exhibition_tb 
+			<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			 <otherwise>
+			where code like '%'||#{searchOp.searchKeyword}||'%' 
+			or title like '%'||#{searchOp.searchKeyword}||'%' 
+			or location like '%'||#{searchOp.searchKeyword}||'%' 
+			or gallery like '%'||#{searchOp.searchKeyword}||'%'
+			 </otherwise>
+			</choose>
+			  and (
+			  start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
+                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+              or end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
+                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+                   )
+            <choose>
+            <when test='searchOp.orderOption.equals("start_date") 
+            or searchOp.orderOption.equals("end_date")
+            or searchOp.orderOption.equals("hit") 
+            or searchOp.orderOption.equals("sales")'> 
+            order by ${searchOp.orderOption} desc
+            </when>
+            <otherwise>
+            order by ${searchOp.orderOption}
+            </otherwise>
+            </choose> 
+			) E
+	) where rn between #{start} and #{end}
+</select>
+<select id="countExbAll" resultType="int">
+	select count(*) from exhibition_tb
+</select>
+
+<select id="countExbIng" resultType="int">
+	select count(
+	case when  
+	<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>  or
+	 <![CDATA[to_char(end_date, 'YYYY-MM-DD') >= #{today}]]>  then 1 end)
+	from exhibition_tb
+</select>	
+
+<insert id="insertExb">
+	insert into exhibition_tb 
+	(code, location, gallery, title, summary, thumnail, start_date, end_date)
+	values
+	(#{code}, #{location}, #{gallery}, #{title}, #{summary}, 
+	#{thumnail}, #{start_date}, #{end_date})
+</insert>
+
+
+</mapper>
