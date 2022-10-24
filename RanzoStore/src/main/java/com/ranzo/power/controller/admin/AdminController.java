@@ -45,7 +45,7 @@ public class AdminController {
 		m.addAttribute("mcount", map.get("mcount"));
 		m.addAttribute("list", map.get("list"));
 		m.addAttribute("pager", map.get("pager"));
-		return "admin_member_list";
+		return "admin/member_list";
 	}
 
 	@RequestMapping("/member_view.do")
@@ -56,7 +56,7 @@ public class AdminController {
 		logger.info("qna_delete userid:" + userid);
 		m.addAttribute("dto", adminService.getMemberView(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
-		return "admin_member_view";
+		return "admin/member_view";
 	}
 
 	@RequestMapping("/member_delete.do")
@@ -64,7 +64,7 @@ public class AdminController {
 			, RedirectAttributes rttr) {
 		adminService.deleteMember(userids);
 		rttr.addFlashAttribute("searchOp", searchOp);
-		return "redirect:/admin/member_list.do";
+		return "redirect:admin/member_list.do";
 	}
 
 	@RequestMapping("/qna_delete")
@@ -73,7 +73,7 @@ public class AdminController {
 		logger.info("qna_delete userid:" + userid);
 		adminService.deleteQna(qna_bno);
 		rttr.addFlashAttribute("userid", userid);
-		return "redirect:/admin/member_view.do";
+		return "redirect:admin/member_view.do";
 	}
 
 	@RequestMapping("/exb_list.do")
@@ -85,12 +85,12 @@ public class AdminController {
 		logger.info("flashmap:"+flashmap);
 		Map<String,Object> map=adminService.getExbList(searchOp, curPage);
 		m.addAttribute("exb", map);
-		return "admin_exb_list";
+		return "admin/exb_list";
 	}
 
 	@GetMapping("/exb_write.do")
 	public String writeExb() {
-		return "admin_exb_write";
+		return "admin/admin_exb_write";
 	}
 
 	@PostMapping("/exb_write.do")
@@ -99,7 +99,7 @@ public class AdminController {
 		dto.setStart_date(format.parse(start_date));
 		dto.setEnd_date(format.parse(end_date)); 
 		adminService.insertExb(dto);
-		return "redirect: admin_exb_list"; 
+		return "redirect: admin/admin_exb_list"; 
 	}
 
 
