@@ -22,7 +22,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<!-- 리소스 매핑 -->
-<!-- 	<resources location="/WEB-INF/views/include/" mapping="/include/**" /> -->
+	<resources location="/WEB-INF/views/include/" mapping="/include/**" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -47,8 +47,8 @@
 		<beans:constructor-arg value="c:/dev/upload" />
 	</beans:bean>
 	
+<!-- 	<context:component-scan base-package="com.ranzo.power" /> -->
 	<context:component-scan base-package="com.ranzo.power" />
-	
 	
 	
 </beans:beans>
