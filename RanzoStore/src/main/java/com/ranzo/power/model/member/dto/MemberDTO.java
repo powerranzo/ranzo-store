@@ -17,8 +17,6 @@ public class MemberDTO {
 	private Date quit_date; //날짜만
 	private String rn;
 
-	private Date join_date;
-
 	public String getUserid() {
 		return userid;
 	}
