@@ -9,16 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select bno, product, title, writer, reg_date, viewcnt
 		from review_tb r, member_tb m
 		where r.writer = m.userid
-		order by bno desc
-	</select>
-	
+		order by bno desc </select>
+
 	<insert id="insert">
-		insert into review_tb(bno, product, writer, title, content) values
-		(seq_review.nextval, #{product},#{writer}, #{title}, #{content})
+		insert into review_tb(bno, product, title, content, writer) values
+		(seq_review.nextval, #{product}, #{title}, #{content},#{writer})
 	</insert>
 	
-	
-	<!-- 조회수 증가 처리 -->
+	<!-- 
+	조회수 증가 처리
 	<update id="increaseViewcnt">
 		update review_tb set viewcnt=viewcnt+1
 		where bno=#{bno}
@@ -35,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete">
 		delete from review_tb
 		where bno=#{bno}
-	</delete>
+	</delete> -->
 	
 </mapper>
 

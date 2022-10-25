@@ -17,6 +17,7 @@ public class ReviewDTO {
 	private String ext; //첨부파일의 확장자(테이블에 없음)
 	private int rating; //별점
 	private int thumb; //좋아요
+	
 	public int getBno() {
 		return bno;
 	}

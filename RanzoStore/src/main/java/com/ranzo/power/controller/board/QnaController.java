@@ -65,7 +65,7 @@ public class QnaController {
 
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
-		//세션 추가해야함
+		//세션 처리
 		String writer = (String)session.getAttribute("userid");
 		dto.setWriter(writer);
 		//레코드 저장

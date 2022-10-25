@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>review목록</title>
 <%@ include file="../include/header.jsp" %>
+<style type="text/css">
+td {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>

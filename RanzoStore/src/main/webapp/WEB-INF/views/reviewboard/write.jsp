@@ -71,12 +71,6 @@ background-color: gray;
 			</td>
 		</tr>
 		<tr>
-			<th>이름</th>
-			<td>				
-			<input id="writer" name="writer" value="${dto.writer}" placeholder="이름을 입력하세요">
-			</td>
-		</tr>
-		<tr>
 			<th>제목</th>
 			<td>
 			<input id="title" name="title" value="${dto.title}" size="70" placeholder="제목을 입력하세요">
