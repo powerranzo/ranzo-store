@@ -9,11 +9,24 @@
 
 //제대로 안된 거 있으면 가입 버튼 안눌림 
 var checking = false;  
+var idChecking = false;  
+var pwdChecking = false;  
+var nameChecking = false;  
 
 function valid(){
 	if(checking == false){
-		$("#idChkMsg").text("아이디 중복확인을 해주세요.");
-		$("#idChkMsg").css("color", "red");
+		if(idChecking == false){
+			alert("아이디 중복 확인을 해주세요.");	
+			checking = false;
+		}else if(pwdChecking == false){
+			alert("비밀번호를 다시 한 번 확인해주세요.");
+			checking = false;
+		}else if(nameChecking == false){
+			alert("이름을 입력해주세요.");
+			checking = false;
+		}else {
+			checking = true;
+		}
 	}
 	return checking;
 }
@@ -28,15 +41,15 @@ function idChk() {
 		data : {"userid" : userid},
 		success : function(data) {
 			if(userid == ""){
-				checking = false;
+				idChecking = false;
 				$("#idChkMsg").text("아이디를 입력한 후 눌러주세요.");
 				$("#idChkMsg").css("color", "red");
 			}else if(data == 1){
-				checking = false;
+				idChecking = false;
 				$("#idChkMsg").text("사용 중인 아이디입니다.");
 				$("#idChkMsg").css("color", "red");
 			}else if(data == 0){
-				checking = true;
+				idChecking = true;
 				$("#idChkMsg").text("사용 가능한 아이디입니다");
 				$("#idChkMsg").css("color", "green");
 			}
@@ -50,42 +63,42 @@ function pwdConfirm() {
 	var passwd2 = $("#passwd2").val();
 	var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
 	
-	if (!pwdCheck.test(passwd)) {
-		checking = false;
-		$("#pwdMsg").text("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
-		$("#pwdMsg").css("color", "red");
-	}else if(passwd == ""){
-		checking = false;
+	if(passwd == ""){
+		pwdChecking = false;
 		$("#pwdMsg").text("비밀번호를 입력해주세요.");
 		$("#pwdMsg").css("color", "red");
-	}else {
-		checking = true;
+	}else if (!pwdCheck.test(passwd)) {
+		pwdChecking = false;
+		$("#pwdMsg").text("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+		$("#pwdMsg").css("color", "red");
+	}else if(pwdCheck.test(passwd)) {
+		pwdChecking = true;
 		$("#pwdMsg").text("사용 가능합니다.");
 		$("#pwdMsg").css("color", "green");
 	}
-	
+
 	if(!pwdCheck.test(passwd2)){
-		checking = false;
+		pwdChecking = false;
 		$("#pwdChkMsg").text("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
 		$("#pwdChkMsg").css("color", "red");
-	}else if(passwd == passwd2) {
-		checking = true;
+	}else if(passwd == passwd2 && pwdCheck.test(passwd2)) {
+		pwdChecking = true;
 		$("#pwdChkMsg").text("일치합니다.");
 		$("#pwdChkMsg").css("color", "green");
-	}else {
-		checking = false;
+	}else if(passwd != passwd2) {
+		pwdChecking = false;
 		$("#pwdChkMsg").text("불일치합니다.");
 		$("#pwdChkMsg").css("color", "red");
 	}
 }
 
-var name = $("#name").val();
-if(name == "") {
-	alert("이름을 입력하세요.");
-	name.focus();
-	checking = false;
-};
-
+function nameChk() {
+	if($("#name").val() == ""){
+		nameChecking = false;
+	}else {
+		nameChecking = true;
+	}
+}
 
 </script>
 <style>
@@ -99,7 +112,7 @@ form {
 	display: inline;
 	align-items: center;
 	position: absolute;
-	top: 50%;
+	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -129,7 +142,7 @@ label {
 button {
 	background-color: black;
 	color: white;
-	width: 308px;
+	width: 320px;
 	height: 50px;
 	font-size: 17px;
 	border: none;
@@ -139,8 +152,8 @@ button {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 70px;
-	height: 40px;
+	width: 84px;
+	height: 42px;
 	font-size: 14px;
 	border: none;
 	margin: 20px 0 0 0;
@@ -180,7 +193,8 @@ button {
 			<p>
 			<tr>
 				<td><label>비밀번호</label></td>
-				<td><input class="input-field" type="password" id="passwd" name="passwd" placeholder="8자 이상, 숫자와 특수문자 포함">
+				<td><input class="input-field" type="password" id="passwd" name="passwd" 
+							onkeyup="pwdConfirm()" placeholder="8자 이상, 숫자와 특수문자 포함">
 						<div class="msg" id="pwdMsg"></div>
 				</td>
 			</tr>
@@ -194,7 +208,7 @@ button {
 			<p>
 			<tr>
 				<td><label>이름</label></td>
-				<td><input class="input-field" type="text" id="name" name="name">
+				<td><input class="input-field" type="text" id="name" name="name" onkeyup="nameChk()">
 				</td>
 			</tr>
 			<p>
@@ -230,7 +244,7 @@ button {
 				<td><input class="input-field" type="text" name="addr2"></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" required></td>
 				<td>[필수]개인정보 수집 및 이용약관 동의</td>
 			</tr>
 			<tr>

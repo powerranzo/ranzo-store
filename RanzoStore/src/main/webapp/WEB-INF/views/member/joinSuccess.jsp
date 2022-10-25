@@ -17,7 +17,7 @@ form {
 	display: inline;
 	align-items: center;
 	position: absolute;
-	top: 70%;
+	top: 80%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -37,16 +37,15 @@ body {
 	height: 40px;
 	font-size: 14px;
 	border: none;
-	margin-top: 30px;
+	margin-top: 40px;
 }
 </style>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<form>
-		<h2>
-			<strong class="name">${param.name}</strong>님의 가입을 환영합니다!
-		</h2>
+		<h1><strong class="name">${param.name}</strong>님의 가입을 환영합니다!</h1>
+		<br>
 		ranzo store와 함께 일상을 더 다채롭게 만들어보세요!
 		<p>
 			<a href="${path}"><input type="button" class="button" value="홈으로"></a>
