@@ -74,11 +74,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping("view.do")
-	public ModelAndView view(int bno) throws Exception {
-		//세션 추가해야함
-		
+	public ModelAndView view(int bno, HttpSession session) throws Exception {
 		//조회수 증가 처리
-		qnaService.increaseViewcnt(bno);
+		qnaService.increaseViewcnt(bno, session);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qnaboard/view");
 		mav.addObject("dto", qnaService.read(bno));

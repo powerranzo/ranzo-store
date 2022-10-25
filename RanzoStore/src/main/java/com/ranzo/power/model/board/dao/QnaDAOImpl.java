@@ -82,7 +82,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public QnaDTO read(int bno) throws Exception {
-		return sqlSession.selectOne("qna.read",bno);
+		return sqlSession.selectOne("qna.read", bno);
 	}
 
 }
