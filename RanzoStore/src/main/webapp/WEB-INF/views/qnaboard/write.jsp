@@ -99,12 +99,12 @@ background-color: gray;
 				<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">	
 			</td>
 		</tr>
-		<tr>
+		<%-- <tr>
 			<th>아이디</th>
 			<td>
 				<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">		
 			</td>
-		</tr>
+		</tr> --%>
 		<tr>
 			<th>내용</th>
 			<td>

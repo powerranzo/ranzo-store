@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,9 +64,11 @@ public class QnaController {
 	}
 
 	@RequestMapping("insert.do")
-	public String insert(@ModelAttribute QnaDTO dto) throws Exception {
+	public String insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
 		//세션 추가해야함
-		
+		String writer = (String)session.getAttribute("userid");
+		dto.setWriter(writer);
+		//레코드 저장
 		qnaService.create(dto);
 		return "redirect:/board/qna/list.do";
 	}

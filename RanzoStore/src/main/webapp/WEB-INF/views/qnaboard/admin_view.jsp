@@ -241,10 +241,10 @@ background-color: gray;
 		제목
 		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
 	</div>
-	<%-- <div>
+	<div>
 		아이디
 		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
-	</div> --%>
+	</div>
 	<div>
 		조회수 : ${dto.viewcnt}
 	</div>
@@ -261,12 +261,12 @@ background-color: gray;
 	<div style="width: 700px;" align="center">
 		<!-- 수정,삭제에 필요한 글번호를 hidden 태그에 저장 -->	
 		<input type="hidden" name="bno" value="${dto.bno}">		
-		<!-- 본인만 수정,삭제 버튼 표시 -->
+		<!-- 세션변수 추가 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnUpdate">수정</button>
 			<button type="button" id="btnDelete">삭제</button>
+			<button type="button" id="btnReply">답변</button>
 		</c:if>
-		<button type="button" id="btnList">목록</button>
+		<button type="button" id="btnList">목록</button> / 
 	</div>
 </form>
 
