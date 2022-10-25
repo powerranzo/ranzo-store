@@ -81,7 +81,7 @@ public class ReviewController {
 		if(dto != null) {
 			reviewService.update(dto);
 		}
-		return "redirect:/board/review/view.do?bno="+dto.getBno();
+		return "redirect:/board/review/list.do";
 	}
 	
 	//게시물 삭제

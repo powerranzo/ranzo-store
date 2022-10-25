@@ -37,7 +37,7 @@ td {
 		<td>${row.bno}</td>
 		<td>${row.rating}</td>
 		<td>${row.product}</td>
-		<td><a href="${path}/board/review/view.do?bno=${row.bno}">s${row.title}</a></td>
+		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.title}</a></td>
 		<td>${row.name}(${row.writer})</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${row.viewcnt}</td>
@@ -46,7 +46,7 @@ td {
 
 <!-- 페이지 네비게이션 출력 -->
 	<tr>
-		<td colspan="6" align="center">
+		<td colspan="7" align="center">
 			<c:if test="${map.pager.curBlock > 1}">
 				<a href="#" onclick="list('1')">[처음]</a>
 			</c:if>

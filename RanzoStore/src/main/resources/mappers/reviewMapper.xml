@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 			    select rownum as rn, A.*
 			    from (
-							select bno, rating, product, title, writer, name, reg_date, viewcnt,show
+							select bno, rating, product, title, content, writer, name, reg_date, viewcnt,show
 			        from review_tb r, member_tb m
 			        where r.writer=m.userid and show='y'
 			        order by bno desc 
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="read" resultType="ReviewDTO">
-		select bno, rating, product, title, writer, name, reg_date, viewcnt
+		select bno, rating, product, title, content, writer, name, reg_date, viewcnt
 		from review_tb r, member_tb m
 		where r.writer=m.userid and bno=#{bno}
 	</select>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시물 내용 수정 -->
 	<update id="update">
 		update review_tb
-		set title=#{title}, content=#{content}
+		set rating=#{rating}, product=#{product}, title=#{title}, content=#{content}
 		where bno=#{bno}
 	</update>
 	

@@ -27,8 +27,8 @@
 				<li><a href="#">MY PAGE</a></li>
 				<li><a href="#">NOTICE</a></li>
 				<li><a href="#">FAQ</a></li>
-				<li><a href="${path}/board/qna/list.do">QnA</a></li>
-				<li><a href="${path}/board/review/list.do">Review</a></li>
+				<li><a href="${path}/board/qna/list.do">QNA</a></li>
+				<li><a href="${path}/board/review/list.do">REVIEW</a></li>
 				<li><a href="#">고객센터</a></li>
 	</ul>
 </div>

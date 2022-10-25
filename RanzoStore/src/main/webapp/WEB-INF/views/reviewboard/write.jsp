@@ -24,7 +24,15 @@ $(function() {
 });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
+function rating_check() {
+	if(rating = 0 ) {
+		alert("별점을 선택하세요");
+	}
+}
+ -->
+
+
 $(function(){
 	$("#btnSave").click(function(){
 		var str="";
@@ -55,14 +63,15 @@ background-color: gray;
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 쓰기</h2>
+<h2>Review 작성</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
 	<table>
 		<tr>
 			<th>별점</th>
 			<td>
-				<select name="rating">
-					<option value="5" selected="selected"> ★★★★★</option>
+				<select id="rating" name="rating" onchange="rating_check()">
+					<option value="0">별점</option>
+					<option value="5"> ★★★★★</option>
 					<option value="4"> ★★★★</option>
 					<option value="3"> ★★★</option>
 					<option value="2"> ★★</option>
@@ -89,7 +98,8 @@ background-color: gray;
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<th>첨부파일</th>
+			<td colspan="2">
 				<input type="file" name="file1">
 			</td>
 		</tr>
