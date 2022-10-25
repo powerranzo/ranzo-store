@@ -8,11 +8,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select resultType="QnaDTO" id="listAll">
 		select *
 			from (
-					select rownum as rn, A.*
-						from (
-									select bno,title, m.name, writer, reg_date,viewcnt,show
+				select rownum as rn, A.*
+						from (									
+									select bno,title, name, writer, reg_date,viewcnt,show
 									from qna_tb q, member_tb m
-									where q.writer=m.userid and show='y'
+									
+									<choose>
+										<when test="search_option != 'all' ">
+											where q.writer=m.userid 
+											and show='y'
+											and ${search_option} like #{keyword}
+										</when>
+										<otherwise>
+											where q.writer=m.userid 
+											and show='y'
+											and (name like #{keyword} 
+											or title like #{keyword})	
+											or content like#{keyword})	
+										</otherwise>
+									</choose>
 									order by bno desc
 						) A
 		) where rn between #{start} and #{end} 
