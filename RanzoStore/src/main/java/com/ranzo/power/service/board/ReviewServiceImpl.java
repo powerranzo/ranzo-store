@@ -3,6 +3,7 @@ package com.ranzo.power.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -47,31 +48,39 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public void update(ReviewDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		reviewDao.update(dto);
 	}
 
 	@Override
 	public void delete(int bno) throws Exception {
 		reviewDao.delete(bno);
-
 	}
 
 	@Override
-	public List<ReviewDTO> listAll() throws Exception {
-		return reviewDao.listAll();
+	public List<ReviewDTO> listAll(int start, int end) throws Exception {
+		return reviewDao.listAll(start,end);
 	}
 
+	//조회수 증가 처리
 	@Override
-	public void increaseViewcnt(int bno) throws Exception {
+	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
+		long update_time=0;
+		if(session.getAttribute("update_time_"+bno) != null) {
+			//최근에 조회수를 올린 시간
+			update_time = (long)session.getAttribute("update_time_"+bno);
+		}
+		long current_time = System.currentTimeMillis();
+		//일정 시간(5초)이 경과한 후 조회수 증가
+		if(current_time - update_time >5*1000) {
+			//조회수 증가 처리
 		reviewDao.increaseViewcnt(bno);
-
+		}
+		session.setAttribute("update_time_"+bno, current_time);
 	}
 
 	@Override
 	public int countArticle() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return reviewDao.countArticle();
 	}
 
 	@Override

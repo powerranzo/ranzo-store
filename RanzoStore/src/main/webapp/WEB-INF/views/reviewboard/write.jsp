@@ -55,15 +55,21 @@ background-color: gray;
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 글쓰기</h2>
+<h2>Review 쓰기</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
 	<table>
-		<%-- <tr>
+		<tr>
 			<th>별점</th>
 			<td>
-				<input id="rating" name="rating" value="${dto.rating}" placeholder="별점을 입력하세요">
+				<select name="rating">
+					<option value="5" selected="selected"> ★★★★★</option>
+					<option value="4"> ★★★★</option>
+					<option value="3"> ★★★</option>
+					<option value="2"> ★★</option>
+					<option value="1"> ★</option>
+				</select>
 			</td>
-		</tr> --%>
+		</tr>
 		<tr>
 			<th>전시코드</th>
 			<td>				
@@ -80,6 +86,11 @@ background-color: gray;
 			<th>내용</th>
 			<td>
 			<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="file" name="file1">
 			</td>
 		</tr>
 	</table>

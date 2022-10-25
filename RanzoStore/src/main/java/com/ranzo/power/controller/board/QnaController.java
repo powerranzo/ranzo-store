@@ -91,7 +91,6 @@ public class QnaController {
 		return qnaService.getAttach(bno);
 	}
 	
-	
 	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(QnaDTO dto) throws Exception {

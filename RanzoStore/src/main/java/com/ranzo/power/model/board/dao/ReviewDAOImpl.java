@@ -1,6 +1,8 @@
 package com.ranzo.power.model.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -29,14 +31,17 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
+		sqlSession.insert("review.addAttach",fullName);
 
 	}
 
+	//첨부파일 정보 수정
 	@Override
-	public void updateAttach(String fullname, int bno) {
-		// TODO Auto-generated method stub
-
+	public void updateAttach(String fullName, int bno) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("fullName", fullName);
+		map.put("bno", bno);
+		sqlSession.insert("review.updateAttach", map);
 	}
 
 	@Override
@@ -47,8 +52,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public void update(ReviewDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.update("review.update",dto);
 	}
 
 	@Override
@@ -58,8 +62,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<ReviewDTO> listAll() throws Exception {
-		return sqlSession.selectList("review.listAll");
+	public List<ReviewDTO> listAll(int start, int end) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("review.listAll", map);
 	}
 
 	@Override
@@ -70,8 +77,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public int countArticle() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("review.countArticle");
 	}
 
 	@Override
