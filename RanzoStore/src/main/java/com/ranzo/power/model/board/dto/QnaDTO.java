@@ -7,7 +7,7 @@ import java.util.Date;
 public class QnaDTO {
 	private int bno; //게시글 번호
 	private String writer; //작성자id(userid랑 조인)
-	private String 	name; //작성자 이름
+	private String name; //작성자 이름
 	private String title; //제목
 	private String content; //내용
 	private Date reg_date; //작성일자 
