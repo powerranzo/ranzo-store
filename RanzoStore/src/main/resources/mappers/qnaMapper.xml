@@ -10,9 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select rownum as rn, A.*
 						from (									
-									select bno,title, name, writer, reg_date,viewcnt,show
-									from qna_tb q, member_tb m
-									
+									select bno,title,writer,name,reg_date,viewcnt,show
+									from qna_tb q, member_tb m	
 									<choose>
 										<when test="search_option != 'all' ">
 											where q.writer=m.userid 
@@ -23,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 											where q.writer=m.userid 
 											and show='y'
 											and (name like #{keyword} 
-											or title like #{keyword})	
+											or title like #{keyword}	
 											or content like#{keyword})	
 										</otherwise>
 									</choose>
@@ -33,7 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
-
 		
 	<insert id="insert">
 	insert into qna_tb (bno,title,content,writer) values
