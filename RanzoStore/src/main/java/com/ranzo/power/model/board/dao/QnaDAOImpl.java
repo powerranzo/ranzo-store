@@ -33,7 +33,8 @@ public class QnaDAOImpl implements QnaDAO {
 		sqlSession.insert("qna.addAttach", fullName);
 
 	}
-
+	
+	//첨부파일 정보 수정
 	@Override
 	public void updateAttach(String fullName, int bno) {
 		Map<String,Object> map = new HashMap<>();

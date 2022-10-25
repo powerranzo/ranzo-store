@@ -26,27 +26,6 @@ $(function() {
 
 <script type="text/javascript">
 $(function(){ //자동으로 실행되는 코드
-	//댓글 목록 출력
-	listReply2();
-	
-	//댓글 쓰기
-	$("#btnReply").click(function(){
-		var replytext=$("#replytext").val(); //댓글 내용
-		var bno="${dto.bno}"; //게시물 번호
-		var param={ "replytext": replytext, "bno": bno};
-		//var param="replytext="+replytext+"&bno="+bno;
-		$.ajax({
-			type: "post",
-			url: "${path}/reply/insert.do",
-			data: param,
-			success: function(){
-				alert("댓글이 등록되었습니다.");
-				//listReply();
-				listReply2(); //댓글 목록 출력
-			}
-		});
-	});
-	
 	$(".fileDrop").on("dragenter dragover",function(e){
 		//기본 효과 막음
 		e.preventDefault();
@@ -223,14 +202,12 @@ function listAttach(){
 </script>
 <style>
 .fileDrop {
-width: 600px;
-height: 100px;
-border: 1px dotted gray;
-background-color: gray;
+	width: 600px;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: gray;
 }
 </style>
-
-
 
 </head>
 <body>
