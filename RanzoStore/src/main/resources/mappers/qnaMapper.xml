@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 					select rownum as rn, A.*
 						from (
-									select bno,title,m.name, writer,reg_date,viewcnt,show
+									select bno,title, m.name, writer, reg_date,viewcnt,show
 									from qna_tb q, member_tb m
 									where q.writer=m.userid and show='y'
 									order by bno desc
