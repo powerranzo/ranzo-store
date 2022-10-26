@@ -66,15 +66,16 @@ public class ReviewServiceImpl implements ReviewService {
 		 * reviewDao.updateAttach(name, dto.getBno()); }
 		 */
 	}
-
+	
+	@Transactional
 	@Override
 	public void delete(int bno) throws Exception {
 		reviewDao.delete(bno);
 	}
 
 	@Override
-	public List<ReviewDTO> listAll(int start, int end) throws Exception {
-		return reviewDao.listAll(start,end);
+	public List<ReviewDTO> listAll(String search_option, String keyword, int start, int end) throws Exception {
+		return reviewDao.listAll(search_option,keyword,start,end);
 	}
 
 	//조회수 증가 처리

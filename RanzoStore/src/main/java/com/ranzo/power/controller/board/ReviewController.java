@@ -30,7 +30,10 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping("list.do")
-	public ModelAndView list(@RequestParam(defaultValue = "1") int curPage) throws Exception {
+	public ModelAndView list(
+			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 		//레코드 개수 계산
 		int count = reviewService.countArticle();
 		//페이지 관련 설정
@@ -39,13 +42,15 @@ public class ReviewController {
 		int end = pager.getPageEnd();
 		
 		
-		List<ReviewDTO> list = reviewService.listAll(start,end);
+		List<ReviewDTO> list = reviewService.listAll(search_option,keyword,start,end);
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
 		map.put("list", list); //map에 자료 저장
 		map.put("count", count); //레코드 개수 파일
-		map.put("pager", pager); //페이지 네비게이션
+		map.put("pager", pager); //페이지 네비게이션을 위한 변수
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
 		mav.setViewName("reviewboard/list");
 		mav.addObject("map", map); //보낼 데이터
 		return mav;

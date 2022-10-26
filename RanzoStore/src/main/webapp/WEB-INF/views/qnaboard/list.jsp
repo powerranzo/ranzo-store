@@ -82,6 +82,7 @@ td {
 	</tr>
 </table>
 
+<!-- 검색폼 -->
 <div align="left">
 <form name="form1" method="post" action="${path}/board/qna/list.do">
 	<select name="search_option">
