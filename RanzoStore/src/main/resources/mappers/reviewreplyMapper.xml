@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="reviewreply">
+	<insert id="insertReply">
+		insert into review_reply_tb (rno,bno,replytext,replyer)
+		values (seq_review_reply.nextval, #{bno}, #{replytext}, #{replyer})
+	</insert>
+	
+	<select id="listReply" resultType="ReviewReplyDTO">
+		select rno,bno,reg_date,update_date,name,replytext
+		from review_reply_tb r, member_tb m
+		where r.replyer = m.userid and bno=#{bno}
+		order by rno
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

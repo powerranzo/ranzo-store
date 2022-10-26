@@ -38,7 +38,11 @@ td {
 		<td>${row.bno}</td>
 		<td>${row.rating}</td>
 		<td><a href="${path}/shop/exhibition/detail/${row.product}">${row.title}</a></td>
-		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a></td>
+		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
+			<c:if test="${row.cnt > 0}">
+				<span style="color: red;">(${row.cnt})</span>
+			</c:if>
+		</td>
 		<td>${row.name}(${row.writer})</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${row.viewcnt}</td>

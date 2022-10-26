@@ -7,7 +7,8 @@
 	<typeAliases>
 		<typeAlias alias="QnaDTO" type="com.ranzo.power.model.board.dto.QnaDTO" />
 		<typeAlias alias="ReviewDTO" type="com.ranzo.power.model.board.dto.ReviewDTO" />
-		<typeAlias type="com.ranzo.power.model.member.dto.MemberDTO" alias="MemberDTO" />
+		<typeAlias alias="ReviewReplyDTO" type="com.ranzo.power.model.board.dto.ReviewReplyDTO"/>
+		<typeAlias alias="MemberDTO" type="com.ranzo.power.model.member.dto.MemberDTO"  />
 		<typeAlias alias="ExhibitionDTO" type="com.ranzo.power.model.shop.dto.ExhibitionDTO"/>
 	</typeAliases>
 </configuration>

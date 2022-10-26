@@ -27,8 +27,8 @@ $(function() {
 <script>
 $(function(){
 	//댓글 목록 출력
-	listReply();
-	//listReply2();
+	//listReply();
+	listReply2();
 	
 	//댓글 쓰기
 	$("#btnReply").click(function(){
@@ -38,12 +38,12 @@ $(function(){
 		//var param="replytext="+replytext+"&bno="+bno;
 		$.ajax({
 			type: "post",
-			url: "${path}/board/reply/insert.do",
+			url: "${path}/board/reviewreply/insert.do",
 			data: param,
 			success: function(){
-				alert("댓글이 등록되었습니다.");
-				listReply();
-				//listReply2(); //댓글 목록 출력
+			alert("댓글이 등록되었습니다.");
+			//listReply();
+			listReply2(); //댓글 목록 출력
 			}
 		});
 	});
@@ -148,7 +148,7 @@ $(function(){
 function listReply(){
 	$.ajax({
 		type: "get",
-		url: "${path}/board/reply/list.do?bno=${dto.bno}",
+		url: "${path}/board/reviewreply/list.do?bno=${dto.bno}",
 		success: function(result){
 			//result : responseText 응답텍스트(html)
 			$("#listReply").html(result);
@@ -172,7 +172,7 @@ function listReply2(){
 	$.ajax({
 		type: "get",
 		contentType: "application/json",
-		url: "${path}/board/reply/list_json.do?bno=${dto.bno}",
+		url: "${path}/board/reviewreply/list_json.do?bno=${dto.bno}",
 		success: function(result){
 //view를 만들지 않는 대신에 자바스크립트로 table등을 만들어야 한다.
 			console.log(result);
