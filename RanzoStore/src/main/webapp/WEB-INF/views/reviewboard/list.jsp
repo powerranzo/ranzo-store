@@ -32,11 +32,12 @@ td {
 	<th>작성일</th>
 	<th>조회수</th>
 </tr>
+
 <c:forEach var="row" items="${map.list}">
 	<tr>
 		<td>${row.bno}</td>
 		<td>${row.rating}</td>
-		<td>${row.title}</td>
+		<td><a href="${path}/shop/exhibition/detail/${row.product}">${row.title}</a></td>
 		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a></td>
 		<td>${row.name}(${row.writer})</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>

@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 			    select rownum as rn, A.*
 			    from (
-							select bno, rating, title, subject, content, writer, name, reg_date, viewcnt, show
+							select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt, show
 							from review_tb r, member_tb m, exhibition_tb e
 							where r.writer=m.userid and r.product=e.code and show='y'
 							order by bno desc
