@@ -23,7 +23,6 @@ td {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <h2>QnA게시판</h2>
-총 ${map.count}개의 글이 있습니다.
 
 <table border="1" style="width: 100%;">
 <tr>
