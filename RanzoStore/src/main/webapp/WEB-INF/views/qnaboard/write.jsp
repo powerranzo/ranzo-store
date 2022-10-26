@@ -24,8 +24,6 @@ $(function() {
 });
 </script>
 
-
-
 <style>
 .fileDrop {
 	width: 600px;
@@ -35,6 +33,13 @@ $(function() {
 }
 </style>
 
+<script type="text/javascript">
+$(function() {
+	$("#btnSave").click(function() {
+		document.form1.submit();
+		});
+})
+</script>
 	
 <script type="text/javascript">
 function checkImageType(fileName){
@@ -58,16 +63,7 @@ function getImageLink(fileName){
 }
 
 $(function(){ 
-	$("#btnSave").click(function() {
-		var str="";
-		$("#uploadedList .file").each(function(i){
-			console.log(i);
-			str += "<input type='hidden' name='files["+i+"]'	value='"
-			+ $(this).val()+"'>";
-		});
-		$("#form1").append(str);
-		document.form1.submit();
-		});
+	
 	
 	//페이지가 뜨자마자 실행
 	//dragenter : 마우스가 대생 객체의 위로 처음 진입할 때,
