@@ -19,7 +19,6 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void deleteFile(String fullName) {
 		qnaDao.deleteFile(fullName);
-
 	}
 
 	@Override
@@ -40,17 +39,17 @@ public class QnaServiceImpl implements QnaService {
 	}
 	
 	//글쓰기,첨부파일 등록 => 하나의 트랜잭션 단위
-//	@Transactional
+	@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {
-		//qna_tb 테이블에 레코드 추가
+		//qna_tb에 insert
 		qnaDao.create(dto);
 		//qna_attach_tb 테이블에 레코드 추가
-//		String[] files = dto.getFiles(); //첨부파일 이름 배열
-//		if(files==null) return; //첨부파일 없으면 넘어가기
-//		for(String name : files) {
-//			qnaDao.addAttach(name); //qna_attach_tb에 insert
-//		}
+		 String[] files = dto.getFiles(); //첨부파일 이름 배열 
+		 if(files==null) return; //첨부파일 없으면 넘어가기 
+		 for(String name : files) { 
+			 qnaDao.addAttach(name); //qna_attach_tb에 insert 
+		}
 	}
 	
 	@Transactional

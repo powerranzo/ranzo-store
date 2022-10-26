@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 목록</title>
+<title>QNA 게시판</title>
 <%@ include file="../include/header.jsp" %>
  
 <script type="text/javascript">

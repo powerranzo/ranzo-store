@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>review reply 목록</title>
+<title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
 </head>
 <body>

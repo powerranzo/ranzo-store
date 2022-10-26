@@ -4,10 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 작성하기</title>
+<title>QNA 게시판</title>
 <%@ include file="../include/header.jsp" %>
-<script src="${path}/include/js/common.js"></script>
-<!-- 스마트에디터 -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -20,38 +18,53 @@
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
-		width : 700,
+		width : 600,
 		height : 200
 	});
 });
 </script>
 
-<style>
+
+<style type="text/css">
 .fileDrop {
-	width: 600px;
-	height: 100px;
-	border: 1px dotted gray;
-	background-color: gray;
+ width : 100%;
+ height: 200px;
+ border: 1px dotted blue;
 }
 </style>
 
-<script>
-$(function(){
-	$("#btnSave").click(function(){
-		var str="";
-   //uploadedList 영역에 클래스이름이 file인 히든타입의태그를 각각 반복
-		$("#uploadedList .file").each(function(i){
-			console.log(i);
-			//hidden 태그 구성
-			str += "<input type='hidden' name='files["+i+"]'	value='"
-	+ $(this).val()+"'>";
-		});
-		//폼에 hidden 태그들을 붙임
-		$("#form1").append(str);
+<script type="text/javascript">
+$(function() {	
+	$("#btnSave").click(function() {
 		document.form1.submit();
+		});
 	});
+</script>	
 	
-  //파일을 마우스로 드래그하여 업로드 영역에 올라갈때 파일이 열리는 기본 효과 막음
+<script type="text/javascript">
+function checkImageType(fileName){
+	var pattern=/jpg|png|gif/i; //정규표현식(i는 대소문자 무시)
+	return fileName.match(pattern); //규칙에 맞으면 true가 리턴
+}
+function getOriginalName(fileName){
+	if(checkImageType(fileName)){//이미지 파일이면 skip
+		return;
+	}
+	var idx=fileName.indexOf("_")+1; //uuid를 제외한 파일이름만 뽑음
+	return fileName.substr(idx);
+}
+function getImageLink(fileName){
+	if(!checkImageType(fileName)){ //이미지 파일이 아니면 skip
+		return;
+	}
+	var front=fileName.substr(0,12)//연월일 경로(0~11번째 까지 자르고)
+	var end=fileName.substr(14);// 14번째 문자열 앞의 s_ 제거
+	return front+end;
+}
+
+$(function(){ //페이지가 뜨자마자 실행
+	//dragenter : 마우스가 대생 객체의 위로 처음 진입할 때,
+	//dragover : 드래그하면서 마우스가 대상 객체의 위에 자리 잡고 있을 때
 	$(".fileDrop").on("dragenter dragover", function(event){
 		event.preventDefault();// 파일을 여는 기본효과를 막음
 	});
@@ -117,7 +130,7 @@ $(function(){
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>문의하기</h2>
+<h2>QNA 문의하기</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
 	<table>
 		<tr>
@@ -135,14 +148,13 @@ $(function(){
 	</table>
 	<div> 첨부파일을 등록하세요
 		<div class="fileDrop"></div>
-		<div id="uploadedList"></div>
+		<div class="uploadedList"></div>
 	</div>
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>
-
 
 </body>
 </html>
