@@ -232,8 +232,7 @@ function listAttach(){
 			<th>별점</th>
 			<td>
 				<select name="rating">
-					<option value="0" selected="selected">별점을 입력하세요</option>
-					<option value="5"> ★★★★★</option>
+					<option value="5" selected="selected"> ★★★★★</option>
 					<option value="4"> ★★★★</option>
 					<option value="3"> ★★★</option>
 					<option value="2"> ★★</option>
@@ -250,7 +249,7 @@ function listAttach(){
 		<tr>
 			<th>제목</th>
 			<td>
-			<input id="title" name="title" value="${dto.title}" size="70" placeholder="제목을 입력하세요.">
+			<input id="subject" name="subject" value="${dto.subject}" size="70" placeholder="제목을 입력하세요.">
 			</td>
 		</tr>
 		<tr>

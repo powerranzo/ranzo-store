@@ -15,6 +15,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+
+
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
@@ -24,15 +26,7 @@ $(function() {
 });
 </script>
 
-<!-- <script type="text/javascript">
-function rating_check() {
-	if(rating = 0 ) {
-		alert("별점을 선택하세요");
-	}
-}
- -->
-
-
+<script>
 $(function(){
 	$("#btnSave").click(function(){
 		var str="";
@@ -69,9 +63,8 @@ background-color: gray;
 		<tr>
 			<th>별점</th>
 			<td>
-				<select id="rating" name="rating" onchange="rating_check()">
-					<option value="0">별점</option>
-					<option value="5"> ★★★★★</option>
+				<select name="rating">
+					<option value="5" selected="selected"> ★★★★★</option>
 					<option value="4"> ★★★★</option>
 					<option value="3"> ★★★</option>
 					<option value="2"> ★★</option>
@@ -82,13 +75,13 @@ background-color: gray;
 		<tr>
 			<th>전시코드</th>
 			<td>				
-			<input id="product" name="product" value="${dto.product}" placeholder="전시명을 입력하세요">
+			<input id="product" name="product" value="${dto.product}" placeholder="전시코드를 입력하세요">
 			</td>
 		</tr>
 		<tr>
 			<th>제목</th>
 			<td>
-			<input id="title" name="title" value="${dto.title}" size="70" placeholder="제목을 입력하세요">
+			<input id="subject" name="subject" value="${dto.subject}" size="70" placeholder="제목을 입력하세요">
 			</td>
 		</tr>
 		<tr>

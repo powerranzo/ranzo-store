@@ -26,7 +26,7 @@ td {
 <tr>
 	<th>No.</th>
 	<th>별점</th>
-	<th>전시코드</th>
+	<th>전시명</th>
 	<th>제목</th>
 	<th>작성자</th>
 	<th>작성일</th>
@@ -36,8 +36,8 @@ td {
 	<tr>
 		<td>${row.bno}</td>
 		<td>${row.rating}</td>
-		<td>${row.product}</td>
-		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.title}</a></td>
+		<td>${row.title}</td>
+		<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a></td>
 		<td>${row.name}(${row.writer})</td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${row.viewcnt}</td>
