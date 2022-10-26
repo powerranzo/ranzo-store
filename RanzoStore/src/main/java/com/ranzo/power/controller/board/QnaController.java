@@ -32,7 +32,7 @@ public class QnaController {
 	
 	@RequestMapping("list.do")
 	public ModelAndView list(
-			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "all") String search_option,
 			@RequestParam(defaultValue = "") String keyword,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 		

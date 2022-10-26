@@ -31,7 +31,7 @@ public class ReviewController {
 	
 	@RequestMapping("list.do")
 	public ModelAndView list(
-			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "all") String search_option,
 			@RequestParam(defaultValue = "") String keyword,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 		//레코드 개수 계산
@@ -40,8 +40,7 @@ public class ReviewController {
 		Pager pager = new Pager(count,curPage);
 		int start = pager.getPageBegin();
 		int end = pager.getPageEnd();
-		
-		
+			
 		List<ReviewDTO> list = reviewService.listAll(search_option,keyword,start,end);
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();

@@ -22,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								<otherwise>
 									where r.writer=m.userid and r.product=e.code
 									and show='y'
-									and ( subject like #{keyword} 
+									and ( title like #{keyword}
+									or subject like #{keyword} 
 									or content like #{keyword}	
 									or name like #{keyword})
 								</otherwise>

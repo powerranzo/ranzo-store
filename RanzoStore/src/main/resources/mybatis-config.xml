@@ -11,5 +11,6 @@
 		<typeAlias alias="MemberDTO" type="com.ranzo.power.model.member.dto.MemberDTO"  />
 		<typeAlias alias="ExhibitionDTO" type="com.ranzo.power.model.shop.dto.ExhibitionDTO"/>
 	</typeAliases>
+	
 </configuration>
 
