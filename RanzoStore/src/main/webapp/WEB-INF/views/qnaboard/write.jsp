@@ -36,6 +36,13 @@ $(function() {
 <script type="text/javascript">
 $(function() {	
 	$("#btnSave").click(function() {
+		var str="";
+		$("#uploadedList .file").each(function(i){
+			console.log(i);
+			str += "<input type='hidden' name='files["+i+"]'	value='"
+			+ $(this).val()+"'>";
+		});
+		$("#form1").append(str);
 		document.form1.submit();
 		});
 	});

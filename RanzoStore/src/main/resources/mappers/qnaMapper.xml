@@ -40,8 +40,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 첨부파일 정보 저장 -->
 	<insert id="addAttach">
-		insert into qna_attach_tb (fullName, bno) values
-  	(#{fullName}, seq_qna.currval)
+	 	insert into qna_attach_tb (fullName, bno) values
+	  (#{fullName}, seq_qna.currval)
 	</insert>
 	
 	<!-- 레코드 계산 -->
