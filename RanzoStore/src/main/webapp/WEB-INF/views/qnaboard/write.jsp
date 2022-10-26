@@ -25,14 +25,15 @@ $(function() {
 </script>
 
 
-<style type="text/css">
+
+<style>
 .fileDrop {
- width : 100%;
- height: 200px;
- border: 1px dotted blue;
+	width: 600px;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: gray;
 }
 </style>
-
 
 	
 <script type="text/javascript">
