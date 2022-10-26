@@ -7,7 +7,7 @@
 <title>QnA 작성하기</title>
 <%@ include file="../include/header.jsp" %>
 <script src="${path}/include/js/common.js"></script>
-
+<!-- 스마트에디터 -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -26,6 +26,15 @@ $(function() {
 });
 </script>
 
+<style>
+.fileDrop {
+	width: 600px;
+	height: 100px;
+	border: 1px dotted gray;
+	background-color: gray;
+}
+</style>
+
 <script>
 $(function(){
 	$("#btnSave").click(function(){
@@ -41,51 +50,69 @@ $(function(){
 		$("#form1").append(str);
 		document.form1.submit();
 	});
+	
   //파일을 마우스로 드래그하여 업로드 영역에 올라갈때 파일이 열리는 기본 효과 막음
-	$(".fileDrop").on("dragenter dragover",function(e){
-		e.preventDefault();
+	$(".fileDrop").on("dragenter dragover", function(event){
+		event.preventDefault();// 파일을 여는 기본효과를 막음
 	});
-  //마우스로 파일을 드롭할 때 파일이 열리는 기본 효과 막음
-	$(".fileDrop").on("drop",function(e){
-		e.preventDefault();
-		//첫번째 첨부파일
-		var files=e.originalEvent.dataTransfer.files;
-		var file=files[0];
-		//폼 데이터에 첨부파일 추가
+	$(".fileDrop").on("drop", function(event){
+		event.preventDefault();// 파일을 여는 기본효과를 막음
+		//첨부파일 배열(여러개를 동시에 선택해서 드래그 할 수도 있기때문에 한개만 처리하도록 조처)
+		var files=event.originalEvent.dataTransfer.files;
+		var file=files[0]; //첫번째 첨부파일
+		//FormData()는 Ajax방식의 파일업로드의 핵심인 객체로
+		//브라우저에서 지원하는 클래스이며 form태그와 같은 역할을 함
 		var formData=new FormData();
-		formData.append("file",file);
+		formData.append("file",file); //폼에 file변수 추가
+		//서버에 파일 업로드(백그라운드에서 실행)
 		$.ajax({
+			type: "post",
 			url: "${path}/upload/uploadAjax",
 			data: formData,
 			dataType: "text",
-			processData: false,
-			contentType: false,
-			type: "post",
-			success: function(data){
-				//console.log(data);
-				//data : 업로드한 파일 정보와 Http 상태 코드
-				var fileInfo=getFileInfo(data);
-				//console.log(fileInfo);
-				var html="<a href='"+fileInfo.getLink+"'>"+
-					fileInfo.fileName+"</a><br>";
-				html += "<input type='hidden' class='file' value='"
-					+fileInfo.fullName+"'>";
-				$("#uploadedList").append(html);
+			processData: false, //파일전송시 자동으로 쿼리스트링형식으로 전송되지 않도록 막는 처리
+			contentType: false, //multipart/form-data로 처리되는것과 같음
+			success: function(data,status,req){
+				console.log("data : " + data);//업로된 파일 이름
+				console.log("status : " + status);//성공,실패 여부
+				console.log("req : " + req.status);//요청코드값
+				
+				var str="";
+				if(checkImageType(data)){ //이미지 파일
+					str="<div><a href='${path}/upload/displayFile?fileName="
+						+getImageLink(data)+"'>";
+					str+="<img src='${path}/upload/displayFile?fileName="
+						+data+"'></a>";	
+				}else{//이미지가 아닌 경우
+					str="<div>";
+					str+="<a href='${path}/upload/displayFile?fileName="
+						+data+"'>"+getOriginalName(data)+"</a>";
+				}
+				str+="<span data-src="+data+">[삭제]</span></div>";
+				$(".uploadedList").append(str);
 			}
+		});
+		
+		//첨부파일 삭제 함수
+		$(".uploadedList").on("click","span",function(event){//내부적으로 span태그가 클릭되면
+			var that=$(this); //this는 현재 클릭한 태그, 즉 span태그
+			$.ajax({
+				url: "${path}/upload/deleteFile",
+				type: "post",
+				data: {
+					fileName: $(this).attr("data-src")
+				},
+				dataType: "text",
+				success: function(result){
+					if(result=="deleted"){
+						that.parent("div").remove();//파일삭제되면 행전체<div>를 삭제처리
+					}
+				}
+			});
 		});
 	});
 });
 </script>
-
-
-<style>
-.fileDrop {
-width: 600px;
-height: 100px;
-border: 1px dotted gray;
-background-color: gray;
-}
-</style>
 
 </head>
 <body>
@@ -99,12 +126,6 @@ background-color: gray;
 				<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">	
 			</td>
 		</tr>
-		<%-- <tr>
-			<th>아이디</th>
-			<td>
-				<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">		
-			</td>
-		</tr> --%>
 		<tr>
 			<th>내용</th>
 			<td>
@@ -112,12 +133,10 @@ background-color: gray;
 			</td>
 		</tr>
 	</table>
-	
-
-		첨부파일을 등록하세요
+	<div> 첨부파일을 등록하세요
 		<div class="fileDrop"></div>
-		<div class="uploadedList"></div>	
-	
+		<div id="uploadedList"></div>
+	</div>
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>

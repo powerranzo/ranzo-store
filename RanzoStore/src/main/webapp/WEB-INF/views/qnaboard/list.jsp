@@ -8,6 +8,13 @@
 <%@ include file="../include/header.jsp" %>
  
 <script type="text/javascript">
+$(function() {
+	$("#btnWrite").click(function() {
+		location.href="${path}/board/qna/write.do";		
+	});	
+});
+
+
 function list(page) {
 	location.href="${path}/board/qna/list.do?curPage="+page;
 }
@@ -100,9 +107,8 @@ td {
 </div>
 
 <div align="right">
-	<button type="button" id="btnWrite" onclick="location.href='${path}/board/qna/write.do'">글쓰기</button>
+	<button type="button" id="btnWrite">글쓰기</button>
 </div>
-
 
 </body>
 </html>
