@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.model.board.dao.ReviewDAO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
@@ -18,19 +20,19 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
+		reviewDao.deleteFile(fullName);
 
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return reviewDao.getAttach(bno);
 	}
 
+	//첨부파일 정보 수정
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -39,16 +41,30 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	//@Transactional
 	@Override
 	public void create(ReviewDTO dto) throws Exception {
 		reviewDao.create(dto);
-
+		
+		//attach 테이블에 레코드 추가
+		/*
+		 * String[] files = dto.getFiles(); //첨부파일 이름 배열 if(files==null) return;
+		 * for(String name : files) { reviewDao.addAttach(name); //review_attach_tb테이블에
+		 * insert }
+		 */
 	}
-
+	
+	//@Transactional
 	@Override
 	public void update(ReviewDTO dto) throws Exception {
 		reviewDao.update(dto);
+		
+		/*
+		 * String[] files = dto.getFiles(); //첨부파일 이름 배열 if(files==null) return;
+		 * for(String name : files) { System.out.println("첨부파일 이름 : " +name);
+		 * reviewDao.updateAttach(name, dto.getBno()); }
+		 */
 	}
 
 	@Override
@@ -73,7 +89,7 @@ public class ReviewServiceImpl implements ReviewService {
 		//일정 시간(5초)이 경과한 후 조회수 증가
 		if(current_time - update_time >5*1000) {
 			//조회수 증가 처리
-		reviewDao.increaseViewcnt(bno);
+			reviewDao.increaseViewcnt(bno);
 		}
 		session.setAttribute("update_time_"+bno, current_time);
 	}

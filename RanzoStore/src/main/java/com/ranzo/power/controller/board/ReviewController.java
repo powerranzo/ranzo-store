@@ -11,8 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.ReviewDTO;
@@ -72,6 +74,14 @@ public class ReviewController {
 		mav.setViewName("reviewboard/view");
 		mav.addObject("dto", reviewService.read(bno));
 		return mav;
+	}
+	
+	//첨부파일 목록을 리턴
+	//json 배열로 변환하여 리턴
+	@RequestMapping("getAttach/{bno}")
+	@ResponseBody //view가 아닌 List<String> 데이터 자체를 리턴
+	public List<String> getAttach(@PathVariable int bno) {
+		return reviewService.getAttach(bno);
 	}
 	
 	//게시물 내용 수정

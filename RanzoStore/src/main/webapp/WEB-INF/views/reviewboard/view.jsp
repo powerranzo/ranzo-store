@@ -25,10 +25,10 @@ $(function() {
 </script>
 
 <script>
-$(function(){ //자동으로 실행되는 코드
+$(function(){
 	//댓글 목록 출력
-	//listReply();
-	listReply2();
+	listReply();
+	//listReply2();
 	
 	//댓글 쓰기
 	$("#btnReply").click(function(){
@@ -38,12 +38,12 @@ $(function(){ //자동으로 실행되는 코드
 		//var param="replytext="+replytext+"&bno="+bno;
 		$.ajax({
 			type: "post",
-			url: "${path}/reply/insert.do",
+			url: "${path}/board/reply/insert.do",
 			data: param,
 			success: function(){
 				alert("댓글이 등록되었습니다.");
-				//listReply();
-				listReply2(); //댓글 목록 출력
+				listReply();
+				//listReply2(); //댓글 목록 출력
 			}
 		});
 	});
@@ -148,7 +148,7 @@ $(function(){ //자동으로 실행되는 코드
 function listReply(){
 	$.ajax({
 		type: "get",
-		url: "${path}/reply/list.do?bno=${dto.bno}",
+		url: "${path}/board/reply/list.do?bno=${dto.bno}",
 		success: function(result){
 			//result : responseText 응답텍스트(html)
 			$("#listReply").html(result);
@@ -172,7 +172,7 @@ function listReply2(){
 	$.ajax({
 		type: "get",
 		contentType: "application/json",
-		url: "${path}/reply/list_json.do?bno=${dto.bno}",
+		url: "${path}/board/reply/list_json.do?bno=${dto.bno}",
 		success: function(result){
 //view를 만들지 않는 대신에 자바스크립트로 table등을 만들어야 한다.
 			console.log(result);
@@ -225,7 +225,7 @@ function listAttach(){
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>리뷰 수정하기</h2>
+<h2>Review 수정</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
 	<table>
 		<tr>
@@ -261,14 +261,26 @@ function listAttach(){
 	</table>
 
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/review/list.do'">목록</button>
+	<!-- 수정, 삭제에 필요한 글번호를 hidden 태그에 저장 -->
+	<input type="hidden" name="bno" value="${dto.bno}">
 		
 		<!-- 본인만 수정, 삭제 버튼 표시 -->		
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnDelete" onclick="location.href='${path}/board/review/delete.do'">삭제</button>
 			<button type="button" id="btnUpdate">수정</button>
+			<button type="button" id="btnDelete">삭제</button>
 		</c:if>
+	<button type="button" id="btnList">목록</button>
 	</div>
 </form>
+<!-- 댓글 작성 -->
+<div style="width:700px; text-align:center;">
+	 <c:if test="${sessionScope.userid != null }">
+	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea><br>
+	 	<button type="button" id="btnReply">댓글 작성</button>
+	 </c:if>
+</div>
+<!-- 댓글 목록 -->
+<div id="listReply"></div>
+
 </body>
 </html>

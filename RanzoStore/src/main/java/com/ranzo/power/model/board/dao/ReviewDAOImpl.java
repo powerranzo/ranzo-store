@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.model.board.dto.ReviewDTO;
 
@@ -17,22 +18,21 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Inject
 	SqlSession sqlSession;
 	
+	//첨부파일 레코드 삭제
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("review.deleteFile", fullName);
 
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("review.getAttach", bno);
 	}
 
 	@Override
 	public void addAttach(String fullName) {
 		sqlSession.insert("review.addAttach",fullName);
-
 	}
 
 	//첨부파일 정보 수정
@@ -43,7 +43,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		map.put("bno", bno);
 		sqlSession.insert("review.updateAttach", map);
 	}
-
+	
 	@Override
 	public void create(ReviewDTO dto) throws Exception {
 		sqlSession.insert("review.insert", dto);

@@ -16,8 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							order by bno desc
 			    ) A    
 			) where rn between #{start} and #{end}
-		
-		</select>
+	</select>
 
 	<insert id="insert">
 		insert into review_tb(bno, rating, product, subject, content, writer) values
@@ -26,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 첨부파일 정보 저장 -->
 	<insert id="addAttach">
-		insert into attach (fullName, bno) values
+		insert into review_attach_tb (fullName, bno) values
 		(#{fullName}, seq_review.currval)
 	</insert>
 	
@@ -44,11 +43,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="read" resultType="ReviewDTO">
-		select bno, rating, product, subject, content, writer, name, reg_date, viewcnt
+		select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt
 		from review_tb r, member_tb m, exhibition_tb e
 		where r.writer=m.userid and r.product=e.code and bno=#{bno}
 	</select>
-
+	
+	<!-- 첨부파일 목록 -->
+	<select id="getAttach" resultType="String">
+		select fullName
+		from review_attach_tb
+		where bno=#{bno}
+		order by reg_date desc	
+	</select>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="deleteFile">
+		delete from review_attach_tb
+		where fullName=#{fullName}
+	</delete>
+	
+	
 	<!-- 게시물 내용 수정 -->
 	<update id="update">
 		update review_tb

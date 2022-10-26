@@ -20,19 +20,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ranzo.power.service.board.QnaService;
+import com.ranzo.power.service.board.ReviewService;
 import com.ranzo.power.util.MediaUtils;
 import com.ranzo.power.util.UploadFileUtils;
 
 
 @Controller
 public class AjaxUploadController {
-	//로깅
+		//로깅
 		private static final Logger logger
 		=LoggerFactory.getLogger(AjaxUploadController.class);
 		
 		@Inject
-		QnaService qnaService;
+		ReviewService reviewService;
 		
 		//업로드 디렉토리
 		@Resource(name = "uploadPath")
@@ -106,7 +106,7 @@ public class AjaxUploadController {
 			new File(uploadPath+fileName.replace(
 					'/',File.separatorChar)).delete();
 			//레코드 삭제
-			qnaService.deleteFile(fileName);
+			reviewService.deleteFile(fileName);
 			
 			return new ResponseEntity<String>("deleted"
 					,HttpStatus.OK);//uploadAjax.jsp의 if(result=="deleted")와 연결
