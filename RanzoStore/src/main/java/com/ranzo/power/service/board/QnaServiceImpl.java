@@ -105,4 +105,18 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.read(bno);
 	}
 
+	//답변 쓰기
+	@Override
+	public void createReply(QnaDTO dto) throws Exception {
+		qnaDao.createReply(dto);
+		
+	}
+	
+	//답변 수정
+	@Override
+	public void updateReply(QnaDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

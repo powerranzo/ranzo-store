@@ -86,4 +86,18 @@ public class QnaDAOImpl implements QnaDAO {
 		return sqlSession.selectOne("qna.read", bno);
 	}
 
+	//답변 쓰기
+	@Override
+	public void createReply(QnaDTO dto) throws Exception {
+		sqlSession.insert("qna.reply_insert", dto);
+		
+	}
+
+	//답변 수정
+	@Override
+	public void updateReply(QnaDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

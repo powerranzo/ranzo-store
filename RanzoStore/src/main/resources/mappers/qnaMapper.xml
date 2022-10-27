@@ -95,6 +95,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update qna_tb set show='n' where bno=#{bno}
 	</delete>
 	
+	<!-- 답변 작성 -->
+	<insert id="reply_insert">
+		
+	</insert>
 </mapper>
 
 

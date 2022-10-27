@@ -27,7 +27,7 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
-	$("#btnSave").click(function(){
+	$("#btnReplySave").click(function(){
 		var str="";
 		// uploadedList 내부의 .file 태그 각각 반복
 		$("#uploadedList .file").each(function(i){
