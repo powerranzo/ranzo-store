@@ -32,7 +32,7 @@ public class ReviewReplyController {
 	@RequestMapping("list.do")
 	public ModelAndView list(int bno, ModelAndView mav) {
 		List<ReviewReplyDTO> list = reviewReplyService.list(bno); //댓글목록
-		mav.setViewName("rviewboard/reply_list");
+		mav.setViewName("reviewboard/reply_list");
 		mav.addObject("list", list);
 		return mav;
 	}

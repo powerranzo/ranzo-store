@@ -8,8 +8,8 @@ public class ReviewReplyDTO {
 	private String replytext; //댓글 내용
 	private String replyer; //댓글 작성자 id
 	private String name; //댓글 작성자 이름(member_tb 테이블)
-	private Date regdate; //작성일자
-	private Date updatedate; //수정일자
+	private Date reg_date; //작성일자
+	private Date update_date; //수정일자
 	private String secret_reply; //비밀댓글 여부
 	private String userid; //작성자 아이디(member_tb)
 	public int getRno() {
@@ -42,17 +42,17 @@ public class ReviewReplyDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getReg_date() {
+		return reg_date;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
-	public Date getUpdatedate() {
-		return updatedate;
+	public Date getUpdate_date() {
+		return update_date;
 	}
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
+	public void setUpdate_date(Date update_date) {
+		this.update_date = update_date;
 	}
 	public String getSecret_reply() {
 		return secret_reply;
@@ -69,7 +69,7 @@ public class ReviewReplyDTO {
 	@Override
 	public String toString() {
 		return "ReviewReplyDTO [rno=" + rno + ", bno=" + bno + ", replytext=" + replytext + ", replyer=" + replyer
-				+ ", name=" + name + ", regdate=" + regdate + ", updatedate=" + updatedate + ", secret_reply="
+				+ ", name=" + name + ", reg_date=" + reg_date + ", update_date=" + update_date + ", secret_reply="
 				+ secret_reply + ", userid=" + userid + "]";
 	}
 }

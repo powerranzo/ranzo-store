@@ -9,7 +9,7 @@
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-<table style="width:700px" border="1">
+<table style="width:700px;" border="1">
 <!-- fn: header.jsp의 jstl -->
 <c:forEach var="row" items="${list}">   
 	<c:set var="str" value="${fn:replace(row.replytext,'<','&lt;') }" />
@@ -22,13 +22,16 @@
 	<tr>
 		<td>
 			${row.name}
-			( <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd a HH:mm:ss" /> )<br>
+			( <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd a HH:mm:ss" /> )
+		</td>
+	</tr>
+	<tr>
+		<td>
 			${str}
 		</td>
 	</tr>
 </c:forEach>	
 </table>
-
 </body>
 </html>
 

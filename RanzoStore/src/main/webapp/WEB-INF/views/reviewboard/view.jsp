@@ -27,23 +27,20 @@ $(function() {
 <script>
 $(function(){
 	//댓글 목록 출력
-	//listReply();
-	listReply2();
+	listReply();
 	
 	//댓글 쓰기
 	$("#btnReply").click(function(){
-		var replytext=$("#replytext").val(); //댓글 내용
-		var bno="${dto.bno}"; //게시물 번호
+		var replytext=$("#replytext").val();
+		var bno="${dto.bno}";
 		var param={ "replytext": replytext, "bno": bno};
-		//var param="replytext="+replytext+"&bno="+bno;
 		$.ajax({
 			type: "post",
 			url: "${path}/board/reviewreply/insert.do",
 			data: param,
 			success: function(){
-			alert("댓글이 등록되었습니다.");
-			//listReply();
-			listReply2(); //댓글 목록 출력
+				alert("댓글이 등록되었습니다.");
+				listReply();
 			}
 		});
 	});
@@ -91,7 +88,7 @@ $(function(){
 		//첨부파일 이름들을 폼에 추가
 		var str="";
 		$("#uploadedList .file").each(function(i){
-//#id이름(공백).클래스이름 : id가 uploadeList인 태그의 자식태그 중에서 class가 file인 태그들
+	//#id이름(공백).클래스이름 : id가 uploadeList인 태그의 자식태그 중에서 class가 file인 태그들
 			str+=
 				"<input type='hidden' name='files["+i+"]' value='"
 				+$(this).val()+"'>";
@@ -168,42 +165,14 @@ function changeDate(date){
 		year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
 	return strDate;
 }
-function listReply2(){
-	$.ajax({
-		type: "get",
-		contentType: "application/json",
-		url: "${path}/board/reviewreply/list_json.do?bno=${dto.bno}",
-		success: function(result){
-//view를 만들지 않는 대신에 자바스크립트로 table등을 만들어야 한다.
-			console.log(result);
-			var output="<table>";
-			for(var i in result){
-				var repl=result[i].replytext;
-				// /정규식/(규칙) => 정규표현식
-				// 규칙 g: global 전역검색, i: 대소문자 무시
-				// ex) /java/gi => JAVA 또는 java를 모두 찾음
-				repl = repl.replace(/  /gi,"&nbsp;&nbsp;");//공백처리
-				repl = repl.replace(/</gi,"&lt;"); //태그문자 처리
-				repl = repl.replace(/>/gi,"&gt;");
-				repl = repl.replace(/\n/gi,"<br>"); //줄바꿈 처리
-				
-				output += "<tr><td>"+result[i].name;
-				date = changeDate(result[i].regdate);
-				output += "("+date+")";
-				output += "<br>"+repl+"</td></tr>";
-			}
-			output+="</table>";
-			$("#listReply").html(output);
-		}
-	});
-}
+
 //첨부파일 리스트를 출력하는 함수
 function listAttach(){
 	$.ajax({
 		type: "post",
 		url: "${path}/board/review/getAttach/${dto.bno}",
 		success: function(list){
-// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
+			// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
 			// list : json
 			//console.log(list);
 			$(list).each(function(){
@@ -276,11 +245,10 @@ function listAttach(){
 <div style="width:700px; text-align:center;">
 	 <c:if test="${sessionScope.userid != null }">
 	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea><br>
-	 	<button type="button" id="btnReply">댓글 작성</button>
+	 	<button type="button" id="btnReply">댓글쓰기</button>
 	 </c:if>
 </div>
 <!-- 댓글 목록 -->
 <div id="listReply"></div>
-
 </body>
 </html>

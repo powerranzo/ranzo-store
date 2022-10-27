@@ -17,7 +17,7 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 	
 	@Override
 	public List<ReviewReplyDTO> list(int bno) {
-		return sqlSession.selectList("reviewreply.listReply", bno);
+		return sqlSession.selectList("review.listReply", bno);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ReviewReplyDAOImpl implements ReviewReplyDAO {
 	//댓글 추가
 	@Override
 	public void create(ReviewReplyDTO dto) {
-		sqlSession.insert("reviewreply.insertReply", dto);
+		sqlSession.insert("review.insertReply", dto);
 	}
 
 }

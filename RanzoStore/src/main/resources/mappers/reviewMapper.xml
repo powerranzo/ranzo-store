@@ -96,6 +96,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update review_tb set show='n' where bno=#{bno}
 	</delete>
 	
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertReply">
+		insert into review_reply_tb (rno,bno,replytext,replyer)
+		values (seq_review_reply.nextval, #{bno}, #{replytext}, #{replyer})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="listReply" resultType="ReviewReplyDTO">
+		select rno,bno,reg_date,update_date,name,replytext
+		from review_reply_tb r, member_tb m
+		where r.replyer = m.userid and bno=#{bno}
+		order by rno
+	</select>
 </mapper>
 
 
