@@ -152,6 +152,10 @@ $(function(){ //페이지가 뜨자마자 실행
 			document.form1.submit();
 		}
 	});
+	//답변 버튼
+	$("#btnReply").click(function() {
+		location.href="${path}/board/qnareply/insert.do";
+	})
 	
 	listAttach();
 	
@@ -178,7 +182,7 @@ $(function(){ //페이지가 뜨자마자 실행
 		}
 	});
 });
-});
+
 </script>
 
 
@@ -240,7 +244,9 @@ $(function(){ //페이지가 뜨자마자 실행
 			<button type="button" id="btnUpdate">수정</button>
 			<button type="button" id="btnDelete">삭제</button>
 		</c:if>
+		
 		<button type="button" id="btnList">목록</button>
+		<button type="button" id="btnReply">답변</button>
 	</div>
 </form>
 </div>

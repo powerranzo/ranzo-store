@@ -141,8 +141,8 @@ $(function(){ //페이지가 뜨자마자 실행
 
 </head>
 <body>
-<div align="center">
 <%@ include file="../include/menu.jsp" %>
+<div align="center">
 <h2>QNA 문의하기</h2><br>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
 	<table style="width: 700px;">

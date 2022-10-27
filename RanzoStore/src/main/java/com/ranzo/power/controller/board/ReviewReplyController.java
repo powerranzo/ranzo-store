@@ -36,10 +36,4 @@ public class ReviewReplyController {
 		mav.addObject("list", list);
 		return mav;
 	}
-	
-	@RequestMapping("list_json.do")
-	public List<ReviewReplyDTO> list_json(int bno) {
-		return reviewReplyService.list(bno);
-	}
-
 }
