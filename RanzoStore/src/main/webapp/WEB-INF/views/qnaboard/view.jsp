@@ -24,41 +24,108 @@ $(function() {
 });
 </script>
 
-<script type="text/javascript">
-$(function(){ //자동으로 실행되는 코드
-	$(".fileDrop").on("dragenter dragover",function(e){
-		//기본 효과 막음
-		e.preventDefault();
+<script>
+function checkImageType(fileName){
+	var pattern=/jpg|png|gif/i; //정규표현식(i는 대소문자 무시)
+	return fileName.match(pattern); //규칙에 맞으면 true가 리턴
+}
+function getOriginalName(fileName){
+	if(checkImageType(fileName)){//이미지 파일이면 skip
+		return;
+	}
+	var idx=fileName.indexOf("_")+1; //uuid를 제외한 파일이름만 뽑음
+	return fileName.substr(idx);
+}
+function getImageLink(fileName){
+	if(!checkImageType(fileName)){ //이미지 파일이 아니면 skip
+		return;
+	}
+	var front=fileName.substr(0,12)//연월일 경로(0~11번째 까지 자르고)
+	var end=fileName.substr(14);// 14번째 문자열 앞의 s_ 제거
+	return front+end;
+}
+
+$(function(){ //페이지가 뜨자마자 실행
+	$("#btnSave").click(function(){
+		var str="";
+   //uploadedList 영역에 클래스이름이 file인 히든타입의태그를 각각 반복
+		$(".uploadedList .file").each(function(i){
+			console.log(i);
+			//hidden 태그 구성
+			str += "<input type='hidden' name='files["+i+"]'	value='"
+	+ $(this).val()+"'>";
+		});
+		//폼에 hidden 태그들을 붙임
+		$("#form1").append(str);
+		document.form1.submit();
 	});
-	$(".fileDrop").on("drop",function(e){
-		e.preventDefault();
-		//첫번째 첨부파일
-		var files=e.originalEvent.dataTransfer.files;
-		var file=files[0];
-		//폼 데이터에 첨부파일 추가
+	
+	
+	
+	
+	//dragenter : 마우스가 대생 객체의 위로 처음 진입할 때,
+	//dragover : 드래그하면서 마우스가 대상 객체의 위에 자리 잡고 있을 때
+	$(".fileDrop").on("dragenter dragover", function(event){
+		event.preventDefault();// 파일을 여는 기본효과를 막음
+	});
+	$(".fileDrop").on("drop", function(event){
+		event.preventDefault();// 파일을 여는 기본효과를 막음
+		//첨부파일 배열(여러개를 동시에 선택해서 드래그 할 수도 있기때문에 한개만 처리하도록 조처)
+		var files=event.originalEvent.dataTransfer.files;
+		var file=files[0]; //첫번째 첨부파일
+		//FormData()는 Ajax방식의 파일업로드의 핵심인 객체로
+		//브라우저에서 지원하는 클래스이며 form태그와 같은 역할을 함
 		var formData=new FormData();
-		formData.append("file",file);
+		formData.append("file",file); //폼에 file변수 추가
+		//서버에 파일 업로드(백그라운드에서 실행)
 		$.ajax({
+			type: "post",
 			url: "${path}/upload/uploadAjax",
 			data: formData,
 			dataType: "text",
-			processData: false,
-			contentType: false,
-			type: "post",
-			success: function(data){
-				//console.log(data);
-				//data : 업로드한 파일 정보와 Http 상태 코드
-				var fileInfo=getFileInfo(data);
-				//console.log(fileInfo);
-				var html="<a href='"+fileInfo.getLink+"'>"+
-					fileInfo.fileName+"</a><br>";
-				html += "<input type='hidden' class='file' value='"
-					+fileInfo.fullName+"'>";
-				$("#uploadedList").append(html);
+			processData: false, //파일전송시 자동으로 쿼리스트링형식으로 전송되지 않도록 막는 처리
+			contentType: false, //multipart/form-data로 처리되는것과 같음
+			success: function(data,status,req){
+				console.log("data : " + data);//업로된 파일 이름
+				console.log("status : " + status);//성공,실패 여부
+				console.log("req : " + req.status);//요청코드값
+				
+				var str="";
+				if(checkImageType(data)){ //이미지 파일
+					str="<div><a href='${path}/upload/displayFile?fileName="
+						+getImageLink(data)+"'>";
+					str+="<img src='${path}/upload/displayFile?fileName="
+						+data+"'></a>";	
+				}else{//이미지가 아닌 경우
+					str="<div>";
+					str+="<a href='${path}/upload/displayFile?fileName="
+						+data+"'>"+getOriginalName(data)+"</a>";
+				}
+				str+="<span data-src="+data+">[삭제]</span></div>";
+				
+				
+				$(".uploadedList").append(str);
 			}
 		});
+		
+		//첨부파일 삭제 함수
+		$(".uploadedList").on("click","span",function(event){//내부적으로 span태그가 클릭되면
+			var that=$(this); //this는 현재 클릭한 태그, 즉 span태그
+			$.ajax({
+				url: "${path}/upload/deleteFile",
+				type: "post",
+				data: {
+					fileName: $(this).attr("data-src")
+				},
+				dataType: "text",
+				success: function(result){
+					if(result=="deleted"){
+						that.parent("div").remove();//파일삭제되면 행전체<div>를 삭제처리
+					}
+				}
+			});
+		});
 	});
-	
 	
 	//목록 버튼
 	$("#btnList").click(function(){
@@ -69,7 +136,7 @@ $(function(){ //자동으로 실행되는 코드
 		//첨부파일 이름들을 폼에 추가
 		var str="";
 		$("#uploadedList .file").each(function(i){
-//#id이름(공백).클래스이름 : id가 uploadeList인 태그의 자식태그 중에서 class가 file인 태그들
+	//#id이름(공백).클래스이름 : id가 uploadeList인 태그의 자식태그 중에서 class가 file인 태그들
 			str+=
 				"<input type='hidden' name='files["+i+"]' value='"
 				+$(this).val()+"'>";
@@ -88,117 +155,41 @@ $(function(){ //자동으로 실행되는 코드
 	
 	listAttach();
 	
-	//첨부파일 삭제
-	//id가 uploadedList인 태그의 class가 file_del인 태그 클릭
-	$("#uploadedList").on("click",".file_del",function(e){
-		var that=$(this); //클릭한 태그
-//data: {fileName: $(this).attr("data-src") },		
+	//첨부파일 리스트를 출력하는 함수
+	function listAttach(){
 		$.ajax({
 			type: "post",
-			url: "${path}/upload/deleteFile",
-			data: "fileName="+	$(this).attr("data-src"),		
-			dataType: "text",
-			success: function(result){
-				if(result=="deleted"){
-					//화면에서 태그 제거
-					that.parent("div").remove();
-				}
-			}
-		});
-	});
-	$("#btnSave").click(function(){
-		var str="";
-		// uploadedList 내부의 .file 태그 각각 반복
-		$("#uploadedList .file").each(function(i){
-			console.log(i);
-			//hidden 태그 구성
-			str += 
-"<input type='hidden' name='files["+i+"]'	value='"
-	+ $(this).val()+"'>";
-		});
-		//폼에 hidden 태그들을 붙임
-		$("#form1").append(str);
-		document.form1.submit();
-	});
-	
-});
-//댓글 목록 출력 함수
-function listReply(){
-	$.ajax({
-		type: "get",
-		url: "${path}/reply/list.do?bno=${dto.bno}",
-		success: function(result){
-			//result : responseText 응답텍스트(html)
-			$("#listReply").html(result);
+			url: "${path}/board/qna/getAttach/${dto.bno}",
+			success: function(list){
+			// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
+				// list : json
+				//console.log(list);
+				$(list).each(function(){
+					var fileInfo=getFileInfo(this);
+					//console.log(fileInfo);
+					var html="<div><a href='"+fileInfo.getLink+"'>"
+						+fileInfo.fileName+"</a>&nbsp;&nbsp;";
+					<c:if test="${sessionScope.userid == dto.writer}">	
+					html+="<a href='#' class='file_del' data-src='"
+						+this+"'>[삭제]</a></div>";
+				</c:if>
+				$("#uploadedList").append(html);
+			});
 		}
 	});
-}
-//타임스탬프값(숫자형)을 문자열 형식으로 변환
-function changeDate(date){
-	date = new Date(parseInt(date));
-	year=date.getFullYear();
-	month=date.getMonth();
-	day=date.getDate();
-	hour=date.getHours();
-	minute=date.getMinutes();
-	second=date.getSeconds();
-	strDate = 
-		year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
-	return strDate;
-}
-function listReply2(){
-	$.ajax({
-		type: "get",
-		contentType: "application/json",
-		url: "${path}/reply/list_json.do?bno=${dto.bno}",
-		success: function(result){
-//view를 만들지 않는 대신에 자바스크립트로 table등을 만들어야 한다.
-			console.log(result);
-			var output="<table>";
-			for(var i in result){
-				var repl=result[i].replytext;
-				// /정규식/(규칙) => 정규표현식
-				// 규칙 g: global 전역검색, i: 대소문자 무시
-				// ex) /java/gi => JAVA 또는 java를 모두 찾음
-				repl = repl.replace(/  /gi,"&nbsp;&nbsp;");//공백처리
-				repl = repl.replace(/</gi,"&lt;"); //태그문자 처리
-				repl = repl.replace(/>/gi,"&gt;");
-				repl = repl.replace(/\n/gi,"<br>"); //줄바꿈 처리
-				
-				output += "<tr><td>"+result[i].name;
-				date = changeDate(result[i].regdate);
-				output += "("+date+")";
-				output += "<br>"+repl+"</td></tr>";
-			}
-			output+="</table>";
-			$("#listReply").html(output);
-		}
-	});
-}
-//첨부파일 리스트를 출력하는 함수
-function listAttach(){
-	$.ajax({
-		type: "post",
-		url: "${path}/board/qna/getAttach/${dto.bno}",
-		success: function(list){
-// Controller에서 List<String>타입으로 넘어온 값을 처리하기 위해 json으로 처리
-			// list : json
-			//console.log(list);
-			$(list).each(function(){
-				var fileInfo=getFileInfo(this);
-				//console.log(fileInfo);
-				var html="<div><a href='"+fileInfo.getLink+"'>"
-					+fileInfo.fileName+"</a>&nbsp;&nbsp;";
-				<c:if test="${sessionScope.userid == dto.writer}">	
-				html+="<a href='#' class='file_del' data-src='"
-					+this+"'>[삭제]</a></div>";
-			</c:if>
-			$("#uploadedList").append(html);
-		});
-	}
 });
-}
+});
+</script>
 
+
+
+
+<script type="text/javascript">
+
+		
+	
+	
+	
 </script>
 <style>
 .fileDrop {
@@ -238,7 +229,7 @@ function listAttach(){
 	<div>
 		첨부파일을 등록하세요
 		<div class="fileDrop"></div>
-		<div id="uploadedList"></div>
+		<div class="uploadedList"></div>
 	</div>
 	<br>
 	<div style="width: 700px;" align="center">

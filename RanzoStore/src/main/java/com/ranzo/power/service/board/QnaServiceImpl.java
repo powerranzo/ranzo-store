@@ -38,7 +38,6 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 	
-	//글쓰기,첨부파일 등록 => 하나의 트랜잭션 단위
 	@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {

@@ -33,15 +33,7 @@ $(function() {
 }
 </style>
 
-<script type="text/javascript">
-$(function() {
-	$("#btnSave").click(function() {
-		document.form1.submit();
-		});
-})
-</script>
-	
-<script type="text/javascript">
+<script>
 function checkImageType(fileName){
 	var pattern=/jpg|png|gif/i; //정규표현식(i는 대소문자 무시)
 	return fileName.match(pattern); //규칙에 맞으면 true가 리턴
@@ -62,10 +54,24 @@ function getImageLink(fileName){
 	return front+end;
 }
 
-$(function(){ 
+$(function(){ //페이지가 뜨자마자 실행
+	$("#btnSave").click(function(){
+		var str="";
+   //uploadedList 영역에 클래스이름이 file인 히든타입의태그를 각각 반복
+		$(".uploadedList .file").each(function(i){
+			console.log(i);
+			//hidden 태그 구성
+			str += "<input type='hidden' name='files["+i+"]'	value='"
+	+ $(this).val()+"'>";
+		});
+		//폼에 hidden 태그들을 붙임
+		$("#form1").append(str);
+		document.form1.submit();
+	});
 	
 	
-	//페이지가 뜨자마자 실행
+	
+	
 	//dragenter : 마우스가 대생 객체의 위로 처음 진입할 때,
 	//dragover : 드래그하면서 마우스가 대상 객체의 위에 자리 잡고 있을 때
 	$(".fileDrop").on("dragenter dragover", function(event){
@@ -105,6 +111,8 @@ $(function(){
 						+data+"'>"+getOriginalName(data)+"</a>";
 				}
 				str+="<span data-src="+data+">[삭제]</span></div>";
+				
+				
 				$(".uploadedList").append(str);
 			}
 		});
@@ -129,6 +137,7 @@ $(function(){
 	});
 });
 </script>
+	
 
 </head>
 <body>
