@@ -107,6 +107,11 @@ public class QnaController {
 		qnaService.delete(bno);
 		return "redirect:/board/qna/list.do";
 	}
-
+	
+	//답변 작성하러가기
+	@RequestMapping("reply_write.do")
+	public String reply_write() {
+		return "qnaboard/reply_write";
+	}
 		
 }

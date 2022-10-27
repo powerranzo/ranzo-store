@@ -27,23 +27,6 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
-	//목록 버튼
-	$("#btnList").click(function(){
-		location.href="${path}/board/qna/list.do";
-	});
-	//수정 버튼
-	$("#btnUpdate").click(function(){
-		document.form1.action="${path}/board/qna/update.do";
-		document.form1.submit();
-	});
-	//삭제 버튼
-	$("#btnDelete").click(function(){
-		if(confirm("삭제하시겠습니까?")){
-			document.form1.action="${path}/board/qna/delete.do";
-			document.form1.submit();
-		}
-	});
-	
 	$("#btnSave").click(function(){
 		var str="";
 		// uploadedList 내부의 .file 태그 각각 반복
@@ -85,7 +68,7 @@ $(function() {
 	<br>
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
-		<button type="button" id="btnSave">확인</button>
+		<button type="button" id="btnReplySave">확인</button>
 	</div>
 </form>
 </div>

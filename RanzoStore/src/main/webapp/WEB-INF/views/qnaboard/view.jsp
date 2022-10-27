@@ -60,8 +60,12 @@ $(function(){ //페이지가 뜨자마자 실행
 		document.form1.submit();
 	});
 	
-	
-	
+	//답변 작성하기 버튼
+	$("#btnReply").click(function() {
+		location.href="${path}/board/qna/reply_write.do";		
+	});	
+
+
 	
 	//dragenter : 마우스가 대생 객체의 위로 처음 진입할 때,
 	//dragover : 드래그하면서 마우스가 대상 객체의 위에 자리 잡고 있을 때
@@ -245,8 +249,8 @@ $(function(){ //페이지가 뜨자마자 실행
 			<button type="button" id="btnDelete">삭제</button>
 		</c:if>
 		
-		<button type="button" id="btnList">목록</button>
-		<button type="button" id="btnReply">답변</button>
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>
+		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do'">답변</button>
 	</div>
 </form>
 </div>
