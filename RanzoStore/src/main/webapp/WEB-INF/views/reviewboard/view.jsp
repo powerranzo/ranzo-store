@@ -26,7 +26,6 @@ $(function() {
 
 <script>
 $(function(){
-	//댓글 목록 출력
 	listReply();
 	
 	//댓글 쓰기
@@ -193,10 +192,11 @@ function listAttach(){
 </script>
 </head>
 <body>
+<div align="center">
 <%@ include file="../include/menu.jsp" %>
 <h2>Review 수정</h2>
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
-	<table>
+	<table style="width: 700px;">
 		<tr>
 			<th>별점</th>
 			<td>
@@ -241,14 +241,17 @@ function listAttach(){
 	<button type="button" id="btnList">목록</button>
 	</div>
 </form>
+<hr>
+<h3>댓글</h3>
 <!-- 댓글 작성 -->
 <div style="width:700px; text-align:center;">
 	 <c:if test="${sessionScope.userid != null }">
-	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea><br>
+	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
 	 	<button type="button" id="btnReply">댓글쓰기</button>
 	 </c:if>
 </div>
 <!-- 댓글 목록 -->
 <div id="listReply"></div>
+</div>
 </body>
 </html>

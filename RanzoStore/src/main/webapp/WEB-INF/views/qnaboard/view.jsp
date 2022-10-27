@@ -18,7 +18,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
-		width : 700,
+		width : 600,
 		height : 200
 	});
 });
@@ -211,26 +211,36 @@ function listAttach(){
 
 </head>
 <body>
+<div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>문의내역 보기</h2>
+<h2>문의내역 보기</h2><br>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
-	<div>
-		제목
-		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
-	</div>
-	<div>
-		조회수 : ${dto.viewcnt}
-	</div>
-	<div style="width: 700px;">	
-		내용
-		<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
-	</div>
+ <table>
+ 	<tr>
+ 		<th>제목</th>
+ 		<td><input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요"></td>
+ 	</tr>
+ 	<tr>
+ 		<th>조회수</th>
+ 		<td>${dto.viewcnt}</td>
+ 	</tr>
+	 <tr>
+ 		<th>내용</th>
+ 		<td>
+ 			<div style="width: 700px;">	
+				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+			</div>
+ 		</td>
+ 	</tr> 
+ </table>
+	
+
 	<div>
 		첨부파일을 등록하세요
 		<div class="fileDrop"></div>
 		<div id="uploadedList"></div>
 	</div>
-	
+	<br>
 	<div style="width: 700px;" align="center">
 		<!-- 수정,삭제에 필요한 글번호를 hidden 태그에 저장 -->	
 		<input type="hidden" name="bno" value="${dto.bno}">		
@@ -242,7 +252,7 @@ function listAttach(){
 		<button type="button" id="btnList">목록</button>
 	</div>
 </form>
-
+</div>
 
 </body>
 </html>

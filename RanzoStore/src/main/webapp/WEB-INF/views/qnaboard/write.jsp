@@ -132,10 +132,11 @@ $(function(){
 
 </head>
 <body>
+<div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>QNA 문의하기</h2>
+<h2>QNA 문의하기</h2><br>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
-	<table>
+	<table style="width: 700px;">
 		<tr>
 			<th>제목</th>
 			<td>
@@ -153,11 +154,12 @@ $(function(){
 		<div class="fileDrop"></div>
 		<div class="uploadedList"></div>
 	</div>
+	<br>
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>
-
+</div>
 </body>
 </html>

@@ -56,10 +56,11 @@ background-color: gray;
 
 </head>
 <body>
+<div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 작성</h2>
+<h2>Review 작성</h2><br>
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
-	<table>
+	<table style="width: 700px;">
 		<tr>
 			<th>별점</th>
 			<td>
@@ -97,11 +98,12 @@ background-color: gray;
 			</td>
 		</tr>
 	</table>
-
+	<br>
 	<div style="width: 700px;" align="center">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnSave">확인</button>
 	</div>
 </form>
+</div>
 </body>
 </html>
