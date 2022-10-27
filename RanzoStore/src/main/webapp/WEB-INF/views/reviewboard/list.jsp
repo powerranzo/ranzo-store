@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>review목록</title>
+<title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 function list(page) {
@@ -21,6 +21,28 @@ td {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <h2>Review게시판</h2>
+<br>
+<!-- 검색폼 -->
+<div>
+<form name="form1" method="post" action="${path}/board/review/list.do">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="title"
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
+		<option value="subject" 
+			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
+	</select>
+	<input name="keyword" size="80" value="${map.keyword}">
+	<input type="submit" value="조회">
+	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'">글쓰기</button>
+</form>
+</div>
+<br>
 
 <table border="1" style="width: 100%;">
 <tr>
@@ -88,28 +110,6 @@ td {
 	</tr>
 </table>
 
-<!-- 검색폼 -->
-<div align="left">
-<form name="form1" method="post" action="${path}/board/review/list.do">
-	<select name="search_option">
-		<option value="all"
-			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
-		<option value="title"
-			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
-		<option value="subject" 
-			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
-	</select>
-	<input name="keyword" size="80" value="${map.keyword}">
-	<input type="submit" value="조회">
-</form>
-</div>
 
-<div align="right">
-<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'">글쓰기</button>
-</div>
 </body>
 </html>
