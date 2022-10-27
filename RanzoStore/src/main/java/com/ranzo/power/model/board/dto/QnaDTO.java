@@ -16,6 +16,9 @@ public class QnaDTO {
 	private String[] files; //첨부파일 이름 배열
 	private String show; //화면 표시 여부
 	private String product; //제품코드 
+	private int ref; //게시물그룹 
+	private int re_step; //게시물그룹의 순번 
+	private int re_level; //답변 단계
 	public int getBno() {
 		return bno;
 	}
@@ -82,11 +85,30 @@ public class QnaDTO {
 	public void setProduct(String product) {
 		this.product = product;
 	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getRe_step() {
+		return re_step;
+	}
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+	public int getRe_level() {
+		return re_level;
+	}
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
+	}
 	@Override
 	public String toString() {
 		return "QnaDTO [bno=" + bno + ", writer=" + writer + ", name=" + name + ", title=" + title + ", content="
 				+ content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", reply_state=" + reply_state
-				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", product=" + product + "]";
+				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", product=" + product + ", ref=" + ref
+				+ ", re_step=" + re_step + ", re_level=" + re_level + "]";
 	}
 
 }
