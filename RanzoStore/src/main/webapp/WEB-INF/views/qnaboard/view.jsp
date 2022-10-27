@@ -218,10 +218,6 @@ function listAttach(){
 		제목
 		<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">
 	</div>
-	<%-- <div>
-		아이디
-		<input name="writer" id="writer" size="80" value="${dto.writer}" placeholder="이름을 입력하세요">
-	</div> --%>
 	<div>
 		조회수 : ${dto.viewcnt}
 	</div>
