@@ -7,7 +7,7 @@ import java.util.Date;
 public class QnaDTO {
 	private int bno; //게시글 번호
 	private String writer; //작성자id(userid랑 조인)
-	private String 	name; //작성자 이름
+	private String name; //작성자 이름
 	private String title; //제목
 	private String content; //내용
 	private Date reg_date; //작성일자 
@@ -15,11 +15,7 @@ public class QnaDTO {
 	private String reply_state; //답변상태
 	private String[] files; //첨부파일 이름 배열
 	private String show; //화면 표시 여부
-	private String ext; //첨부파일의 확장자(테이블에 없음)
-	private String product; //제품코드 (빠짐)
-	private String fileName;
-	private int filesize;
-	
+	private String product; //제품코드 
 	public int getBno() {
 		return bno;
 	}
@@ -80,59 +76,17 @@ public class QnaDTO {
 	public void setShow(String show) {
 		this.show = show;
 	}
-	public String getExt() {
-		return ext;
-	}
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
 	public String getProduct() {
 		return product;
 	}
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public int getFilesize() {
-		return filesize;
-	}
-	public void setFilesize(int filesize) {
-		this.filesize = filesize;
-	}
 	@Override
 	public String toString() {
 		return "QnaDTO [bno=" + bno + ", writer=" + writer + ", name=" + name + ", title=" + title + ", content="
 				+ content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", reply_state=" + reply_state
-				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", ext=" + ext + ", product=" + product
-				+ ", fileName=" + fileName + ", filesize=" + filesize + "]";
+				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", product=" + product + "]";
 	}
-	public QnaDTO(int bno, String writer, String name, String title, String content, Date reg_date, int viewcnt,
-			String reply_state, String[] files, String show, String ext, String product, String fileName,
-			int filesize) {
-		super();
-		this.bno = bno;
-		this.writer = writer;
-		this.name = name;
-		this.title = title;
-		this.content = content;
-		this.reg_date = reg_date;
-		this.viewcnt = viewcnt;
-		this.reply_state = reply_state;
-		this.files = files;
-		this.show = show;
-		this.ext = ext;
-		this.product = product;
-		this.fileName = fileName;
-		this.filesize = filesize;
-	}
-	public QnaDTO() {
 	
-	}
-
-
 }

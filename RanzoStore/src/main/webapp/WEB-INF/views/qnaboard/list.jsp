@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 목록</title>
+<title>QNA 게시판</title>
 <%@ include file="../include/header.jsp" %>
-<!-- <script type="text/javascript">
-$(function() {
-	$("#btnWrite").click(function(){
-		location.href="${path}/board/qna/write.do";
-	});
-});
-</script>
- -->
+ 
 <script type="text/javascript">
+$(function() {
+	$("#btnWrite").click(function() {
+		location.href="${path}/board/qna/write.do";		
+	});	
+});
+
+
 function list(page) {
 	location.href="${path}/board/qna/list.do?curPage="+page;
 }
@@ -30,7 +30,26 @@ td {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <h2>QnA게시판</h2>
-총 ${map.count}개의 글이 있습니다.
+<br>
+<!-- 검색폼 -->
+<div>
+<form name="form1" method="post" action="${path}/board/qna/list.do" style="width: 100%;">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	>이름</option>
+		<option value="title" 
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+	</select>
+	<input name="keyword" size="80" value="${map.keyword}">
+	<input type="submit" value="조회">
+	<button type="button" id="btnWrite">글쓰기</button>
+</form>
+</div>
+<br>
 
 <table border="1" style="width: 100%;">
 <tr>
@@ -89,25 +108,6 @@ td {
 	</tr>
 </table>
 
-<div align="left">
-<form name="form1" method="post" action="${path}/board/qna/list.do"></form>
-	<select name="search_option">
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected</c:if>	>이름</option>
-		<option value="title" 
-			<c:if test="${map.search_option == 'title'}"> selected</c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected</c:if>	>내용</option>
-		<option value="all" 
-			<c:if test="${map.search_option == 'all'}"> selected</c:if>	>이름+내용+제목</option>
-	</select>
-	<input name="keyboard" size="80" value="${map.keyword}">
-	<input type="submit" value="조회">
-</div>
-
-<div align="right">
-	<button type="button" id="btnWrite" onclick="location.href='${path}/board/qna/write.do'">글쓰기</button>
-</div>
 
 
 </body>
