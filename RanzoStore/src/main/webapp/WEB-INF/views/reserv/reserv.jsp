@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예매</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 .div1 {
@@ -87,9 +87,9 @@
 			url : "${path}/reserv/result.do",
 			success : function(result) {
 				$("#result").html(
-						"성인 " + result.adult + "명" + "<br>" + "청소년 "
+						"<h3>"+"성인 " + result.adult + "명" + "<br>" + "청소년 "
 								+ result.teen + "명" + "<br>" + "유아 및 어린이 "
-								+ result.kids + "명" + "<br>");
+								+ result.kids + "명" + "<br>"+"</h3>");
 			}
 		});
 	}
@@ -145,24 +145,26 @@
  </tr>
  </thead>
  <tr>
-  <td width="33%" rowspan="3"><img src="${dto.thumnail}" width="100%"></td>
+  <td width="33%" rowspan="3"><img src="${dto.thumnail}" width="80%"></td>
   <td width="33%" rowspan="3">
   <ul style="text-align: left;">
   <li><h1>${dto.title}</h1></li>
   <li>${dto.summary}</li>
   <li><strong>장소</strong> ${dto.gallery} </li>
-  <li><strong>전시기간</strong> ${dto.start_date} ~ ${dto.end_date}</li>
+  <li><strong>전시기간</strong>
+  <fmt:formatDate value="${dto.start_date}" pattern="yyyy-MM-dd" /> ~ 
+  <fmt:formatDate value="${dto.end_date}" pattern="yyyy-MM-dd" /></li>
   <li><strong>관람등급</strong> 전체관람가</li>
   <li><strong>이용요금</strong><br>
-  		성인 20,000원 <br>
-  		초중고 학생 17,000원 <br>
-  		유아 14,000원</li>
+  		성인 18,000원 <br>
+  		초중고 학생 9,000원 <br>
+  		유아 6,000원</li>
   </ul>
   </td>
   
  <td class="tdstyle">
  <h2>관람일</h2>
- <input type="date" id="res_date" name="res_date" min="" max="${dto.end_date}">
+ <input type="date" id="res_date" name="res_date" min="" max="<fmt:formatDate value="${dto.end_date}" pattern="yyyy-MM-dd" />">
  <script>
 	document.getElementById("res_date").value = new Date().toISOString().substring(0, 10);;
   document.getElementById("res_date").setAttribute("min", new Date().toISOString().substring(0, 10));
@@ -205,21 +207,49 @@
  </td>
  </tr>
  <tr>
-  <td><input type="hidden" value="${dto.code}" id="code"></td>
-  <td> &nbsp; </td>
+  <td colspan="2"><input type="hidden" value="${dto.code}" id="code"></td>
   <td class="tdstyle">
   <div id="result">
-   성인 0명 <br>
+   <h3>성인 0명 <br>
    청소년 0명 <br>
-   유아 및 어린이 0명 <br></div>
+   유아 및 어린이 0명 <br></h3></div>
+   
+   <br>
+   <br>
+  <input type="checkbox" onclick="check(this.form)" name="check2" id="check2"> 관람시 유의 사항 동의
+  <input type="button" name="checkButton" id="checkButton" value="예매하기" disabled="disabled">
   </td>
  </tr>
  <tr>
-  <td colspan="2"> &nbsp;</td>
-   
-  <td class="tdstyle"><input type="checkbox" onclick="check(this.form)" name="check2" id="check2"> 관람시 유의 사항 동의
-    <input type="button" name="checkButton" id="checkButton" value="예매하기" disabled="disabled">
-  </td>
+  <td colspan="2">
+
+ <h3 style="text-align: left;">관람 시 유의사항</h3>
+   <div id="infodiv">
+    <ol>
+     <li>입장, 티켓 환불 & 취소</li>
+      <ul>
+       <li>• 예매하신 티켓의 변경, 취소, 환불은 전시 관람 또는 프로그램 하루 전 오후 5시까지만 가능합니다. 이후에는 취소와 환불이 불가하오니 유의해 주세요.</li>
+       <li>• 전시 관람 또는 프로그램 참여 당일 예매하신 티켓은 취소, 변경, 환불이 불가합니다. 꼭 기억해 주세요.</li>
+       <li>• 관람 및 참여 여부와 관계없이 예약시간에 사용하지 않은 티켓은 기간만료 처리 되어 취소,환불이 불가능합니다.</li>
+       <li>• 재관람은 ‘사용완료’ 처리된 티켓으로만 가능합니다. 티켓을 취소 했거나, 예매 후 미술관을 방문하지 못해 기간만료 처리 된 티켓으로는 재관람이 어렵습니다.</li>
+      </ul>
+     <li>코로나19 예방과 확산 방지를 위한 관람객 유의 사항</li>
+      <ul>
+       <li>• 미술관 안에서는 안전한 관람을 위하여 관람객 모두 마스크를 착용해야 합니다.</li>
+       <li>• 올바른 마스크 착용이 아니거나 마스크 착용을 거부할 경우 퇴장 조치 될 수 있습니다.</li>
+      </ul>
+     <li>미술관 방문과 전시 관람</li>
+      <ul>
+	     <li>• 전시장 안으로는 물, 껌, 사탕을 포함한 모든 음식물 반입이 불가하오니 꼭 기억해 주세요.</li>
+	     <li>• 미술관 내에는 안내견을 제외한 반려동물은 입장할 수 없습니다.</li>
+	     <li>• 플래시, 삼각대 및 셀카봉을 이용한 촬영, 상업적 용도의 촬영, 동영상 촬영은 불가합니다.</li>
+	     <li>• 14세 미만 어린이의 경우, 보호자와 함께 입장하셔야 합니다. 전시장에서는 어린이들이 보호자의 손을 잡고 전시를 관람할 수 있게 해 주세요.</li>
+	     <li>• 관람객이 전시 작품 및 시설물을 파괴하거나 훼손하였을 때에는 이에 상응하는 손해 배상을 하실 수 있으니, 관람에 유의해 주세요.</li>    
+    	</ul>
+    </ol>
+   </div>
+</td> 
+
  </tr>
 </table>
 </div>

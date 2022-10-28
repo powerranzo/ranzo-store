@@ -87,8 +87,9 @@ function date(d) {
 	});	
 }
 function list(page){
-	location.href="${path}/reserv/list.do/${sessionScope.userid}?curPage="+page;
+	location.href="${path}/reserv/list2.do/${sessionScope.userid}?curPage="+page;
 } 
+
 
 </script>
 
@@ -100,12 +101,12 @@ function list(page){
 <p><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
 <form action="${path}/reserv/list2.do/${sessionScope.userid}" method="post" name="orderlist">
 <div class="datediv">
- <button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
+<button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
  <button type="button" name="filterDate" value="2" onclick="date(2)" class="filterDate">1개월</button>
  <button type="button" name="filterDate" value="3" onclick="date(3)" class="filterDate">3개월</button>
  <button type="button" name="filterDate" value="4" onclick="date(4)" class="filterDate">6개월</button>
  <input name="strDate" id="strDate" type="date" value="${dto.strDate}">
-  <span> ~ </span>
+ <span> ~ </span>
  <input name="endDate" id="endDate" type="date" value="${dto.endDate}"> 
 <button name="btnSearch" id="btnSearch" class="filterDate">검색</button>
 </div>
@@ -171,6 +172,7 @@ function list(page){
 	</tr>
 </table>
 </div>
+
 
 
 <%@ include file="../include/footer.jsp" %>
