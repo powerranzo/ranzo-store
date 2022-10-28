@@ -15,7 +15,7 @@
 <%@ include file="include/header.jsp"%>
 <style type="text/css">
 .swiper-container {
-	height: 700px;
+	height: 820px;
 	width: 100%;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .main {
-	padding: 30px 150px;
+	padding: 50px 70px;
 	text-align: center;
 }
 
@@ -96,6 +96,26 @@ button.btn2 {
 	padding: 10px;
 	text-align: center;
 }
+#s0 {
+	margin: 100 10px 30 0;
+	height: 300px;
+	vertical-align: bottom;
+}
+.suggestdiv #s1 {
+	margin: 80px 10px 10px 10px;
+	
+}
+.suggestdiv #s2 {
+	margin: 20px 10px 80px 0;
+}
+.suggestdiv #s3 {
+	margin: 90px 10px 10px 0;
+}
+.suggestdiv img {
+	width: 240px;
+	height: 330px;
+}
+
 </style>
 <script type="text/javascript">
 	function btn2() {
@@ -159,34 +179,28 @@ button.btn2 {
 	</script>
 
 	<div class="main">
-		<div style="display: inline-block; text-align: right;">
+		<div style="display: inline-block; text-align: right;" id="s0">
 			<h1>EXHIBITION</h1>
 			<br>
 			<ul>
-				<li>추천 전시 ></li>
+				<li><strong>추천 전시 ></strong></li>
 			</ul>
 		</div>
-		<div style="display: inline-block;">
+		<div style="display: inline-block;" class="suggestdiv">
 			<ul>
-				<li><a href="#"><img alt=""
-						src="${path}/resources/images/20220825-43301_1.jpg" width="250"
-						height="300"></a></li>
-				<li><a href="#"><img alt=""
-						src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg"
-						width="250" height="300"></a></li>
-				<li><a href="#"><img alt=""
-						src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg"
-						width="250" height="300"></a></li>
+				<li>
+				<a href="#">
+				<img src="${path}/resources/images/20220825-43301_1.jpg" id="s1"></a></li>
+				<li><a href="#">
+				<img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="s2"></a></li>
+				<li><a href="#">
+				<img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="s3"></a></li>
 			</ul>
 		</div>
 	</div>
-	<a href="${path}/exhibition/list.do">전시리스트 test</a>
-	<br>
-	<a href="${path}/reserv/orderlist.do">주문내역 확인하기 test</a>
-
-	<%@ include file="include/footer.jsp"%>
+	
 
 
-
+<%@ include file="include/footer.jsp"%>
 </body>
 </html>

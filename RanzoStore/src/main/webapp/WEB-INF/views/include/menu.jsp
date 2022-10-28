@@ -4,8 +4,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <div style="text-align: center;">
 
-	<a href="${path}/upload/uploadForm">업로드 테스트</a> | <a
-		href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
+	<a href="${path}/upload/uploadForm">업로드 테스트</a> |
+	<a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
+	<a href="${path}/reserv/list.do/${sessionScope.userid}">주문내역 확인하기 test</a>
 
 </div>
 <hr>
@@ -20,22 +21,26 @@
 			</c:when>
 		<c:otherwise>
 			<!-- 로그인한 상태 -->
-     		${sessionScope.name}님이 로그인 중입니다.
-			<li><a href="${path}/member/logout.do">LOGOUT</a></li>
+     		<span style="font-weight: bold;">${sessionScope.name}</span>님이 로그인 중입니다.
+			  <li><a href="${path}/member/logout.do">LOGOUT</a></li>
+				<li><a href="#">MY PAGE</a></li>
 			</c:otherwise>
 		</c:choose>
-				<li><a href="${path}/member/mypage.do">MY PAGE</a></li>
 				<li><a href="#">NOTICE</a></li>
 				<li><a href="#">FAQ</a></li>
 				<li><a href="${path}/board/qna/list.do">QnA</a></li>
 				<li><a href="${path}/board/review/list.do">Review</a></li>
 				<li><a href="#">고객센터</a></li>
+			 <!-- 관리자아이디일 경우 -->
+			  <c:if test="${sessionScope.admin==1}">
+			   <li><a href="#">관리자 페이지</a></li>
+			  </c:if>
 	</ul>
 </div>
 <div class="header2">
 	<div class="menu2" style="float: left;">
-		<a href="${path}"><img alt=""
-			src="${path}/resources/images/logo_icon.png" height="20"></a>
+		<a href="${path}">
+		<img src="${path}/resources/images/rlogo.png" height="35"></a>
 	</div>
 	<div class="menu1">
 		<ul class="menu">

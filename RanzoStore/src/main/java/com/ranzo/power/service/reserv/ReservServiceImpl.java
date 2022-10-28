@@ -23,18 +23,46 @@ public class ReservServiceImpl implements ReservService {
 
 	@Override
 	public void delete(int no) {
-		// TODO Auto-generated method stub
+		reservDao.delete(no);
 
 	}
 
 	@Override
-	public List<ReservDTO> listReserv(String userid) {
-		return reservDao.listReserv(userid);
+	public List<ReservDTO> listReserv(String userid, int start, int end) {
+		return reservDao.listReserv(userid, start, end);
 	}
 
 	@Override
 	public ReservDTO detail(int no) {
 		return reservDao.detail(no);
 	}
+
+	@Override
+	public void updateAddr(ReservDTO dto) {
+		reservDao.updateAddr(dto);
+		
+	}
+
+	@Override
+	public int countorder(String userid) {
+		return reservDao.countorder(userid);
+	}
+
+	@Override
+	public List<ReservDTO> listReserv_search(String userid, String strDate, String endDate, int start, int end) {
+		return reservDao.listReserv_search(userid,strDate,endDate, start, end);
+	}
+
+	@Override
+	public int countorder_search(String userid, String strDate, String endDate) {
+		return reservDao.countorder_search(userid, strDate, endDate);
+	}
+
+	@Override
+	public int firstorder(String userid) {
+		return reservDao.firstorder(userid);
+	}
+
+
 
 }

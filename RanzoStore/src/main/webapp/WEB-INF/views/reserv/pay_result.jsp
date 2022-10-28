@@ -11,7 +11,7 @@
 <%@ include file="../include/menu.jsp" %>
 결제가 완료되었습니다. <br>
 
-<a href="${path}/reserv/orderlist.do">주문내역 확인하기</a>
+<a href="${path}/reserv/list.do/${sessionScope.userid}">주문내역 확인하기</a>
 
 
 
