@@ -21,13 +21,10 @@ public class MemberServiceImpl implements MemberService {
 			MemberDTO dto2=viewMember(dto.getUserid());
 			session.setAttribute("userid", dto.getUserid());
 			session.setAttribute("name", dto2.getName());
-		}
+			if(memberDao.adminCheck(dto.getUserid())){
+				session.setAttribute("admin", "y");
+			}
 		return result;
-	}
-	
-	@Override
-	public MemberDTO viewMember(String userid) {
-		return memberDao.viewMember(userid);
 	}
 	
 	@Override
@@ -45,5 +42,23 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.idChk(dto);
 	}
 
+	@Override
+	public boolean infoEnterCheck(String userid, String passwd) {
+		return memberDao.infoEnterCheck(userid, passwd);
+	}
+	
+	@Override
+	public MemberDTO viewMember(String userid) {
+		return memberDao.viewMember(userid);
+	}
 
+	@Override
+	public void updateMember(MemberDTO dto) {
+		memberDao.updateMember(dto);
+	}
+
+	@Override
+	public void deleteMember(String userid) {
+		memberDao.deleteMember(userid);
+	}
 }

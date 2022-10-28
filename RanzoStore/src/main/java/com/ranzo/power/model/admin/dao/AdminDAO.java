@@ -21,5 +21,9 @@ public interface AdminDAO {
 		public int countExbAll();
 		public List<MemberDTO> getExbList(Map<String, Object> map);
 		public void insertExb(ExhibitionDTO dto);
+		public ExhibitionDTO getExbView(String code);
+		public void updateExb(ExhibitionDTO dto);
+		public void deleteThumnail(String code);
+		public void deleteExb(String code);
 
 }

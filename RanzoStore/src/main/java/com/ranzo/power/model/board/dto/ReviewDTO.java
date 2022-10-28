@@ -52,8 +52,8 @@ public class ReviewDTO {
 	public String getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setsubject(String subject) {
+		this.subject = subject;
 	}
 	public String getContent() {
 		return content;

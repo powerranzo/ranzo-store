@@ -78,9 +78,27 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public void insertExb(ExhibitionDTO dto) {
-		sqlSession.insert("admin.insertExb");
+		sqlSession.insert("admin.insertExb", dto);
 	}
 
+	@Override
+	public ExhibitionDTO getExbView(String code) {
+		return sqlSession.selectOne("admin.getExbView", code);
+	}
+	
+	@Override
+	public void updateExb(ExhibitionDTO dto) {
+		sqlSession.update("admin.updateExb",dto);
+	}
 
+	@Override
+	public void deleteThumnail(String code) {
+		sqlSession.update("admin.deleteThumnail",code);
+	}
+	
+	@Override
+	public void deleteExb(String code) {
+		sqlSession.update("admin.deleteExb",code);
+	}
 
 }

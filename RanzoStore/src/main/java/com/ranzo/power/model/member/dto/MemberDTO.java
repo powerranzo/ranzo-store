@@ -16,7 +16,15 @@ public class MemberDTO {
 	private Date join_date;
 	private Date quit_date; //날짜만
 	private String rn;
+	private String admin;
+	
 
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -101,11 +109,13 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", name=" + name + ", email=" + email
 				+ ", gender=" + gender + ", hp=" + hp + ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2
-				+ ", quit=" + quit + ", join_date=" + join_date + ", quit_date=" + quit_date + ", rn=" + rn + "]";
+				+ ", quit=" + quit + ", join_date=" + join_date + ", quit_date=" + quit_date + ", rn=" + rn + ", admin="
+				+ admin + "]";
 	}
 
 	public MemberDTO(String userid, String passwd, String name, String email, String gender, String hp, String zipcode,
-			String addr1, String addr2, Date join_date) {
+			String addr1, String addr2, String quit, Date join_date, Date quit_date, String rn, String admin) {
+		super();
 		this.userid = userid;
 		this.passwd = passwd;
 		this.name = name;
@@ -115,7 +125,11 @@ public class MemberDTO {
 		this.zipcode = zipcode;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
+		this.quit = quit;
 		this.join_date = join_date;
+		this.quit_date = quit_date;
+		this.rn = rn;
+		this.admin = admin;
 	}
 	public MemberDTO() {
 

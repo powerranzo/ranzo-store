@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<title>Insert title here</title>
+<title>결제</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 .div1{
@@ -47,6 +47,9 @@
 	color:#cccccc;
 	border: none;
 }
+#paydiv3{
+	margin: 0 10px;
+}
 </style>
 <script type="text/javascript">
 /* 버튼 활성화 */
@@ -59,6 +62,15 @@ function check(frm){
     frm.payButton.disabled=true
     $("#payButton").css({"backgroundColor":"#eeeeee","color":"#cccccc"});
    }
+}
+function coupon() {
+	$.ajax({
+		type : "post",
+		url : "${path}/reserv/coupon.do",
+		success : function(result) {
+			$("#result").html(result.coupon);
+		}
+	});
 }
 
 </script>
@@ -103,7 +115,7 @@ function check(frm){
      <td>성인</td>
      <td>18,000원</td>
      <td>${adult}인<input type="hidden" id="adult" name="adult" value="${adult}"></td>
-     <td style="text-align: right;"><strong>${adult*18000}원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${adult*18000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
      <c:if test="${teen>0}">
@@ -111,7 +123,7 @@ function check(frm){
      <td>청소년</td>
      <td>9,000원</td>
      <td>${teen}인<input type="hidden" id="teen" name="teen" value="${teen}"></td>
-     <td style="text-align: right;"><strong>${teen*9000}원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${teen*9000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
     <c:if test="${kids>0}">
@@ -119,7 +131,7 @@ function check(frm){
      <td>유아 및 어린이</td>
      <td>6,000원</td>
      <td>${kids}인<input type="hidden" id="kids" name="kids" value="${kids}"></td>
-     <td style="text-align: right;"><strong>${kids*6000}원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${kids*6000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
    </table>
@@ -134,25 +146,37 @@ function check(frm){
       <tr>
        <td style="text-align: left;">총금액/${adult + teen + kids}매
        <input type="hidden" id="quantity" name="quantity" value="${adult + teen + kids}"></td>
-       <td style="text-align: right;">${(adult*18000)+(teen*9000)+(kids*6000)}원
+       <td style="text-align: right;"><fmt:formatNumber value="${(adult*18000)+(teen*9000)+(kids*6000)}" pattern="#,###" />원
        <input type="hidden" id="sub_total" name="sub_total" value="${(adult*18000)+(teen*9000)+(kids*6000)}"></td>
       </tr>
       <tr>
+       <td style="text-align: left;">배송비</td>
+       <td style="text-align: right;">2,500원</td>
+			</tr>
+      <tr>
        <td style="text-align: left;">최종결제금액</td>
-       <td style="text-align: right;"><h2>${(adult*18000)+(teen*9000)+(kids*6000)}원</h2></td>
+       <td style="text-align: right;"><h2><fmt:formatNumber value="${(adult*18000)+(teen*9000)+(kids*6000)+2500}" pattern="#,###" />원</h2></td>
       </tr>
      </table>
    </div>
-		<br>
-   <input type="checkbox" onclick="check(this.form)" name="check3" id="check3"> 예약 티켓 정보에 대한 동의
+   	
+  </td>
+ </tr>
+ <tr>
+  <td colspan="2" style="text-align: left;">&nbsp;</td>
+  <td style="text-align: left;">
+  <div id="paydiv3">
+  <input type="checkbox" onclick="check(this.form)" name="check3" id="check3"> 예약 티켓 정보에 대한 동의
+   <br>
+   <br>
    <p style="font-size: 14px; color: gray;">예약하신 티켓의 가격, 할인 내역, 취소 정책을 최종확인 하였으며, 구매에 동의합니다.
-		<br>(전자거래법 제8조 제2항)</p>
+	(전자거래법 제8조 제2항)</p></div>
 		<br>
 		<button id="payButton" name="payButton" type="button" disabled="disabled">결제하기</button>
 	<script>
 		$("#payButton").click(function() {
 			var IMP = window.IMP;
-			var price = ${(adult*18000)+(teen*9000)+(kids*6000)};
+			var price = ${(adult*18000)+(teen*9000)+(kids*6000)+2500};
 			var quantity = ${adult+teen+kids};
 			IMP.init('imp63178535');
 			IMP.request_pay({
@@ -179,9 +203,7 @@ function check(frm){
 				}
 			});
 		});
-	</script>
-		
-  </td>
+	</script>	</td>
  </tr>
  </table>
  </div>
