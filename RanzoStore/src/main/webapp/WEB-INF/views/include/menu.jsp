@@ -23,7 +23,7 @@
 			<!-- 로그인한 상태 -->
      		<span style="font-weight: bold;">${sessionScope.name}</span>님이 로그인 중입니다.
 			  <li><a href="${path}/member/logout.do">LOGOUT</a></li>
-				<li><a href="#">MY PAGE</a></li>
+				<li><a href="${path}/member/mypage.do">MY PAGE</a></li>
 			</c:otherwise>
 		</c:choose>
 				<li><a href="#">NOTICE</a></li>
