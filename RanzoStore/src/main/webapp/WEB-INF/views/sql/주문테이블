@@ -1,0 +1,36 @@
+--주문내역 테이블
+DROP TABLE RESERV_ITEM_TB;
+
+create table RESERV_ITEM_TB(
+no number not null primary key, --주문번호
+userid varchar2(50) not null, --예매자
+code varchar2(50), --전시코드
+res_date date, --관람일
+adult number, --수량(성인)
+teen number, --수량(청소년)
+kids number, --수량(어린이)
+quantity number, --수량(총)
+sub_total number, --가격
+pay varchar2(5) default 'y' not null, --결제상태
+r_hp varchar2(50), --배송 연락처
+r_zipcode varchar2(7), --배송 우편번호
+r_addr1 varchar2(200), --배송 주소1
+r_addr2 varchar2(200), --배송 주소2
+r_name varchar2(50), --배송받는 사람
+foreign key(code) references EXHIBITION_TB(code),
+foreign key(userid) references MEMBER_TB(userid)
+);
+
+alter table RESERV_ITEM_TB add edit number default 0 not null; --배송지 수정여부
+
+select * from RESERV_ITEM_TB;
+
+--시퀀스
+drop sequence  seq_reserv_no; --시퀀스 삭제
+create sequence seq_reserv_no start with 10001 increment by 1;
+
+--샘플 데이터
+INSERT INTO RESERV_ITEM_TB (no, userid, code, res_date, adult, teen, kids, quantity, sub_total)
+VALUES (seq_reserv_no.nextval, 'kim', 'testcode02', '2022-11-01',1,0,0,1,18000);
+
+commit;

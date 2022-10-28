@@ -97,7 +97,7 @@ $(function(){
 <!-- 			</table> -->
 <!-- 				</div> -->
 				
-				<h4>${dto.name}님의 최근 문의글
+				<h4>${dto.name}님의 최근 문의글</h4>
 <!-- 				<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#qna">최근 문의글</button></h4> -->
 <!--   				<div id="qna" class="collapse"> -->
 				 <table class="table table-hover">
