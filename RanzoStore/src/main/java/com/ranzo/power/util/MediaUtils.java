@@ -3,6 +3,8 @@ package com.ranzo.power.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.MediaType;
 
 public class MediaUtils {
@@ -16,4 +18,8 @@ public class MediaUtils {
 	public static MediaType getMediaType(String type) {
 		return mediaMap.get(type.toUpperCase());
 	}
+	
+	public static String getServerUploadPath(HttpServletRequest request) {
+		return request.getServletContext().getRealPath("/resources/images/");
+	} 
 }

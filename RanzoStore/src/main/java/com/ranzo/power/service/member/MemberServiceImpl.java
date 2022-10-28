@@ -21,11 +21,9 @@ public class MemberServiceImpl implements MemberService {
 			MemberDTO dto2=viewMember(dto.getUserid());
 			session.setAttribute("userid", dto.getUserid());
 			session.setAttribute("name", dto2.getName());
-			if(dto.getUserid().equals("admin")) {
-				int admin=1;
-				session.setAttribute("admin", admin);				
+			if(memberDao.adminCheck(dto.getUserid())){
+				session.setAttribute("admin", "y");
 			}
-		}
 		return result;
 	}
 	

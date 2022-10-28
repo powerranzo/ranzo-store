@@ -1,15 +1,20 @@
 package com.ranzo.power.service.admin;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import com.ranzo.power.controller.admin.AdminController;
 import com.ranzo.power.model.admin.dao.AdminDAO;
 import com.ranzo.power.model.admin.dto.MemberCountDTO;
 import com.ranzo.power.model.admin.dto.PopupDTO;
@@ -21,6 +26,7 @@ import com.ranzo.power.utils.DateFunction;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	private static final Logger logger=LoggerFactory.getLogger(AdminController.class);
 
 	@Inject
 	AdminDAO adminDao;
@@ -45,15 +51,6 @@ public class AdminServiceImpl implements AdminService {
 		map.put("pager", pager);
 		return map;
 	}
-
-//	@Override
-//	public MemberCountDTO getMemberCount() {
-//		MemberCountDTO dto=
-//				new MemberCountDTO(adminDao.countMemberAll(), 
-//						adminDao.countMemberToday(DateFunction.getToday()),
-//						adminDao.countMemberQuit());
-//		return dto;
-//	}
 
 	@Override
 	public MemberDTO getMemberView(String userid) {
@@ -97,17 +94,59 @@ public class AdminServiceImpl implements AdminService {
 		map.put("exb_count_ing", adminDao.countExbIng(DateFunction.getToday()));
 		map.put("list", list);
 		map.put("pager", pager);
-		System.out.println("return exb map:" + map);
 		return map;
 	}
 
 
 	@Override
-	public void insertExb(ExhibitionDTO dto) {
+	public void insertExb(String startDate, String endDate, 
+			ExhibitionDTO dto, String fileUrl) {
+			try {
+				dto.setStart_date(DateFunction.stringToDate(startDate));
+				dto.setEnd_date(DateFunction.stringToDate(endDate));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} 
+			dto.setThumnail(fileUrl);
+//			dto.setThumnail((String)session.getAttribute("fileUrl"));
+//			logger.info("after session_dto_thumnail:"+dto.getThumnail());
+//			session.removeAttribute("fileUrl");
 		adminDao.insertExb(dto);
-		
 	}
 
+	@Override
+	public ExhibitionDTO getExbView(String code) {
+		return adminDao.getExbView(code);
+	}
+	
+	@Override
+	public void updateExb(String startDate, String endDate, 
+			ExhibitionDTO dto, String fileUrl) {
+		try {
+			dto.setStart_date(DateFunction.stringToDate(startDate));
+			dto.setEnd_date(DateFunction.stringToDate(endDate));
+//			if((String)session.getAttribute("fileUrl")!=null)
+//			dto.setThumnail((String)session.getAttribute("fileUrl"));
+//			else dto.setThumnail("-");
+//			logger.info("after session_dto_thumnail:"+dto.getThumnail());
+//			session.removeAttribute("fileUrl");
+			dto.setThumnail(fileUrl);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		adminDao.updateExb(dto);
+	}
+	
+	@Override
+	public void deleteThumnail(String code) {
+		adminDao.deleteThumnail(code);
+	}
+
+	@Override
+	public void deleteExb(String code) {
+		adminDao.deleteExb(code);
+	}
+	
 	@Override
 	public List<PopupDTO> popupList() {
 		// TODO Auto-generated method stub
@@ -131,6 +170,10 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 
 	}
+
+
+
+
 
 
 

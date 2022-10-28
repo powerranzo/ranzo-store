@@ -33,6 +33,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public boolean adminCheck(String userid) {
+		String name=sqlSession.selectOne("member.adminCheck", userid);
+		return (name==null) ? false : true;
+	}
+	
 	public boolean infoEnterCheck(String userid, String passwd) {
 		boolean result = false;
 		Map<String, String> map = new HashMap<String, String>();
