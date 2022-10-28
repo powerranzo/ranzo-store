@@ -24,6 +24,7 @@ public class MemberServiceImpl implements MemberService {
 			if(memberDao.adminCheck(dto.getUserid())){
 				session.setAttribute("admin", "y");
 			}
+		}
 		return result;
 	}
 	
