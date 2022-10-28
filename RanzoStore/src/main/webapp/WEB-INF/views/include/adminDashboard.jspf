@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리페이지</title>
+
+</head>
+<body>
+<div class="body">
+	<div class="title">ADMIN PAGE</div>
+	<aside>
+		<div class="title-s">MEMBER</div>
+		<hr noshade size="1px" color="black"><br>
+		<a class="a" href="${path}/admin/member_list.do">회원목록</a>
+		<p><br>
+<!-- 		<a class="a" href="#">위시리스트</a> -->
+<!-- 		<p><br> -->
+<!-- 		<a class="a" href="#">배송지관리</a> -->
+<!-- 		<p><br> -->
+<!-- 		<a class="a" href="#">고객리뷰</a> -->
+<!-- 		<p><br> -->
+<!-- 		<a class="a" href="#">상품문의</a> -->
+<!-- 		<p><br> -->
+		<div class="title-s">EXHIBITION</div>
+		<hr noshade size="1px" color="black"><br>
+		<a class="a" href="${path}/admin/exb_list.do">전시목록</a>
+	</aside>
+
+
+</div>
+</body>
+</html>

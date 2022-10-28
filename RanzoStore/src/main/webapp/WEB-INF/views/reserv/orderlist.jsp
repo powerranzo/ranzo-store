@@ -6,11 +6,12 @@
 <meta charset="UTF-8">
 <title>티켓예매 목록</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 <style type="text/css">
 .ordertable{
 	padding: 10px;
 	width: 100%;
-	margin: 10px auto;
+	margin: 10px;
 	text-align: center;
 	border-collapse: collapse;
 }
@@ -23,8 +24,10 @@
 .ordertable th, td{ padding: 10px;}
 .orderdiv {
 	padding: 20px;
-	margin: auto;
-	width: 70%;
+	margin-right:20%;
+	float: right;
+	width: 100%;
+	padding-bottom: 50px;
 }
 .orderul li {
 	display: inline-block;
@@ -48,6 +51,9 @@
 }
 .datediv {
 	margin: 10px 0 0 0;
+}
+footer{
+	clear : right;
 }
 </style>
 <script type="text/javascript">
@@ -95,6 +101,9 @@ function list(page){
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<%@ include file="../include/CommonDashboard.jspf" %>
+
+<section>
 <div class="orderdiv">
 <h2>티켓예매 목록</h2>
 <p><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
@@ -171,8 +180,10 @@ function list(page){
 	</tr>
 </table>
 </div>
+</section>
 
-
+<footer>
 <%@ include file="../include/footer.jsp" %>
+</footer>
 </body>
 </html>

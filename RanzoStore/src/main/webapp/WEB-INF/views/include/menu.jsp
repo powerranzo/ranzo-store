@@ -7,7 +7,7 @@
 	<a href="${path}/upload/uploadForm">업로드 테스트</a> |
 	<a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
 	<a href="${path}/reserv/list.do/${sessionScope.userid}">주문내역 확인하기 test</a>
-	
+
 </div>
 <hr>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -32,8 +32,8 @@
 				<li><a href="${path}/board/review/list.do">REVIEW</a></li>
 				<li><a href="#">고객센터</a></li>
 			 <!-- 관리자아이디일 경우 -->
-			  <c:if test="${sessionScope.admin eq 'y'}">
-			   <li><a href="#">관리자 페이지</a></li>
+			  <c:if test="${sessionScope.admin == 'y'}">
+			   <li><a href="${path}/admin/home.do">관리자 페이지</a></li>
 			  </c:if>
 	</ul>
 </div>

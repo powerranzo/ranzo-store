@@ -44,9 +44,10 @@ public class AdminController {
 
 	//	@Resource(name = "uploadPath") 
 	//	String uploadPath;
-	@GetMapping("/sample.do")
+	
+	@GetMapping("/home.do")
 	public String adminHome() {
-		return "admin/sample";
+		return "admin/adminHome";
 	}
 	
 	@RequestMapping("/member_list.do")
