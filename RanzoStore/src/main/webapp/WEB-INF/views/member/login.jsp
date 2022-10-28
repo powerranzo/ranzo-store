@@ -31,6 +31,11 @@
  	<c:if test="${message == 'error' }">
 		alert("로그인에 실패하였습니다.");
 	</c:if>
+	
+	<c:if test="${param.message == 'nologin' }">
+    console.log('message');
+		alert("로그인 후 이용가능합니다.");
+	</c:if> 
  	
 </script>
 <style>
@@ -110,7 +115,7 @@ form {
 			<input class="input-field2" type="password" name="passwd" id="passwd"
 				placeholder="비밀번호를 입력해주세요.">
 		<p>
-			<a href="#" class="a">아이디 찾기 </a>|<a href="#" class="a"> 비밀번호 찾기</a>
+			<a href="${path}/member/findId.do" class="a">아이디 찾기 </a>|<a href="${path}/member/findPwd.do" class="a"> 비밀번호 찾기</a>
 		<p>
 			<button class="button" id="btnLogin">로그인</button>
 			<a href="${path}/member/join.do"><input type="button" class="button" value="회원가입"></a>

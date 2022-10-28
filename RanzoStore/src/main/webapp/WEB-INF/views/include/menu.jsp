@@ -16,7 +16,7 @@
 			<c:when test="${sessionScope.userid == null}">
 				<!-- 로그인하지 않은 상태  -->
 				<li><a href="${path}/member/login.do">LOGIN</a></li>
-				<li><a href="#">BECOME A MEMBER</a></li>
+				<li><a href="${path}/member/join.do">BECOME A MEMBER</a></li>
 			</c:when>
 		<c:otherwise>
 			<!-- 로그인한 상태 -->
@@ -24,7 +24,7 @@
 			<li><a href="${path}/member/logout.do">LOGOUT</a></li>
 			</c:otherwise>
 		</c:choose>
-				<li><a href="#">MY PAGE</a></li>
+				<li><a href="${path}/member/mypage.do">MY PAGE</a></li>
 				<li><a href="#">NOTICE</a></li>
 				<li><a href="#">FAQ</a></li>
 				<li><a href="${path}/board/qna/list.do">QnA</a></li>
