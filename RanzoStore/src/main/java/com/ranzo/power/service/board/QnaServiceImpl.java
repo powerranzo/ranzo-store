@@ -3,6 +3,7 @@ package com.ranzo.power.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,6 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void deleteFile(String fullName) {
 		qnaDao.deleteFile(fullName);
-
 	}
 
 	@Override
@@ -38,18 +38,17 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 	
-	//글쓰기,첨부파일 등록 => 하나의 트랜잭션 단위
-//	@Transactional
+	@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {
-		//qna_tb 테이블에 레코드 추가
+		//qna_tb에 insert
 		qnaDao.create(dto);
 		//qna_attach_tb 테이블에 레코드 추가
-//		String[] files = dto.getFiles(); //첨부파일 이름 배열
-//		if(files==null) return; //첨부파일 없으면 넘어가기
-//		for(String name : files) {
-//			qnaDao.addAttach(name); //qna_attach_tb에 insert
-//		}
+		String[] files=dto.getFiles(); //첨부파일 이름 배열
+		if(files==null) return; //첨부파일이 없으면 skip
+		for(String name : files) {
+			qnaDao.addAttach(name); 
+		}
 	}
 	
 	@Transactional
@@ -80,12 +79,20 @@ public class QnaServiceImpl implements QnaService {
 	
 	//조회수 증가 처리
 	@Override
-	public void increaseViewcnt(int bno) throws Exception {
-		//세션처리
-		
-		
-		qnaDao.increaseViewcnt(bno);
-
+	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
+		long update_time=0;
+		if(session.getAttribute("update_time_"+bno) != null) {
+			//최근에 조회수를 올린 시간
+			update_time = (long)session.getAttribute("update_time_"+bno);
+		}
+		long current_time = System.currentTimeMillis();
+		//일정 시간(5초)이 경과한 후 조회수 증가
+		if(current_time - update_time >5*1000) {
+			//조회수 증가 처리
+			qnaDao.increaseViewcnt(bno);	
+			//조회수를 올린 시간 저장
+			session.setAttribute("update_time_"+bno, current_time);
+		}
 	}
 
 	@Override

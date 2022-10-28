@@ -21,13 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ranzo.power.service.board.QnaService;
+import com.ranzo.power.service.board.ReviewService;
 import com.ranzo.power.util.MediaUtils;
 import com.ranzo.power.util.UploadFileUtils;
 
 
 @Controller
 public class AjaxUploadController {
-	//로깅
+		//로깅
 		private static final Logger logger
 		=LoggerFactory.getLogger(AjaxUploadController.class);
 		
