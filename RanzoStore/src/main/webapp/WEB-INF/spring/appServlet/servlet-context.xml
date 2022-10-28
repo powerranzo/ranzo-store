@@ -59,7 +59,6 @@
 	<beans:bean id="AdminInterceptor" class="com.ranzo.power.interceptor.AdminInterceptor">
 	</beans:bean>
 	
-	
 		<interceptors>
 			<interceptor>
 	      <mapping path="/reserv/pay/*"/>
