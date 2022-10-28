@@ -8,7 +8,7 @@
 <%@ include file="../include/header.jsp"%>
 <script type="text/javascript">
 	$(function(){
-	
+		//상세 판넬
 		tabList = $('.tablist li a');
 		panelList = $('.tabpanel');
 		
@@ -25,6 +25,19 @@
 			/* console.log($target); */
 			$($target).show();
 		});
+		
+		// 리뷰
+	function review() {
+		$.ajax({
+			type: "post",
+			url: "board/review//list.do",
+			data : {product : ${dto_prd.code}},
+			success: function(result){
+				console.log(result);
+				$("#rvwList").html(result);
+			}
+		});
+	}
 
 	});
 </script>	
@@ -72,7 +85,27 @@
 
 		<div class="tabpanel" id="prdInfo">전시상세</div>
 		<div class="tabpanel" id="reservInfo">예매/취소</div>
-		<div class="tabpanel" id="reviewInfo"">관람후기</div>
+		<div class="tabpanel" id="reviewInfo"">
+		<h1>관람후기</h1>
+		<hr>
+<%-- 			<form name="form1" method="post" action="${path}/board/review/list.do">
+				<select name="search_option"56ㅏㅍ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+					<option value="all"
+						<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+					<option value="title"
+						<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
+					<option value="subject" 
+						<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
+					<option value="content" 
+						<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+					<option value="name"
+						<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
+				</select>
+				<input name="keyword" size="80" value="${map.keyword}">
+				<input type="submit" value="조회">
+				<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'">글쓰기</button>
+			</form> --%>
+		</div>
 		<div class="tabpanel" id="qnaInfo" >Q&A</div>
 	</section>
 
