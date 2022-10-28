@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class QnaController {
 	
 	@RequestMapping("list.do")
 	public ModelAndView list(
-			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "all") String search_option,
 			@RequestParam(defaultValue = "") String keyword,
 			@RequestParam(defaultValue = "1") int curPage) throws Exception {
 		
@@ -63,19 +64,19 @@ public class QnaController {
 	}
 
 	@RequestMapping("insert.do")
-	public String insert(@ModelAttribute QnaDTO dto) throws Exception {
-		//세션 추가해야함
-		
+	public String insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+		//세션 처리
+		String writer = (String)session.getAttribute("userid");
+		dto.setWriter(writer);
+		//레코드 저장
 		qnaService.create(dto);
 		return "redirect:/board/qna/list.do";
 	}
 	
 	@RequestMapping("view.do")
-	public ModelAndView view(int bno) throws Exception {
-		//세션 추가해야함
-		
+	public ModelAndView view(int bno, HttpSession session) throws Exception {
 		//조회수 증가 처리
-		qnaService.increaseViewcnt(bno);
+		qnaService.increaseViewcnt(bno, session);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qnaboard/view");
 		mav.addObject("dto", qnaService.read(bno));
@@ -89,7 +90,6 @@ public class QnaController {
 	public List<String> getAttach(@PathVariable int bno) {
 		return qnaService.getAttach(bno);
 	}
-	
 	
 	//게시물 수정
 	@RequestMapping("update.do")
@@ -107,6 +107,11 @@ public class QnaController {
 		qnaService.delete(bno);
 		return "redirect:/board/qna/list.do";
 	}
-
+	
+	//답변 작성하러가기
+	@RequestMapping("reply_write.do")
+	public String reply_write() {
+		return "qnaboard/reply_write";
+	}
 		
 }

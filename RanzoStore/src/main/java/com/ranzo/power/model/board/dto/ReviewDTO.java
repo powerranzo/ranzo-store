@@ -8,15 +8,17 @@ public class ReviewDTO {
 	private String product; //전시명
 	private String writer; //작성자id(userid랑 조인)
 	private String name; //작성자 이름
-	private String title; //제목
+	private String subject; // 제목
+	private String title; //제목(exhibition테이블 전시코드랑 조인)
 	private String content; //내용
 	private Date reg_date; //작성일자 
-	int viewcnt; //조회수
+	private int viewcnt; //조회수
 	private String[] files; //첨부파일 이름 배열
 	private String show; //화면 표시 여부
-	private String ext; //첨부파일의 확장자(테이블에 없음)
 	private int rating; //별점
 	private int thumb; //좋아요
+	private int cnt; //댓글 개수
+	
 	public int getBno() {
 		return bno;
 	}
@@ -41,11 +43,17 @@ public class ReviewDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public String getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setsubject(String subject) {
+		this.subject = subject;
 	}
 	public String getContent() {
 		return content;
@@ -77,12 +85,7 @@ public class ReviewDTO {
 	public void setShow(String show) {
 		this.show = show;
 	}
-	public String getExt() {
-		return ext;
-	}
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
+	
 	public int getRating() {
 		return rating;
 	}
@@ -95,12 +98,17 @@ public class ReviewDTO {
 	public void setThumb(int thumb) {
 		this.thumb = thumb;
 	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	@Override
 	public String toString() {
-		return "ReviewDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", title="
-				+ title + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", files="
-				+ Arrays.toString(files) + ", show=" + show + ", ext=" + ext + ", rating=" + rating + ", thumb=" + thumb
-				+ "]";
+		return "ReviewDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", subject="
+				+ subject + ", title=" + title + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt="
+				+ viewcnt + ", files=" + Arrays.toString(files) + ", show=" + show + ", rating=" + rating + ", thumb="
+				+ thumb + ", cnt=" + cnt + "]";
 	}
-
 }

@@ -12,6 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select name from member_tb
 		where userid=#{userid} and passwd=#{passwd}
 	</select>
+	<!-- 관리자 -->
+	<select id="adminCheck"
+	resultType="String">
+		select name from member_tb
+		where userid=#{userid} and admin='y'
+	</select>
 	
 	<!-- 회원 전체 보기 -->
 	<select id="viewMember" 
@@ -34,6 +40,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member_tb
 		where userid = #{userid}
 	</select>
+	
+	<!-- 비밀번호 중복 체크 -->
+	<select id="infoEnterCheck" resultType="int">
+		select count(*) from member_tb
+		where userid = #{userid} and passwd = #{passwd}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember">
+		update member_tb
+		set passwd=#{passwd}, name=#{name}, email=#{email}, hp=#{hp}, 
+		zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}
+		where userid=#{userid}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember">
+		delete from member_tb
+		where userid=#{userid}
+	</delete>
 	
 </mapper>
 
