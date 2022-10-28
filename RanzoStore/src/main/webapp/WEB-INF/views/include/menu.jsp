@@ -17,7 +17,7 @@
 			<c:when test="${sessionScope.userid == null}">
 				<!-- 로그인하지 않은 상태  -->
 				<li><a href="${path}/member/login.do">LOGIN</a></li>
-				<li><a href="#">BECOME A MEMBER</a></li>
+				<li><a href="${path}/member/join.do">BECOME A MEMBER</a></li>
 			</c:when>
 		<c:otherwise>
 			<!-- 로그인한 상태 -->

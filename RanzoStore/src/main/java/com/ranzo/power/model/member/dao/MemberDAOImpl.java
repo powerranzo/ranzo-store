@@ -1,5 +1,8 @@
 package com.ranzo.power.model.member.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,11 +21,6 @@ public class MemberDAOImpl implements MemberDAO {
 		String name=sqlSession.selectOne("member.loginCheck", dto);
 		return (name==null) ? false : true;
 	}
-
-	@Override
-	public MemberDTO viewMember(String userid) {
-		return sqlSession.selectOne("member.viewMember", userid);
-	}
 	
 	@Override
 	public void insertMember(MemberDTO dto) {
@@ -33,5 +31,31 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idChk(MemberDTO dto) {
 		return sqlSession.selectOne("member.idChk", dto);
 	}
-	
+
+	@Override
+	public boolean infoEnterCheck(String userid, String passwd) {
+		boolean result = false;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("passwd", passwd);
+		int count = sqlSession.selectOne("member.infoEnterCheck", map);
+		if(count == 1) result = true;
+		return result;
+	}
+
+	@Override
+	public MemberDTO viewMember(String userid) {
+		return sqlSession.selectOne("member.viewMember", userid);
+	}
+
+	@Override
+	public void updateMember(MemberDTO dto) {
+		sqlSession.update("member.updateMember", dto);
+	}
+
+	@Override
+	public void deleteMember(String userid) {
+		sqlSession.delete("member.deleteMember", userid);
+	}
+
 }
