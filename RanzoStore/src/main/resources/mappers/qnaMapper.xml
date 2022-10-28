@@ -9,33 +9,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 			from (
 				select rownum as rn, A.*
-						from (									
-									select bno,title,writer,name,reg_date,viewcnt,show,re_level
-									from qna_tb q, member_tb m	
-									<choose>
-										<when test="search_option != 'all' ">
-											where q.writer=m.userid 
-											and show='y'
-											and ${search_option} like #{keyword}
-										</when>
-										<otherwise>
-											where q.writer=m.userid 
-											and show='y'
-											and (name like #{keyword} 
-											or title like #{keyword}	
-											or content like#{keyword})	
-										</otherwise>
-									</choose>
-									order by ref desc, re_step asc
-						) A
-		) where rn between #{start} and #{end} 
-		
+					from (
+						select bno,title,writer,name,reg_date,viewcnt,show
+						from qna_tb q, member_tb m 
+							<choose>
+								<when test="search_option != 'all' ">
+									where q.writer=m.userid
+									and show='y'and ${search_option} like #{keyword} 
+								</when>
+								<otherwise>
+									where q.writer=m.userid
+									and show='y'
+									and (name like #{keyword}
+									or title like #{keyword}
+									or content like#{keyword}) 
+								</otherwise>
+							</choose>
+						order by bno desc
+					) A
+				) where rn between #{start} and #{end} 
 	</select>
 	
 		
 	<insert id="insert">
-		insert into qna_tb (bno,title,ref,re_step,re_level,content,writer) values
-  	(seq_qna.nextval,#{title},seq_qna.nextval,1,0,#{content},#{writer})
+		insert into qna_tb (bno,title,content,writer) values
+  	(seq_qna.nextval,#{title},#{content},#{writer})
 	</insert>
 	
 	<!-- 첨부파일 정보 저장 -->
@@ -95,18 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update qna_tb set show='n' where bno=#{bno}
 	</delete>
 	
-	<!-- 답글 순서 조정 -->
- <update id="updateStep">
-	 update qna_tb
-	 set re_step=re_step+1
-	 where ref=#{ref} and re_step >= #{re_step} 
- </update>
-	
-	<!-- 답변 작성 -->
-	<insert id="reply_insert">
-		insert into qna_tb (bno,title,ref,re_step,re_level,content,writer) values
-  	(seq_qna.nextval,#{title},#{ref},#{re_step},#{re_level},#{content},#{writer})
-	</insert>
+
 </mapper>
 
 
