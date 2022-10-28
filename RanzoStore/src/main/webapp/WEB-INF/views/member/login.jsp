@@ -32,8 +32,8 @@
  		console.log('message');
 		alert("로그인에 실패하였습니다.");
 	</c:if>
- 	<c:if test="${param.message == 'nologin' }">
- 		console.log('message');
+	<c:if test="${param.message == 'nologin' }">
+    console.log('message');
 		alert("로그인 후 이용가능합니다.");
 	</c:if>
  	
@@ -50,37 +50,45 @@ form {
 	display: inline;
 	align-items: center;
 	position: absolute;
-	top: 50%;
+	top: 62%;
 	left: 55%;
 	transform: translate(-50%, -50%);
 }
 
-.input-field {
+.input-field1 {
 	width: 300px;
 	height: 40px;
 	border: 1px solid gray;
 	padding: 0 10px;
-	margin-bottom: 10px;
+	margin: 30px 0 10px 0;
+}
+
+.input-field2 {
+	width: 300px;
+	height: 40px;
+	border: 1px solid gray;
+	padding: 0 10px;
+	margin-bottom: 35px;
 }
 
 .button {
 	background-color: black;
 	color: white;
-	width: 308px;
+	width: 320px;
 	height: 50px;
 	font-size: 17px;
 	border: none;
-	margin-bottom: 10px;
+	margin: 5px 0 5px 0;
 }
 
 .kakao{
 	background-color: #FEE500;
 	color: black;
-	width: 308px;
+	width: 320px;
 	height: 50px;
 	font-size: 17px;
 	border: none;
-	margin-bottom: 10px;
+	margin-top: 5px;
 }
 
 .title {
@@ -88,17 +96,10 @@ form {
 	margin: 40px 0 15px 0;
 }
 
-.msg {
-	height: 30px;
-	text-align: center;
-	font-size: 16px;
-	color: red;
-	margin-bottom: 20px;
-}
-
 .a{
 	text-decoration: none;
 	color: black;
+	font-weight: normal; 
 }
 
 </style>
@@ -109,13 +110,13 @@ form {
 		<div class="title">로그인</div>
 		<p>
 		
-		<input class="input-field" type="text" name="userid" id="userid"
+		<input class="input-field1" type="text" name="userid" id="userid"
 			placeholder="아이디를 입력해주세요.">
 		<p>
-			<input class="input-field" type="password" name="passwd" id="passwd"
+			<input class="input-field2" type="password" name="passwd" id="passwd"
 				placeholder="비밀번호를 입력해주세요.">
 		<p>
-			<a href="#" class="a">아이디 찾기 </a>|<a href="#" class="a"> 비밀번호 찾기</a>
+			<a href="${path}/member/findId.do" class="a">아이디 찾기 </a>|<a href="${path}/member/findPwd.do" class="a"> 비밀번호 찾기</a>
 		<p>
 			<button class="button" id="btnLogin">로그인</button>
 			<a href="${path}/member/join.do"><input type="button" class="button" value="회원가입"></a>

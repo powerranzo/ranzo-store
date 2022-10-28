@@ -57,15 +57,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	//회원정보수정관련
-	//아직 못함.
-	@RequestMapping("view.do")
-	public String view(@RequestParam String userid, Model model) {
-		//모델에 자료 저장
-		model.addAttribute("dto", memberService.viewMember(userid));
-		return "member/view";
-	}
-	
 	//회원가입 등록
 	@RequestMapping("join.do")
 	public String join() {
@@ -84,6 +75,68 @@ public class MemberController {
 	@ResponseBody
 	public int idChk(MemberDTO dto) {
 		return memberService.idChk(dto);
+	}
+	
+	//마이페이지 이동
+	@RequestMapping("mypage.do")
+	public String mypage() {
+		return "member/mypage";
+	}
+	
+	//회원 수정 확인 페이지 이동
+	@RequestMapping("infoEnter.do")
+	public String infoEnter() {
+		return "member/infoEnter";
+	}
+	
+	//회원수정 페이지로 이동하기 위해 비밀번호 재확인
+	@RequestMapping("infoEnterCheck.do")
+	public ModelAndView infoEnterCheck(String userid, String passwd) {
+		boolean result=memberService.infoEnterCheck(userid, passwd);
+		ModelAndView mav=new ModelAndView();
+		if(result) {
+			mav.addObject("userid", userid);
+			mav.setViewName("redirect:info.do"); 
+		}else {
+			mav.addObject("message", "error");
+			mav.setViewName("member/infoEnter");
+		}
+		return mav;
+	}
+	
+	//회원정보페이지에서 정보 보여주기
+	@RequestMapping("info.do")
+	public String view(@RequestParam String userid, Model model) {
+		model.addAttribute("dto", memberService.viewMember(userid));
+		logger.info(userid);
+		return "member/info";
+	}
+	
+	//회원 정보 수정
+	@RequestMapping("update.do")
+	public String update(MemberDTO dto) {
+		memberService.updateMember(dto);
+		return "member/mypage";
+	}
+	
+	//회원 탈퇴
+	@RequestMapping("delete.do")
+	public String delete(String userid, HttpSession session) {
+		memberService.deleteMember(userid);
+		memberService.logout(session);
+		return "home";
+	}
+	
+	//아이디찾기 페이지 이동
+	@RequestMapping("findId.do")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	//비밀번호 찾기 페이지 이동
+	@RequestMapping("findPwd.do")
+	public String findPwd() {
+		return "member/findPwd";
 	}
 	
 }
