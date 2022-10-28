@@ -7,4 +7,5 @@ public interface MemberDAO {
 	public MemberDTO viewMember(String userid);
 	public void insertMember(MemberDTO dto);
 	public int idChk(MemberDTO dto);
+	public boolean adminCheck(String userid);
 }

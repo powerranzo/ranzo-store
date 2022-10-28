@@ -12,6 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select name from member_tb
 		where userid=#{userid} and passwd=#{passwd}
 	</select>
+	<!-- 관리자 -->
+	<select id="adminCheck"
+	resultType="String">
+		select name from member_tb
+		where userid=#{userid} and admin='y'
+	</select>
 	
 	<!-- 회원 전체 보기 -->
 	<select id="viewMember" 

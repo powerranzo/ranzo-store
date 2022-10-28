@@ -19,7 +19,7 @@ $(function(){
 	});
 	$("#btnDelete").click(function(){
 		if(confirm('삭제 처리하시겠습니까?')){
-		document.form1.action="${path}/admin/exb_delete.do";
+		document.form1.action="${path}/admin/exbs_delete.do";
 		document.form1.submit();
 		}
 	});
@@ -49,8 +49,24 @@ function optionSelect(num){
 	}
 }
 function exbList(param){
-	document.form1.action="${path}/admin/member_list.do?curPage="+param;
+	document.form1.action="${path}/admin/exb_list.do?curPage="+param;
 	document.form1.submit();
+}
+
+function exbUpdate(param){
+	console.log(param);
+	var form=document.createElement('form');
+	form.setAttribute('name', 'form2');
+	form.setAttribute('method', 'post');
+	form.setAttribute('action', '${path}/admin/exb_view.do');
+// 	document.charset="utf-8";
+	var hidden=document.createElement('input');
+	hidden.setAttribute('type', 'hidden');
+	hidden.setAttribute('name', 'code');
+	hidden.setAttribute('value', param);
+	form.appendChild(hidden);
+	document.body.appendChild(form);
+	form.submit();
 }
 </script>
 </head>
@@ -120,12 +136,12 @@ function exbList(param){
 				</td>
 				</tr>
 			</table>
-			</div>
-			<div class="form-group" align="center">
+			<div class="form-group">
 					<button class="btn btn-default" type="button" id="btnSearch">
 						검색  <i class="glyphicon glyphicon-search"></i>
 					</button>
 				</div>
+			</div>
 
 			<table class="table table-hover">
 				<thead>
@@ -144,11 +160,11 @@ function exbList(param){
 				<c:forEach var="dto" varStatus="loop" items="${exb.list}">
 					<tbody>
 						<tr>
-							<td><input name="code" type="checkbox"
+							<td><input name="codes" type="checkbox"
 								value="${dto.code}"></td>
 							<td>${dto.rn}</td>
 							<td>${dto.code}</td>
-							<td><a href="#">${dto.title}</a></td>
+							<td><a href="#" onclick="exbUpdate('${dto.code}')">${dto.title}</a></td>
 							<td>${dto.location}</td>
 							<td>${dto.gallery}</td>
 							<td><fmt:formatDate value="${dto.start_date}" type="date"
@@ -175,7 +191,7 @@ function exbList(param){
 							end="${exb.pager.blockEndPage}">
 							<c:choose>
 								<c:when test="${page == exb.pager.curPage}">
-									<li><a href="#" style="text-decoration: underline;">${page}</a></li>
+									<li><a href="#" style="text-decoration: underline;">${	page}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><a href="#" onclick="exbList('${page}')">${page}</a></li>
@@ -193,8 +209,7 @@ function exbList(param){
 				</div>
 			</div>
 			<button id="btnDelete" type="button" class="btn btn-default">삭제처리</button>
-			<button id="btnDelete" type="button" class="btn btn-default">신규등록</button>
-		</form>
+			<button id="btnWrite" type="button" class="btn btn-default">신규등록</button>
 	</div>
 </body>
 </html>

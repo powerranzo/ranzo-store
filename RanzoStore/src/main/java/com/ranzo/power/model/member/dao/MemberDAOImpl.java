@@ -33,5 +33,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idChk(MemberDTO dto) {
 		return sqlSession.selectOne("member.idChk", dto);
 	}
+
+	@Override
+	public boolean adminCheck(String userid) {
+		String name=sqlSession.selectOne("member.adminCheck", userid);
+		return (name==null) ? false : true;
+	}
 	
 }

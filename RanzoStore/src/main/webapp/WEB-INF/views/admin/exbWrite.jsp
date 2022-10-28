@@ -22,16 +22,11 @@ $(function(){
 <body>
 	<div class="container">
 		<h2>전시 등록</h2>
-		<div class="form-group" align="right">
-			<button class="btn btn-lg" id="btnWrite">
-				<span class="glyphicon glyphicon-pencil"></span>&nbsp;등록
-			</button>
-		</div>
 		<form name="form1" enctype="multipart/form-data" method="post">
 			<div class="form-group">
 				<label for="code">전시코드</label> 
 				<input name="code" class="form-control input-sm" 
-				id="title" placeholder="">
+				id="code" placeholder="">
 			</div>
 			<div class="form-group">
 				<label for="title">전시명</label> 
@@ -49,29 +44,25 @@ $(function(){
 				id="location" placeholder="">
 			</div>
 			<div class="form-group">
-				<label for="start_date">전시 시작일</label> 
-				<input type="date" name="start_date" class="form-control input-sm" 
-				id="start_date"> 
+				<label for="startDate">전시 시작일</label> 
+				<input type="date" name="startDate" class="form-control input-sm" 
+				id="startDate"> 
 			</div>
 			<div class="form-group">
-				<label for="end_date">전시 마감일</label> 
-				<input type="date" name="end_date" class="form-control input-sm" 
-				id="end_date">
+				<label for="endDate">전시 마감일</label> 
+				<input type="date" name="endDate" class="form-control input-sm" 
+				id="endDate">
 			</div>
 			<div class="form-group">
-				<textarea id="summary" name="summary" rows="80" cols="80"></textarea>
-				<script type="text/javascript">
-					CKEDITOR.replace("summary", {
-						filebrowserUploadUrl : "${path}/imageUpload.do"
-					});
-				</script>
+				<label for="summary">내용</label>
+				<textarea name="summary" class="form-control input-sm" id="summary"
+					placeholder="내용을 입력해주세요." rows="20"></textarea>
 			</div>
-<!-- 			<div class="form-group"> -->
-<!-- 				<label for="files">첨부파일</label>  -->
-<!-- 				<input type="file" name="files"	 -->
-<!-- 				class="form-control input-lg" id="files"> -->
-<!-- 			</div> -->
-		<input name="thumnail" type="hidden" value="${fileUrl}">
+			<div class="form-group">
+				<label for="files">썸네일</label> 
+				<input type="file" name="file"	
+				class="form-control input-lg" id="file">
+			</div>
 		</form>
 		<div class="form-group" align="right">
 			<button class="btn btn-lg" id="btnWrite">
