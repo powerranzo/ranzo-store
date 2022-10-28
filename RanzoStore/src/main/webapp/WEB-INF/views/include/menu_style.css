@@ -17,7 +17,7 @@
     vertical-align: middle;
     padding: 10px;
 }
-a{
+.header1 a, .header2 a{
 	text-decoration:none;
 	font-weight: bold; 
 }
@@ -35,14 +35,13 @@ ul{
 }
 .menu1 {	
 	display: inline-block;
-	padding: 10px;
+	padding: 15px;
 }
 .menu2{
 	display: inline-block;
-	padding: 10px;
+	padding: 5px;
 }
-.menu2 img{
-	margin: 5px;
+.menu2 img {
 	padding: 5px;
 }
 .menu:after{
@@ -60,12 +59,13 @@ ul{
 	padding:0 30px; 
 	height:40px; 
 	line-height:40px; 
-
 }
 .menu > li:hover .depth_1 {
 	display:block;
 	background-color: white;
+	opacity: 0.9;
 	z-index: 2;
+	border: 1px solid gray;
 	
 }
 .menu .depth_1{
@@ -75,7 +75,7 @@ ul{
 	right:0; 
 	text-align:center;
 }
-.menu .depth_1 a{
+.depth_1 a{
 	display:block; 
 	padding:5px; 
 	font-size: 14px;

@@ -51,7 +51,7 @@
 				<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
 				<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 			</span>
-			<span><a href="${path}/reserv/reserv/${exhibition.code}">예매하기</a></span>
+			<span><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 		</div>
 		<div>
 			<!-- 관리자용 -->
