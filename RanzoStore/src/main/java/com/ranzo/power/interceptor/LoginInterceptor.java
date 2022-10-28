@@ -14,18 +14,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		//세션 객체 생성
 		HttpSession session=request.getSession();
+		//세션이 없으면(로그인되지 않은 상태)
 		if(session.getAttribute("userid") == null) {
 			response.sendRedirect(request.getContextPath()
 					+"/member/login.do?message=nologin");
-			return false; 
-		}else {
-			return true; 
+			return false; //메인 액션으로 가지 않음
+		}else {//로그인 했으면
+			return true; //메인 액션으로 이동
 		}
 	}
 	
 	//메인 액션이 실행된 후
-
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -33,4 +34,3 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	}
 
 }
-
