@@ -115,12 +115,35 @@ button.btn2 {
 	width: 240px;
 	height: 330px;
 }
+.image_ex{
+	position: relative;
+	margin: auto;
+	width: 300px;
+	height: 400px;
+}
+.image_child{
+	position: absolute;
+	top: 10px;
+	right: 60px;
+}
 
 </style>
 <script type="text/javascript">
 	function btn2() {
 		location.href = "${path}/reserv/reserv.do";
 	}
+	$(function(){
+		$(".imgch").mouseover(function(){
+			$(this).attr("src","${path}/resources/images/favorite2.png");			
+		});
+		$(".imgch").mouseout(function(){
+			$(this).attr("src","${path}/resources/images/favorite1.png");
+		});
+		$(".imgch").click(function(){
+			$(this).attr("src","${path}/resources/images/favorite2.png");	
+		});
+	});
+
 </script>
 </head>
 <body>
@@ -197,6 +220,19 @@ button.btn2 {
 				<img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="s3"></a></li>
 			</ul>
 		</div>
+	</div>
+	
+		<div class="image_ex" style="display: inline-block;">
+	 <img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg"	width="250" height="330" id="s2">
+	  <div class="image_child">
+	   <img src="${path}/resources/images/favorite1.png" class="imgch">
+	  </div>
+	</div>
+	<div class="image_ex" style="display: inline-block;">
+	 <img src="${path}/resources/images/20220825-43301_1.jpg"	width="250" height="330" id="s2">
+	  <div class="image_child">
+	   <img src="${path}/resources/images/favorite1.png" class="imgch">
+	  </div>
 	</div>
 	
 

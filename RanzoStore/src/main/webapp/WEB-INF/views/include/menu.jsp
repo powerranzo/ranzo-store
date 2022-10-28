@@ -7,7 +7,7 @@
 	<a href="${path}/upload/uploadForm">업로드 테스트</a> |
 	<a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
 	<a href="${path}/reserv/list.do/${sessionScope.userid}">주문내역 확인하기 test</a>
-
+	
 </div>
 <hr>
 <c:set var="path" value="${pageContext.request.contextPath}" />
