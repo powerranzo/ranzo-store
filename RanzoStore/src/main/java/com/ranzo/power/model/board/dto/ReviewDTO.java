@@ -8,7 +8,7 @@ public class ReviewDTO {
 	private String product; //전시명
 	private String writer; //작성자id(userid랑 조인)
 	private String name; //작성자 이름
-	private String title; //제목
+	private String subject; 
 	private String content; //내용
 	private Date reg_date; //작성일자 
 	int viewcnt; //조회수
@@ -41,11 +41,11 @@ public class ReviewDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTitle() {
-		return title;
+	public String getsubject() {
+		return subject;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setsubject(String subject) {
+		this.subject = subject;
 	}
 	public String getContent() {
 		return content;
@@ -97,8 +97,8 @@ public class ReviewDTO {
 	}
 	@Override
 	public String toString() {
-		return "ReviewDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", title="
-				+ title + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", files="
+		return "ReviewDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", subject="
+				+ subject + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", files="
 				+ Arrays.toString(files) + ", show=" + show + ", ext=" + ext + ", rating=" + rating + ", thumb=" + thumb
 				+ "]";
 	}

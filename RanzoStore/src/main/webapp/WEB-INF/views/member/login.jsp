@@ -9,6 +9,7 @@
 <script>
 
  	$(function() {
+ 		
 		$("#btnLogin").click(function() {
 			var userid = $("#userid").val();
 			var passwd = $("#passwd").val();
@@ -26,17 +27,17 @@
 			document.loginForm.action = "${path}/member/loginCheck.do";
 			document.loginForm.submit();
 		});
-	}); 
 	
- 	<c:if test="${message == 'error' }">
+ 	<c:if test="${param.message == 'error' }">
+ 		console.log('message');
 		alert("로그인에 실패하였습니다.");
 	</c:if>
-	
 	<c:if test="${param.message == 'nologin' }">
     console.log('message');
 		alert("로그인 후 이용가능합니다.");
-	</c:if> 
+	</c:if>
  	
+	}); 
 </script>
 <style>
 * {

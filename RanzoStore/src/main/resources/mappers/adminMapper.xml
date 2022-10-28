@@ -65,14 +65,16 @@ select * from (
 </select>
 
 <select id="getMemberQna" resultType="QnaDTO">
-select * from (
-select Q.*, rownum as rn from (
-	select bno, writer, name, title, content, reg_date, viewcnt,
-	reply_state, show
-	from qna_tb
-	where writer=#{userid}
-	order by reg_date desc
-	) Q
+	select * from (
+		select Q.*, rownum as rn from (
+			select
+			q.bno, q.writer, m.name, q.title, q.content, q.reg_date, q.viewcnt,
+			q.reply_state, q.show
+			from qna_tb q, member_tb m
+			where q.writer=#{userid}
+			and m.userid=#{userid}
+			order by q.reg_date desc
+		) Q
 	) where <![CDATA[rn <= 6]]> 
 </select>
 
@@ -149,5 +151,28 @@ select * from (
 	#{thumnail}, #{start_date}, #{end_date})
 </insert>
 
+<select id="getExbView" resultType="ExhibitionDTO">
+	select 
+		code, location, gallery, title, summary, 
+		thumnail, start_date, end_date, hit, sales
+	from exhibition_tb
+	where code=#{code}
+</select>
 
+<update id="updateExb">
+	update exhibition_tb set
+		location=#{location}, gallery=#{gallery}, title=#{title},
+		summary=#{summary}, thumnail=#{thumnail}, 
+		start_date=#{start_date}, end_date=#{end_date}
+	where code=#{code}
+</update>
+
+<update id="deleteThumnail">
+	update exhibition_tb set thumnail='-'
+	where code=#{code}
+</update>
+
+<delete id="deleteExb">
+	delete from exhibition_tb where code=#{code}
+</delete>
 </mapper>
