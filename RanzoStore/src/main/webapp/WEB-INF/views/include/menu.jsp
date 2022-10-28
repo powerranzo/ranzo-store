@@ -32,8 +32,8 @@
 				<li><a href="${path}/board/review/list.do">REVIEW</a></li>
 				<li><a href="#">고객센터</a></li>
 			 <!-- 관리자아이디일 경우 -->
-			  <c:if test="${sessionScope.admin eq 'y'}">
-			   <li><a href="#">관리자 페이지</a></li>
+			  <c:if test="${sessionScope.admin == 'y'}">
+			   <li><a href="${path}/admin/home.do">관리자 페이지</a></li>
 			  </c:if>
 	</ul>
 </div>
