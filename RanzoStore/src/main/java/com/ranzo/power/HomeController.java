@@ -35,5 +35,9 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping("kakaotest.do")
+	public String kakao() {
+		return "kakaotest";
+	}
 	
 }

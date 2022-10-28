@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="review">
+	<select id="listAll" resultType="ReviewDTO">	
+		select *
+			from (
+			    select rownum as rn, A.*
+			    from (
+							select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt, show
+							,(select count(*) from review_reply_tb where bno=r.bno) cnt
+							from review_tb r, member_tb m, exhibition_tb e
+							<choose>
+								<when test="search_option != 'all'">
+									where r.writer=m.userid and r.product=e.code
+									and show='y'
+									and ${search_option} like #{keyword}
+								</when>
+								<otherwise>
+									where r.writer=m.userid and r.product=e.code
+									and show='y'
+									and ( title like #{keyword}
+									or subject like #{keyword} 
+									or content like #{keyword}	
+									or name like #{keyword})
+								</otherwise>
+							</choose>	
+							order by bno desc
+			    ) A    
+			) where rn between #{start} and #{end}
+	</select>
+
+	<insert id="insert">
+		insert into review_tb(bno, rating, product, subject, content, writer) values
+		(seq_review.nextval, #{rating}, #{product}, #{subject}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 첨부파일 정보 저장 -->
+	<insert id="addAttach">
+		insert into review_attach_tb (fullName, bno) values
+		(#{fullName}, seq_review.currval)
+	</insert>
+	
+	<!-- 레코드 개수 계산 -->
+	<select id="countArticle" resultType="int">
+		select count(*)
+		from review_tb r, member_tb m
+		where r.writer=m.userid
+	</select>
+	
+	<!-- 조회수 증가 처리  -->
+	<update id="increaseViewcnt">
+		update review_tb set viewcnt=viewcnt+1
+		where bno=#{bno}
+	</update>
+	
+	<select id="read" resultType="ReviewDTO">
+		select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt
+		from review_tb r, member_tb m, exhibition_tb e
+		where r.writer=m.userid and r.product=e.code and bno=#{bno}
+	</select>
+	
+	<!-- 첨부파일 목록 -->
+	<select id="getAttach" resultType="String">
+		select fullName
+		from review_attach_tb
+		where bno=#{bno}
+		order by reg_date desc	
+	</select>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="deleteFile">
+		delete from review_attach_tb
+		where fullName=#{fullName}
+	</delete>
+	
+	
+	<!-- 게시물 내용 수정 -->
+	<update id="update">
+		update review_tb
+		set rating=#{rating}, product=#{product}, subject=#{subject}, content=#{content}
+		where bno=#{bno}
+	</update>
+	
+	<!-- 새로운 첨부파일 추가 -->
+	<insert id="updateAttach">
+		insert into review_attach_tb (fullName,bno) values
+		(#{fullName}, #{bno})
+	</insert>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete">
+		update review_tb set show='n' where bno=#{bno}
+	</delete>
+	
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertReply">
+		insert into review_reply_tb (rno,bno,replytext,replyer)
+		values (seq_review_reply.nextval, #{bno}, #{replytext}, #{replyer})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="listReply" resultType="ReviewReplyDTO">
+		select rno,bno,reg_date,update_date,name,replytext
+		from review_reply_tb r, member_tb m
+		where r.replyer = m.userid and bno=#{bno}
+		order by rno
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

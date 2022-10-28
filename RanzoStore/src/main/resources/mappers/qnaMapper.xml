@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="qna">
+	<select resultType="QnaDTO" id="listAll">
+		select *
+			from (
+				select rownum as rn, A.*
+					from (
+						select bno,title,writer,name,reg_date,viewcnt,show
+						from qna_tb q, member_tb m 
+							<choose>
+								<when test="search_option != 'all' ">
+									where q.writer=m.userid
+									and show='y'and ${search_option} like #{keyword} 
+								</when>
+								<otherwise>
+									where q.writer=m.userid
+									and show='y'
+									and (name like #{keyword}
+									or title like #{keyword}
+									or content like#{keyword}) 
+								</otherwise>
+							</choose>
+						order by bno desc
+					) A
+				) where rn between #{start} and #{end} 
+	</select>
+	
+		
+	<insert id="insert">
+		insert into qna_tb (bno,title,content,writer) values
+  	(seq_qna.nextval,#{title},#{content},#{writer})
+	</insert>
+	
+	<!-- 첨부파일 정보 저장 -->
+	<insert id="addAttach">
+	 	insert into qna_attach_tb (fullName, bno) values
+	  (#{fullName}, seq_qna.currval)
+	</insert>
+	
+	<!-- 레코드 계산 -->
+	<select id="countArticle" resultType="int">
+		select count(*)
+		from qna_tb q, member_tb m
+		where q.writer = m.userid
+	</select>
+	
+	<!-- 조회수 증가 처리 -->
+	<update id="increaseViewcnt">
+		update qna_tb set viewcnt=viewcnt+1
+		where bno = #{bno}
+	</update>
+	
+	<select id="read" resultType="QnaDTO">
+		select bno, title, writer, reg_date, viewcnt, content
+		from qna_tb q, member_tb m
+		where q.writer = m.userid and bno=#{bno}
+	</select>
+	
+	<!-- 첨부파일 목록 -->
+	<select id="getAttach" resultType="String">
+		select fullName
+		from qna_attach_tb
+		where bno=#{bno}
+		order by reg_date desc	
+	</select>
+	
+	<!-- 첨부파일 레코드 삭제 -->
+	<delete id="deleteFile">
+		delete from qna_attach_tb
+		where fullName= #{fullName}
+	</delete>
+	
+	<!-- 게시물 내용 수정 -->
+	<update id="update">
+		update qna_tb
+		set title=#{title}, content=#{content}
+		where bno=#{bno}
+	</update>
+	
+	<!-- 새로운 첨부파일 추가 -->
+	<insert id="updateAttach">
+		insert into qna_attach_tb (fullName, bno) values
+		(#{fullName}, #{bno})
+	</insert>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete">
+		update qna_tb set show='n' where bno=#{bno}
+	</delete>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
