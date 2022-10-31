@@ -44,7 +44,7 @@ $(function() {
 		<tr>
 			<th>제목</th>
 			<td>
-				<input name="title" id="title" size="80" value="${dto.title}" placeholder="문의 내용 답변드립니다 :)">
+				<input name="title" id="title" size="80" value="re: 문의 내용 답변드립니다  ${dto.title}">
 			</td>
 		</tr>
 		<tr>

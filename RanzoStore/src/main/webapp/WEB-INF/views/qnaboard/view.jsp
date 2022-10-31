@@ -48,7 +48,7 @@ $(function(){ //페이지가 뜨자마자 실행
 	});
 	//답변 버튼
 	$("#btnReply").click(function() {
-		location.href="${path}/board/qna/reply_write.do";
+		location.href="${path}/board/qna/reply_write.do?bno=";
 	});
 });
 </script>
@@ -95,7 +95,7 @@ $(function(){ //페이지가 뜨자마자 실행
 			<button type="button" id="btnDelete">삭제</button>
 		</c:if>
            
-		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do'">답변</button>		
+		<button type="button" id="btnReply">답변</button>		
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>
 	</div>
 </form>
