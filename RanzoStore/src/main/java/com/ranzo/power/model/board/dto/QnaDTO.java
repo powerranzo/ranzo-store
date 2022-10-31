@@ -19,6 +19,7 @@ public class QnaDTO {
 	private int ref; // 게시물 그룹=bno
 	private int re_order; // 게시물 그룹의 순번과 답글이 하나로 묶일것임
 	private int re_depth; // 답변 계층
+	
 	public int getBno() {
 		return bno;
 	}

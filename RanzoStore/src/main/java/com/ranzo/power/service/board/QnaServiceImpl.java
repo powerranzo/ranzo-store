@@ -108,15 +108,13 @@ public class QnaServiceImpl implements QnaService {
 	//답글 작성
 	@Override
 	public void create_reply(QnaDTO dto) throws Exception {
-		qnaDao.create_reply(dto);
-		
+		qnaDao.create_reply(dto);	
 	}
 
 	//답글 순서 조정
 	@Override
 	public void update_reply(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		
+		qnaDao.update_reply(dto);		
 	}
 
 }

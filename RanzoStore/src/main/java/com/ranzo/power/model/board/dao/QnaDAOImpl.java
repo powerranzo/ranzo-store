@@ -95,8 +95,7 @@ public class QnaDAOImpl implements QnaDAO {
 	//답글 순서 조정
 	@Override
 	public void update_reply(QnaDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("qna.update_reply", dto);		
 	}
 
 }

@@ -27,7 +27,7 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
-	$("#btnSave").click(function(){
+	$("#btnReplySave").click(function(){
 		document.form1.submit();
 	});
 });
