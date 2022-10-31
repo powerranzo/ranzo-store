@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									or content like#{keyword}) 
 								</otherwise>
 							</choose>
-						order by ref desc, re_order asc
+						order by ref desc, re_order desc
 					) A
 				) where rn between #{start} and #{end} 
 	</select>
@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update_reply">
 		update qna_tb 
 		set re_order = re_order+1 
-		where ref = #{ref} and re_order >= #{re_order}
+		where bno = #{bno} and re_order >= #{re_order}
 	</update>
 
 	<!-- 답변 작성 -->

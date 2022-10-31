@@ -48,7 +48,7 @@ $(function(){ //페이지가 뜨자마자 실행
 	});
 	//답변 버튼
 	$("#btnReply").click(function() {
-		location.href="${path}/board/qna/reply_write.do?bno=";
+		location.href="${path}/board/qna/reply_write.do?bno="+${dto.bno};
 	});
 });
 </script>
@@ -63,6 +63,10 @@ $(function(){ //페이지가 뜨자마자 실행
  	<tr>
  		<th>제목</th>
  		<td><input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요"></td>
+ 	</tr>
+ 	<tr>
+ 		<th>글 번호</th>
+ 		<td>${dto.bno}</td>
  	</tr>
  	<tr>
  		<th>조회수</th>
