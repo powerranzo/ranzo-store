@@ -16,6 +16,8 @@ public class QnaDTO {
 	private String[] files; //첨부파일 이름 배열
 	private String show; //화면 표시 여부
 	private String product; //제품코드 
+	
+	
 	public int getBno() {
 		return bno;
 	}

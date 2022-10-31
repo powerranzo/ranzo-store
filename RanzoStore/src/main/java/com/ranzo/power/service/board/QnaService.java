@@ -18,5 +18,8 @@ public interface QnaService {
 	public void increaseViewcnt(int bno, HttpSession session) throws Exception; //조회수 증가 처리
 	public int countArticle() throws Exception;//레코드 갯수 계산
 	public QnaDTO read(int bno) throws Exception; //레코드 조회
+	
+	public void create_reply(QnaDTO dto) throws Exception; //답글 작성
+
 
 }

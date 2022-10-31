@@ -242,15 +242,20 @@ $(function(){ //페이지가 뜨자마자 실행
 	<br>
 	<div style="width: 700px;" align="center">
 		<!-- 수정,삭제에 필요한 글번호를 hidden 태그에 저장 -->	
-		<input type="hidden" name="bno" value="${dto.bno}">		
+		<input type="hidden" name="bno" value="${dto.bno}">	
+			
 		<!-- 본인만 수정,삭제 버튼 표시 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
 			<button type="button" id="btnUpdate">수정</button>
 			<button type="button" id="btnDelete">삭제</button>
 		</c:if>
+
+		<!-- 로그인 했을때 답변달 수있게 했음 -->                    
+		<c:if test="${sessionScope.userid != null}">                
+			<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do'">답변</button>
+		</c:if>
 		
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>
-		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do'">답변</button>
 	</div>
 </form>
 </div>

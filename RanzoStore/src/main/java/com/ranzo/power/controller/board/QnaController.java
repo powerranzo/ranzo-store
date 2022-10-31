@@ -113,5 +113,16 @@ public class QnaController {
 	public String reply_write() {
 		return "qnaboard/reply_write";
 	}
+	
+	//답변 작성
+	@RequestMapping("reply_insert.do")
+	public String reply_insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+		//세션 처리
+		String writer = (String)session.getAttribute("userid");
+		dto.setWriter(writer);
+		//레코드 저장
+		qnaService.create_reply(dto);
+		return "redirect:/board/qna/list.do";	
+	}
 		
 }

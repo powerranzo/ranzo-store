@@ -105,4 +105,10 @@ public class QnaServiceImpl implements QnaService {
 		return qnaDao.read(bno);
 	}
 
+	@Override
+	public void create_reply(QnaDTO dto) throws Exception {
+		qnaDao.create_reply(dto);
+		
+	}
+
 }
