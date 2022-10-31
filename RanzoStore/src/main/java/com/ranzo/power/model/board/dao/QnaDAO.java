@@ -18,5 +18,6 @@ public interface QnaDAO {
 	public QnaDTO read(int bno) throws Exception; //레코드 조회
 	
 	public void create_reply(QnaDTO dto) throws Exception; //답글 작성
+	public void update_reply(QnaDTO dto) throws Exception; //답글 순서 수정
 
 }
