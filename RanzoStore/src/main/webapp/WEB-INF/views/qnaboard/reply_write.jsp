@@ -56,7 +56,7 @@ $(function() {
 	</table>
 	<br>
 	<div style="width: 700px;" align="center">
-		<input type="hidden" name="bno" value="${dto.bno}">
+		<input type="number" name="bno" value="${dto.bno}">
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
 		<button type="button" id="btnReplySave">확인</button>
 	</div>

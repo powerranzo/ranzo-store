@@ -121,7 +121,7 @@ public class QnaController {
 		String writer = (String)session.getAttribute("userid");
 		dto.setWriter(writer);
 		//답변 순서 조정
-		//qnaService.update_reply(dto);
+		qnaService.update_reply(dto);
 		//레코드 저장
 		qnaService.create_reply(dto);
 		return "redirect:/board/qna/list.do";	
