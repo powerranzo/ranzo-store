@@ -116,10 +116,11 @@ public class QnaController {
 	
 	//답변 작성
 	@RequestMapping("reply_insert.do")
-	public String reply_insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+	public String reply_insert( @ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
 		//세션 처리
 		String writer = (String)session.getAttribute("userid");
 		dto.setWriter(writer);
+		
 		//답변 순서 조정
 		qnaService.update_reply(dto);
 		//레코드 저장

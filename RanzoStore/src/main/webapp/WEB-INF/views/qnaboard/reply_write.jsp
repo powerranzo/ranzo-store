@@ -41,6 +41,10 @@ $(function() {
 <h2>QNA 답변</h2><br>
 <form id="form1" name="form1" method="post" action="${path}/board/qna/reply_insert.do">
 	<table style="width: 700px;">
+	<tr>
+		<th>글번호</th>
+		<td>${dto.bno}</td>
+	</tr>
 		<tr>
 			<th>제목</th>
 			<td>
