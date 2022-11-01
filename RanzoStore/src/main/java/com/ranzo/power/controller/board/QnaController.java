@@ -1,12 +1,15 @@
 package com.ranzo.power.controller.board;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
@@ -65,6 +69,20 @@ public class QnaController {
 
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+		//파일 업로드 처리
+		String fileName=null;
+		MultipartFile uploadFile = dto.getUploadFile();
+		if (!uploadFile.isEmpty()) {
+			String originalFileName = uploadFile.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+			UUID uuid = UUID.randomUUID();	//UUID 구하기
+			fileName=uuid+"."+ext;
+			uploadFile.transferTo(new File("c:\\dev\\upload\\" + fileName));
+		} else {
+			fileName="(null)";
+		}
+		dto.setFileName(fileName);
+		
 		//세션 처리
 		String writer = (String)session.getAttribute("userid");
 		dto.setWriter(writer);
@@ -83,13 +101,6 @@ public class QnaController {
 		return mav;
 	}
 	
-	//첨부파일 목록 리턴
-	//ArrayList를 json 배열로 변환하여 리턴
-	@RequestMapping("getAttach/{bno}")
-	@ResponseBody
-	public List<String> getAttach(@PathVariable int bno) {
-		return qnaService.getAttach(bno);
-	}
 	
 	//게시물 수정
 	@RequestMapping("update.do")

@@ -32,8 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		
 	<insert id="insert">
-		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth) values
-  	(seq_qna.nextval,#{title},#{content},#{writer},seq_qna.nextval,0,0)
+		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth,fileName) values
+  	(seq_qna.nextval,#{title},#{content},#{writer},seq_qna.nextval,0,0,#{fileName})
 	</insert>
 	
 	<!-- 첨부파일 정보 저장 -->

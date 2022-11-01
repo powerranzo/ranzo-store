@@ -39,7 +39,7 @@ $(function(){
 <%@ include file="../include/menu.jsp" %>
 <div align="center">
 
-<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
+<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do" enctype="multipart/form-data">
 	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 		<tr>
 			<th colspan="2" style="background-color: #eeeeee; text-align: center;">QNA 문의하기</th>
@@ -56,12 +56,12 @@ $(function(){
 				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>		
 			</td>
 		</tr>
-		<!-- <tr>
+		<tr>
 			<th>첨부파일</th>
 			<td>
-				<input type="file" name="file1" id="file1">
+				<input type="file" name="uploadFile">
 			</td>
-		</tr> -->
+		</tr>
 	</table>
 	
 	<br>

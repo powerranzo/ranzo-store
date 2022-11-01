@@ -83,15 +83,22 @@ $(function(){ //페이지가 뜨자마자 실행
 				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 			</div>
  		</td>
+ 	</tr>
+ 	<tr>
+ 		<th>첨부파일</th>
+ 		<td>
+ 			<input type="file" name="uploadFile">
+ 		</td>
  	</tr> 
+	<c:if test="${board.fileName ne null}">
+			<tr>
+				<td bgcolor="orange">첨부파일</td>
+				<td align="left"><a href="fileDownload.do?fileName=${board.fileName}">${board.fileName}</a></td>
+			</tr>
+	</c:if>
  </table>
 	
 
-	<div>
-		첨부파일을 등록하세요
-		<div class="fileDrop"></div>
-		<div class="uploadedList"></div>
-	</div>
 	<br>
 	<div style="width: 700px;" align="center">
 		<!-- 수정,삭제에 필요한 글번호를 hidden 태그에 저장 -->	
