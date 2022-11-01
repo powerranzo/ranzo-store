@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>QNA 게시판</title>
 <%@ include file="../include/header.jsp" %>
- 
 <script type="text/javascript">
 $(function() {
 	$("#btnWrite").click(function() {

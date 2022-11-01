@@ -198,7 +198,7 @@ function listAttach(){
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
 	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 		<tr>
-			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 수정</th>
+			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 보기</th>
 		</tr>
 		<tr>
 			<th>별점</th>
@@ -240,13 +240,12 @@ function listAttach(){
 		<c:if test="${sessionScope.userid == dto.writer}">
 			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
 			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
-			<button type="button" id="btnList" class="btn btn-secondary">목록</button>
 		</c:if>
+			<button type="button" id="btnList" class="btn btn-secondary">목록</button>
 	</div>
 </form>
 <hr>
-<h3>댓글</h3>
-<!-- 댓글 작성 -->
+<h3>댓글</h3><small>(로그인 후 사용 가능)</small> 
 <div class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 	 <c:if test="${sessionScope.userid != null }">
 	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
