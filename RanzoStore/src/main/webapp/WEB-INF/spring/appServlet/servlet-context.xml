@@ -65,6 +65,7 @@
 	      <mapping path="/reserv/pay/*"/>
 	       <mapping path="/reserv/list.do/*"/>
 	       
+	       <mapping path="/board/qna/write.do"/>
 	       <mapping path="/board/qna/insert.do"/>
 	       <mapping path="/board/qna/update.do"/>
 	       <mapping path="/board/qna/delete.do"/>

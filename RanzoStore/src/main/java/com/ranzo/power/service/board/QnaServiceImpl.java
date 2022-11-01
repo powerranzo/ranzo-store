@@ -38,17 +38,18 @@ public class QnaServiceImpl implements QnaService {
 
 	}
 	
-	@Transactional
+	//@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {
 		//qna_tb에 insert
 		qnaDao.create(dto);
 		//qna_attach_tb 테이블에 레코드 추가
-		String[] files=dto.getFiles(); //첨부파일 이름 배열
+		/*String[] files=dto.getFiles(); //첨부파일 이름 배열
 		if(files==null) return; //첨부파일이 없으면 skip
 		for(String name : files) {
 			qnaDao.addAttach(name); 
 		}
+		*/
 	}
 	
 	@Transactional
