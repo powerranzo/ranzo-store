@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
+<link href="../include/style.css" rel="stylesheet">
 <script type="text/javascript">
 function list(page) {
 	location.href="${path}/board/review/list.do?curPage="+page;
