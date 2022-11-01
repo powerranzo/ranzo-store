@@ -235,10 +235,10 @@ function listAttach(){
 		
 		<!-- 본인만 수정, 삭제 버튼 표시 -->		
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnUpdate">수정</button>
-			<button type="button" id="btnDelete">삭제</button>
+			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
+			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
+			<button type="button" id="btnList" class="btn btn-secondary">목록</button>
 		</c:if>
-	<button type="button" id="btnList">목록</button>
 	</div>
 </form>
 <hr>
@@ -247,7 +247,7 @@ function listAttach(){
 <div style="width:700px; text-align:center;">
 	 <c:if test="${sessionScope.userid != null }">
 	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
-	 	<button type="button" id="btnReply">댓글쓰기</button>
+	 	<button type="button" id="btnReply" class="btn btn-primary">댓글쓰기</button>
 	 </c:if>
 </div>
 <!-- 댓글 목록 -->

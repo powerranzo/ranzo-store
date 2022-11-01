@@ -96,12 +96,12 @@ $(function(){ //페이지가 뜨자마자 실행
 			
 		<!-- 본인만 수정,삭제 버튼 표시 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnUpdate">수정</button>
-			<button type="button" id="btnDelete">삭제</button>
+			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
+			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		
-		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'">답변</button>		
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>
+		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'" class="btn btn-primary">답변</button>		
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>
 	</div>
 </form>
 </div>

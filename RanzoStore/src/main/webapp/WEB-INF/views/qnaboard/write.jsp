@@ -165,8 +165,8 @@ $(function(){ //페이지가 뜨자마자 실행
 	</div>
 	<br>
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
-		<button type="button" id="btnSave">확인</button>
+		<button type="button" id="btnList" class="btn btn-secondary" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
+		<button type="button" id="btnSave" class="btn btn-primary">확인</button>
 	</div>
 </form>
 </div>

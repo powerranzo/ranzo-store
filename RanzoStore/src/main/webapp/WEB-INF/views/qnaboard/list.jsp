@@ -31,25 +31,6 @@ td {
 <%@ include file="../include/menu.jsp" %>
 <h2>QnA게시판</h2>
 <br>
-<!-- 검색폼 -->
-<div>
-<form name="form1" method="post" action="${path}/board/qna/list.do" style="width: 100%;">
-	<select name="search_option">
-		<option value="all"
-			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected </c:if>	>이름</option>
-		<option value="title" 
-			<c:if test="${map.search_option == 'title'}"> selected </c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
-	</select>
-	<input name="keyword" size="80" value="${map.keyword}">
-	<input type="submit" value="조회">
-	<button type="button" id="btnWrite">글쓰기</button>
-</form>
-</div>
-<br>
 
 <table border="1" style="width: 100%;">
 <tr>
@@ -107,8 +88,26 @@ td {
 		</td>
 	</tr>
 </table>
+<br>
 
-
+<!-- 검색폼 -->
+<div align="center">
+<form name="form1" method="post" action="${path}/board/qna/list.do" style="width: 100%;">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	>이름</option>
+		<option value="title" 
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+	</select>
+	<input name="keyword" size="80" value="${map.keyword}">
+	<input type="submit" value="조회" class="btn btn-secondary">
+	<button type="button" id="btnWrite" class="btn btn-primary pull-right">글쓰기</button>
+</form>
+</div>
 
 </body>
 </html>
