@@ -194,9 +194,12 @@ function listAttach(){
 <body>
 <div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 수정</h2>
+
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
-	<table style="width: 700px;">
+	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+		<tr>
+			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 수정</th>
+		</tr>
 		<tr>
 			<th>별점</th>
 			<td>
@@ -244,7 +247,7 @@ function listAttach(){
 <hr>
 <h3>댓글</h3>
 <!-- 댓글 작성 -->
-<div style="width:700px; text-align:center;">
+<div class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 	 <c:if test="${sessionScope.userid != null }">
 	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
 	 	<button type="button" id="btnReply" class="btn btn-primary">댓글쓰기</button>

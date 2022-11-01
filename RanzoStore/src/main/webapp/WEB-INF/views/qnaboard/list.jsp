@@ -32,13 +32,13 @@ td {
 <h2>QnA게시판</h2>
 <br>
 
-<table border="1" style="width: 100%;">
+<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
 <tr>
-	<th style="width: 10%;">No.</th>
-	<th style="width: 40%;">제목</th>
-	<th style="width: 20%;">작성자</th>
-	<th style="width: 20%;">작성일</th>
-	<th style="width: 10%;">조회수</th>
+	<th style="background-color: #eeeeee; text-align: center; width: 10%;">No.</th>
+	<th style="background-color: #eeeeee; text-align: center; width: 40%;">제목</th>
+	<th style="background-color: #eeeeee; text-align: center; width: 20%;">작성자</th>
+	<th style="background-color: #eeeeee; text-align: center; width: 20%;">작성일</th>
+	<th style="background-color: #eeeeee; text-align: center; width: 10%;">조회수</th>
 </tr>
 <c:forEach var="row" items="${map.list}">
 	<c:choose>

@@ -58,9 +58,12 @@ background-color: gray;
 <body>
 <div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 작성</h2><br>
+
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
-	<table style="width: 700px;">
+	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+		<tr>
+			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 작성</th>
+		</tr>
 		<tr>
 			<th>별점</th>
 			<td>

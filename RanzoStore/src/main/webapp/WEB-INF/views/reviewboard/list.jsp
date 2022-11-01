@@ -23,15 +23,15 @@ td {
 <h2>Review게시판</h2>
 <br>
 
-<table border="1" style="width: 100%;">
+<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
 <tr>
-	<th>No.</th>
-	<th>별점</th>
-	<th>전시명</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일</th>
-	<th>조회수</th>
+	<th style="background-color: #eeeeee; text-align: center;">No.</th>
+	<th style="background-color: #eeeeee; text-align: center;">별점</th>
+	<th style="background-color: #eeeeee; text-align: center;">전시명</th>
+	<th style="background-color: #eeeeee; text-align: center;">제목</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+	<th style="background-color: #eeeeee; text-align: center;">조회수</th>
 </tr>
 
 <c:forEach var="row" items="${map.list}">

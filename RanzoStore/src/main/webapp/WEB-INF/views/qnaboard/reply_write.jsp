@@ -38,9 +38,12 @@ $(function() {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <div align="center">
-<h2>QNA 답변</h2><br>
+
 <form id="form1" name="form1" method="post" action="${path}/board/qna/reply_insert.do">
-	<table style="width: 700px;">
+	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+	<tr>
+		<th colspan="2" style="background-color: #eeeeee; text-align: center;">QNA 답변</th>
+	</tr>
 	<tr>
 		<th>글번호</th>
 		<td>${dto.bno}</td>
