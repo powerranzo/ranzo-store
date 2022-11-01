@@ -104,7 +104,7 @@ $(function(){ //페이지가 뜨자마자 실행
 		</c:if>
 		
 		<c:if test="${sessionScope.admin == 'y' }">
-		<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'" class="btn btn-primary">답변</button>		
+			<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'" class="btn btn-primary">답변</button>		
 		</c:if>
 		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>
 	</div>
