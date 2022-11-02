@@ -7,6 +7,35 @@
 	<title>전시</title>
 	<%@ include file="../include/header.jsp" %>	
 	<link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
+	<script type="text/javascript">
+		$(function(){
+			
+			$(window).scroll(function(){
+				var scrollNow = $(window).scrollTop();
+				  if (scrollNow + $(window).height() + 100 >= $('#mainPage').height()){
+			            getList(scrollPage);
+			        }
+			    })
+			})
+/* 
+		function getList(page){
+		    if (!loading){
+		        loading = true;
+		        $.ajax({
+		            url:"shop/exhibition/getList",
+		            type:"get",
+		            data:{"page":page},
+		            dataType:"html",
+		            success:function(res){
+		                $("#mainPage > #sv_wrap > .sv_ct").append(res);
+		                loading = false;
+		                scrollPage += 1;
+		            }
+		        })
+		    }
+		}
+*/
+	</script>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>

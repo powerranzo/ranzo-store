@@ -8,14 +8,14 @@
 <%@ include file="../include/header.jsp"%>
 <script type="text/javascript">
 	$(function(){
-		//상세 판넬
+		// 상세 판넬
 		tabList = $('.tab-list li');
 		tabContent = $('.tab-content');
 		tabContent.hide();
 		$('.tab-list li:first').addClass("active").show();
 		$('.tab-content:first').show();
 		
-		//링크 클릭시
+		// 상세 정보 탭
 		tabList.click(function(e){
 			e.preventDefault();
 			
@@ -29,12 +29,13 @@
 			$(target).show();
 		});
 		
-		$("#btn-review-write").on("click", function(){alert("btn-review-write")});
-		
+		// 리뷰작성 (미완)
+		$("#btn-review-write").on("click", function(){alert("btn-review-write")});		
 		reviewList();
-		console.log("@@@ reviewList")
 
+		console.log("0643");
 	});
+	
 	
 	// 리뷰 리스트 ajax
 	function reviewList() {
@@ -103,6 +104,7 @@
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
+	
 	<section class="sec-prd">
 		<div class="prd-heading">
 			<span class="info-title"></span>
