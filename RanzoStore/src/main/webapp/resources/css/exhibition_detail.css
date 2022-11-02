@@ -4,14 +4,14 @@
 	width: 100%
 }
 
-.sec-prd .prd-img {
+.sec-prd .prd-thumnail {
 	width: 35%;
 	float: left;
 	overflow: hidden;
 	border-radius: 10px;
 }
 
-.sec-prd .prd-img img {
+.sec-prd .prd-thumnail img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -32,7 +32,7 @@
 }
 
 /* 탭메뉴 위에 마우스 커서 올릴 경우 */
-.tablist a:hover, tablist a.active {
+.tab-list a:hover, tab-list a.active {
 	color: red;
 }
 
@@ -41,24 +41,25 @@
 	width: 100%;
 }
 
-.sec-detail .tablist {
+.sec-detail .tab-list {
 	width: 100%;
 	display: flex;
 	margin: 0;
 	padding: 0;
-	text-align:center;
+	text-align: center;
 	border-bottom: 2px solid #ccc;
 	list-style-type: none;
 }
 
-.sec-detail .tablist::after {
+.sec-detail .tab-list::after {
 	content: '';
 	display: block;
 	clear: both;
 }
 
-.sec-detail .tablist li {
+.sec-detail .tab-list li {
 	flex-grow: 1;
+	padding:10px;
 	/* 	display: block; */
 	/* 	padding: 10px 20px 10px 20px; */
 	/* 	margin-right: -1px;
@@ -66,10 +67,10 @@
 	float: left */
 }
 
-.sec-detail .tablist li a {
-	align-items: center;
-	width: inherit%;
+.sec-detail .tab-list li a {
+	width: inherit;
 	color: grey;
+	font-size: 16px;
 	text-decoration: none;
 }
 
@@ -80,8 +81,10 @@
 	font-weight: bold;
 }
 
-.sec-detail .tabpanel {
+.sec-detail .tab-content {
 	display: none;
+	margin: 0 auto;
+	text-align: center;
 	padding: 10px;
 }
 
@@ -89,13 +92,17 @@
 	display: block;
 }
 
+.sec-detail div .img-prdInfo {
+	width: 100%;
+}
+
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
 	.sec-prd, .sec-detail {
-		margin: 0 auto;
 		max-width: 1020px;
+		margin: 0 auto;
 	}
-	.sec-prd .prd-img {
+	.sec-prd .prd-thumnail {
 		width: 35%;
 		float: left;
 	}
@@ -104,9 +111,13 @@
 		width: 65%;
 		float: right;
 	}
-	.sec-prd .prd-img img {
+	.sec-prd .prd-thumnail img {
 		margin-right: 40px;
 		max-width: 405px;
+	}
+	.sec-detail div .img-prdInfo {
+		width: 100%;
+		max-width: 750px;
 	}
 }
 
