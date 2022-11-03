@@ -64,8 +64,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  from reserv_item_tb
  where userid=#{userid}
  </select>
+ <select id="canclelist" resultType="ReservDTO">
+    select *
+			from (
+			    select rownum as rn, A.*
+			    from (
+			       select r.no, r.userid, m.name, r.code, r.res_date, r.adult,r.teen, r.kids, r.quantity, e.title,r.pay
+                    from RESERV_ITEM_TB r, EXHIBITION_TB e, MEMBER_TB m
+                    where r.code = e.code and r.userid=m.userid and r.userid=#{userid} and pay='n'
+			        order by no desc
+			    ) A    
+			) where rn between #{start} and #{end}
  
- 
+ </select>
+ <select id="countcancle" resultType="int">
+ select count(*)
+ from reserv_item_tb
+ where userid=#{userid} and pay='n'
+ </select>
+ <select id="mypagelist" resultType="ReservDTO">
+	select * from (select e.title, r.res_date
+	from RESERV_ITEM_TB r, EXHIBITION_TB e, MEMBER_TB m
+	where r.code = e.code and r.userid=m.userid
+	and res_date  between '22-10-28' and '22-11-02' and m.userid=#{userid})
+	where rownum between 1 and 5
+ </select>
  
 	
 </mapper>

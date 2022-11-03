@@ -6,59 +6,38 @@
 <meta charset="UTF-8">
 <title>회원 정보 수정 확인</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 <script type="text/javascript">
-
 <c:if test="${message == 'error' }">
 	alert("비밀번호를 확인해주세요.");
 </c:if>
-
 </script>
 <style>
 * {box-sizing: content-box;}
 
-form {
-	width: 500px;
-	height: 600px;
-	display: inline-block;
-	align-items: center;
-	position: absolute;
-	top: 60%;
-	left: 35%;
-	transform: translate(-50%, -50%);
+* {
+	margin:0px; 
 }
+.content{
+	margin: 20px 80px 0 80px;
 
-.title {
-	font-size: 30px;
-	margin-top: 40px;
 }
-
-.title-s {
-	font-size: 20px;
-	margin: 30px 0 15px 0;
-}
-
 section {
-	margin-left: 50%;	
-	width: 700px;
+	width: 75%;
+	float: right;
+	text-align: left;
 }
-
-aside {
-	width: 35%;
-	height: 450px;
+.orderdiv {
+	padding:5px;
 	float: left;
-	color: black;
+	display: inline-block;
+	min-height: 100%;
+	width: 80%;
+	flex: 1;
 }
-
 .p {
 	margin-bottom: 15px;
 }
-
-.a {
-	text-decoration: none;
-	color: black;
-	font-weight: normal;
-}
-
 .check {
 	margin: 30px 0 0 165px;
 }
@@ -85,34 +64,28 @@ button {
 	border: none;
 	margin: 50px 0 30px 190px;
 }
+footer{
+	clear : both;
+	bottom: 0;
+}
 
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
+}
 </style>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
 <form method="post" action="${path}/member/infoEnterCheck.do">
-	<div class="title">MY PAGE</div>
-	<aside>
-		<div class="title-s">MY SHOPPING</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a" href="#">주문내역</a>
-		<p><br>
-		<a class="a" href="#">취소/반품내역</a>
-		<p><br>
-		<a class="a" href="#">위시리스트</a>
-		<p><br>
-		<a class="a" href="#">배송지관리</a>
-		<p><br>
-		<a class="a" href="#">고객리뷰</a>
-		<p><br>
-		<a class="a" href="#">상품문의</a>
-		<p><br>
-		<div class="title-s">MY INFO</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a" href="#">개인정보 변경/탈퇴</a>
-	</aside>
-	
+<div class="content">
+<%@ include file="../include/CommonDashboard.jspf" %>
 	<section>
+	 <div class="orderdiv">
 		<div class="title">개인 정보 수정</div>
 		<div class="title-s">비밀번호 재확인</div>
 		<p class="p">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
@@ -134,8 +107,14 @@ button {
 		<p style="margin: 50px 0 30px 0">
 		<hr noshade size="1px" width="700px" color="black">
 		<button id="btnCheck">확인</button>
+		</div>
 	</section>
 
+</div>
 </form>
+
+<footer>
+<%@ include file="../include/footer.jsp" %>
+</footer>
 </body>
 </html>

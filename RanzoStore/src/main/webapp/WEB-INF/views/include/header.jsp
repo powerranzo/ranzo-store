@@ -8,6 +8,8 @@
 <link href="${path}/include/alertify.css" rel="stylesheet">
 <script src="${path}/include/alertify.min.js"></script>
 
+<%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
+
 
 <%-- <script src="${path}/resources/include/admin_script.js"></script> --%>
 <!-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->

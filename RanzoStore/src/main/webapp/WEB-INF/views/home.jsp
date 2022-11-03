@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!-- 세션 사용 옵션 -->
 <%@ page session="true"%>
-
 <html>
 <head>
 <link rel="stylesheet"
@@ -13,137 +13,14 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <%@ include file="include/header.jsp"%>
-<style type="text/css">
-.swiper-container {
-	height: 820px;
-	width: 100%;
-}
-
-.swiper-slide {
-	text-align: center;
-	display: flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
-	align-items: center; /* 위아래 기준 중앙정렬 */
-	justify-content: center; /* 좌우 기준 중앙정렬 */
-}
-
-.swiper-slide img {
-	box-shadow: 0 0 5px #555;
-	max-width: 100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
-	/* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
-}
-
-.main {
-	padding: 50px 70px;
-	text-align: center;
-}
-
-.main li {
-	display: inline-block;
-	padding-right: 15px;
-}
-
-h1 {
-	font-size: 60px;
-	font-weight: bold;
-}
-
-.simage {
-	postiion: relative;
-}
-
-button.btn1 {
-	position: absolute;
-	top: 500px;
-	left: 150px;
-	width: 180px;
-	height: 60px;
-	border: 1px solid white;
-	background: none;
-	font-weight: bold;
-	font-size: 18px;
-	color: white;
-}
-
-button.btn2 {
-	position: absolute;
-	top: 500px;
-	left: 350px;
-	width: 180px;
-	height: 60px;
-	border: 1px solid white;
-	background-color: white;
-	color: black;
-	font-weight: bold;
-	font-size: 18px;
-}
-
-.image_text {
-	position: absolute;
-	top: 280px;
-	left: 150px;
-	font-size: 70px;
-	color: white;
-	text-align: left;
-}
-
-.text1 {
-	position: absolute;
-	top: 230px;
-	left: 150px;
-	background-color: black;
-	color: white;
-	width: 100px;
-	padding: 10px;
-	text-align: center;
-}
-#s0 {
-	margin: 100 10px 30 0;
-	height: 300px;
-	vertical-align: bottom;
-}
-.suggestdiv #s1 {
-	margin: 80px 10px 10px 10px;
-	
-}
-.suggestdiv #s2 {
-	margin: 20px 10px 80px 0;
-}
-.suggestdiv #s3 {
-	margin: 90px 10px 10px 0;
-}
-.suggestdiv img {
-	width: 240px;
-	height: 330px;
-}
-.image_ex{
-	position: relative;
-	margin: auto;
-	width: 300px;
-	height: 400px;
-}
-.image_child{
-	position: absolute;
-	top: 10px;
-	right: 60px;
-}
-
-</style>
+<link rel="stylesheet" href="${path}/resources/css/home.css">
 <script type="text/javascript">
-	function btn2() {
-		location.href = "${path}/reserv/reserv.do";
+	function btn1() {
+		location.href = "${path}/shop/exhibition/detail/testcode04";
 	}
-	$(function(){
-		$(".imgch").mouseover(function(){
-			$(this).attr("src","${path}/resources/images/favorite2.png");			
-		});
-		$(".imgch").mouseout(function(){
-			$(this).attr("src","${path}/resources/images/favorite1.png");
-		});
-		$(".imgch").click(function(){
-			$(this).attr("src","${path}/resources/images/favorite2.png");	
-		});
-	});
-
+	function btn2() {
+		location.href = "${path}/reserv/detail/testcode04";
+	}
 </script>
 </head>
 <body>
@@ -153,19 +30,27 @@ button.btn2 {
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<a><img class="simage"
-					src="${path}/resources/images/20220916134414476001.jpg"></a>
+					src="${path}/resources/images/main_1.jpg"></a>
 				<div class="text1">디뮤지엄</div>
 				<div class="image_text">
 					<p style="font-size: 18px; font-weight: bold;">2022.03.16 ~
 						2022.11.27</p>
-					<p style="font-weight: bold;">Romantic Days</p>
+					<p style="font-weight: bold;" id="title1">Romantic Days</p>
 					<p>어쨌든, 사랑</p>
 				</div>
-				<button class="btn1" type="button">자세히보기</button>
+				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
 				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
 			</div>
 			<div class="swiper-slide">
-				<a><img src="${path}/resources/images/20220629092929701001.png"></a>
+				<a><img src="${path}/resources/images/main_2.jpg"></a>
+				<div class="text1">DDP배움터</div>
+				<div class="image_text">
+					<p style="font-size: 18px; font-weight: bold;">2022.10.01 ~ 2023.01.08</p>
+					<p style="font-weight: bold;" id="title1">Then, There</p>
+					<p>장 줄리앙</p>
+				</div>
+				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
+				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
 			</div>
 		</div>
 
@@ -174,7 +59,6 @@ button.btn2 {
 		<!-- 다음 버튼 (오른쪽에 있는 버튼) -->
 		<div class="swiper-button-prev"></div>
 		<!-- 이전 버튼 -->
-
 		<!-- 페이징 -->
 		<div class="swiper-pagination"></div>
 	</div>
@@ -209,33 +93,18 @@ button.btn2 {
 				<li><strong>추천 전시 ></strong></li>
 			</ul>
 		</div>
-		<div style="display: inline-block;" class="suggestdiv">
-			<ul>
-				<li>
-				<a href="#">
-				<img src="${path}/resources/images/20220825-43301_1.jpg" id="s1"></a></li>
-				<li><a href="#">
-				<img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="s2"></a></li>
-				<li><a href="#">
-				<img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="s3"></a></li>
-			</ul>
+		<div style="display: inline-block;" class="reco">
+			<div class="reco1">
+			<a href="#"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
+			</div>
+			<div class="reco1">
+			<a href="#"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
+			</div>
+			<div class="reco1">
+			<a href="#"><img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="r3"></a>
+			</div>
 		</div>
 	</div>
-	
-		<div class="image_ex" style="display: inline-block;">
-	 <img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg"	width="250" height="330" id="s2">
-	  <div class="image_child">
-	   <img src="${path}/resources/images/favorite1.png" class="imgch">
-	  </div>
-	</div>
-	<div class="image_ex" style="display: inline-block;">
-	 <img src="${path}/resources/images/20220825-43301_1.jpg"	width="250" height="330" id="s2">
-	  <div class="image_child">
-	   <img src="${path}/resources/images/favorite1.png" class="imgch">
-	  </div>
-	</div>
-	
-
 
 <%@ include file="include/footer.jsp"%>
 </body>
