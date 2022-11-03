@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
+<link href="../include/style.css" rel="stylesheet">
 <script type="text/javascript">
 function list(page) {
 	location.href="${path}/board/review/list.do?curPage="+page;
@@ -22,37 +23,16 @@ td {
 <%@ include file="../include/menu.jsp" %>
 <h2>Review게시판</h2>
 <br>
-<!-- 검색폼 -->
-<div>
-<form name="form1" method="post" action="${path}/board/review/list.do">
-	<select name="search_option">
-		<option value="all"
-			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
-		<option value="title"
-			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
-		<option value="subject" 
-			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
-	</select>
-	<input name="keyword" size="80" value="${map.keyword}">
-	<input type="submit" value="조회">
-	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'">글쓰기</button>
-</form>
-</div>
-<br>
 
-<table border="1" style="width: 100%;">
+<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
 <tr>
-	<th>No.</th>
-	<th>별점</th>
-	<th>전시명</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일</th>
-	<th>조회수</th>
+	<th style="background-color: #eeeeee; text-align: center;">No.</th>
+	<th style="background-color: #eeeeee; text-align: center;">별점</th>
+	<th style="background-color: #eeeeee; text-align: center;">전시명</th>
+	<th style="background-color: #eeeeee; text-align: center;">제목</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+	<th style="background-color: #eeeeee; text-align: center;">조회수</th>
 </tr>
 
 <c:forEach var="row" items="${map.list}">
@@ -110,6 +90,27 @@ td {
 	</tr>
 </table>
 
+<br>
+<!-- 검색폼 -->
+<div align="center">
+<form name="form1" method="post" action="${path}/board/review/list.do">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="title"
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
+		<option value="subject" 
+			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
+	</select>
+	<input name="keyword" size="80" value="${map.keyword}">
+	<input type="submit" value="조회" class="btn btn-secondart">
+	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'" class="btn btn-primary pull-right">글쓰기</button>
+</form>
+</div>
 
 </body>
 </html>

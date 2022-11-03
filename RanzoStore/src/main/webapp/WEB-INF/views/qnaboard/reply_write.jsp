@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>QNA 게시판</title>
 <%@ include file="../include/header.jsp" %>
+
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -27,18 +28,9 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
-	$("#btnSave").click(function(){
-		var str="";
-		// uploadedList 내부의 .file 태그 각각 반복
-		$("#uploadedList .file").each(function(i){
-			console.log(i);
-			//hidden 태그 구성
-			str += 
-"<input type='hidden' name='files["+i+"]'	value='"
-	+ $(this).val()+"'>";
-		});
-		//폼에 hidden 태그들을 붙임
-		$("#form1").append(str);
+	
+	console.log('${dto.bno}');
+	$("#btnReplySave").click(function(){
 		document.form1.submit();
 	});
 });
@@ -49,13 +41,20 @@ $(function() {
 <body>
 <%@ include file="../include/menu.jsp" %>
 <div align="center">
-<h2>QNA 답변</h2><br>
+
 <form id="form1" name="form1" method="post" action="${path}/board/qna/reply_insert.do">
-	<table style="width: 700px;">
+	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+	<tr>
+		<th colspan="2" style="background-color: #eeeeee; text-align: center;">QNA 답변</th>
+	</tr>
+	<tr>
+		<th>글번호</th>
+		<td>${dto.bno}</td>
+	</tr>
 		<tr>
 			<th>제목</th>
 			<td>
-				<input name="title" id="title" size="80" value="${dto.title}" placeholder="문의 내용 답변드립니다 :)">
+				<input name="title" id="title" size="80" value="re: 문의 내용 답변드립니다  ${dto.title}">
 			</td>
 		</tr>
 		<tr>
@@ -67,11 +66,11 @@ $(function() {
 	</table>
 	<br>
 	<div style="width: 700px;" align="center">
-		<input type="hidden" name="bno" value="${dto.bno}">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
-		<button type="button" id="btnReplySave">확인</button>
+		<input type="hidden" name="bnobno" value="${dto.bno}">
 	</div>
 </form>
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>		
+		<button type="button" id="btnReplySave" class="btn btn-primary">확인</button>
 </div>
 </body>
 </html>

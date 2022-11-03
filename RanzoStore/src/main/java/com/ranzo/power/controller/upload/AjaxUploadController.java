@@ -107,7 +107,7 @@ public class AjaxUploadController {
 			new File(uploadPath+fileName.replace(
 					'/',File.separatorChar)).delete();
 			//레코드 삭제
-			qnaService.deleteFile(fileName);
+			//qnaService.deleteFile(fileName);
 			
 			return new ResponseEntity<String>("deleted"
 					,HttpStatus.OK);//uploadAjax.jsp의 if(result=="deleted")와 연결

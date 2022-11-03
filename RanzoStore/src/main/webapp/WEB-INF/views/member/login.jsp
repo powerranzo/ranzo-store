@@ -8,6 +8,7 @@
 <%@ include file="../include/header.jsp" %>
 <script>
 
+//일반 로그인
  	$(function() {
  		
 		$("#btnLogin").click(function() {
@@ -28,23 +29,25 @@
 			document.loginForm.submit();
 		});
 	
- 	<c:if test="${param.message == 'error' }">
- 		console.log('message');
-		alert("로그인에 실패하였습니다.");
-	</c:if>
-	<c:if test="${param.message == 'nologin' }">
-    console.log('message');
-		alert("로그인 후 이용가능합니다.");
-	</c:if>
- 	
 	}); 
+ 	
+<c:if test="${message == 'error' }">
+	console.log('message');
+	alert("로그인에 실패하였습니다.");
+</c:if>
+
+<c:if test="${message == 'nologin' }">
+	console.log('message');
+	alert("로그인 후 이용가능합니다.");
+</c:if>
+	
 </script>
 <style>
 * {
 	box-sizing: content-box;
 }
 
-form {
+/* #loginForm {
 	width: 500px;
 	height: 600px;
 	display: inline;
@@ -53,6 +56,13 @@ form {
 	top: 62%;
 	left: 55%;
 	transform: translate(-50%, -50%);
+} */
+.logindiv{
+	width: 500px;
+	height: 600px;
+	margin: auto;
+	align-items: center;
+	text-align: center;
 }
 
 .input-field1 {
@@ -107,6 +117,7 @@ form {
 <body>
 <%@ include file="../include/menu.jsp" %>
 	<form name="loginForm" method="post">
+	 <div class="logindiv">
 		<div class="title">로그인</div>
 		<p>
 		
@@ -116,12 +127,17 @@ form {
 			<input class="input-field2" type="password" name="passwd" id="passwd"
 				placeholder="비밀번호를 입력해주세요.">
 		<p>
-			<a href="${path}/member/findId.do" class="a">아이디 찾기 </a>|<a href="${path}/member/findPwd.do" class="a"> 비밀번호 찾기</a>
+			<a href="${path}/member/findIdPage.do" class="a">아이디 찾기 </a>|<a href="${path}/member/findPwdPage.do" class="a"> 비밀번호 찾기</a>
 		<p>
 			<button class="button" id="btnLogin">로그인</button>
 			<a href="${path}/member/join.do"><input type="button" class="button" value="회원가입"></a>
 		<p>
-			<input class="kakao" type="button" value="kakao로 로그인하기">
+			<button type="button" class="kakao" id="btnKakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c25de70aa517d0143d2b73595c73dc86&redirect_uri=http://localhost/power/member/kakaoLogin&response_type=code'">
+			kakao로 로그인하기</button>
+	 </div>
 	</form>
+<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>

@@ -116,17 +116,6 @@
 									<input type="date" id="endDate" name="endDate"
 									value="${ exb.searchOp.endDate}"></td>
 							</tr>
-							<!-- 				<tr> -->
-							<!-- 				<th>분류</th> -->
-							<!-- 				<td> -->
-							<!-- 				<label for="searchOption2"></label> -->
-							<!-- 				<select name="searchOption2" class="form-control" id="searchOption2"> -->
-							<!-- 							<option value="user">이용</option> -->
-							<!-- 							<option value="quit">탈퇴</option> -->
-							<!-- 							<option value="all">전체</option> -->
-							<!-- 						</select> -->
-							<!-- 				</td> -->
-							<!-- 				</tr> -->
 							<tr>
 								<th>정렬기준</th>
 								<td><select name="orderOption" class="form-control"
