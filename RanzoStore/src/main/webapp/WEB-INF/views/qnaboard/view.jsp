@@ -88,11 +88,11 @@ $(function(){ //페이지가 뜨자마자 실행
  	<!-- 첨부파일이 있다면-->
 	<c:if test="${dto.fileName ne null}">
 			<tr>
-				<td>${dto.fileName}</td>
+				<th>업로드된 파일</th>
+				<td><a href="${path}/board/download/fileDownload.do?fileName=${dto.fileName}">${dto.fileName}</a></td>
 			</tr>
 	</c:if>
- </table>
-	
+ </table>	
 
 	<br>
 	<div style="width: 700px;" align="center">
@@ -105,6 +105,7 @@ $(function(){ //페이지가 뜨자마자 실행
 			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		
+		<!-- 관리자 권한이 있을 경우만 답변 가능 -->
 		<c:if test="${sessionScope.admin == 'y' }">
 			<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'" class="btn btn-primary">답변</button>		
 		</c:if>

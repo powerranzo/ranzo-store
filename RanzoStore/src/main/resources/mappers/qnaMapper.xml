@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="read" resultType="QnaDTO">
-		select bno, title, writer, reg_date, viewcnt, content
+		select bno, title, writer, reg_date, viewcnt, content, fileName
 		from qna_tb q, member_tb m
 		where q.writer = m.userid and bno=#{bno}
 	</select>
