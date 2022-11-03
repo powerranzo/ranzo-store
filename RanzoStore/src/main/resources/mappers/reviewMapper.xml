@@ -10,25 +10,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 			    select rownum as rn, A.*
 			    from (
-							select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt, show
+							select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, m.name, r.reg_date, r.viewcnt, r.show
 							,(select count(*) from review_reply_tb where bno=r.bno) cnt
 							from review_tb r, member_tb m, exhibition_tb e
 							<choose>
 								<when test="search_option != 'all'">
 									where r.writer=m.userid and r.product=e.code
-									and show='y'
+									and r.show='y'
 									and ${search_option} like #{keyword}
 								</when>
 								<otherwise>
 									where r.writer=m.userid and r.product=e.code
-									and show='y'
-									and ( title like #{keyword}
-									or subject like #{keyword} 
-									or content like #{keyword}	
-									or name like #{keyword})
+									and r.show='y'
+									and ( e.title like #{keyword}
+									or r.subject like #{keyword} 
+									or r.content like #{keyword}	
+									or m.name like #{keyword})
 								</otherwise>
 							</choose>	
-							order by bno desc
+							order by r.bno desc
 			    ) A    
 			) where rn between #{start} and #{end}
 	</select>

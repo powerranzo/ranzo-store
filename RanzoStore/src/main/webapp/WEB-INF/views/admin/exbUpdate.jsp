@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>전시 수정</title>
 <%@ include file="../include/header.jsp" %>
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
 .form-group{
 width:80%;

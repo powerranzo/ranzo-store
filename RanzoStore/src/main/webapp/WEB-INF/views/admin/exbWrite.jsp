@@ -12,7 +12,7 @@ width:80%;
 }
 </style>
 <%@ include file="../include/header.jsp" %>
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 $(function(){
 	$("#summary").summernote({
