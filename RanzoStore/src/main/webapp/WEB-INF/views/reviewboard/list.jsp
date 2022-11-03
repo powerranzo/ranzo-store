@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <link href="../include/style.css" rel="stylesheet">
 <script type="text/javascript">
 function list(page) {
@@ -43,7 +43,11 @@ td {
 	<c:when test="${row.show == 'y'}">
 		<tr>
 			<td>${row.bno}</td>
-			<td>${row.rating}</td>
+			<td>
+				<c:forEach begin="1" end="${row.rating}" step="1">
+					<span class="glyphicon glyphicon-star"></span>
+				</c:forEach>
+			</td>
 			<td><a href="${path}/shop/exhibition/detail/${row.product}">${row.title}</a></td>
 			<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
 				<c:if test="${row.cnt > 0}">
