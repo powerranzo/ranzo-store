@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../include/header.jsp"%>
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <title>회원 정보</title>
 <script type="text/javascript">
 	$(function() {

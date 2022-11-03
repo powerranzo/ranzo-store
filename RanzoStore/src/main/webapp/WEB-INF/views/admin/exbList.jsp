@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../include/admin_head.jspf"%>
 <title>전시 목록</title>
 <script type="text/javascript">
 	$(function() {
@@ -70,7 +69,7 @@
 	}
 </script>
 <%@ include file="../include/header.jsp"%>
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/adminHeader.jspf"%>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
