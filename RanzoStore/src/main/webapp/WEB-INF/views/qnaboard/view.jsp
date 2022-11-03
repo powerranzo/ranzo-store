@@ -46,11 +46,6 @@ $(function(){ //페이지가 뜨자마자 실행
 			document.form1.submit();
 		}
 	});
-	//답변 버튼
-	/* $("#btnReply").click(function() {
-		location.href="${path}/board/qna/reply_write.do";
-		//location.href="${path}/board/qna/reply_write.do?bno="+${dto.bno};
-	}); */
 });
 </script>
 
@@ -90,10 +85,10 @@ $(function(){ //페이지가 뜨자마자 실행
  			<input type="file" name="uploadFile">
  		</td>
  	</tr> 
-	<c:if test="${board.fileName ne null}">
+ 	<!-- 첨부파일이 있다면-->
+	<c:if test="${dto.fileName ne null}">
 			<tr>
-				<td bgcolor="orange">첨부파일</td>
-				<td align="left"><a href="fileDownload.do?fileName=${board.fileName}">${board.fileName}</a></td>
+				<td>${dto.fileName}</td>
 			</tr>
 	</c:if>
  </table>
