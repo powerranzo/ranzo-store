@@ -197,6 +197,7 @@ public class MemberController {
 		MemberDTO dto2 = memberService.findPwd(dto);
 		ModelAndView mav=new ModelAndView();
 		if(dto2 != null) {
+			mav.addObject("userid", userid);
 			mav.addObject("email", email);
 			mav.setViewName("redirect:sendPwd.do");
 		}else {
@@ -208,8 +209,8 @@ public class MemberController {
 	
 	//임시 비밀번호 이메일 전송
 	@RequestMapping("sendPwd.do")
-	public String sendPwd(String email) throws Exception {
-		memberService.sendPwd(email);
+	public String sendPwd(String userid, String email) throws Exception {
+		memberService.sendPwd(userid, email);
 		return "member/foundPwd";
 	}
 	

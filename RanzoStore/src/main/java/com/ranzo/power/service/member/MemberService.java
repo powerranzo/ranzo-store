@@ -16,7 +16,7 @@ public interface MemberService {
 	public void deleteMember(String userid);
 	public MemberDTO findId(MemberDTO dto);
 	public MemberDTO findPwd(MemberDTO dto); 
-	public void sendPwd(String email) throws Exception;
+	public void sendPwd(String userid, String email) throws Exception;
 	public String getAccessToken(String authorize_code);
 	public KakaoDTO getUserInfo(String access_Token);
 }

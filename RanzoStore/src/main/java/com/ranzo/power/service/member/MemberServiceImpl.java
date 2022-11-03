@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -97,12 +99,39 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO findPwd(MemberDTO dto) {
 		return memberDao.findPwd(dto);
 	}
-
 	
-	//임시 비번 네이버 메일 발송
+	// 임시 비번 발행 & 임시 비번으로 회원 비번 설정
+	// 네이버 메일 발송
 	@Override
-	public void sendPwd(String email) throws Exception {
-		
+	public void sendPwd(String userid, String email) throws Exception {
+        
+		//임시 비번 발행 & 임시 비번으로 회원 비번 변경
+		char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                '!', '@', '#', '$', '%', '^', '&' };
+
+        StringBuffer sb = new StringBuffer();
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(new Date().getTime());
+
+        int idx = 0;
+        int len = charSet.length;
+        for (int i=0; i<10; i++) {
+            idx = sr.nextInt(len);  
+            sb.append(charSet[idx]);
+        }
+        
+        String tempPwd = sb.toString();
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("tempPwd", tempPwd);
+        memberDao.tempPwd(map);
+		//임시 비번 끝
+        
+        
 		//메일 관련 정보
 		String host = "smtp.naver.com";
 		final String username = "ranzostore";
@@ -112,7 +141,8 @@ public class MemberServiceImpl implements MemberService {
 		//메일 내용
 		String recipient = email;
 		String subject = "Ranzo Store 임시 비밀번호가 발급되었습니다.";
-		String body="임시 비번 아직 안만듬 ㅈㅅ";
+		String body="임시 비밀번호 : " + tempPwd 
+				+ "\r\n 확인 후 로그인하여 회원 정보 수정을 통해 비밀번호를 변경해주세요.\r\n";
 		
 		Properties props = System.getProperties();
 		
@@ -136,7 +166,6 @@ public class MemberServiceImpl implements MemberService {
         mimeMessage.setText(body);
         Transport.send(mimeMessage);
 	}
-
 	
 	//카카오 로그인
 	@Override

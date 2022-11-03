@@ -17,7 +17,7 @@ public interface MemberDAO {
 	public void deleteMember(Map<String, Object> map);
 	public MemberDTO findId(MemberDTO dto);
 	public MemberDTO findPwd(MemberDTO dto);
-//	public String tempPwd(MemberDTO dto);
+	public void tempPwd(Map<String, String> map);
 	public void kakaoinsert(HashMap<String, Object> userInfo);
 	public KakaoDTO findkakao(HashMap<String, Object> userInfo);
 }
