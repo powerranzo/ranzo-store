@@ -9,7 +9,7 @@
 </head>
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
-<table style="width:700px;" border="1">
+<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 <!-- fn: header.jsp의 jstl -->
 <c:forEach var="row" items="${list}">   
 	<c:set var="str" value="${fn:replace(row.replytext,'<','&lt;') }" />
