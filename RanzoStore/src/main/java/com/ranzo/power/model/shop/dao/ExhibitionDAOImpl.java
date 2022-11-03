@@ -5,19 +5,25 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 
 @Repository
 public class ExhibitionDAOImpl implements ExhibitionDAO {
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 
 	@Inject
 	SqlSession sqlSession;
-	
+
 	@Override
 	public List<ExhibitionDTO> listProduct() {
-		return sqlSession.selectList("exhibition.list");
+		List<ExhibitionDTO> list = sqlSession.selectList("exhibition.list");
+		logger.info("### ExhDAO/productList {}." + list);
+		return list;
 	}
 
 	@Override
@@ -28,19 +34,19 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	@Override
 	public void updateProduct(ExhibitionDTO dto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteProduct(String exhibitionCode) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void insertProduct(ExhibitionDTO dto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -10,11 +10,14 @@ public class ExhibitionDTO {
 	private String title; // 전시 제목
 	private String summary; // 전시 소개/소제목
 	private String thumnail;  // 포스터 이미지 링크
+	private String product_info; // 상세이미지 링크
 	private Date start_date; // 전시 시작일
 	private Date end_date; // 전시 종료일
 	private int hit; //조회수
 	private int sales; //
 	private int rn;
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -50,6 +53,13 @@ public class ExhibitionDTO {
 	}
 	public void setThumnail(String thumnail) {
 		this.thumnail = thumnail;
+	}
+	
+	public String getProduct_info() {
+		return product_info;
+	}
+	public void setProduct_info(String product_info) {
+		this.product_info = product_info;
 	}
 	public Date getStart_date() {
 		return start_date;

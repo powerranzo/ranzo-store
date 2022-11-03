@@ -47,7 +47,7 @@
 	box-sizing: content-box;
 }
 
-form {
+/* #loginForm {
 	width: 500px;
 	height: 600px;
 	display: inline;
@@ -56,6 +56,13 @@ form {
 	top: 62%;
 	left: 55%;
 	transform: translate(-50%, -50%);
+} */
+.logindiv{
+	width: 500px;
+	height: 600px;
+	margin: auto;
+	align-items: center;
+	text-align: center;
 }
 
 .input-field1 {
@@ -110,6 +117,7 @@ form {
 <body>
 <%@ include file="../include/menu.jsp" %>
 	<form name="loginForm" method="post">
+	 <div class="logindiv">
 		<div class="title">로그인</div>
 		<p>
 		
@@ -126,6 +134,10 @@ form {
 		<p>
 			<button type="button" class="kakao" id="btnKakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c25de70aa517d0143d2b73595c73dc86&redirect_uri=http://localhost/power/member/kakaoLogin&response_type=code'">
 			kakao로 로그인하기</button>
+	 </div>
 	</form>
+<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>

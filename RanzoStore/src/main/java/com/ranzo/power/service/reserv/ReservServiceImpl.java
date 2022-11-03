@@ -63,6 +63,21 @@ public class ReservServiceImpl implements ReservService {
 		return reservDao.firstorder(userid);
 	}
 
+	@Override
+	public List<ReservDTO> canclelist(String userid, int start, int end) {		
+		return reservDao.canclelist(userid,start, end);
+	}
+
+	@Override
+	public int countcancle(String userid) {
+		return reservDao.countcancle(userid);
+	}
+
+	@Override
+	public List<ReservDTO> mypagelist(String userid) {
+		return reservDao.mypagelist(userid);
+	}
+
 
 
 }
