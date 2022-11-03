@@ -30,7 +30,6 @@ $(function(){
 	$("#btnSave").click(function(){
 		document.form1.submit();
 	});
-
 });
 </script>
 
@@ -39,7 +38,7 @@ $(function(){
 <div align="center">
 <%@ include file="../include/menu.jsp" %>
 
-<form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
+<form id="form1" name="form1" method="post" action="${path}/board/review/insert.do" enctype="multipart/form-data">
 	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 		<tr>
 			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 작성</th>
