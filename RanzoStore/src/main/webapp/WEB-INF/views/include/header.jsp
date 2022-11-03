@@ -8,21 +8,16 @@
 <link href="${path}/include/alertify.css" rel="stylesheet">
 <script src="${path}/include/alertify.min.js"></script>
 
-<<<<<<< HEAD
-=======
 
 <%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
 
->>>>>>> 41874a2d1e34dfeaafd179b992f6728269333f0c
 <%-- <script src="${path}/resources/include/admin_script.js"></script> --%>
 <!-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <!-- <script src="https://kit.fontawesome.com/a72ff6c63d.js" crossorigin="anonymous"></script> -->
-<<<<<<< HEAD
-<link rel="stylesheet" href="${path}/include/admin_dashboard.css">
-=======
-<%-- <link rel="stylesheet" href="${path}/include/admin_dashboard.css"> --%>
 
->>>>>>> 41874a2d1e34dfeaafd179b992f6728269333f0c
+<link rel="stylesheet" href="${path}/include/admin_dashboard.css">
+
+<%-- <link rel="stylesheet" href="${path}/include/admin_dashboard.css"> --%>
