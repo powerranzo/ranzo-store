@@ -79,4 +79,23 @@ public class ReservDAOImpl implements ReservDAO {
 		return sqlSession.selectOne("reserv.firstorder", userid);
 	}
 
+	@Override
+	public List<ReservDTO> canclelist(String userid, int start, int end) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userid", userid);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("reserv.canclelist", map);
+	}
+
+	@Override
+	public int countcancle(String userid) {
+		return sqlSession.selectOne("reserv.countcancle", userid);
+	}
+
+	@Override
+	public List<ReservDTO> mypagelist(String userid) {
+		return sqlSession.selectList("reserv.mypagelist", userid);
+	}
+
 }

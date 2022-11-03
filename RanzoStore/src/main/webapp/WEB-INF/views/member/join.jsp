@@ -159,15 +159,15 @@ function daumZipCode() {
 	box-sizing: content-box;
 }
 
-form {
-	width: 500px;
-	height: 600px;
-	display: inline;
-	align-items: center;
+/* #joinForm {	
+	display: inline;	
 	position: absolute;
-	top: 60%;
-	left: 51%;
 	transform: translate(-50%, -50%);
+} */
+.joindiv{
+	margin: auto;
+	width: 500px;
+	align-items: center;
 }
 
 .input-field {
@@ -192,7 +192,7 @@ label {
 	margin-top: 4px;
 }
 
-button {
+#btnJoin{
 	background-color: black;
 	color: white;
 	width: 320px;
@@ -232,11 +232,13 @@ tr {
 	height: 60px;
 }
 
+
 </style>
 <title>회원가입</title>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<div class="joindiv">
 	<form id="joinForm" method="post" action="${path}/member/insert.do" onsubmit="return valid()">
 		<div class="title">회원가입</div>
 		<br>
@@ -311,5 +313,9 @@ tr {
 			</tr>
 		</table>
 	</form>
+</div>
+
+<%@ include file="../include/footer.jsp"%>
+
 </body>
 </html>

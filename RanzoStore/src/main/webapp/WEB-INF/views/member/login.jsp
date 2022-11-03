@@ -44,7 +44,7 @@
 	box-sizing: content-box;
 }
 
-form {
+/* #loginForm {
 	width: 500px;
 	height: 600px;
 	display: inline;
@@ -53,6 +53,13 @@ form {
 	top: 62%;
 	left: 55%;
 	transform: translate(-50%, -50%);
+} */
+.logindiv{
+	width: 500px;
+	height: 600px;
+	margin: auto;
+	align-items: center;
+	text-align: center;
 }
 
 .input-field1 {
@@ -107,6 +114,7 @@ form {
 <body>
 <%@ include file="../include/menu.jsp" %>
 	<form name="loginForm" method="post">
+	 <div class="logindiv">
 		<div class="title">로그인</div>
 		<p>
 		
@@ -122,6 +130,10 @@ form {
 			<a href="${path}/member/join.do"><input type="button" class="button" value="회원가입"></a>
 		<p>
 			<input class="kakao" type="button" value="kakao로 로그인하기">
+	 </div>
 	</form>
+<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>
