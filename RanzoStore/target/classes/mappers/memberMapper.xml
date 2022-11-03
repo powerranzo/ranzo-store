@@ -76,11 +76,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid} and name=#{name} and email=#{email} and quit='n'
 	</select>
 	
- 	<!-- 비밀번호 변경 -->
-<!-- 	<update id="tempPwd">
-		update member_tb set passwd=#{passwd} 
+ 	<!-- 임시 비밀번호로 비번 변경 -->
+	<update id="tempPwd">
+		update member_tb set passwd=#{tempPwd} 
 		where userid=#{userid} 
-	</update> -->
+	</update> 
 
 	<!-- 정보 저장 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">

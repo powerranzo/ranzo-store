@@ -74,10 +74,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.findPwd", dto);
 	}
 
-	/*
-	 * @Override public String tempPwd(MemberDTO dto) { MemberDTO dto2 =
-	 * sqlSession.selectOne("member.findPwd", dto); return dto2.getPasswd(); }
-	 */
+	@Override 
+	public void tempPwd(Map<String, String> map) { 
+		sqlSession.update("member.tempPwd", map);
+	}
 
 	@Override
 	public void kakaoinsert(HashMap<String, Object> userInfo) {
