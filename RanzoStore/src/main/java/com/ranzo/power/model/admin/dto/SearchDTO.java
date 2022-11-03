@@ -1,6 +1,6 @@
 package com.ranzo.power.model.admin.dto;
 
-import com.ranzo.power.utils.DateFunction;
+import com.ranzo.power.util.DateFunction;
 
 public class SearchDTO {
 	private String searchOption1;

@@ -124,5 +124,12 @@ public class AdminPager {
 		public void setblockEndPage(int blockEndPage) {
 			this.blockEndPage = blockEndPage;
 		}
+		@Override
+		public String toString() {
+			return "AdminPager [curPage=" + curPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + ", totPage="
+					+ totPage + ", totBlock=" + totBlock + ", curBlock=" + curBlock + ", prevBlock=" + prevBlock
+					+ ", nextBlock=" + nextBlock + ", pageBegin=" + pageBegin + ", pageEnd=" + pageEnd
+					+ ", blockStartPage=" + blockStartPage + ", blockEndPage=" + blockEndPage + "]";
+		}
 		
 	}

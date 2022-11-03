@@ -3,13 +3,11 @@ package com.ranzo.power.service.admin;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
+import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 
 public interface AdminService {
@@ -21,16 +19,14 @@ public interface AdminService {
 	public MemberDTO getMemberView(String userid);
 	public void deleteMember(String[] userids);//멤버 탈퇴시키기
 	public List<QnaDTO> getMemberQna(String userid);
+	public List<ReservDTO> getMemberReserv(String userid);
 	public void deleteQna(String[] qna_bno);
+	public void deleteReserv(String[] reserv_no);
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage);
 	public void insertExb(String startDate, String endDate, ExhibitionDTO dto, String savedFileName);
 	public ExhibitionDTO getExbView(String code);
 	public void updateExb(String startDate, String endDate, ExhibitionDTO dto, String fileUrl);
-	//전시리스트 (미정: exhibitionMapper 이용할지  크롤링 여부 따라 따로 작성할지)
-	//전시상세 (미정: 동일. cf.가변변수)
-	//전시등록 (미정: 동일)
-	//전시 수정 (미정: 동일)
-	//전시 삭제 (미정: 동일)
+	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
 	
 	public List<PopupDTO> popupList();//팝업 리스트 
 	public void insertPopup(PopupDTO dto);//팝업 등록

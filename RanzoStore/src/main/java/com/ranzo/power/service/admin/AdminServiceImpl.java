@@ -1,9 +1,8 @@
 package com.ranzo.power.service.admin;
 
+
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.ranzo.power.controller.admin.AdminController;
 import com.ranzo.power.model.admin.dao.AdminDAO;
@@ -21,8 +19,9 @@ import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
+import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
-import com.ranzo.power.utils.DateFunction;
+import com.ranzo.power.util.DateFunction;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -33,16 +32,17 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage) {
-		AdminPager pager=new AdminPager(adminDao.countMemberAll(), curPage);
-		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("join_date");
-		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		Map<String,Object> map=new HashMap<>();
 		map.put("searchOp", searchOp);
+		AdminPager pager=new AdminPager(adminDao.countSearchMember(map), curPage);
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("join_date");
+		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
+		logger.info("Pager start:" + pager.getPageBegin() + "end:"+pager.getPageEnd());
 		List<MemberDTO> list=adminDao.getMemberList(map);
 		MemberCountDTO mcount=
-				new MemberCountDTO(adminDao.countMemberAll(), 
+				new MemberCountDTO(adminDao.countTbAll("member_tb"), 
 						adminDao.countMemberToday(DateFunction.getToday()),
 						adminDao.countMemberQuit());
 		map.clear();
@@ -61,6 +61,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<QnaDTO> getMemberQna(String userid) {
 		return adminDao.getMemberQna(userid);
 	}
+	
+	@Override
+	public List<ReservDTO> getMemberReserv(String userid) {
+		return adminDao.getMemberReserv(userid);
+	}
 
 	@Override
 	public void deleteMember(String[] userids) {
@@ -71,6 +76,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public void deleteReserv(String[] reserv_no) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("reserv_no", reserv_no);
+		adminDao.deleteReserv(map);
+	}
+	
+	@Override
 	public void deleteQna(String[] qna_bno) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("qna_bno", qna_bno);
@@ -80,17 +92,17 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage) {
-		AdminPager pager=new AdminPager(adminDao.countExbAll(), curPage);
-		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("end_date");
-		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		Map<String,Object> map=new HashMap<>();
 		map.put("searchOp", searchOp);
+		AdminPager pager=new AdminPager(adminDao.countSearchExb(map), curPage);
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("end_date");
+		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
 		List<MemberDTO> list=adminDao.getExbList(map);
 		map.clear();
 		map.put("searchOp", searchOp);
-		map.put("exb_count_all", adminDao.countExbAll());
+		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_count_ing", adminDao.countExbIng(DateFunction.getToday()));
 		map.put("list", list);
 		map.put("pager", pager);
@@ -148,6 +160,27 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage) {
+		Map<String,Object> map=new HashMap<>();
+		map.put("searchOp", searchOp);
+		logger.info("admin_countsearchreserv:"+adminDao.countSearchReserv(map));
+		AdminPager pager=new AdminPager(adminDao.countSearchReserv(map), curPage);
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("res_date");
+		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("start", pager.getPageBegin());
+		map.put("end", pager.getPageEnd());
+		List<ReservDTO> list=adminDao.getReservList(map);
+//		map.clear();
+//		map.put("searchOp", searchOp);
+		map.put("reserv_count_all", adminDao.countTbAll("reserv_item_tb"));
+		map.put("reserv_count_ing", adminDao.countReservIng(DateFunction.getToday()));
+		map.put("reserv_list", list);
+		map.put("pager", pager);
+		logger.info("reserv_pager:" + pager.toString());
+		return map;
+	}
+	
+	@Override
 	public List<PopupDTO> popupList() {
 		// TODO Auto-generated method stub
 		return null;
@@ -170,11 +203,5 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 
 	}
-
-
-
-
-
-
 
 }
