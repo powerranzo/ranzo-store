@@ -4,15 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>티켓예매 목록</title>
+<title>티켓취소 목록</title>
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 <style type="text/css">
 * {
 	margin:0px; 
 }
+
 .content{
 	margin: 20px 80px 0 80px;
+
 }
 section {
 	width: 75%;
@@ -119,7 +121,7 @@ function date(d) {
 	});	
 }
 function list(page){
-	location.href="${path}/reserv/list.do/${sessionScope.userid}?curPage="+page;
+	location.href="${path}/reserv/canclelist.do/${sessionScope.userid}?curPage="+page;
 } 
 
 </script>
@@ -130,9 +132,9 @@ function list(page){
 <%@ include file="../include/CommonDashboard.jspf" %>
 <section>
 <div class="orderdiv">
-<h2>티켓예매 목록</h2>
+<h2>티켓취소 목록</h2>
 <p><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
-<form action="${path}/reserv/list2.do/${sessionScope.userid}" method="post" name="orderlist">
+<form action="${path}/reserv/cnaclelist.do/${sessionScope.userid}" method="post" name="orderlist">
 <div class="datediv">
  <button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
  <button type="button" name="filterDate" value="2" onclick="date(2)" class="filterDate">1개월</button>
@@ -206,6 +208,8 @@ function list(page){
 </table>
 </div>
 </section>
+ 
+
 </div>
 <div align="center">
 <footer>

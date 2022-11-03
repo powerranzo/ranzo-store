@@ -13,6 +13,8 @@
 	text-align: center;
 	margin: auto;
 	padding: 20px;
+	min-height: 100%;
+	flex: 1;
 }
 .table1{
 	margin: auto;
@@ -30,14 +32,6 @@
 .table1 td{
 	padding:10px;
 }
-.paydiv{
-	border-bottom: 1px solid #ddd;
-	padding: 10px;
-}
-.paydiv2{
-	border: 1px solid #ddd;
-	padding: 10px;
-}
 #payButton{
 	margin: 5px;
 	padding: 10px;
@@ -47,8 +41,38 @@
 	color:#cccccc;
 	border: none;
 }
-#paydiv3{
-	margin: 0 10px;
+.paydiv1, .paydiv2{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 30px;	
+}
+.paydiv1{
+	width: 700px;
+	text-align: left;
+	margin-right: 40px;
+}
+.paydiv2{
+	width: 350px;
+	margin-left: 15px;
+	padding:15px;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+.table2 td{
+	padding: 10px; 
+}
+footer{
+	clear : both;
+	bottom: 0;
+}
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
+  
 }
 </style>
 <script type="text/javascript">
@@ -88,14 +112,18 @@ function coupon() {
   <td width="33%">03. 결제</td>
  </tr>
  </thead>
- <tr>
-  <td colspan="2" style="text-align: left;"> 
-   <div class="paydiv"><h2>티켓정보</h2></div>
+</table>
+<div class="paydiv1">
+	<h2>티켓정보</h2>
+	<br>
+	<hr noshade size="1px" color="#ddd">
+	<br>
    <div class="paydiv">
-   <table>
+   <table class="table2">
     <tr>
      <td>전시명</td>
-     <td><h1>${dto.title}</h1><input type="hidden" id="code" name="code" value="${dto.code}"></td>
+     <td><h1>${dto.title}<input type="hidden" id="title" name="title" value="${dto.title}"></h1>
+     <input type="hidden" id="code" name="code" value="${dto.code}"></td>
     </tr>
     <tr>
      <td>관람일시</td>
@@ -103,12 +131,13 @@ function coupon() {
    </tr>
    <tr>
      <td>장소</td>
-     <td>${dto.gallery}</td>
+     <td>${dto.gallery}<input type="hidden" id="gallery" name="gallery" value="${dto.gallery}"></td>
    </tr>
    </table>
-
    </div>
-   <div class="paydiv">
+  <br>
+	<hr noshade size="1px" color="#ddd">
+	<br>
     <table width="100%">
     <c:if test="${adult>0}">
     <tr>
@@ -135,13 +164,19 @@ function coupon() {
     </tr>
     </c:if>
    </table>
-   </div>
-  </td>
-  <td style="text-align: left;">
+   <br>
+	<hr noshade size="1px" color="#ddd">
+	<br>
+
+  </div>
+
    <div class="paydiv2">
-     <table width="100%">
+     <table width="100%" class="table2">
       <tr>
-       <td style="text-align: left;"><h2>결제정보</h2></td>
+       <td style="text-align: left;" colspan="2"><h2>결제정보</h2>
+       <br>
+			<hr noshade size="1px" color="#ddd">
+			<br></td>
       </tr>
       <tr>
        <td style="text-align: left;">총금액/${adult + teen + kids}매
@@ -158,14 +193,10 @@ function coupon() {
        <td style="text-align: right;"><h2><fmt:formatNumber value="${(adult*18000)+(teen*9000)+(kids*6000)+2500}" pattern="#,###" />원</h2></td>
       </tr>
      </table>
-   </div>
-   	
-  </td>
- </tr>
- <tr>
-  <td colspan="2" style="text-align: left;">&nbsp;</td>
-  <td style="text-align: left;">
-  <div id="paydiv3">
+     <br>
+	<hr noshade size="1px" color="#ddd">
+	<br>
+     <div class="paydiv3">
   <input type="checkbox" onclick="check(this.form)" name="check3" id="check3"> 예약 티켓 정보에 대한 동의
    <br>
    <br>
@@ -203,10 +234,12 @@ function coupon() {
 				}
 			});
 		});
-	</script>	</td>
- </tr>
- </table>
+	</script>
+
  </div>
+   </div>
+   	
+  
 </form>
 <%@ include file="../include/footer.jsp" %>
 </body>

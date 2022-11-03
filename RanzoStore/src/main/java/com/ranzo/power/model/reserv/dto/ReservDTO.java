@@ -15,27 +15,27 @@ public class ReservDTO {
 	private int kids;//어린이 수량
 	private int quantity;//총 수량
 	private int sub_total; //총가격
-	private String title;
-	private String gallery;
-	private String name;
+	private String title; //전시제목
+	private String gallery; //갤러리 
+	private String name;  //예매자 이름
 	private String pay; //상태
-	private String thumnail;
+	private String thumnail; 
 	private String zipcode;
 	private String addr1;
 	private String addr2;
 	private String hp;
 	
-	private String r_name;
+	private String r_name; //배송받는 사람 정보
 	private String r_zipcode;
 	private String r_addr1;
 	private String r_addr2;
 	private String r_hp;
-	private int edit;
-	private String filterDate;
+	private int edit; //배송지 변경 여부
+	private String filterDate; //검색날짜
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
-	private String strDate;
+	private String strDate; //시작날짜
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
-	private String endDate;
+	private String endDate; //끝날짜
 	private int coupon;
 	
 	public ReservDTO(int coupon) {
