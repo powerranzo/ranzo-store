@@ -101,7 +101,7 @@ button {
 		<p><br>
 		<a class="a" href="#">위시리스트</a>
 		<p><br>
-		<a class="a" href="#">배송지관리</a>
+		<a class="a" href="${path}/member/addressList.do">배송지관리</a>
 		<p><br>
 		<a class="a" href="#">고객리뷰</a>
 		<p><br>
@@ -133,7 +133,7 @@ button {
 		</div>
 		<p style="margin: 50px 0 30px 0">
 		<hr noshade size="1px" width="700px" color="black">
-		<button id="btnCheck">확인</button>
+		<button>확인</button>
 	</section>
 
 </form>

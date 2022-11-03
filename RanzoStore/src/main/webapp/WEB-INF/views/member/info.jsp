@@ -85,15 +85,11 @@ $(function(){
 
 //회원 탈퇴 -> 뉴 모달창 버전
 $(function() {
-	$("#btnDelete").click(function(){
+	$("#btnWithdrawal").click(function(){
 		alertify.confirm("탈퇴하시겠습니까?",
 			function(){
-				alertify.success('Ok');
-				document.infoForm.action="${path}/member/delete.do";
+				document.infoForm.action="${path}/member/withdrawal.do";
 				document.infoForm.submit();
-			},
-			function(){
-				alertify.error('Cancel');
 			});
 	});
 });
@@ -103,7 +99,7 @@ $(function() {
 $(function() {
 	$("#btnDelete").click(function(){
 		if(confirm("탈퇴하시겠습니까?")){
-			document.infoForm.action="${path}/member/delete.do";
+			document.infoForm.action="${path}/member/withdrawal.do";
 			document.infoForm.submit();
 		}
 	});
@@ -279,7 +275,7 @@ tr{
 			<tr>
 				<td colspan="2"><input type="button" id="btnUpdate" class="button" value="회원정보수정">
 				<input type="button" class="button" value="취소" onclick="history.back(-1)">
-				<input type="button" id="btnDelete" class="button" value="회원탈퇴"></td>
+				<input type="button" id="btnWithdrawal" class="button" value="회원탈퇴"></td>
 			</tr>
 		</table>
 	</form>

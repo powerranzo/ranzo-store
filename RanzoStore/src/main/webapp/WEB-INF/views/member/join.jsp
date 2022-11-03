@@ -13,6 +13,7 @@ var checking = false;
 var idChecking = false;  
 var pwdChecking = false;  
 var nameChecking = false;  
+var emailChecking = false;  
 
 function valid(){
 	if(checking == false){
@@ -24,6 +25,9 @@ function valid(){
 			checking = false;
 		}else if(nameChecking == false){
 			alert("이름을 입력해주세요.");
+			checking = false;
+		}else if(emailChecking == false){
+			alert("이메일을 입력해주세요.");
 			checking = false;
 		}else {
 			checking = true;
@@ -99,6 +103,15 @@ function nameChk() {
 		nameChecking = false;
 	}else {
 		nameChecking = true;
+	}
+}
+
+// 이메일 입력 안하면 알림창
+function emailChk() {
+	if($("#email").val() == ""){
+		emailChecking = false;
+	}else {
+		emailChecking = true;
 	}
 }
 
@@ -273,7 +286,7 @@ tr {
 			<tr>
 				<td><label>이메일</label></td>
 				<td><input class="input-field" type="email" id="email" name="email"
-					placeholder="power@ranzo.com"></td>
+					placeholder="power@ranzo.com" onkeyup="emailChk()"></td>
 			</tr>
 			<p>
 			<tr>
@@ -295,14 +308,14 @@ tr {
 			</tr>
 			<tr>
 				<td></td>
-				<td><input class="input-field" type="text" name="addr1" id="addr1" placeholder="주소"></td>
+				<td><input class="input-field" type="text" name="addr1" id="addr1" placeholder="기본주소"></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><input class="input-field" type="text" name="addr2" id="addr2" placeholder="상세주소"></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" required></td>
+				<td><input type="checkbox" checked required></td>
 				<td>[필수]개인정보 수집 및 이용약관 동의</td>
 			</tr>
 			<tr>

@@ -100,7 +100,7 @@ aside {
 		<p><br>
 		<a class="a" href="#">위시리스트</a>
 		<p><br>
-		<a class="a" href="#">배송지관리</a>
+		<a class="a" href="${path}/member/addressList.do">배송지관리</a>
 		<p><br>
 		<a class="a" href="#">고객리뷰</a>
 		<p><br>
