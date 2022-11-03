@@ -13,15 +13,15 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.QnaService;
 
@@ -121,13 +121,22 @@ public class QnaController {
 	
 	//답변 작성하러가기
 	@RequestMapping("reply_write.do")
-	public String reply_write() {
+	public String reply_write(int bno, Model m) throws Exception {
+		QnaDTO dto=qnaService.read(bno);
+		m.addAttribute("dto", dto);
 		return "qnaboard/reply_write";
 	}
 	
 	//답변 작성
 	@RequestMapping("reply_insert.do")
-	public String reply_insert( @ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+	public String reply_insert(@RequestParam(defaultValue = "1")String bnobno, @ModelAttribute QnaDTO dto, HttpSession session) throws Exception {
+		System.out.println("bnobno:"+bnobno);
+		int bno = 0;
+		if(bnobno!=null) {
+			bno=Integer.parseInt(bnobno);
+		}
+		dto.setBno(bno);
+		
 		//세션 처리
 		String writer = (String)session.getAttribute("userid");
 		dto.setWriter(writer);

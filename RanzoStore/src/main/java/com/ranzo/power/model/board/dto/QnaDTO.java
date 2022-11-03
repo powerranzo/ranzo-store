@@ -1,7 +1,6 @@
 package com.ranzo.power.model.board.dto;
 
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;

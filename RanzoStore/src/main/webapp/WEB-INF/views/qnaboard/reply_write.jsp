@@ -28,6 +28,8 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
+	
+	console.log('${dto.bno}');
 	$("#btnReplySave").click(function(){
 		document.form1.submit();
 	});
@@ -64,11 +66,11 @@ $(function() {
 	</table>
 	<br>
 	<div style="width: 700px;" align="center">
-		<input type="number" name="bno" value="${dto.bno}">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>		
-		<button type="button" id="btnReplySave" class="btn btn-primary">확인</button>
+		<input type="hidden" name="bnobno" value="${dto.bno}">
 	</div>
 </form>
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>		
+		<button type="button" id="btnReplySave" class="btn btn-primary">확인</button>
 </div>
 </body>
 </html>
