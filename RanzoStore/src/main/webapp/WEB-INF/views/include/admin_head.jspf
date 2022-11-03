@@ -14,3 +14,5 @@
 <!-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> -->
   <script src="${path}/resources/include/admin_script.js"></script>
   <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+
+  
