@@ -6,12 +6,36 @@
 <meta charset="UTF-8">
 <title>티켓예매 목록</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 <style type="text/css">
+* {
+	margin:0px; 
+}
+.content{
+	margin: 20px 80px 0 80px;
+
+}
+section {
+	width: 75%;
+	float: right;
+	text-align: left;
+}
+.orderdiv {
+	padding:5px;
+	float: left;
+	display: inline-block;
+	min-height: 100%;
+	width: 80%;
+	flex: 1;
+}
+.orderdiv a:hover{ font-weight: bold;}
+.orderdiv a:visited{ text-decoration: none; color: black;}
+.orderdiv a:link { text-decoration: none; color:black; }
+.orderdiv a:active { text-decoration: none; color:black;}
 .ordertable{
-	padding: 10px;
-	width: 100%;
-	margin: 10px auto;
+	margin: 10px;
 	text-align: center;
+	width: 100%;
 	border-collapse: collapse;
 }
 .ordertable th {
@@ -21,11 +45,7 @@
 }
 .ordertable td{	border-bottom: 1px solid #e4e4e4;}
 .ordertable th, td{ padding: 10px;}
-.orderdiv {
-	padding: 20px;
-	margin: auto;
-	width: 70%;
-}
+
 .orderul li {
 	display: inline-block;
 	padding-top: 20px;
@@ -34,7 +54,7 @@
 .filterDate{
 	border: 1px solid #e4e4e4;
 	padding: 7px;
-	width: 100px;
+	width: 75px;
 	text-align: center;
 	background: none;
 }
@@ -48,6 +68,19 @@
 }
 .datediv {
 	margin: 10px 0 0 0;
+}
+footer{
+	clear : both;
+	bottom: 0;
+}
+
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 </style>
 <script type="text/javascript">
@@ -90,23 +123,24 @@ function list(page){
 	location.href="${path}/reserv/list2.do/${sessionScope.userid}?curPage="+page;
 } 
 
-
 </script>
-
 </head>
-<body>
 <%@ include file="../include/menu.jsp" %>
+
+<div class="content">
+<%@ include file="../include/CommonDashboard.jspf" %>
+<section>
 <div class="orderdiv">
 <h2>티켓예매 목록</h2>
 <p><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
 <form action="${path}/reserv/list2.do/${sessionScope.userid}" method="post" name="orderlist">
 <div class="datediv">
-<button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
+ <button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
  <button type="button" name="filterDate" value="2" onclick="date(2)" class="filterDate">1개월</button>
  <button type="button" name="filterDate" value="3" onclick="date(3)" class="filterDate">3개월</button>
  <button type="button" name="filterDate" value="4" onclick="date(4)" class="filterDate">6개월</button>
  <input name="strDate" id="strDate" type="date" value="${dto.strDate}">
- <span> ~ </span>
+  <span> ~ </span>
  <input name="endDate" id="endDate" type="date" value="${dto.endDate}"> 
 <button name="btnSearch" id="btnSearch" class="filterDate">검색</button>
 </div>
@@ -172,9 +206,12 @@ function list(page){
 	</tr>
 </table>
 </div>
-
-
-
+</section>
+</div>
+<div align="center">
+<footer>
 <%@ include file="../include/footer.jsp" %>
+</footer>
+</div>
 </body>
 </html>

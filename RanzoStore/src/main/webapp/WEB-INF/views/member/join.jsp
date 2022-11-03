@@ -13,6 +13,7 @@ var checking = false;
 var idChecking = false;  
 var pwdChecking = false;  
 var nameChecking = false;  
+var emailChecking = false;  
 
 function valid(){
 	if(checking == false){
@@ -24,6 +25,9 @@ function valid(){
 			checking = false;
 		}else if(nameChecking == false){
 			alert("이름을 입력해주세요.");
+			checking = false;
+		}else if(emailChecking == false){
+			alert("이메일을 입력해주세요.");
 			checking = false;
 		}else {
 			checking = true;
@@ -102,6 +106,15 @@ function nameChk() {
 	}
 }
 
+// 이메일 입력 안하면 알림창
+function emailChk() {
+	if($("#email").val() == ""){
+		emailChecking = false;
+	}else {
+		emailChecking = true;
+	}
+}
+
 
 //주소 찾기
 function daumZipCode() {
@@ -159,15 +172,15 @@ function daumZipCode() {
 	box-sizing: content-box;
 }
 
-form {
-	width: 500px;
-	height: 600px;
-	display: inline;
-	align-items: center;
+/* #joinForm {	
+	display: inline;	
 	position: absolute;
-	top: 60%;
-	left: 51%;
 	transform: translate(-50%, -50%);
+} */
+.joindiv{
+	margin: auto;
+	width: 500px;
+	align-items: center;
 }
 
 .input-field {
@@ -192,7 +205,7 @@ label {
 	margin-top: 4px;
 }
 
-button {
+#btnJoin{
 	background-color: black;
 	color: white;
 	width: 320px;
@@ -232,11 +245,13 @@ tr {
 	height: 60px;
 }
 
+
 </style>
 <title>회원가입</title>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<div class="joindiv">
 	<form id="joinForm" method="post" action="${path}/member/insert.do" onsubmit="return valid()">
 		<div class="title">회원가입</div>
 		<br>
@@ -273,7 +288,7 @@ tr {
 			<tr>
 				<td><label>이메일</label></td>
 				<td><input class="input-field" type="email" id="email" name="email"
-					placeholder="power@ranzo.com"></td>
+					placeholder="power@ranzo.com" onkeyup="emailChk()"></td>
 			</tr>
 			<p>
 			<tr>
@@ -295,14 +310,14 @@ tr {
 			</tr>
 			<tr>
 				<td></td>
-				<td><input class="input-field" type="text" name="addr1" id="addr1" placeholder="주소"></td>
+				<td><input class="input-field" type="text" name="addr1" id="addr1" placeholder="기본주소"></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><input class="input-field" type="text" name="addr2" id="addr2" placeholder="상세주소"></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" required></td>
+				<td><input type="checkbox" checked required></td>
 				<td>[필수]개인정보 수집 및 이용약관 동의</td>
 			</tr>
 			<tr>
@@ -311,5 +326,9 @@ tr {
 			</tr>
 		</table>
 	</form>
+</div>
+
+<%@ include file="../include/footer.jsp"%>
+
 </body>
 </html>

@@ -6,6 +6,33 @@
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
 <%@ include file="../include/header.jsp" %>
+<script>
+
+$(function() {
+	$("#btnFindId").click(function() {
+		var name = $("#name").val();
+		var email = $("#email").val();
+		if (name == "") {
+			alert("이름을 입력하세요.");
+			$("#name").focus(); 
+			return;
+		}
+		if (email == "") {
+			alert("이메일을 입력하세요.");
+			$("#email").focus();
+			return;
+		}
+		document.findId.action = "${path}/member/findId.do";
+		document.findId.submit();
+	});
+});
+ 	
+<c:if test="${message == 'checkAgain' }">
+	console.log('message');
+	alert("다시 한 번 확인해주세요.");
+</c:if>
+
+</script>
 <style>
 * {
 	box-sizing: content-box;
@@ -67,7 +94,7 @@ form {
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-	<form name="loginForm" method="post">
+	<form name="findId" method="post">
 		<div class="title">아이디 찾기</div>
 		<p>
 		
@@ -80,7 +107,7 @@ form {
 			<button class="button" id="btnFindId">아이디 찾기</button>
 		<p>
 			<div class="a-div">
-			<a href="javascript:history.back();" class="a">이전 화면으로 </a>|<a href="${path}/member/findPwd.do" class="a"> 비밀번호 찾기</a>
+			<a href="javascript:history.back();" class="a">이전 화면으로 </a>|<a href="${path}/member/findPwdPage.do" class="a"> 비밀번호 찾기</a>
 			</div>
 	</form>
 </body>

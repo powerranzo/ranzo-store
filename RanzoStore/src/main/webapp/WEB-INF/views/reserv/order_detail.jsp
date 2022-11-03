@@ -6,7 +6,27 @@
 <meta charset="UTF-8">
 <title>예매상세정보</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 <style type="text/css">
+* {
+	margin:0px; 
+}
+.content{
+	margin: 20px 80px 0 80px;
+}
+section {
+	width: 75%;
+	float: right;
+	text-align: left;
+}
+.orderdiv {
+	padding:5px;
+	float: left;
+	display: inline-block;
+	min-height: 100%;
+	width: 80%;
+	flex: 1;
+}
 .orderdetail{
 	padding: 10px;
 	width: 100%;
@@ -24,11 +44,6 @@
 }
 .orderdetail td{	border-bottom: 1px solid #e4e4e4;}
 .orderdetail thead, .orderdetail td{ padding: 10px;}
-.orderdiv {
-	padding: 20px;
-	margin: auto;
-	width: 70%;
-}
 .tdstyle {
 	background-color: #f8f9fa;
 }
@@ -39,6 +54,7 @@
 	font-size: 13px;
 	margin: 10px 0 0 0;
 }
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -56,8 +72,9 @@ $(function(){
 <body>
 <%@ include file="../include/menu.jsp" %>
 
+<div class="content">
+<section>
 <div class="orderdiv">
-
 <form action="${path}/reserv/addr_edit/${dto.no}" method="post" name="order">
 <h2>예매확인/취소</h2>
 
@@ -144,8 +161,9 @@ $(function(){
 </tr>
 </table>
  </form>
-
-
+</div>
+</section>
+<%@ include file="../include/CommonDashboard.jspf" %>
 </div>
 
 

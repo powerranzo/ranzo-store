@@ -5,11 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<%@ include file="../include/admin_head.jspf"%>
 <title>전시 수정</title>
-<script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/admin_head.jspf"%>
+<style type="text/css">
+.form-group{
+width:80%;
+}
+</style>
 <script type="text/javascript">
 $(function(){
+	$("#summary").summernote({
+		width : 800,
+		height : 300
+	});
 	$("#btnUpdate").click(function(){
 		if(confirm('수정하시겠습니까?')){
 		document.form1.action="${path}/admin/exb_update.do";
@@ -42,8 +51,12 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
-		<h2>전시 등록</h2>
+	<%@ include file="../include/menu.jsp"%>
+	<div class="content">
+		<section>
+			<%@ include file="../include/adminDashboard.jspf"%>
+			<div class=sectiondiv>
+		<h2>전시 수정</h2>
 		<form name="form1" enctype="multipart/form-data" method="post">
 			<div class="form-group">
 				<label for="code">전시코드</label> <input name="code"
@@ -93,19 +106,17 @@ $(function(){
 			</div>
 		</form>
 			<div class="form-group" align="right">
-				<button class="btn btn-lg" id="btnUpdate">
+				<button class="btn btn-sm" id="btnUpdate">
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;수정
 				</button>
-			</div>
-			<div class="form-group" align="right">
-				<button class="btn btn-lg" id="btnDelete">
+				<button class="btn btn-sm" id="btnDelete">
 					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
 				</button>
 			</div>
 			<br>
 	</div>
-
-
+</section>
+</div>
 
 </body>
 </html>
