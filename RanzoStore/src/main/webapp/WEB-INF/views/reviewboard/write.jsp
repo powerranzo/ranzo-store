@@ -83,7 +83,7 @@ $(function(){
 	</table>
 	<br>
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>		
+		<button type="button" id="btnList" onclick="location.href='${path}/board/review/list.do'" class="btn btn-secondary">목록</button>		
 		<button type="button" id="btnSave" class="btn btn-primary">확인</button>
 	</div>
 </form>
