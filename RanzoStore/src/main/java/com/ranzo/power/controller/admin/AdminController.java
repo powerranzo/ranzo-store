@@ -130,6 +130,7 @@ public class AdminController {
 
 	@RequestMapping("/exb_view.do")
 	public String getExbView(String code, Model m, HttpServletRequest request) {
+		logger.info("exb_view_code:"+code);
 		ExhibitionDTO dto=adminService.getExbView(code);
 		m.addAttribute("startDate", DateFunction.dateToString(dto.getStart_date())); 
 		m.addAttribute("endDate", DateFunction.dateToString(dto.getEnd_date()));

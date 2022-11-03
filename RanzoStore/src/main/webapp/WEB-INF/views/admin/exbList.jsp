@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전시 목록</title>
+<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 	$(function() {
 
@@ -68,8 +70,6 @@
 		form.submit();
 	}
 </script>
-<%@ include file="../include/header.jsp"%>
-<%@ include file="../include/adminHeader.jspf"%>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
