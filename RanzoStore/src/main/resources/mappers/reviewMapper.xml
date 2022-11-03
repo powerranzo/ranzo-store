@@ -5,33 +5,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="review">
-	<select id="listAll" resultType="ReviewDTO">	
-		select *
-			from (
-			    select rownum as rn, A.*
-			    from (
-							select bno, rating, product, title, subject, content, writer, name, reg_date, viewcnt, show
-							,(select count(*) from review_reply_tb where bno=r.bno) cnt
-							from review_tb r, member_tb m, exhibition_tb e
-							<choose>
-								<when test="search_option != 'all'">
-									where r.writer=m.userid and r.product=e.code
-									and show='y'
-									and ${search_option} like #{keyword}
-								</when>
-								<otherwise>
-									where r.writer=m.userid and r.product=e.code
-									and show='y'
-									and ( title like #{keyword}
-									or subject like #{keyword} 
-									or content like #{keyword}	
-									or name like #{keyword})
-								</otherwise>
-							</choose>	
-							order by bno desc
-			    ) A    
-			) where rn between #{start} and #{end}
-	</select>
+<select id="listAll" resultType="ReviewDTO">   
+      select *
+         from (
+             select rownum as rn, A.*
+             from (
+                     select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, m.name, r.reg_date, r.viewcnt, r.show
+                     ,(select count(*) from review_reply_tb where bno=r.bno) cnt
+                     from review_tb r, member_tb m, exhibition_tb e
+                     <choose>
+                        <when test="search_option != 'all'">
+                           where r.writer=m.userid and r.product=e.code
+                           and r.show='y'
+                           and ${search_option} like #{keyword}
+                        </when>
+                        <otherwise>
+                           where r.writer=m.userid and r.product=e.code
+                           and r.show='y'
+                           and ( e.title like #{keyword}
+                           or r.subject like #{keyword} 
+                           or r.content like #{keyword}   
+                           or m.name like #{keyword})
+                        </otherwise>
+                     </choose>   
+                     order by r.bno desc
+             ) A    
+         ) where rn between #{start} and #{end}
+   </select>
 
 	<insert id="insert">
 		insert into review_tb(bno, rating, product, subject, content, writer) values
