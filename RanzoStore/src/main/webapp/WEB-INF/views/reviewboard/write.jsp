@@ -16,7 +16,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 
-
 <script type="text/javascript">
 $(function() {
 	$("#content").summernote({
@@ -29,30 +28,11 @@ $(function() {
 <script>
 $(function(){
 	$("#btnSave").click(function(){
-		var str="";
-   //uploadedList 영역에 클래스이름이 file인 히든타입의태그를 각각 반복
-		$("#uploadedList .file").each(function(i){
-			console.log(i);
-			//hidden 태그 구성
-			str += "<input type='hidden' name='files["+i+"]'	value='"
-	+ $(this).val()+"'>";
-		});
-		//폼에 hidden 태그들을 붙임
-		$("#form1").append(str);
 		document.form1.submit();
 	});
 
 });
 </script>
-
-<style>
-.fileDrop {
-width: 600px;
-height: 100px;
-border: 1px dotted gray;
-background-color: gray;
-}
-</style>
 
 </head>
 <body>
