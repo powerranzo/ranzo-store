@@ -10,6 +10,9 @@
 
 	<a href="${path}/upload/uploadForm">업로드 테스트</a> |
 	<a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
+
+	<a href="${path}/reserv/list/${sessionScope.userid}">주문내역 확인하기 test</a>
+
 </div>
 <hr>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -47,9 +50,9 @@
 	<div class="menu1">
 		<ul class="menu">
 			<li><a href="#">ABOUT</a></li>
-			<li><a href="${path}/shop/exhibition/list.do">EXHIBITION</a>
+			<li><a href="${path}/shop/exhibition/list">EXHIBITION</a>
 				<ul class="depth_1">
-					<li><a href="${path}/shop/exhibition/list.do">현재전시</a></li>
+					<li><a href="${path}/shop/exhibition/list">현재전시</a></li>
 					<li><a href="#">지난전시</a></li>
 				</ul></li>
 			<li><a href="#">MENU 2</a></li>

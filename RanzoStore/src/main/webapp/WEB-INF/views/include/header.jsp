@@ -8,8 +8,8 @@
 <link href="${path}/include/alertify.css" rel="stylesheet">
 <script src="${path}/include/alertify.min.js"></script>
 
-<%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
 
+<%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
 
 <%-- <script src="${path}/resources/include/admin_script.js"></script> --%>
 <!-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
@@ -18,3 +18,4 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <!-- <script src="https://kit.fontawesome.com/a72ff6c63d.js" crossorigin="anonymous"></script> -->
 <%-- <link rel="stylesheet" href="${path}/include/admin_dashboard.css"> --%>
+
