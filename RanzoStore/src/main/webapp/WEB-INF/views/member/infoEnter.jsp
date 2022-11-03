@@ -84,6 +84,7 @@ body {
 <form method="post" action="${path}/member/infoEnterCheck.do">
 <div class="content">
 <%@ include file="../include/CommonDashboard.jspf" %>
+
 	<section>
 	 <div class="orderdiv">
 		<div class="title">개인 정보 수정</div>
