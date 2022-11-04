@@ -69,14 +69,8 @@ $(function(){
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>
+			<td style="text-align: left;">
 			<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
-			</td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td colspan="2">
-				<input type="file" name="file1">
 			</td>
 		</tr>
 	</table>

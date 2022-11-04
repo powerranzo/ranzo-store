@@ -110,6 +110,16 @@ public class QnaController {
 		return mav;
 	}
 	
+	//수정하러 이동
+	@RequestMapping("edit.do")
+	public ModelAndView edit(int bno, HttpSession session) throws Exception {
+		//조회수 증가 처리
+		qnaService.increaseViewcnt(bno, session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaboard/edit");
+		mav.addObject("dto", qnaService.read(bno));
+		return mav;
+	}
 	
 	//게시물 수정
 	@RequestMapping("update.do")
@@ -136,7 +146,7 @@ public class QnaController {
 						e.printStackTrace();
 					}
 				} else {
-					fileName="(null)";
+					fileName="-";
 				}
 				dto.setFileName(fileName);		
 		if(dto != null) {
