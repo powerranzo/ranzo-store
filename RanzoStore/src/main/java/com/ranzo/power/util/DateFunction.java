@@ -1,4 +1,4 @@
-package com.ranzo.power.utils;
+package com.ranzo.power.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

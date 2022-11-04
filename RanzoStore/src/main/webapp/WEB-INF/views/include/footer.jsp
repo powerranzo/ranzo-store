@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
 #footer{
 	background-color: black;
@@ -12,7 +11,10 @@
 	text-align: center;
 	padding: 30px 100px;
 	font-size: 14px;
+	height: 60px;
+	clear: both;
 }
+
 
 </style>
 </head>

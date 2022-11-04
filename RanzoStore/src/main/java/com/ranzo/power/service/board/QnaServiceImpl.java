@@ -16,53 +16,16 @@ public class QnaServiceImpl implements QnaService {
 	@Inject
 	QnaDAO qnaDao;
 	
-	@Override
-	public void deleteFile(String fullName) {
-		qnaDao.deleteFile(fullName);
-	}
-
-	@Override
-	public List<String> getAttach(int bno) {
-		return qnaDao.getAttach(bno);
-	}
-
-	@Override
-	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateAttach(String fullName, int bno) {
-		// TODO Auto-generated method stub
-
-	}
 	
-	@Transactional
 	@Override
 	public void create(QnaDTO dto) throws Exception {
-		//qna_tb에 insert
 		qnaDao.create(dto);
-		//qna_attach_tb 테이블에 레코드 추가
-		String[] files=dto.getFiles(); //첨부파일 이름 배열
-		if(files==null) return; //첨부파일이 없으면 skip
-		for(String name : files) {
-			qnaDao.addAttach(name); 
-		}
 	}
 	
-	@Transactional
+	
 	@Override
 	public void update(QnaDTO dto) throws Exception {
 		qnaDao.update(dto);
-		
-		String[] files = dto.getFiles(); //첨부파일 이름 배열
-		if(files==null) return; //첨부파일 없으면 넘어가기
-		for(String name : files) {
-			System.out.println("첨부파일 이름 : " + name);
-			qnaDao.updateAttach(name, dto.getBno());
-		}
-
 	}
 
 	@Transactional
@@ -103,6 +66,18 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public QnaDTO read(int bno) throws Exception {
 		return qnaDao.read(bno);
+	}
+
+	//답글 작성
+	@Override
+	public void create_reply(QnaDTO dto) throws Exception {
+		qnaDao.create_reply(dto);	
+	}
+
+	//답글 순서 조정
+	@Override
+	public void update_reply(QnaDTO dto) throws Exception {
+		qnaDao.update_reply(dto);		
 	}
 
 }

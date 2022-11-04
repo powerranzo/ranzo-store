@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select rownum as rn, A.*
 					from (
-						select bno,title,writer,name,reg_date,viewcnt,show
+						select bno,title,writer,name,reg_date,viewcnt,re_depth,show
 						from qna_tb q, member_tb m 
 							<choose>
 								<when test="search_option != 'all' ">
@@ -25,15 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									or content like#{keyword}) 
 								</otherwise>
 							</choose>
-						order by bno desc
+						order by ref desc, re_depth asc
 					) A
 				) where rn between #{start} and #{end} 
 	</select>
 	
 		
 	<insert id="insert">
-		insert into qna_tb (bno,title,content,writer) values
-  	(seq_qna.nextval,#{title},#{content},#{writer})
+		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth,fileName) values
+  	(seq_qna.nextval,#{title},#{content},#{writer},seq_qna.nextval,0,0,#{fileName})
 	</insert>
 	
 	<!-- 첨부파일 정보 저장 -->
@@ -93,7 +93,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update qna_tb set show='n' where bno=#{bno}
 	</delete>
 	
+	<!-- 답변 순서  -->
+	<update id="update_reply">
+		update qna_tb 
+		set re_order = re_order+1 
+		where bno = #{bno} and re_order > #{re_order}
+	</update>
 
+	<!-- 답변 작성 -->
+	<insert id="insert_reply">
+		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth) values
+	  (seq_qna.nextval, #{title}, #{content}, #{writer}, #{bno}, #{re_order}+1, #{re_depth}+1)
+	</insert>
+
+	
 </mapper>
 
 

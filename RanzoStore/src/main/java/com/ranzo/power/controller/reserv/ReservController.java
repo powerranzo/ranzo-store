@@ -155,17 +155,30 @@ public class ReservController {
 	public ReservDTO date(Model model, @RequestParam(defaultValue = "0") String filterDate) {
 		return new ReservDTO(filterDate);
 	}
-
-	@ResponseBody
-	@RequestMapping("coupon.do")
-	public ReservDTO coupon(Model model){	
-		int coupon2 =5000;
-		model.addAttribute("coupon", coupon2);
+	
+	@RequestMapping("canclelist.do/{userid}")
+	public ModelAndView canclelist(ModelAndView mav, @PathVariable String userid,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception {
+		int count = reservService.countcancle(userid);
+		Pager pager = new Pager(count, curPage);
+		int start = pager.getPageBegin();
+		int end =pager.getPageEnd();
 		
-		return new ReservDTO(5000);
+		List<ReservDTO> list = reservService.canclelist(userid,start, end);
+		Map<String, Object> map=new HashMap<>();
+		map.put("list", list);
+		map.put("count", count); //레코드 갯수 파일
+		map.put("pager", pager); 
+		
+		mav.setViewName("/reserv/cancleList");
+		mav.addObject("map", map);	
+		return mav;
 	}
-	
-	
-
-	
+	@RequestMapping("mypagelist.do/{userid}")
+	public ModelAndView mypagelist(ModelAndView mav, @PathVariable String userid){	
+		List<ReservDTO> list = reservService.mypagelist(userid);
+		mav.setViewName("/reserv/mypagelist");
+		mav.addObject("list", list);	
+		return mav;
+	}
 }

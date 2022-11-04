@@ -1,8 +1,9 @@
 package com.ranzo.power.model.board.dto;
 
 
-import java.util.Arrays;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class QnaDTO {
 	private int bno; //게시글 번호
@@ -13,9 +14,16 @@ public class QnaDTO {
 	private Date reg_date; //작성일자 
 	private int viewcnt; //조회수
 	private String reply_state; //답변상태
-	private String[] files; //첨부파일 이름 배열
+
 	private String show; //화면 표시 여부
 	private String product; //제품코드 
+	private int ref; // 게시물 그룹=bno
+	private int re_order; // 게시물 그룹의 순번과 답글이 하나로 묶일것임
+	private int re_depth; // 답변 계층
+	
+	private String fileName;
+	private MultipartFile uploadFile;
+	
 	public int getBno() {
 		return bno;
 	}
@@ -64,12 +72,7 @@ public class QnaDTO {
 	public void setReply_state(String reply_state) {
 		this.reply_state = reply_state;
 	}
-	public String[] getFiles() {
-		return files;
-	}
-	public void setFiles(String[] files) {
-		this.files = files;
-	}
+	
 	public String getShow() {
 		return show;
 	}
@@ -82,11 +85,45 @@ public class QnaDTO {
 	public void setProduct(String product) {
 		this.product = product;
 	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getRe_order() {
+		return re_order;
+	}
+	public void setRe_order(int re_order) {
+		this.re_order = re_order;
+	}
+	public int getRe_depth() {
+		return re_depth;
+	}
+	public void setRe_depth(int re_depth) {
+		this.re_depth = re_depth;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	@Override
 	public String toString() {
 		return "QnaDTO [bno=" + bno + ", writer=" + writer + ", name=" + name + ", title=" + title + ", content="
 				+ content + ", reg_date=" + reg_date + ", viewcnt=" + viewcnt + ", reply_state=" + reply_state
-				+ ", files=" + Arrays.toString(files) + ", show=" + show + ", product=" + product + "]";
+				+ ", show=" + show + ", product=" + product + ", ref=" + ref
+				+ ", re_order=" + re_order + ", re_depth=" + re_depth + ", fileName=" + fileName + ", uploadFile="
+				+ uploadFile + "]";
 	}
+	
+	
 	
 }

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 @Repository
@@ -38,12 +39,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return (name==null) ? false : true;
 	}
 	
-	public boolean infoEnterCheck(String userid, String passwd) {
+	public boolean pwdCheck(String userid, String passwd) {
 		boolean result = false;
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userid", userid);
 		map.put("passwd", passwd);
-		int count = sqlSession.selectOne("member.infoEnterCheck", map);
+		int count = sqlSession.selectOne("member.pwdCheck", map);
 		if(count == 1) result = true;
 		return result;
 	}
@@ -59,8 +60,35 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void deleteMember(String userid) {
-		sqlSession.delete("member.deleteMember", userid);
+	public void deleteMember(Map<String, Object> map) {
+		sqlSession.delete("member.deleteMember", map);
+	}
+
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		return sqlSession.selectOne("member.findId", dto);
+	}
+
+	@Override
+	public MemberDTO findPwd(MemberDTO dto) {
+		return sqlSession.selectOne("member.findPwd", dto);
+	}
+
+	@Override 
+	public void tempPwd(Map<String, String> map) { 
+		sqlSession.update("member.tempPwd", map);
+	}
+
+	@Override
+	public void kakaoinsert(HashMap<String, Object> userInfo) {
+		sqlSession.insert("member.kakaoInsert", userInfo);
+	}
+
+	@Override
+	public KakaoDTO findkakao(HashMap<String, Object> userInfo) {
+		System.out.println("닉네임: "+userInfo.get("nickname"));
+		System.out.println("이메일: "+userInfo.get("email"));
+		return sqlSession.selectOne("member.findKakao", userInfo);
 	}
 
 }

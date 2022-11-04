@@ -5,11 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<%@ include file="../include/admin_head.jspf"%>
 <title>전시 등록</title>
-<script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+<style type="text/css">
+.form-group{
+width:80%;
+}
+</style>
+<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 $(function(){
+	$("#summary").summernote({
+		width : 880,
+		height : 300
+	});
 	$("#btnWrite").click(function(){
 		if(confirm('등록하시겠습니까?')){
 		document.form1.action="${path}/admin/exb_write.do";
@@ -20,7 +29,11 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<%@ include file="../include/menu.jsp"%>
+	<div class="content">
+		<section>
+			<%@ include file="../include/adminDashboard.jspf"%>
+			<div class=sectiondiv>
 		<h2>전시 등록</h2>
 		<form name="form1" enctype="multipart/form-data" method="post">
 			<div class="form-group">
@@ -53,7 +66,7 @@ $(function(){
 				<input type="date" name="endDate" class="form-control input-sm" 
 				id="endDate">
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="width:inherit;">
 				<label for="summary">내용</label>
 				<textarea name="summary" class="form-control input-sm" id="summary"
 					placeholder="내용을 입력해주세요." rows="20"></textarea>
@@ -61,7 +74,7 @@ $(function(){
 			<div class="form-group">
 				<label for="files">썸네일</label> 
 				<input type="file" name="file"	
-				class="form-control input-lg" id="file">
+				class="form-control input-sm" id="file">
 			</div>
 		</form>
 		<div class="form-group" align="right">
@@ -71,8 +84,8 @@ $(function(){
 		</div>
 		<br>
 	</div>
-
-
+</section>
+</div>
 
 </body>
 </html>
