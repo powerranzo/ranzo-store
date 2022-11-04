@@ -84,16 +84,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 정보 저장 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
-		insert into kakao_tb (k_name, k_email)
-		values (#{nickname}, #{email})
+		insert into member_tb (userid, name, email, passwd)
+		values (#{nickname}, #{nickname}, #{email}, 'kakaopwd')
 	</insert>
 	
 	<!-- 정보 찾기 -->
 	<select id="findKakao" 
 	parameterType="java.util.HashMap" 
-	resultType="com.ranzo.power.model.member.dto.KakaoDTO">
-		select * from kakao_tb 
-		where k_name=#{nickname} and k_email=#{email}
+	resultType="com.ranzo.power.model.member.dto.MemberDTO">
+		select * from member_tb 
+		where name=#{nickname} and email=#{email}
 	</select>
 	
 </mapper>

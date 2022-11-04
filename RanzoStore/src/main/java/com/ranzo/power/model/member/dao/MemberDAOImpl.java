@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 @Repository
@@ -85,7 +84,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public KakaoDTO findkakao(HashMap<String, Object> userInfo) {
+	public MemberDTO findkakao(HashMap<String, Object> userInfo) {
 		System.out.println("닉네임: "+userInfo.get("nickname"));
 		System.out.println("이메일: "+userInfo.get("email"));
 		return sqlSession.selectOne("member.findKakao", userInfo);
