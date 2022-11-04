@@ -73,11 +73,23 @@ public class QnaController {
 		String fileName=null;
 		MultipartFile uploadFile = dto.getUploadFile();
 		if (!uploadFile.isEmpty()) {
+			
 			String originalFileName = uploadFile.getOriginalFilename();
 			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
 			fileName=uuid+"."+ext;
-			uploadFile.transferTo(new File("c:\\dev\\upload\\" + fileName));
+			
+			//배포디렉토리
+			try {
+				String path="c:\\dev\\upload\\";
+				new File(path).mkdir();
+				uploadFile.transferTo(new File(path + fileName));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 		} else {
 			fileName="(null)";
 		}
