@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.service.member.MemberService;
 
@@ -221,12 +220,13 @@ public class MemberController {
 		String access_Token = memberService.getAccessToken(code);
 		System.out.println("###access_Token#### : " + access_Token);
 		
-		KakaoDTO userInfo = memberService.getUserInfo(access_Token);
+		MemberDTO dto = memberService.getUserInfo(access_Token);
 		System.out.println("$$$access_Token$$$$ : " + access_Token);
 		
 		// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
-		session.setAttribute("name", userInfo.getK_name());
-		session.setAttribute("userid", userInfo.getK_email());
+		session.setAttribute("userid", dto.getUserid());
+		session.setAttribute("name", dto.getName());
+		session.setAttribute("email", dto.getEmail());
 		return "home";
 	}
 	

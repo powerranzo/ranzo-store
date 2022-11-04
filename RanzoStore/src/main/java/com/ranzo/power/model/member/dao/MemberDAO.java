@@ -3,7 +3,6 @@ package com.ranzo.power.model.member.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -19,5 +18,5 @@ public interface MemberDAO {
 	public MemberDTO findPwd(MemberDTO dto);
 	public void tempPwd(Map<String, String> map);
 	public void kakaoinsert(HashMap<String, Object> userInfo);
-	public KakaoDTO findkakao(HashMap<String, Object> userInfo);
+	public MemberDTO findkakao(HashMap<String, Object> userInfo);
 }
