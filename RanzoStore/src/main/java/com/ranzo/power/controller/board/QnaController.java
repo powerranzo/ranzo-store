@@ -33,7 +33,6 @@ public class QnaController {
 	@Inject
 	QnaService qnaService;
 	
-	
 	@RequestMapping("list.do")
 	public ModelAndView list(
 			@RequestParam(defaultValue = "all") String search_option,
@@ -77,11 +76,11 @@ public class QnaController {
 			String originalFileName = uploadFile.getOriginalFilename();
 			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
-			fileName=uuid+"."+ext;
+			fileName=originalFileName+"_"+uuid+"."+ext;
 			
 			//배포디렉토리
 			try {
-				String path="c:\\dev\\upload\\";
+				String path="c:\\dev\\qna\\";
 				new File(path).mkdir();
 				uploadFile.transferTo(new File(path + fileName));
 				
@@ -115,6 +114,31 @@ public class QnaController {
 	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(QnaDTO dto) throws Exception {
+		
+		//파일 업로드 처리
+				String fileName=null;
+				MultipartFile uploadFile = dto.getUploadFile();
+				if (!uploadFile.isEmpty()) {
+					
+					String originalFileName = uploadFile.getOriginalFilename();
+					logger.info("oriname:"+originalFileName);
+					String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+					UUID uuid = UUID.randomUUID();	//UUID 구하기
+					fileName=originalFileName+"_"+uuid+"."+ext;
+					
+					//배포디렉토리
+					try {
+						String path="c:\\dev\\qna\\";
+						new File(path).mkdir();
+						uploadFile.transferTo(new File(path + fileName));
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					fileName="(null)";
+				}
+				dto.setFileName(fileName);		
 		if(dto != null) {
 			qnaService.update(dto);
 		}
