@@ -20,7 +20,20 @@
 $(function() {
 	$("#content").summernote({
 		width : 600,
-		height : 200
+		height : 200,
+		
+		 callbacks: {
+			 onImageUpload: function(image) {
+				 var file = image[0];
+         var reader = new FileReader();
+         reader.onloadend = function() {
+        	 var image = $('<img>').attr('src',  reader.result);
+        	 image.attr('width','30%');
+           $('#content').summernote("insertNode", image[0]);
+					}
+         	reader.readAsDataURL(file);
+				}
+		 }
 	});
 });
 </script>

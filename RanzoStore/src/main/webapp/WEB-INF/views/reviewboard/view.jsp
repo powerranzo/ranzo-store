@@ -108,7 +108,7 @@ function listReply(){
 		<tr>
 			<th>내용</th>
 			<td>
-				<div style="height: 200px;" >
+				<div style="height: 300px;" >
 					${dto.content}
 				</div>
 			</td>
