@@ -2,7 +2,6 @@ package com.ranzo.power.service.member;
 
 import javax.servlet.http.HttpSession;
 
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 public interface MemberService {
@@ -18,5 +17,5 @@ public interface MemberService {
 	public MemberDTO findPwd(MemberDTO dto); 
 	public void sendPwd(String userid, String email) throws Exception;
 	public String getAccessToken(String authorize_code);
-	public KakaoDTO getUserInfo(String access_Token);
+	public MemberDTO getUserInfo(String access_Token);
 }

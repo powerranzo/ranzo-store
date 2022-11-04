@@ -28,7 +28,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ranzo.power.model.member.dao.MemberDAO;
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.util.DateFunction;
 
@@ -229,7 +228,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public KakaoDTO getUserInfo(String access_Token) {
+	public MemberDTO getUserInfo(String access_Token) {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -270,7 +269,7 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 		
-		KakaoDTO result = memberDao.findkakao(userInfo);
+		MemberDTO result = memberDao.findkakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
 		if(result==null) {
