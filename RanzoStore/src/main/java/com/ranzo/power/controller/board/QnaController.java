@@ -88,8 +88,6 @@ public class QnaController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
 		} else {
 			fileName="(null)";
 		}

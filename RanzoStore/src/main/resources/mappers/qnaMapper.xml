@@ -37,10 +37,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 첨부파일 정보 저장 -->
-	<insert id="addAttach">
+<!-- 	<insert id="addAttach">
 	 	insert into qna_attach_tb (fullName, bno) values
 	  (#{fullName}, seq_qna.currval)
-	</insert>
+	</insert> -->
 	
 	<!-- 레코드 계산 -->
 	<select id="countArticle" resultType="int">
@@ -61,31 +61,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where q.writer = m.userid and bno=#{bno}
 	</select>
 	
-	<!-- 첨부파일 목록 -->
-	<select id="getAttach" resultType="String">
-		select fullName
-		from qna_attach_tb
-		where bno=#{bno}
-		order by reg_date desc	
-	</select>
+
 	
 	<!-- 첨부파일 레코드 삭제 -->
 	<delete id="deleteFile">
-		delete from qna_attach_tb
-		where fullName= #{fullName}
+		delete from qna_tb
+		where fileName= #{fileName}
 	</delete>
 	
 	<!-- 게시물 내용 수정 -->
 	<update id="update">
 		update qna_tb
-		set title=#{title}, content=#{content}
+		set title=#{title}, content=#{content}, fileName=#{fileName}
 		where bno=#{bno}
 	</update>
 	
 	<!-- 새로운 첨부파일 추가 -->
 	<insert id="updateAttach">
-		insert into qna_attach_tb (fullName, bno) values
-		(#{fullName}, #{bno})
+		insert into qna_tb (fileName, bno) values
+		(#{fileName}, #{bno})
 	</insert>
 	
 	<!-- 게시물 삭제 -->
