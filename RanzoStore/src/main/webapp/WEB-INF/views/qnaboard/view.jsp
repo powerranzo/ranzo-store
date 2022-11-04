@@ -74,7 +74,7 @@ $(function(){ //페이지가 뜨자마자 실행
 	 <tr>
  		<th>내용</th>
  		<td>
- 			<div style="width: 700px;">	
+ 			<div style="height: 200px;">	
 				${dto.content}
 			</div>
  		</td>

@@ -69,8 +69,8 @@ $(function(){
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td style="text-align: left;">
-			<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+			<td>
+				<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 			</td>
 		</tr>
 	</table>

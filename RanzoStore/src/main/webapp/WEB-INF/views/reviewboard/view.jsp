@@ -107,7 +107,11 @@ function listReply(){
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td style="height: 200px; text-align: left;">${dto.content}</td>
+			<td>
+				<div style="height: 200px;" >
+					${dto.content}
+				</div>
+			</td>
 		</tr>
 	</table>
 
