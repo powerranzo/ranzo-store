@@ -9,7 +9,6 @@
 <%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 	$(function() {
-
 		optionSelect(1);
 		optionSelect(2);
 		optionSelect(3);
@@ -18,7 +17,7 @@
 			location.href = '${path}/admin/exb_write.do';
 		});
 		$("#btnDelete").click(function() {
-			if (confirm('삭제 처리하시겠습니까?')) {
+			if (confirm('종료 처리하시겠습니까?')) {
 				document.form1.action = "${path}/admin/exbs_delete.do";
 				document.form1.submit();
 			}
@@ -49,26 +48,6 @@
 						.prop("selected", "selected");
 		}
 	}
-	function exbList(param) {
-		document.form1.action = "${path}/admin/exb_list.do?curPage=" + param;
-		document.form1.submit();
-	}
-
-	function exbUpdate(param) {
-		console.log(param);
-		var form = document.createElement('form');
-		form.setAttribute('name', 'form2');
-		form.setAttribute('method', 'post');
-		form.setAttribute('action', '${path}/admin/exb_view.do');
-		// 	document.charset="utf-8";
-		var hidden = document.createElement('input');
-		hidden.setAttribute('type', 'hidden');
-		hidden.setAttribute('name', 'code');
-		hidden.setAttribute('value', param);
-		form.appendChild(hidden);
-		document.body.appendChild(form);
-		form.submit();
-	}
 </script>
 </head>
 <body>
@@ -79,60 +58,69 @@
 			<div class=sectiondiv>
 				<h3>전시현황</h3>
 				<form name="form1" class="form-inline" method="post">
-						<table class="adminTable1">
-							<tr>
-								<th>전체 전시</th>
-								<th>진행 중인 전시</th>
-								<th></th>
-							</tr>
-							<tr>
-								<td>${ exb.exb_count_all}개</td>
-								<td>${ exb.exb_count_ing}개</td>
-								<td>
-								<td>
-							</tr>
-						</table>
-						<table class="adminTable2">
-							<tr>
-								<th>검색옵션
-								<td><label for="searchOption1"></label> <select
-									name="searchOption1" class="form-control" id="searchOption1">
-										<option value="code">전시코드</option>
-										<option value="title">전시명</option>
-										<option value="location">전시지역</option>
-										<option value="gallery">전시관</option>
-										<option value="all">코드/이름/지역/전시관</option>
-								</select>
-									<div class="input-group">
-										<input type="text" class="form-control" name="searchKeyword"
-											value="${ exb.searchOp.searchKeyword}">
-									</div></td>
-							</tr>
-							<tr>
-								<th>전시 기간</th>
-								<td><input type="date" id="startDate" name="startDate"
-									value="${ exb.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
-									<input type="date" id="endDate" name="endDate"
-									value="${ exb.searchOp.endDate}"></td>
-							</tr>
-							<tr>
-								<th>정렬기준</th>
-								<td><select name="orderOption" class="form-control"
-									id="orderOption">
-										<option value="code">코드순</option>
-										<option value="title">전시명순</option>
-										<option value="hit">조회수</option>
-										<option value="sales">판매량순</option>
-										<option value="start_date">시작일기준</option>
-										<option value="end_date">마감일기준</option>
-								</select></td>
-							</tr>
-						</table>
-						<div class="sectiondiv" align="center">
-							<button class="btn btn-default" type="button" id="btnSearch">
-								검색 <i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
+					<table class="adminTable1">
+						<tr>
+							<th>전체 전시</th>
+							<th>진행 중인 전시</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>${ exb.exb_count_all}개</td>
+							<td>${ exb.exb_count_ing}개</td>
+							<td>
+							<td>
+						</tr>
+					</table>
+					<table class="adminTable2">
+						<tr>
+							<th>검색옵션
+							<td><label for="searchOption1"></label> <select
+								name="searchOption1" class="form-control" id="searchOption1">
+									<option value="code">전시코드</option>
+									<option value="title">전시명</option>
+									<option value="location">전시지역</option>
+									<option value="gallery">전시관</option>
+									<option value="all">코드/이름/지역/전시관</option>
+							</select>
+								<div class="input-group">
+									<input type="text" class="form-control" name="searchKeyword"
+										value="${ exb.searchOp.searchKeyword}">
+								</div></td>
+						</tr>
+						<tr>
+							<th>전시 기간</th>
+							<td><input type="date" id="startDate" name="startDate"
+								value="${ exb.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+								<input type="date" id="endDate" name="endDate"
+								value="${ exb.searchOp.endDate}"></td>
+						</tr>
+						<tr>
+							<th>분류</th>
+							<td><label for="searchOption2"></label> <select
+								name="searchOption2" class="form-control" id="searchOption2">
+									<option value="ing">진행</option>
+									<option value="end">종료</option>
+									<option value="all">전체</option>
+							</select></td>
+						</tr>
+						<tr>
+							<th>정렬기준</th>
+							<td><select name="orderOption" class="form-control"
+								id="orderOption">
+									<option value="code">코드순</option>
+									<option value="title">전시명순</option>
+									<option value="hit">조회수</option>
+									<option value="sales">판매량순</option>
+									<option value="start_date">시작일기준</option>
+									<option value="end_date">마감일기준</option>
+							</select></td>
+						</tr>
+					</table>
+					<div class="sectiondiv" align="center">
+						<button class="btn btn-default" type="button" id="btnSearch">
+							검색 <i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
 
 					<table class="ordertable">
 						<thead>
@@ -146,6 +134,7 @@
 								<th>전시기간</th>
 								<th>페이지 조회수</th>
 								<th>판매량</th>
+								<th>상태</th>
 							</tr>
 						</thead>
 						<c:forEach var="dto" varStatus="loop" items="${exb.list}">
@@ -164,6 +153,7 @@
 									</td>
 									<td>${dto.hit}</td>
 									<td>${dto.sales}</td>
+									<td>${dto.show == 'y' ? '진행': '종료'}</td>
 								</tr>
 							</tbody>
 						</c:forEach>
@@ -198,7 +188,7 @@
 							</ul>
 						</div>
 					</div>
-					<button id="btnDelete" type="button" class="btn btn-default">삭제처리</button>
+					<button id="btnDelete" type="button" class="btn btn-default">종료처리</button>
 					<button id="btnWrite" type="button" class="btn btn-default">신규등록</button>
 				</form>
 			</div>

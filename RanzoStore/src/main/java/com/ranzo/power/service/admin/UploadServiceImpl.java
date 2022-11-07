@@ -51,8 +51,15 @@ public class UploadServiceImpl implements UploadService {
 	@Override
 	public String uploadFile(MultipartFile file, HttpServletRequest request) {
 		UUID uid=UUID.randomUUID();
-		String savedName=uid.toString()+"_"+file.getOriginalFilename(); 
-		String uploadPath=request.getServletContext().getRealPath("/resources/images/");
+		String savedName="";
+
+		if(file.getOriginalFilename().indexOf("_")!=-1) {
+			savedName=uid.toString()+"_"+file.getOriginalFilename().replace("_", "");
+		}
+		else {
+			savedName=uid.toString()+"_"+file.getOriginalFilename();
+		}
+		String uploadPath=MediaUtils.getServerUploadPath(request);
 		File target=new File(uploadPath, savedName);
 		try {
 			FileCopyUtils.copy(file.getBytes(), target);

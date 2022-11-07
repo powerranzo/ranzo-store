@@ -70,15 +70,15 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public void deleteQna(Map<String, Object> map) {
-		sqlSession.update("admin.deleteQna", map);
+	public void updateShowN(Map<String, Object> map) {
+		sqlSession.update("admin.updateShowN", map);
 		
 	}
 	
-	@Override
-	public void deleteReserv(Map<String, Object> map) {
-		sqlSession.update("admin.deleteReserv", map);
-	}
+//	@Override
+//	public void deleteReserv(Map<String, Object> map) {
+//		sqlSession.update("admin.deleteQna", map);
+//	}
 
 	@Override
 	public int countExbIng(String today) {
@@ -116,8 +116,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void deleteThumnail(String code) {
-		sqlSession.update("admin.deleteThumnail",code);
+	public void deleteFile(Map<String, Object> map) {
+		sqlSession.update("admin.deleteFile",map);
 	}
 	
 	@Override

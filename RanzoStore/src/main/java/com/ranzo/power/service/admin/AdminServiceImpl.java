@@ -78,15 +78,19 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteReserv(String[] reserv_no) {
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("reserv_no", reserv_no);
-		adminDao.deleteReserv(map);
+		map.put("value", "reserv_item_tb");
+		map.put("condition", "no");
+		map.put("list", reserv_no);
+		adminDao.updateShowN(map);
 	}
 	
 	@Override
 	public void deleteQna(String[] qna_bno) {
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("qna_bno", qna_bno);
-		adminDao.deleteQna(map);
+		map.put("value", "qna_tb");
+		map.put("condition", "bno");
+		map.put("list", qna_bno);
+		adminDao.updateShowN(map);
 
 	}
 
@@ -100,8 +104,6 @@ public class AdminServiceImpl implements AdminService {
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
 		List<MemberDTO> list=adminDao.getExbList(map);
-		map.clear();
-		map.put("searchOp", searchOp);
 		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_count_ing", adminDao.countExbIng(DateFunction.getToday()));
 		map.put("list", list);
@@ -111,20 +113,20 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public void insertExb(String startDate, String endDate, 
-			ExhibitionDTO dto, String fileUrl) {
-			try {
-				dto.setStart_date(DateFunction.stringToDate(startDate));
-				dto.setEnd_date(DateFunction.stringToDate(endDate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} 
-			dto.setThumnail(fileUrl);
-//			dto.setThumnail((String)session.getAttribute("fileUrl"));
-//			logger.info("after session_dto_thumnail:"+dto.getThumnail());
-//			session.removeAttribute("fileUrl");
+	public void insertExb(ExhibitionDTO dto) {
 		adminDao.insertExb(dto);
 	}
+//	@Override
+//	public void insertExb(String startDate, String endDate, 
+//			ExhibitionDTO dto) {
+//		try {
+//			dto.setStart_date(DateFunction.stringToDate(startDate));
+//			dto.setEnd_date(DateFunction.stringToDate(endDate));
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		} 
+//		adminDao.insertExb(dto);
+//	}
 
 	@Override
 	public ExhibitionDTO getExbView(String code) {
@@ -132,26 +134,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void updateExb(String startDate, String endDate, 
-			ExhibitionDTO dto, String fileUrl) {
-		try {
-			dto.setStart_date(DateFunction.stringToDate(startDate));
-			dto.setEnd_date(DateFunction.stringToDate(endDate));
-//			if((String)session.getAttribute("fileUrl")!=null)
-//			dto.setThumnail((String)session.getAttribute("fileUrl"));
-//			else dto.setThumnail("-");
-//			logger.info("after session_dto_thumnail:"+dto.getThumnail());
-//			session.removeAttribute("fileUrl");
-			dto.setThumnail(fileUrl);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public void updateExb(ExhibitionDTO dto) {
 		adminDao.updateExb(dto);
 	}
 	
 	@Override
-	public void deleteThumnail(String code) {
-		adminDao.deleteThumnail(code);
+	public void deleteFile(String code, String fileType) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("fileType", fileType);
+		adminDao.deleteFile(map);
 	}
 
 	@Override
@@ -165,13 +157,11 @@ public class AdminServiceImpl implements AdminService {
 		map.put("searchOp", searchOp);
 		logger.info("admin_countsearchreserv:"+adminDao.countSearchReserv(map));
 		AdminPager pager=new AdminPager(adminDao.countSearchReserv(map), curPage);
-		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("res_date");
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("r.res_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
 		List<ReservDTO> list=adminDao.getReservList(map);
-//		map.clear();
-//		map.put("searchOp", searchOp);
 		map.put("reserv_count_all", adminDao.countTbAll("reserv_item_tb"));
 		map.put("reserv_count_ing", adminDao.countReservIng(DateFunction.getToday()));
 		map.put("reserv_list", list);

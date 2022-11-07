@@ -7,11 +7,13 @@
 	  <div class="title"><a href="${path}/admin/home.do">ADMIN PAGE</a></div>
 		<div class="title-s">MEMBER</div>
 		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/member_list.do">회원목록</a>
+		<a class="a1" href="${path}/admin/member_list.do">회원 목록</a>
+		<p><br>
+		<a class="a1" href="${path}/admin/qna_list.do">QnA</a>
 		<p><br>
 		<div class="title-s">EXHIBITION</div>
 		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/exb_list.do">전시목록</a>
+		<a class="a1" href="${path}/admin/exb_list.do">전시 목록</a>
 		<p><br>
 		<a class="a1" href="${path}/admin/exb_write.do">전시 등록</a> 
 		<p><br>
