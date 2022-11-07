@@ -86,22 +86,22 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
+	public int countArticle(String code) {
+		int count = sqlSession.selectOne("review.countArticleExhibieion", code);
+		logger.info("### countArticle/count = " + count);
+		return count;
+	}
+
+	@Override
 	public ReviewDTO read(int bno) throws Exception {
 		return sqlSession.selectOne("review.read", bno);
 	}
 
 	@Override
-	public List<ReviewDTO> exhibitionReviewList(String code) {
-		List<ReviewDTO> reviewList = sqlSession.selectList("review.exhibitionReviewList", code);
+	public List<ReviewDTO> getReviewInfo(String code) {
+		List<ReviewDTO> reviewList = sqlSession.selectList("review.getReviewInfo", code);
 		logger.info("### reviewList {}. " + reviewList);
 		return reviewList;
-	}
-
-	@Override
-	public int countArticle(String code) {
-		int count = sqlSession.selectOne("review.exhibitionReviewCount", code);
-		logger.info("### countArticle/count = " + count);
-		return count;
 	}
 
 }

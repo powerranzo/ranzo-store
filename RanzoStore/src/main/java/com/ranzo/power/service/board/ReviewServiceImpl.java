@@ -110,8 +110,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewDTO> exhibitionReviewList(String code) {
-		return reviewDao.exhibitionReviewList(code);
+	public List<ReviewDTO> getReviewInfo(String code) {
+		return reviewDao.getReviewInfo(code);
 	}
 
 }

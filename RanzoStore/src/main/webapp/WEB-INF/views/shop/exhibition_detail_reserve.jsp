@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail_review.css">
 </head>
 <body>
+예매/취소
+<%-- 
 	<h1>관람후기 <span id="review-count">${map.count}</span></h1>
 	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	<hr>
@@ -27,6 +29,6 @@
 			</li>
 	</c:forEach>
 	</ul>
-	
+	 --%>
 </body>
 </html>

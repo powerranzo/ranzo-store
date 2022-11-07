@@ -1,14 +1,20 @@
 @charset "UTF-8";
 
+footer {
+	display: flex;
+	justify-content: space-around;
+}
+
 .sec-prd {
 	width: 100%;
 	background-color: #fcc;
 }
 
 .sec-prd .prd-title {
-	font-size:24px;
-	font-weight:bold; 
+	font-size: 24px;
+	font-weight: bold;
 }
+
 .sec-prd .prd-thumnail {
 	width: 35%;
 	float: left;
@@ -43,7 +49,7 @@
 	width: 100%;
 	position: sticky;
 	top: 0;
-	background-color:#ffffff;
+	background-color: #ffffff;
 	display: flex;
 	text-align: center;
 	border-bottom: 2px solid #ccc;
@@ -84,7 +90,6 @@
 	display: block;
 }
 
-
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
 	.sec-prd, .sec-detail {
@@ -106,7 +111,6 @@
 		/* margin-right: 40px; */
 		max-width: 405px;
 	}
-
 }
 
 /* PC용 CSS */

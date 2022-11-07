@@ -9,12 +9,13 @@
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail_review.css">
 </head>
 <body>
-	<h1>관람후기 <span id="review-count">${map.count}</span></h1>
+	<h1>관람후기 <span id="review-count">(${map.count})</span></h1>
 	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	<hr>
+	
 	<ul>
 		<!-- fn: header.jsp의 jstl -->
-		<c:forEach var="review" items="${map.reviewList}">   
+		<c:forEach var="review" items="${map.reviewInfo}">   
 			<li>
 				<div>
 					<span id='rvw-bno'>${review.bno}</span> | 

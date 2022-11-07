@@ -14,6 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE code = #{exhibitionCode}
 	</select>
 
+	<select id="getProductInfo" resultType="ProductInfoDTO">
+		SELECT code, content, attach
+		FROM PRODUCT_INFO_TB
+		WHERE code = #{code}
+	</select>
+
+	<select id="getReserveInfo" resultType="ProductInfoDTO">
+		SELECT code, attach, content FROM Product_Info_TB
+	</select>
 </mapper>
 
 

@@ -22,9 +22,6 @@
 
 <%-- <link rel="stylesheet" href="${path}/include/admin_dashboard.css"> --%>
 
-
-=======
-
 <%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
 
 <%-- <script src="${path}/resources/include/admin_script.js"></script> --%>

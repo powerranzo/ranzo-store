@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dao.ExhibitionDAO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Service
 public class ExhibitionServiceImpl implements ExhibitionService {
@@ -51,5 +52,15 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	public String fileInfo(String exhibitionCode) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ProductInfoDTO getProductInfo(String code) {
+		return exhibitionDAO.getProductInfo(code);
+	}
+	
+	@Override
+	public String getReserveInfo(String code) {		
+		return exhibitionDAO.getReserveInfo(code);
 	}
 }

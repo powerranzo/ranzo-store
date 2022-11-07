@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
 public class ExhibitionDAOImpl implements ExhibitionDAO {
@@ -53,6 +54,20 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	public String fileInfo(String exhibitionCode) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ProductInfoDTO getProductInfo(String code) {
+		ProductInfoDTO productInfo = sqlSession.selectOne("exhibition.getProductInfo", code);
+		logger.info("### ExhDAO/getProductInfo/" + productInfo);
+		return productInfo;
+	}
+	
+	@Override
+	public String getReserveInfo(String code) {
+		String reserveInfo = sqlSession.selectOne("exhibition.getReserveInfo", code);
+		logger.info("### ExhDAO/getReserveInfo/" + reserveInfo);
+		return reserveInfo;
 	}
 
 }

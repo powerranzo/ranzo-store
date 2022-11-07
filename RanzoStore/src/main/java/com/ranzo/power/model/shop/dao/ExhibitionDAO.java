@@ -3,6 +3,7 @@ package com.ranzo.power.model.shop.dao;
 import java.util.List;
 
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 
 public interface ExhibitionDAO {
@@ -13,4 +14,6 @@ public interface ExhibitionDAO {
 	void deleteProduct(String exhibitionCode);//삭제
 	void insertProduct(ExhibitionDTO dto);//입력
 	String fileInfo(String exhibitionCode);//첨부파일정보
+	String getReserveInfo(String code);
+	ProductInfoDTO getProductInfo(String code);
 }

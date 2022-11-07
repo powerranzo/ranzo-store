@@ -115,19 +115,20 @@ public class ReviewController {
 		return reviewList;
 	}
 */
-	@RequestMapping("exhibitionReviewList")
-	public ModelAndView exhibitionReviewList(String code, ModelAndView mav) throws Exception {
-		logger.info("### exhibitionReviewList/code = " + code);
+	@RequestMapping("getReviewInfo")
+	public ModelAndView getReviewInfo(String code, ModelAndView mav) throws Exception {
+		logger.info("### getReviewInfo/code = " + code);
 
-		List<ReviewDTO> reviewList = reviewService.exhibitionReviewList(code);
+		List<ReviewDTO> reviewInfo = reviewService.getReviewInfo(code);
 		int count = reviewService.countArticle(code);
-		logger.info("### exhibitionReviewList/reviewList {}. = " + reviewList);
-		logger.info("### exhibitionReviewList/count = " + count);
+		logger.info("### getReviewInfo/reviewList {}. = " + reviewInfo);
+		logger.info("### getReviewInfo/count = " + count);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("reviewList", reviewList); // map에 자료 저장
+		map.put("reviewInfo", reviewInfo); // map에 자료 저장
 		map.put("count", count); //레코드 개수 파일
 		mav.addObject("map", map); // 보낼 데이터
+		
 		mav.setViewName("shop/exhibition_detail_review");
 		logger.info("### reviewList {}. " + mav);
 		return mav;

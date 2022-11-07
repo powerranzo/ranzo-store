@@ -110,16 +110,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.replyer = m.userid and bno=#{bno}
 		order by rno
 	</select>
-
-	<select id="exhibitionReviewList" resultType="ReviewDTO">
-		select bno, rating, product, writer, subject, content, reg_date, viewcnt, show
+	
+	<select id="countArticleExhibieion" resultType="int">
+		select count (*)
 		from review_tb
 		where product = #{code}
 		and show = 'y'
 	</select>
-	
-	<select id="exhibitionReviewCount" resultType="int">
-		select count (*)
+
+	<select id="getReviewInfo" resultType="ReviewDTO">
+		select bno, rating, product, writer, subject, content, reg_date, viewcnt, show
 		from review_tb
 		where product = #{code}
 		and show = 'y'

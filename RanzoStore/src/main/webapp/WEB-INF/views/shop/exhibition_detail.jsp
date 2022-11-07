@@ -29,69 +29,72 @@
 			$(target).show();
 		});
 		
-		reviewInfo();
+		getProductInfo();
+		//getReserveInfo();
+		getReviewInfo();
+		getQnaInfo();
 
 		date = new Date();
 		console.log("date:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 	});
 	
 	// 전시상세
-	function prdInfo() {
+	function getProductInfo() {
 		$.ajax({
 			type: "get",
-			url: "${path}/board/review/exhibitionReviewList?code=${exhibition.code}",
+			url: "${path}/shop/exhibition/getProductInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : " + result);
-				$("#reviewInfo").html(result);
+				console.debug("getProductInfo success : " + result);
+				$("#productInfo").html(result);
 			},
 			error : function (result){
-				console.error("@@@ error : " + result);
+				console.error("getProductInfo error : " + result);
 			}
 		});
 	}
 	
 	// 예매/취소
-	function reserveInfo() {
+	function getReserveInfo() {
 		$.ajax({
 			type: "get",
-			url: "${path}/board/review/exhibitionReviewList?code=${exhibition.code}",
+			url: "${path}/shop/exhibition/getReserveInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : " + result);
-				$("#reviewInfo").html(result);
+				console.debug("getReserveInfo success : " + result);
+				$("#reserveInfo").html(result);
 			},
 			error : function (result){
-				console.error("@@@ error : " + result);
+				console.error("getReserveInfo error : " + result);
 			}
 		});
 	}
 	
 	
 	// 관람후기
-	function reviewInfo() {
+	function getReviewInfo() {
 		$.ajax({
 			type: "get",
-			url: "${path}/board/review/exhibitionReviewList?code=${exhibition.code}",
+			url: "${path}/board/review/getReviewInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : " + result);
+				console.debug("getReviewInfo success : " + result);
 				$("#reviewInfo").html(result);
 			},
 			error : function (result){
-				console.error("@@@ error : " + result);
+				console.error("getReviewInfo error : " + result);
 			}
 		});
 	}
 	
 	// Q&A
-	function qnaInfo() {
+	function getQnaInfo() {
 		$.ajax({
 			type: "get",
-			url: "${path}/board/review/exhibitionReviewList?code=${exhibition.code}",
+			url: "${path}/board/qna/getQnaInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : " + result);
-				$("#reviewInfo").html(result);
+				console.debug("getQnaInfo success : " + result);
+				$("#qnaInfo").html(result);
 			},
 			error : function (result){
-				console.error("@@@ error : " + result);
+				console.error("getQnaInfo error : " + result);
 			}
 		});
 	}
@@ -132,19 +135,22 @@
 
 	<section class="sec-detail">
 		<ul class="tab-list"> 
-			<li><a href="#prdInfo">전시상세</a></li>
+			<li><a href="productInfo">전시상세</a></li>
 			<li><a href="#reservInfo">예매/취소</a></li>
 			<li><a href="#reviewInfo">관람후기</a></li>
 			<li><a href="#qnaInfo">Q&A</a></li>
 		</ul>
 
-		<div class="tab-content" id="prdInfo"></div>
-		<div class="tab-content" id="reservInfo">예매/취소</div>
+		<div class="tab-content" id="productInfo"></div>
+		<div class="tab-content" id="reservInfo"></div>
 		<div class="tab-content" id="reviewInfo"></div>
-		<div class="tab-content" id="qnaInfo" >Q&A</div>
+		<div class="tab-content" id="qnaInfo" ></div>
 	</section>
-
-	<%@ include file="../include/footer.jsp"%>
+<%-- 
+	<footer>
+		<%@ include file="../include/footer.jsp"%>
+	</footer>
+	 --%>
 </body>
 </html>
 

@@ -18,7 +18,7 @@ public interface ReviewDAO {
 	public void increaseViewcnt(int bno) throws Exception; //조회수 증가 처리
 	public int countArticle() throws Exception;//레코드 갯수 계산
 	public ReviewDTO read(int bno) throws Exception; //레코드 조회
-	public List<ReviewDTO> exhibitionReviewList(String code);
 	public int countArticle(String code);
+	public List<ReviewDTO> getReviewInfo(String code);
 
 }
