@@ -32,22 +32,30 @@ $(function(){
 		}
 	});
 	$("#fileDel").click(function(){
-		if(confirm('삭제하시겠습니까?')){
-			$.ajax({
-				url:"${path}/admin/thumnail_delete.do",
-				type: "post",
-				data: {"code":"${dto.code}"},
-				dataType: "text",
-				success: function(result){
-					if(result=="deleted"){
-					alert('파일이 삭제되었습니다.');
-					$("#div_thumnail").remove();
-					}
-				}
-			});
-		}
+		console.log('fileDel clicked');
+		fileDel(1);
+	});
+	$("#fileDel2").click(function(){
+		fileDel(2);
 	});
 });
+
+function fileDel(param){
+	console.log(param);
+	var type="";
+	if(param==1) type="thumnail";
+	else if(param==2) type="product_info";
+	console.log(type);
+	if(confirm('삭제하시겠습니까?')){
+		let ipt = document.createElement('input');
+		ipt.setAttribute('type', 'hidden');
+		ipt.setAttribute('name', 'fileType');
+		ipt.setAttribute('value', type);
+		document.form1.appendChild(ipt);
+		document.form1.action="${path}/admin/file_delete.do";
+		document.form1.submit();
+	}
+}
 </script>
 </head>
 <body>
@@ -55,7 +63,7 @@ $(function(){
 	<div class="content">
 		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
-			<div class=sectiondiv>
+			<div class="sectiondiv">
 		<h2>전시 수정</h2>
 		<form name="form1" enctype="multipart/form-data" method="post">
 			<div class="form-group">
@@ -90,19 +98,38 @@ $(function(){
 				<textarea name="summary" class="form-control input-sm" id="summary"
 					placeholder="내용을 입력해주세요." rows="20">${dto.summary}</textarea>
 			</div>
-			<c:if test="${dto.thumnail != '-'}">
 				<div class="form-group">
-					<label for="files">썸네일</label>
-					<div id="div_thumnail">
-						${fileName}
+					<label for="files">포스터(썸네일)</label>
+			<c:if test="${dto.thumnail != '-'}">
+					<div class="sectiondiv">
+						${thumnailName}
 						<%--       (${dto.filesize / 1024} KB) --%>
 						<img src="${dto.thumnail}" width="100" height="100">
-						<button type="button" name="fileDel" id="fileDel">삭제</button>
+						</div>
+<!-- 						<button type="button" name="fileDel" id="fileDel">삭제</button> -->
+						<button class="btn btn-sm" name="fileDel" id="fileDel">
+					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+				</button>
+			</c:if>
+				</div>
+			<div class="form-group">
+				<input type="file" name="file" class="form-control input-" id="file">
+			</div>
+			<c:if test="${dto.product_info != '-'}">
+				<div class="form-group">
+					<label for="file2">전시 정보 이미지</label>
+					<div class="sectiondiv">
+						${product_infoName}
+						<%--       (${dto.filesize / 1024} KB) --%>
+						<img src="${dto.product_info}" width="100" height="100">
 					</div>
+						<button class="btn btn-sm" id="fileDel2" name="fileDel2">
+					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+				</button>
 				</div>
 			</c:if>
 			<div class="form-group">
-				<input type="file" name="file" class="form-control input-" id="file">
+				<input type="file" name="file2" class="form-control input-" id="file2">
 			</div>
 		</form>
 			<div class="form-group" align="right">

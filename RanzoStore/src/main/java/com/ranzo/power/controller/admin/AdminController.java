@@ -88,10 +88,17 @@ public class AdminController {
 	public String deleteReserv(String[] reserv_no, String userid
 			, RedirectAttributes rttr) {
 		adminService.deleteReserv(reserv_no);
-		rttr.addFlashAttribute("userid", userid);
-		return "redirect:member_view.do";
+		if(userid!=null) {
+			rttr.addFlashAttribute("userid", userid);
+			return "redirect:member_view.do";
+		}else
+			return "redirect:reserv_list.do";
 	}
 	
+//	@RequestMapping("/reserv_delete.do")
+//	public void deleteReserv() {
+//		
+//	}
 	@RequestMapping("/qna_delete.do")
 	public String deleteQna(String[] qna_bno, String userid
 			, RedirectAttributes rttr) {
@@ -104,6 +111,7 @@ public class AdminController {
 	public String exbList(SearchDTO searchOp, 
 			@RequestParam(defaultValue="1") int curPage, Model m
 			,HttpServletRequest request) {
+		logger.info("exbList_SearchOp:"+searchOp);
 		Map<String,?> flashmap=RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!=null) 
 			searchOp=(SearchDTO)flashmap.get("searchOp");
@@ -117,74 +125,95 @@ public class AdminController {
 		return "admin/exbWrite";
 	}
 	@PostMapping("/exb_write.do")
-	public String writeExb(String startDate, String endDate, 
-			ExhibitionDTO dto, HttpServletRequest request, MultipartFile file) {
-		logger.info("multipartfile:"+file.getOriginalFilename());
-		String fileUrl="-";
-		if(!file.getOriginalFilename().equals("")) 
-			fileUrl=uploadService.uploadFile(file, request);
-		adminService.insertExb(startDate, endDate, dto, fileUrl);
+//	public String writeExb(String startDate, String endDate, 
+	public String writeExb( 
+			ExhibitionDTO dto, HttpServletRequest request
+			, MultipartFile file, MultipartFile file2) {
+		String thumnail="-";
+		String product_info="-";
+		if(!file.isEmpty()) {
+			logger.info("multipartfile:"+file.getOriginalFilename());
+			thumnail=uploadService.uploadFile(file, request);
+		}
+		if(!file.isEmpty()) {
+			logger.info("multipartfile:"+file2.getOriginalFilename());
+			product_info=uploadService.uploadFile(file2, request);
+		}
+		dto.setThumnail(thumnail);
+		dto.setProduct_info(product_info);
+//		adminService.insertExb(startDate, endDate, dto);
+		adminService.insertExb(dto);
 		return "redirect:exb_list.do"; 
 	}
 
-
 	@RequestMapping("/exb_view.do")
 	public String getExbView(String code, Model m, HttpServletRequest request) {
+		Map<String,?> flashmap=RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!=null) 
+			code=(String) flashmap.get("code");
 		logger.info("exb_view_code:"+code);
 		ExhibitionDTO dto=adminService.getExbView(code);
+		logger.info("exb_view_dto:"+dto);
 		m.addAttribute("startDate", DateFunction.dateToString(dto.getStart_date())); 
 		m.addAttribute("endDate", DateFunction.dateToString(dto.getEnd_date()));
-		m.addAttribute("fileName", dto.getThumnail().substring(dto.getThumnail().lastIndexOf("_")+1));
+//		m.addAttribute("thumnailName", dto.getThumnail().substring(dto.getThumnail().lastIndexOf("_")+1));
+//		m.addAttribute("product_infoName", dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("_")+1));
+//		logger.info("product_infoName:"+dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("_")+1));
 		m.addAttribute("dto", dto);
 		return "admin/exbUpdate";
 	}
 
 	@RequestMapping("/exb_update.do")
-	public String updateExb(String startDate, String endDate, 
-			ExhibitionDTO dto, HttpServletRequest request, MultipartFile file) {
-		String fileUrl="-";
-		if(!file.getOriginalFilename().equals("")) 
-			fileUrl=uploadService.uploadFile(file, request);
-		adminService.updateExb(startDate,endDate,dto, fileUrl);
+	public String updateExb(ExhibitionDTO dto, HttpServletRequest request
+			, MultipartFile file, MultipartFile file2) {
+		String thumnail=adminService.getExbView(dto.getCode()).getThumnail();
+		String product_info=adminService.getExbView(dto.getCode()).getProduct_info();
+		if(!file.isEmpty()) {
+			thumnail=thumnail.substring(thumnail.lastIndexOf("/")+1);
+			uploadService.deleteServerFile(thumnail, request);
+			thumnail=uploadService.uploadFile(file, request);
+		}
+		dto.setThumnail(thumnail);
+		if(!file2.isEmpty()) {
+			product_info=product_info.substring(product_info.lastIndexOf("/")+1);
+			uploadService.deleteServerFile(product_info, request);
+			product_info=uploadService.uploadFile(file2, request);
+		}
+		dto.setProduct_info(product_info);
+		adminService.updateExb(dto);
 		return "redirect:exb_list.do";
 	}  
 
-	@RequestMapping("thumnail_delete.do")
-	public ResponseEntity<String> fileDelete(String code, HttpServletRequest request) {
-		logger.info("thumnail_delete.do 호출");
+	@RequestMapping("file_delete.do")
+	public String fileDelete(String code, String fileType, HttpServletRequest request
+			,RedirectAttributes rttr) {
+		logger.info("file_delete.do 호출");
 		ExhibitionDTO dto=adminService.getExbView(code);
-		String fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
-		logger.info("fileName_thumnail_delete:"+fileName);
+		String fileName="";
+		logger.info("fileType:"+fileType);
+		if(fileType.equals("thumnail"))
+			fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
+		else if(fileType.equals("product_info"))
+			fileName=dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("/")+1);
+		logger.info("fileName_for_delete:"+fileName);
 		uploadService.deleteServerFile(fileName, request);
-		adminService.deleteThumnail(code); 
-		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
+		adminService.deleteFile(code, fileType);
+		rttr.addFlashAttribute("code", code);
+		return "redirect:/admin/exb_view.do";
+	} 
 
 	@RequestMapping("/exbs_delete.do")
 	public String deleteExb(String[] codes, SearchDTO searchOp,
 			HttpServletRequest request, RedirectAttributes rttr) {
-//		ExhibitionDTO dto=null;
 		for(int i=0; i<codes.length; i++) {
-//			dto=adminService.getExbView(codes[i]);
-//			String fileName=dto.getThumnail();
-//			if(!fileName.equals("-")) {
-//				fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
-//				uploadService.deleteServerFile(fileName, request);
-//			}
 			adminService.deleteExb(codes[i]);
-		}//for
+		}
 		rttr.addFlashAttribute("searchOp", searchOp);
 		return "redirect:/admin/exb_list.do";
 	}
 
 	@RequestMapping("/exb_delete.do")
 	public String deleteExb(String code, HttpServletRequest request) {
-//		ExhibitionDTO dto=adminService.getExbView(code);
-//		String fileName="";
-//		if(!dto.getThumnail().equals("-")) {
-//			fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
-//			uploadService.deleteServerFile(fileName, request);
-//		}
 		adminService.deleteExb(code);
 		return "redirect:/admin/exb_list.do";
 	}
@@ -201,7 +230,9 @@ public class AdminController {
 		m.addAttribute("reserv", map);
 		return "admin/reservList";
 	}
-	
 
-
+	@RequestMapping("/qna_list.do")
+	public String qnaList() {
+		return "";
+	}
 }

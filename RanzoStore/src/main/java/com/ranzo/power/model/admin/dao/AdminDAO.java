@@ -20,8 +20,8 @@ public interface AdminDAO {
 		public List<QnaDTO> getMemberQna(String userid);
 		public List<ReservDTO> getMemberReserv(String userid);
 		public void deleteMember(Map<String,Object> map);
-		public void deleteQna(Map<String, Object> map);
-		public void deleteReserv(Map<String, Object> map);
+		public void updateShowN(Map<String, Object> map);
+//		public void deleteReserv(Map<String, Object> map);
 		public int countExbIng(String today);
 //		public int countExbAll();
 		public int countSearchExb(Map<String, Object> map);
@@ -29,7 +29,7 @@ public interface AdminDAO {
 		public void insertExb(ExhibitionDTO dto);
 		public ExhibitionDTO getExbView(String code);
 		public void updateExb(ExhibitionDTO dto);
-		public void deleteThumnail(String code);
+		public void deleteFile(Map<String, Object> map);
 		public void deleteExb(String code);
 		public int countSearchReserv(Map<String, Object> map);
 		

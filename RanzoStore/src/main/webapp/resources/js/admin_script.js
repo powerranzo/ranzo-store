@@ -1,8 +1,23 @@
-
-	function memberView(param) {
+/**
+ * 
+ */
+function getContextPath(){
+	var hostIndex = location.href.indexOf(location.host)+location.host.length;
+	var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+	return contextPath;
+}
+//memberList.jsp
+	function memberList(param) {
+		document.form1.action = getContextPath()+"/admin/member_list.do?curPage=" + param;
+		document.form1.submit();
+	}
+function memberView(param) {
+	console.log('memberView() 호출');
+	console.log(param);
 		let frm = document.createElement('form');
+		frm.setAttribute('name', 'form2');
 		frm.setAttribute('method', 'post');
-		frm.setAttribute('action', '${path}/admin/member_view.do');
+		frm.setAttribute('action', getContextPath()+'/admin/member_view.do');
 		let ipt = document.createElement('input');
 		ipt.setAttribute('type', 'hidden');
 		ipt.setAttribute('name', 'userid');
@@ -12,3 +27,26 @@
 		document.body.appendChild(frm);
 		frm.submit();
 	}
+
+//exbList.jsp
+	function exbList(param) {
+		document.form1.action = getContextPath()+'/admin/exb_list.do?curPage=' + param;
+		document.form1.submit();
+	}
+
+	function exbUpdate(param) {
+		console.log(param);
+		var form = document.createElement('form');
+		form.setAttribute('name', 'form2');
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', getContextPath()+'/admin/exb_view.do');
+		// 	document.charset="utf-8";
+		var hidden = document.createElement('input');
+		hidden.setAttribute('type', 'hidden');
+		hidden.setAttribute('name', 'code');
+		hidden.setAttribute('value', param);
+		form.appendChild(hidden);
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
