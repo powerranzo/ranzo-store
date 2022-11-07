@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="detail" resultType="ExhibitionDTO">
-		SELECT * FROM EXHIBITION_TB
+		SELECT code, location, gallery, title, summary, thumnail, product_info, start_date, end_date, hit, sales FROM EXHIBITION_TB
 		WHERE code = #{exhibitionCode}
 	</select>
 

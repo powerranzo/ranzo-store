@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
+<%@ include file="../include/member_session_check.jsp" %>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -58,9 +59,12 @@ background-color: gray;
 <body>
 <div align="center">
 <%@ include file="../include/menu.jsp" %>
-<h2>Review 작성</h2><br>
+
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
-	<table style="width: 700px;">
+	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+		<tr>
+			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 작성</th>
+		</tr>
 		<tr>
 			<th>별점</th>
 			<td>
@@ -100,8 +104,8 @@ background-color: gray;
 	</table>
 	<br>
 	<div style="width: 700px;" align="center">
-		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'">목록</button>		
-		<button type="button" id="btnSave">확인</button>
+		<button type="button" id="btnList" onclick="location.href='${path}/board/qna/list.do'" class="btn btn-secondary">목록</button>		
+		<button type="button" id="btnSave" class="btn btn-primary">확인</button>
 	</div>
 </form>
 </div>

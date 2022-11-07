@@ -27,7 +27,7 @@ import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.admin.AdminService;
 import com.ranzo.power.service.admin.UploadService;
-import com.ranzo.power.utils.DateFunction;
+import com.ranzo.power.util.DateFunction;
 
 @Controller
 @RequestMapping("admin/*")
@@ -44,9 +44,10 @@ public class AdminController {
 
 	//	@Resource(name = "uploadPath") 
 	//	String uploadPath;
-	@GetMapping("/sample.do")
+	
+	@GetMapping("/home.do")
 	public String adminHome() {
-		return "admin/sample";
+		return "admin/adminHome";
 	}
 	
 	@RequestMapping("/member_list.do")
@@ -71,6 +72,7 @@ public class AdminController {
 		if(flashmap!=null) userid=(String)flashmap.get("userid");
 		m.addAttribute("dto", adminService.getMemberView(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
+		m.addAttribute("reserv_list", adminService.getMemberReserv(userid)); 
 		return "admin/memberView";
 	}
 
@@ -81,8 +83,16 @@ public class AdminController {
 		rttr.addFlashAttribute("searchOp", searchOp);
 		return "redirect:member_list.do";
 	}
-
-	@RequestMapping("/qna_delete")
+	
+	@RequestMapping("/reserv_delete.do")
+	public String deleteReserv(String[] reserv_no, String userid
+			, RedirectAttributes rttr) {
+		adminService.deleteReserv(reserv_no);
+		rttr.addFlashAttribute("userid", userid);
+		return "redirect:member_view.do";
+	}
+	
+	@RequestMapping("/qna_delete.do")
 	public String deleteQna(String[] qna_bno, String userid
 			, RedirectAttributes rttr) {
 		adminService.deleteQna(qna_bno);
@@ -106,7 +116,6 @@ public class AdminController {
 	public String writeExb() {
 		return "admin/exbWrite";
 	}
-
 	@PostMapping("/exb_write.do")
 	public String writeExb(String startDate, String endDate, 
 			ExhibitionDTO dto, HttpServletRequest request, MultipartFile file) {
@@ -121,6 +130,7 @@ public class AdminController {
 
 	@RequestMapping("/exb_view.do")
 	public String getExbView(String code, Model m, HttpServletRequest request) {
+		logger.info("exb_view_code:"+code);
 		ExhibitionDTO dto=adminService.getExbView(code);
 		m.addAttribute("startDate", DateFunction.dateToString(dto.getStart_date())); 
 		m.addAttribute("endDate", DateFunction.dateToString(dto.getEnd_date()));
@@ -153,14 +163,14 @@ public class AdminController {
 	@RequestMapping("/exbs_delete.do")
 	public String deleteExb(String[] codes, SearchDTO searchOp,
 			HttpServletRequest request, RedirectAttributes rttr) {
-		ExhibitionDTO dto=null;
+//		ExhibitionDTO dto=null;
 		for(int i=0; i<codes.length; i++) {
-			dto=adminService.getExbView(codes[i]);
-			String fileName=dto.getThumnail();
-			if(!fileName.equals("-")) {
-				fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
-				uploadService.deleteServerFile(fileName, request);
-			}
+//			dto=adminService.getExbView(codes[i]);
+//			String fileName=dto.getThumnail();
+//			if(!fileName.equals("-")) {
+//				fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
+//				uploadService.deleteServerFile(fileName, request);
+//			}
 			adminService.deleteExb(codes[i]);
 		}//for
 		rttr.addFlashAttribute("searchOp", searchOp);
@@ -169,16 +179,29 @@ public class AdminController {
 
 	@RequestMapping("/exb_delete.do")
 	public String deleteExb(String code, HttpServletRequest request) {
-		ExhibitionDTO dto=adminService.getExbView(code);
-		String fileName="";
-		if(!dto.getThumnail().equals("-")) {
-			fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
-			uploadService.deleteServerFile(fileName, request);
-		}
+//		ExhibitionDTO dto=adminService.getExbView(code);
+//		String fileName="";
+//		if(!dto.getThumnail().equals("-")) {
+//			fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
+//			uploadService.deleteServerFile(fileName, request);
+//		}
 		adminService.deleteExb(code);
 		return "redirect:/admin/exb_list.do";
 	}
 
+	@RequestMapping("/reserv_list.do")
+	public String reservList(SearchDTO searchOp, 
+			@RequestParam(defaultValue="1") int curPage, Model m
+			,HttpServletRequest request) {
+		Map<String,?> flashmap=RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!=null) 
+			searchOp=(SearchDTO)flashmap.get("searchOp");
+		Map<String,Object> map=adminService.getReservList(searchOp, curPage);
+		logger.info("reserv map:" + map);
+		m.addAttribute("reserv", map);
+		return "admin/reservList";
+	}
+	
 
 
 }

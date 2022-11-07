@@ -17,33 +17,7 @@ public class QnaDAOImpl implements QnaDAO {
 	@Inject
 	SqlSession sqlSession;
 	
-	@Override
-	public void deleteFile(String fullName) {
-		sqlSession.delete("qna.deleteFile", fullName);
-
-	}
-
-	@Override
-	public List<String> getAttach(int bno) {
-		return sqlSession.selectList("qna.getAttach",bno);
-	}
-
-	@Override
-	public void addAttach(String fullName) {
-		sqlSession.insert("qna.addAttach", fullName);
-
-	}
 	
-	//첨부파일 정보 수정
-	@Override
-	public void updateAttach(String fullName, int bno) {
-		Map<String,Object> map = new HashMap<>();
-		map.put("fullName", fullName);
-		map.put("bno", bno);
-		sqlSession.insert("qna.updateAttach", map);
-
-	}
-
 	@Override
 	public void create(QnaDTO dto) throws Exception {
 		sqlSession.insert("qna.insert", dto);
@@ -84,6 +58,18 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public QnaDTO read(int bno) throws Exception {
 		return sqlSession.selectOne("qna.read", bno);
+	}
+
+	//답글 작성
+	@Override
+	public void create_reply(QnaDTO dto) throws Exception {
+		sqlSession.insert("qna.insert_reply", dto);
+	}
+
+	//답글 순서 조정
+	@Override
+	public void update_reply(QnaDTO dto) throws Exception {
+		sqlSession.update("qna.update_reply", dto);		
 	}
 
 }

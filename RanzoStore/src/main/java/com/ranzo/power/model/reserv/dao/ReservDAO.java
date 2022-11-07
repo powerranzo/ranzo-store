@@ -14,7 +14,9 @@ public interface ReservDAO {
 	public List<ReservDTO> listReserv_search(String userid, String strDate, String endDate, int start, int end);
 	public int countorder_search(String userid, String strDate, String endDate);
 	public int firstorder(String userid);
-	
+	public List<ReservDTO> canclelist(String userid, int start, int end);
+	public int countcancle(String userid);
+	public List<ReservDTO> mypagelist(String userid);
 
 
 	

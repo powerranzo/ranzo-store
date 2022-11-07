@@ -10,8 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginCheck"
 	resultType="String">
 		select name from member_tb
-		where userid=#{userid} and passwd=#{passwd}
+		where userid=#{userid} and passwd=#{passwd} and quit='n'
 	</select>
+	
 	<!-- 관리자 -->
 	<select id="adminCheck"
 	resultType="String">
@@ -42,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 비밀번호 중복 체크 -->
-	<select id="infoEnterCheck" resultType="int">
+	<select id="pwdCheck" resultType="int">
 		select count(*) from member_tb
 		where userid = #{userid} and passwd = #{passwd}
 	</select>
@@ -55,11 +56,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid}
 	</update>
 	
-	<!-- 회원탈퇴 -->
-	<delete id="deleteMember">
-		delete from member_tb
-		where userid=#{userid}
-	</delete>
+	<!-- 회원탈퇴 (삭제x, 로그인 권한 뺏음) -->
+	<update id="deleteMember">
+		update member_tb set quit='y', quit_date=#{today}
+		where userid=#{userid} 
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId"
+	resultType="com.ranzo.power.model.member.dto.MemberDTO">
+		select * from member_tb
+		where name=#{name} and email=#{email} and quit='n'
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd"
+	resultType="com.ranzo.power.model.member.dto.MemberDTO">
+		select * from member_tb
+		where userid=#{userid} and name=#{name} and email=#{email} and quit='n'
+	</select>
+	
+ 	<!-- 비밀번호 변경 -->
+<!-- 	<update id="tempPwd">
+		update member_tb set passwd=#{passwd} 
+		where userid=#{userid} 
+	</update> -->
+
+	<!-- 정보 저장 -->
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		insert into kakao_tb (k_name, k_email)
+		values (#{nickname}, #{email})
+	</insert>
+	
+	<!-- 정보 찾기 -->
+	<select id="findKakao" 
+	parameterType="java.util.HashMap" 
+	resultType="com.ranzo.power.model.member.dto.KakaoDTO">
+		select * from kakao_tb 
+		where k_name=#{nickname} and k_email=#{email}
+	</select>
 	
 </mapper>
 

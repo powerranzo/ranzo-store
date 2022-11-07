@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/adminHeader.jspf"%>
 <title>회원 목록</title>
 <script type="text/javascript">
 	$(function() {
@@ -65,11 +66,14 @@
 </script>
 </head>
 <body>
-	<div class="container">
+<%@ include file="../include/menu.jsp"%>
+<div class="content">
+<section>
+<%@ include file="../include/adminDashboard.jspf"%>
+			<div class="sectiondiv">
 		<h3>회원관리</h3>
 		<form name="form1" class="form-inline" method="post">
-			<div class="form-group">
-				<table class="table table-striped">
+				<table class="adminTable1">
 					<tr>
 						<th>전체회원수</th>
 						<th>오늘 가입한 회원수</th>
@@ -81,7 +85,7 @@
 						<td>${mcount.member_quit}명</td>
 					</tr>
 				</table>
-				<table class="table table-bordered">
+				<table class="adminTable2">
 					<tr>
 						<th>검색옵션
 						<td><label for="searchOption1"></label> <select
@@ -122,14 +126,14 @@
 						</select></td>
 					</tr>
 				</table>
-				<div class="input-group-btn">
+				<br>
+			
+				<div class="sectiondiv" align="center">
 					<button class="btn btn-default" type="button" id="btnSearch">
 						검색 <i class="glyphicon glyphicon-search"></i>
 					</button>
 				</div>
-			</div>
-
-			<table class="table table-hover">
+			<table class="ordertable">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -144,8 +148,8 @@
 						<th>탈퇴여부</th>
 					</tr>
 				</thead>
-				<c:forEach var="dto" varStatus="loop" items="${list}">
 					<tbody>
+				<c:forEach var="dto" varStatus="loop" items="${list}">
 						<tr>
 							<td><input name="userids" type="checkbox"
 								value="${dto.userid}"></td>
@@ -158,11 +162,12 @@
 							<td>${dto.addr1}</td>
 							<td><fmt:formatDate value="${dto.join_date}" type="date"
 									pattern="yyyy-MM-dd" /></td>
-							<th>${dto.quit == 'y' ? '탈퇴':'회원'}</th>
+							<td>${dto.quit == 'y' ? '탈퇴':'회원'}</td>
 						</tr>
-					</tbody>
 				</c:forEach>
+					</tbody>
 			</table>
+			<button id="btnDelete" type="button" class="btn btn-default">탈퇴처리</button>
 			<div class="row" align="center">
 				<div class="col-sm-12">
 					<ul class="pagination pagination">
@@ -192,9 +197,11 @@
 						</c:if>
 					</ul>
 				</div>
-			</div>
-			<button id="btnDelete" type="button" class="btn btn-default">탈퇴처리</button>
+				</div>
 		</form>
+			
+	</div>
+	</section>
 	</div>
 </body>
 </html>

@@ -103,5 +103,6 @@ public class ReviewController {
 	public String delete(int bno) throws Exception {
 		reviewService.delete(bno);
 		return "redirect:/board/review/list.do";
+		
 	}
 }
