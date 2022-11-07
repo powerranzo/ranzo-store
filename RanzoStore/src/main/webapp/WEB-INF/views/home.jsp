@@ -21,6 +21,12 @@
 	function btn2() {
 		location.href = "${path}/reserv/detail/testcode04";
 	}
+	function btn3() {
+		location.href = "${path}/shop/exhibition/detail/testcode06";
+	}
+	function btn4() {
+		location.href = "${path}/reserv/detail/testcode06";
+	}
 </script>
 </head>
 <body>
@@ -31,12 +37,12 @@
 			<div class="swiper-slide">
 				<a><img class="simage"
 					src="${path}/resources/images/main_1.jpg"></a>
-				<div class="text1">디뮤지엄</div>
+				<div class="text1">국립중앙박물관</div>
 				<div class="image_text">
-					<p style="font-size: 18px; font-weight: bold;">2022.03.16 ~
-						2022.11.27</p>
-					<p style="font-weight: bold;" id="title1">Romantic Days</p>
-					<p>어쨌든, 사랑</p>
+					<p style="font-size: 18px; font-weight: bold;">2022.10.25 ~
+						2023.03.01</p>
+					<p style="font-weight: bold;" id="title1">합스부르크 600년,</p>
+					<p>매혹의 걸작들</p>
 				</div>
 				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
 				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
@@ -49,8 +55,8 @@
 					<p style="font-weight: bold;" id="title1">Then, There</p>
 					<p>장 줄리앙</p>
 				</div>
-				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
-				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
+				<button class="btn1" type="button" onclick="btn3()">자세히보기</button>
+				<button class="btn2" type="button" onclick="btn4()">예매하기</button>
 			</div>
 		</div>
 
@@ -105,7 +111,8 @@
 			</div>
 		</div>
 	</div>
-
+<footer>
 <%@ include file="include/footer.jsp"%>
+</footer>
 </body>
 </html>

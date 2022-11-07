@@ -55,4 +55,14 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		return null;
 	}
 
+	@Override
+	public List<ExhibitionDTO> searchProduct(String keyword) {
+		return sqlSession.selectList("exhibition.searchlist", keyword);
+	}
+
+	@Override
+	public int searchCount(String keyword) {
+		return sqlSession.selectOne("exhibition.searchCount", keyword);
+	}
+
 }

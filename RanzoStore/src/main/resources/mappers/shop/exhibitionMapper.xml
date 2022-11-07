@@ -13,6 +13,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT code, location, gallery, title, summary, thumnail, product_info, start_date, end_date, hit, sales FROM EXHIBITION_TB
 		WHERE code = #{exhibitionCode}
 	</select>
+	
+	<!-- 키워드검색 -->
+	<select id="searchlist" resultType="ExhibitionDTO">
+	 select * from EXHIBITION_TB
+	 where title like '%'||#{keyword}||'%'	
+	</select>
+	<!-- 검색 카운트 -->
+	<select id="searchCount" resultType="int">
+	 select count(*) from EXHIBITION_TB
+	 where title like '%'||#{keyword}||'%'
+	</select>
 
 </mapper>
 

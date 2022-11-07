@@ -13,4 +13,6 @@ public interface ExhibitionDAO {
 	void deleteProduct(String exhibitionCode);//삭제
 	void insertProduct(ExhibitionDTO dto);//입력
 	String fileInfo(String exhibitionCode);//첨부파일정보
+	List<ExhibitionDTO> searchProduct(String keyword);
+	int searchCount(String keyword);
 }

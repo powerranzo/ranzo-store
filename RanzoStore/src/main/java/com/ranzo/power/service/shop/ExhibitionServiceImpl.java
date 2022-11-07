@@ -52,4 +52,14 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<ExhibitionDTO> searchProduct(String keyword) {
+		return exhibitionDAO.searchProduct(keyword);
+	}
+
+	@Override
+	public int searchCount(String keyword) {
+		return exhibitionDAO.searchCount(keyword);
+	}
 }

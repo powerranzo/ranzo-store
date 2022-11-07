@@ -1,11 +1,7 @@
 @charset "UTF-8";
 
-*{
-	margin: 0;
-	padding: 0;
-}
 .swiper-container {
-	height: 800px;
+	height: 750px;
 	width: 100%;
 }
 .swiper-slide {
@@ -36,7 +32,7 @@
 }
 button.btn1 {
 	position: absolute;
-	top: 500px;
+	top: 550px;
 	left: 150px;
 	width: 180px;
 	height: 60px;
@@ -48,7 +44,7 @@ button.btn1 {
 }
 button.btn2 {
 	position: absolute;
-	top: 500px;
+	top: 550px;
 	left: 350px;
 	width: 180px;
 	height: 60px;
@@ -72,7 +68,6 @@ button.btn2 {
 	left: 150px;
 	background-color: black;
 	color: white;
-	width: 100px;
 	padding: 10px;
 	text-align: center;
 }
@@ -130,5 +125,4 @@ button.btn2 {
 		color: white;
 		text-align: left;
 	}
-
 }

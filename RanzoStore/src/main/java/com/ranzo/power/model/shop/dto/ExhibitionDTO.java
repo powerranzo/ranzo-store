@@ -16,8 +16,15 @@ public class ExhibitionDTO {
 	private int hit; //조회수
 	private int sales; //
 	private int rn;
+	private String keyword;
 	
 	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getCode() {
 		return code;
 	}
