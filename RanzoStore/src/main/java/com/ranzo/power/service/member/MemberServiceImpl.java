@@ -166,7 +166,7 @@ public class MemberServiceImpl implements MemberService {
         Transport.send(mimeMessage);
 	}
 	
-	//카카오 로그인
+	//카카오 로그인 (인가 코드 주고 토큰 받아오기)
 	@Override
 	public String getAccessToken(String authorize_code) {
 		String access_Token = "";
@@ -187,8 +187,8 @@ public class MemberServiceImpl implements MemberService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
             
-			sb.append("&client_id=c25de70aa517d0143d2b73595c73dc86"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost/power/member/kakaoLogin"); // 본인이 설정한 주소
+			sb.append("&client_id=c25de70aa517d0143d2b73595c73dc86"); //발급받은 key
+			sb.append("&redirect_uri=http://localhost/power/member/kakaoLogin"); //설정한 주소
             
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -227,6 +227,7 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	//받아온 카카오 회원 정보 저장 및 처리
 	@Override
 	public MemberDTO getUserInfo(String access_Token) {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
@@ -271,7 +272,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		MemberDTO result = memberDao.findkakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
-		System.out.println("S:" + result);
+		System.out.println("userInfo:" + result);
 		if(result==null) {
 		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
 			memberDao.kakaoinsert(userInfo);
@@ -283,6 +284,32 @@ public class MemberServiceImpl implements MemberService {
 			return result;
 			// 정보가 이미 있기 때문에 result를 리턴함.
 		}
+	}
+	
+	@Override
+	public void kakaoLogout(String access_Token) {
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String result = "";
+            String line = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 }
