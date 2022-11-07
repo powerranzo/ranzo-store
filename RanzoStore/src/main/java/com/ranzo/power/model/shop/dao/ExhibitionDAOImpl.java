@@ -23,7 +23,7 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	@Override
 	public List<ExhibitionDTO> listProduct() {
 		List<ExhibitionDTO> list = sqlSession.selectList("exhibition.list");
-		logger.info("### ExhDAO/productList {}." + list);
+		logger.info("### ExhDAO/productList/" + list);
 		return list;
 	}
 

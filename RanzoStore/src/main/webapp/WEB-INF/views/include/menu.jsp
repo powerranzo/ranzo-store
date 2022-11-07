@@ -119,10 +119,10 @@
 	<div class="menu1">
 		<ul class="menu">
 			<li><a href="#">ABOUT</a></li>
-			<li><a href="${path}/shop/exhibition/list">EXHIBITION</a>
+			<li><a href="${path}/shop/exhibition/list/current">EXHIBITION</a>
 				<ul class="depth_1">
-					<li><a href="${path}/shop/exhibition/list">현재전시</a></li>
-					<li><a href="#">지난전시</a></li>
+					<li><a href="${path}/shop/exhibition/list/current">현재전시</a></li>
+					<li><a href="${path}/shop/exhibition/list/past">지난전시</a></li>
 				</ul></li>
 			<li><a href="#">MENU 2</a></li>
 		</ul>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.controller.board.ReviewController;
+import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.shop.ExhibitionService;
 
@@ -25,12 +26,22 @@ public class ExhibitionController {
 	@Inject
 	ExhibitionService exhibitionService;
 
+	// 현재전시
+	@RequestMapping("list/current") // 세부 rul
+	public ModelAndView listCurrent(ModelAndView mav) {
+		mav.setViewName("/shop/exhibition_current");
+		// mav.addObject("list", exhibitionService.listProduct());
+		logger.debug("ExhController/listCurrent/" + mav);
+		return mav;
+	}
+
 	// 전시 리스트
 	@RequestMapping("list") // 세부 rul
-	public ModelAndView list(ModelAndView mav) {
+	public ModelAndView getList(ModelAndView mav) {
+		List<ExhibitionDTO> list = exhibitionService.listProduct();
+		mav.addObject("list", list);
 		mav.setViewName("/shop/exhibition_list");
-		mav.addObject("list", exhibitionService.listProduct());
-		logger.debug("ExhController/list {}." + mav);
+		logger.info("ExhController/getList/" + list);
 		return mav;
 	}
 
@@ -43,20 +54,20 @@ public class ExhibitionController {
 		logger.debug("ExhController/list {}." + mav);
 		return mav;
 	}
-	
+
 	//
 	@RequestMapping("getProductInfo")
 	public ModelAndView getProductInfo(String code, ModelAndView mav) throws Exception {
 		logger.info("### getProductInfo/code = " + code);
-		
+
 		ProductInfoDTO productInfo = exhibitionService.getProductInfo(code);
-		logger.info("### getProductInfo/productInfo = " + productInfo);		
+		logger.info("### getProductInfo/productInfo = " + productInfo);
 		mav.addObject("productInfo", productInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_product");
 		logger.info("### getProductInfo/mav {}. " + mav);
 		return mav;
 	}
-	
+
 	//
 	@RequestMapping("getReserveInfo")
 	public ModelAndView reserveInfo(String code, ModelAndView mav) throws Exception {
@@ -64,12 +75,11 @@ public class ExhibitionController {
 
 		String reserveInfo = exhibitionService.getReserveInfo(code);
 		logger.info("### getReserveInfo/reviewList {}. = " + reserveInfo);
-		
+
 		mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_reserve");
 		logger.info("### getReserveInfo/mav {}. " + mav);
 		return mav;
 	}
-	
 
 }

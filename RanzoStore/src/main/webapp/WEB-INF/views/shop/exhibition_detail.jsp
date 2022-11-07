@@ -102,9 +102,7 @@
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
-<body>
-	<%@ include file="../include/menu.jsp"%>
-	
+<body>	
 	<section class="sec-prd">
 		<div class="prd-heading">
 			<span class="info-title"></span>
