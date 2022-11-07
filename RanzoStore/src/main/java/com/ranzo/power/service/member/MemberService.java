@@ -18,4 +18,5 @@ public interface MemberService {
 	public void sendPwd(String userid, String email) throws Exception;
 	public String getAccessToken(String authorize_code);
 	public MemberDTO getUserInfo(String access_Token);
+	public void kakaoLogout(String access_Token);
 }

@@ -51,11 +51,21 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session, ModelAndView mav) {
-		memberService.logout(session);
-		mav.setViewName("home");
-		mav.addObject("message", "logout");
-		return mav;
+	public String logout(HttpSession session) {
+		 String access_Token = (String)session.getAttribute("access_Token");
+
+	        if(access_Token != null && !"".equals(access_Token)){
+	            memberService.kakaoLogout(access_Token);
+	            session.removeAttribute("access_Token");
+	            session.removeAttribute("userid");
+	            session.removeAttribute("name");
+	            session.removeAttribute("email");
+	            System.out.println("카카오 로그아웃");
+	        }else{
+	        	memberService.logout(session);
+	            System.out.println("일반 로그아웃");
+	        }
+		return "home";
 	}
 	
 	//회원가입 등록
@@ -227,6 +237,7 @@ public class MemberController {
 		session.setAttribute("userid", dto.getUserid());
 		session.setAttribute("name", dto.getName());
 		session.setAttribute("email", dto.getEmail());
+		session.setAttribute("access_Token", access_Token);
 		return "home";
 	}
 	
