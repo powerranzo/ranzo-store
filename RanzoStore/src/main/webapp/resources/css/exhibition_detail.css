@@ -80,20 +80,10 @@
 	font-weight: bold;
 }
 
-.sec-detail .tab-content {
-	display: none;
-	margin: 0 auto;
-	text-align: center;
-	padding: 10px;
-}
-
 .show {
 	display: block;
 }
 
-.sec-detail div .img-prdInfo {
-	width: 100%;
-}
 
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
@@ -116,10 +106,7 @@
 		/* margin-right: 40px; */
 		max-width: 405px;
 	}
-	.sec-detail div .img-prdInfo {
-		width: 100%;
-		max-width: 750px;
-	}
+
 }
 
 /* PC용 CSS */

@@ -28,30 +28,29 @@ public class ReviewController {
 
 	@Inject
 	ReviewService reviewService;
-	
+
 	@RequestMapping("list.do")
-	public ModelAndView list(
-			@RequestParam(defaultValue = "all") String search_option,
-			@RequestParam(defaultValue = "") String keyword,
-			@RequestParam(defaultValue = "1") int curPage) throws Exception {
-		//레코드 개수 계산
+	public ModelAndView list(@RequestParam(defaultValue = "all") String search_option,
+			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "1") int curPage)
+			throws Exception {
+		// 레코드 개수 계산
 		int count = reviewService.countArticle();
-		//페이지 관련 설정
-		Pager pager = new Pager(count,curPage);
+		// 페이지 관련 설정
+		Pager pager = new Pager(count, curPage);
 		int start = pager.getPageBegin();
 		int end = pager.getPageEnd();
-			
-		List<ReviewDTO> list = reviewService.listAll(search_option,keyword,start,end);
+
+		List<ReviewDTO> list = reviewService.listAll(search_option, keyword, start, end);
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<>();
-		map.put("list", list); //map에 자료 저장
-		map.put("count", count); //레코드 개수 파일
-		map.put("pager", pager); //페이지 네비게이션을 위한 변수
+		map.put("list", list); // map에 자료 저장
+		map.put("count", count); // 레코드 개수 파일
+		map.put("pager", pager); // 페이지 네비게이션을 위한 변수
 		map.put("search_option", search_option);
 		map.put("keyword", keyword);
 		mav.setViewName("reviewboard/list");
-		mav.addObject("map", map); //보낼 데이터
+		mav.addObject("map", map); // 보낼 데이터
 		return mav;
 	}
 
@@ -59,50 +58,78 @@ public class ReviewController {
 	public String write() {
 		return "reviewboard/write";
 	}
-	
+
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute ReviewDTO dto, HttpSession session) throws Exception {
-		//세션처리
-		String writer = (String)session.getAttribute("userid");
+		// 세션처리
+		String writer = (String) session.getAttribute("userid");
 		dto.setWriter(writer);
-		//레코드 저장
+		// 레코드 저장
 		reviewService.create(dto);
 		return "redirect:/board/review/list.do";
 	}
-	
+
 	@RequestMapping("view.do")
 	public ModelAndView view(int bno, HttpSession session) throws Exception {
-		//조회수 증가 처리
+		// 조회수 증가 처리
 		reviewService.increaseViewcnt(bno, session);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("reviewboard/view");
 		mav.addObject("dto", reviewService.read(bno));
 		return mav;
 	}
-	
-	//첨부파일 목록을 리턴
-	//json 배열로 변환하여 리턴
+
+	// 첨부파일 목록을 리턴
+	// json 배열로 변환하여 리턴
 	@RequestMapping("getAttach/{bno}")
-	@ResponseBody //view가 아닌 List<String> 데이터 자체를 리턴
+	@ResponseBody // view가 아닌 List<String> 데이터 자체를 리턴
 	public List<String> getAttach(@PathVariable int bno) {
 		return reviewService.getAttach(bno);
 	}
-	
-	//게시물 내용 수정
+
+	// 게시물 내용 수정
 	@RequestMapping("update.do")
 	public String update(ReviewDTO dto) throws Exception {
-		System.out.println("dto : "+ dto);
-		if(dto != null) {
+		System.out.println("dto : " + dto);
+		if (dto != null) {
 			reviewService.update(dto);
 		}
 		return "redirect:/board/review/list.do";
 	}
-	
-	//게시물 삭제
+
+	// 게시물 삭제
 	@RequestMapping("delete.do")
 	public String delete(int bno) throws Exception {
 		reviewService.delete(bno);
 		return "redirect:/board/review/list.do";
+
+	}
+/*
+	@RequestMapping("exhibitionReviewList")
+	public @ResponseBody List<ReviewDTO> exhibitionReviewList(String code) throws Exception {
+		logger.info("### exhibitionReviewList/code = " + code);
+
+		List<ReviewDTO> reviewList = reviewService.exhibitionReviewList(code);
+		logger.info("### reviewList {}. " + reviewList);
+
+		return reviewList;
+	}
+*/
+	@RequestMapping("exhibitionReviewList")
+	public ModelAndView exhibitionReviewList(String code, ModelAndView mav) throws Exception {
+		logger.info("### exhibitionReviewList/code = " + code);
+
+		List<ReviewDTO> reviewList = reviewService.exhibitionReviewList(code);
+		int count = reviewService.countArticle(code);
+		logger.info("### exhibitionReviewList/reviewList {}. = " + reviewList);
+		logger.info("### exhibitionReviewList/count = " + count);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewList", reviewList); // map에 자료 저장
+		map.put("count", count); //레코드 개수 파일
+		mav.addObject("map", map); // 보낼 데이터
+		mav.setViewName("shop/exhibition_detail_review");
+		logger.info("### reviewList {}. " + mav);
+		return mav;
 	}
 }

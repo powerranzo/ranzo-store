@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -99,10 +98,20 @@ public class ReviewServiceImpl implements ReviewService {
 	public int countArticle() throws Exception {
 		return reviewDao.countArticle();
 	}
+	
+	@Override
+	public int countArticle(String code) throws Exception {
+		return reviewDao.countArticle(code);
+	}
 
 	@Override
 	public ReviewDTO read(int bno) throws Exception {
 		return reviewDao.read(bno);
+	}
+
+	@Override
+	public List<ReviewDTO> exhibitionReviewList(String code) {
+		return reviewDao.exhibitionReviewList(code);
 	}
 
 }
