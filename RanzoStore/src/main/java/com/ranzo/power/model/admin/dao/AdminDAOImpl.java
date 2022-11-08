@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
@@ -129,19 +130,55 @@ public class AdminDAOImpl implements AdminDAO {
 	public int countSearchReserv(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchReserv", map);
 	}
+	
+	@Override
+	public int countReservPay() {
+		return sqlSession.selectOne("admin.countReservPay");
+	}
 
 	@Override
 	public List<ReservDTO> getReservList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getReservList", map);
 	}
-
+	
 	@Override
-	public int countReservIng(String today) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countQnaNew() {
+		return sqlSession.selectOne("admin.countQnaNew");
+	}
+	
+	@Override
+	public int countQnaDel() {
+		return sqlSession.selectOne("admin.countQnaDel");
+	}
+	
+	@Override
+	public int countSearchQna(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.countSearchQna", map);
 	}
 
+	@Override
+	public List<QnaDTO> getQnaList(Map<String, Object> map) {
+		return sqlSession.selectList("admin.getQnaList", map);
+	}
 
+	@Override
+	public int countSearchPopup(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.countSearchPopup", map);
+	}
 
+	@Override
+	public List<PopupDTO> getPopupList(Map<String, Object> map) {
+		return sqlSession.selectList("admin.getPopupList", map);
+	}
+
+	@Override
+	public PopupDTO getPopupView(int no) {
+		return sqlSession.selectOne("admin.getPopupView", no);
+	}
+
+	@Override
+	public void insertPopup(PopupDTO dto) {
+		sqlSession.insert("admin.insertPopup", dto);
+	}
 
 }

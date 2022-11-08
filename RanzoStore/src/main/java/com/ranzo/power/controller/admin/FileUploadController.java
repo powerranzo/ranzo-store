@@ -29,14 +29,13 @@ public class FileUploadController {
 		
 		@RequestMapping("ck_imageUpload.do")
 		public void imageUpload(HttpServletRequest request, 
-				HttpServletResponse response, HttpSession session,
-				@RequestParam MultipartFile upload) throws Exception{
+				HttpServletResponse response, @RequestParam MultipartFile upload) throws Exception{
 			
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("text/html; charset=utf-8");
 			
 			try {
-				uploadService.uploadCKEditor(request, response, session, upload);
+				uploadService.uploadCKEditor(request, response, upload);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

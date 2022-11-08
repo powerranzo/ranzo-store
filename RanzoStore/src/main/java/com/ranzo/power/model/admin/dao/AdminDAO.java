@@ -3,6 +3,7 @@ package com.ranzo.power.model.admin.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
@@ -32,8 +33,16 @@ public interface AdminDAO {
 		public void deleteFile(Map<String, Object> map);
 		public void deleteExb(String code);
 		public int countSearchReserv(Map<String, Object> map);
-		
 		public List<ReservDTO> getReservList(Map<String, Object> map);
-		public int countReservIng(String today);
+		public int countReservPay();
+		public List<QnaDTO> getQnaList(Map<String, Object> map);
+		public int countSearchQna(Map<String, Object> map);
+		public int countQnaNew();
+		public int countQnaDel();
+		public int countSearchPopup(Map<String, Object> map);
+		public List<PopupDTO> getPopupList(Map<String, Object> map);
+		public PopupDTO getPopupView(int no);
+		public void insertPopup(PopupDTO dto);
+		
 
 }

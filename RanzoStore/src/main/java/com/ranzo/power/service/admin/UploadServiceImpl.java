@@ -21,8 +21,9 @@ import com.ranzo.power.util.MediaUtils;
 public class UploadServiceImpl implements UploadService {
 
 	@Override
-	public void uploadCKEditor(HttpServletRequest request, HttpServletResponse response, 
-			HttpSession session, MultipartFile upload) throws Exception {
+	public String uploadCKEditor(HttpServletRequest request, 
+			HttpServletResponse response, 
+			MultipartFile upload) throws Exception {
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -33,7 +34,7 @@ public class UploadServiceImpl implements UploadService {
 		out.write(bytes);
 		printWriter=response.getWriter();
 		String fileUrl=request.getContextPath()+"/resources/images/"+fileName;
-		session.setAttribute("fileUrl", fileUrl);
+//		session.setAttribute("fileUrl", fileUrl);
 		printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 		printWriter.flush();
 		try {
@@ -46,6 +47,7 @@ public class UploadServiceImpl implements UploadService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return fileUrl;
 	}
 
 	@Override

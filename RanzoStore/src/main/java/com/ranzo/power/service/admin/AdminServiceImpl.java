@@ -1,7 +1,6 @@
 package com.ranzo.power.service.admin;
 
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +84,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void deleteQna(String[] qna_bno) {
+	public void deleteQna(int[] qna_bno) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("value", "qna_tb");
 		map.put("condition", "bno");
@@ -163,23 +162,53 @@ public class AdminServiceImpl implements AdminService {
 		map.put("end", pager.getPageEnd());
 		List<ReservDTO> list=adminDao.getReservList(map);
 		map.put("reserv_count_all", adminDao.countTbAll("reserv_item_tb"));
-		map.put("reserv_count_ing", adminDao.countReservIng(DateFunction.getToday()));
+		map.put("reserv_count_pay", adminDao.countReservPay());
 		map.put("reserv_list", list);
 		map.put("pager", pager);
-		logger.info("reserv_pager:" + pager.toString());
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage) {
+		Map<String,Object> map=new HashMap<>();
+		map.put("searchOp", searchOp);
+		AdminPager pager=new AdminPager(adminDao.countSearchQna(map), curPage);
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
+		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("start", pager.getPageBegin());
+		map.put("end", pager.getPageEnd());
+		List<QnaDTO> list=adminDao.getQnaList(map);
+		map.put("qna_newcount", adminDao.countQnaNew());
+		map.put("qna_delcount", adminDao.countQnaDel());
+		map.put("qna_list", list);
+		logger.info("qna_list:"+list);
+		map.put("pager", pager);
 		return map;
 	}
 	
 	@Override
-	public List<PopupDTO> popupList() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage) {
+		Map<String,Object> map=new HashMap<>();
+		map.put("searchOp", searchOp);
+		AdminPager pager=new AdminPager(adminDao.countSearchPopup(map), curPage);
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
+		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("start", pager.getPageBegin());
+		map.put("end", pager.getPageEnd());
+		List<PopupDTO> list=adminDao.getPopupList(map);
+		map.put("popup_list", list);
+		map.put("pager", pager);
+		return map;
 	}
 
 	@Override
+	public PopupDTO getPopupView(int no) {
+		return adminDao.getPopupView(no);
+	}
+	
+	@Override
 	public void insertPopup(PopupDTO dto) {
-		// TODO Auto-generated method stub
-
+		adminDao.insertPopup(dto);
 	}
 
 	@Override
@@ -189,9 +218,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deletePopup(PopupDTO dto) {
-		// TODO Auto-generated method stub
-
+	public void deletePopup(int[] pop_no) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "popup_tb");
+		map.put("condition", "no");
+		map.put("list", pop_no);
+		adminDao.updateShowN(map);
 	}
+
+
 
 }

@@ -7,22 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.admin.AdminService;
@@ -44,12 +39,12 @@ public class AdminController {
 
 	//	@Resource(name = "uploadPath") 
 	//	String uploadPath;
-	
+
 	@GetMapping("/home.do")
 	public String adminHome() {
 		return "admin/adminHome";
 	}
-	
+
 	@RequestMapping("/member_list.do")
 	public String memberList(SearchDTO searchOp, 
 			@RequestParam(defaultValue="1") int curPage, Model m
@@ -83,7 +78,7 @@ public class AdminController {
 		rttr.addFlashAttribute("searchOp", searchOp);
 		return "redirect:member_list.do";
 	}
-	
+
 	@RequestMapping("/reserv_delete.do")
 	public String deleteReserv(String[] reserv_no, String userid
 			, RedirectAttributes rttr) {
@@ -94,17 +89,20 @@ public class AdminController {
 		}else
 			return "redirect:reserv_list.do";
 	}
-	
-//	@RequestMapping("/reserv_delete.do")
-//	public void deleteReserv() {
-//		
-//	}
+
+	//	@RequestMapping("/reserv_delete.do")
+	//	public void deleteReserv() {
+	//		
+	//	}
 	@RequestMapping("/qna_delete.do")
-	public String deleteQna(String[] qna_bno, String userid
+	public String deleteQna(int[] qna_bno, String userid
 			, RedirectAttributes rttr) {
 		adminService.deleteQna(qna_bno);
-		rttr.addFlashAttribute("userid", userid);
-		return "redirect:member_view.do";
+		if(userid!=null) {
+			rttr.addFlashAttribute("userid", userid);
+			return "redirect:member_view.do";
+		}else
+			return "redirect:qna_list.do";
 	}
 
 	@RequestMapping("/exb_list.do")
@@ -125,7 +123,6 @@ public class AdminController {
 		return "admin/exbWrite";
 	}
 	@PostMapping("/exb_write.do")
-//	public String writeExb(String startDate, String endDate, 
 	public String writeExb( 
 			ExhibitionDTO dto, HttpServletRequest request
 			, MultipartFile file, MultipartFile file2) {
@@ -135,13 +132,12 @@ public class AdminController {
 			logger.info("multipartfile:"+file.getOriginalFilename());
 			thumnail=uploadService.uploadFile(file, request);
 		}
-		if(!file.isEmpty()) {
+		if(!file2.isEmpty()) {
 			logger.info("multipartfile:"+file2.getOriginalFilename());
 			product_info=uploadService.uploadFile(file2, request);
 		}
 		dto.setThumnail(thumnail);
 		dto.setProduct_info(product_info);
-//		adminService.insertExb(startDate, endDate, dto);
 		adminService.insertExb(dto);
 		return "redirect:exb_list.do"; 
 	}
@@ -156,9 +152,6 @@ public class AdminController {
 		logger.info("exb_view_dto:"+dto);
 		m.addAttribute("startDate", DateFunction.dateToString(dto.getStart_date())); 
 		m.addAttribute("endDate", DateFunction.dateToString(dto.getEnd_date()));
-//		m.addAttribute("thumnailName", dto.getThumnail().substring(dto.getThumnail().lastIndexOf("_")+1));
-//		m.addAttribute("product_infoName", dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("_")+1));
-//		logger.info("product_infoName:"+dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("_")+1));
 		m.addAttribute("dto", dto);
 		return "admin/exbUpdate";
 	}
@@ -213,7 +206,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/exb_delete.do")
-	public String deleteExb(String code, HttpServletRequest request) {
+	public String deleteExb(String code) {
 		adminService.deleteExb(code);
 		return "redirect:/admin/exb_list.do";
 	}
@@ -232,7 +225,64 @@ public class AdminController {
 	}
 
 	@RequestMapping("/qna_list.do")
-	public String qnaList() {
-		return "";
+	public String qnaList(SearchDTO searchOp,
+			@RequestParam(defaultValue = "1") int curPage, Model m) {
+		Map<String,Object> map=adminService.getQnaList(searchOp, curPage);
+		logger.info("qna_map:"+map);
+		m.addAttribute("qna", map);
+		return "admin/qnaList"; 
+	}
+
+	@RequestMapping("/popup_list.do")
+	public String popupList(SearchDTO searchOp,
+			@RequestParam(defaultValue = "1") int curPage, Model m) {
+		Map<String,Object> map=adminService.getPopupList(searchOp, curPage);
+		logger.info("popup_map:"+map);
+		m.addAttribute("pop", map);
+		return "admin/popupList"; 
+	}
+
+	@RequestMapping("/popup_delete.do")
+	public String deletePopup(int[] pop_no, @RequestParam(defaultValue = "0")int no
+			, RedirectAttributes rttr) {
+		logger.info("int no:" + no);
+		adminService.deletePopup(pop_no);
+		if(no!=0) {
+			rttr.addFlashAttribute("no", no);
+			return "redirect:popup_view.do";
+		}else
+			return "redirect:popup_list.do";
+	}
+
+	@RequestMapping("/popup_view.do")
+	public String viewPopup(int no, Model m 
+			,HttpServletRequest request) {
+		Map<String,?> flashmap=RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!=null) no=(int)flashmap.get("no");
+		m.addAttribute("dto", adminService.getPopupView(no));
+		return "admin/popupView";
+	}
+
+	@GetMapping("/popup_write.do")
+	public String writePopup() {
+		logger.info("Get 호출");
+		return "admin/popupWrite";
+	}
+	
+	@PostMapping("/popup_write.do")
+	public String writePopup(PopupDTO dto, String start_time, String end_time, 
+			HttpServletRequest request) {
+//			, MultipartFile file) {
+		logger.info("post 호출");
+//		String img_src="-";
+//		if(!file.isEmpty()) {
+//			logger.info("multipartfile:"+file.getOriginalFilename());
+//			img_src=uploadService.uploadFile(file, request);
+//		}
+		logger.info("popupDTO start_time:"+start_time);
+//		dto.setStart_date();
+//		dto.setImg_src(img_src);
+		adminService.insertPopup(dto);
+		return "redirect:exb_list.do"; 
 	}
 }

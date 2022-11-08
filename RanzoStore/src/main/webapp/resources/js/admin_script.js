@@ -49,4 +49,25 @@ function memberView(param) {
 		document.body.appendChild(form);
 		form.submit();
 	}
+
+//reservList.jsp
+	function reservList(param) { 
+		document.form1.action = getContextPath()+'/admin/reserv_list.do?curPage=' + param;
+		document.form1.submit();
+	}
+//qnaList.jsp
+	function qnaList(param) {
+		document.form1.action = getContextPath()+'/admin/qna_list.do?curPage=' + param;
+		document.form1.submit();
+	}
 	
+//popupList.jsp
+	function popupList(param) {
+		document.form1.action = getContextPath()+'/admin/popup_list.do?curPage=' + param;
+		document.form1.submit();
+	}
+	
+	function popupView(param) {
+		document.form1.action = getContextPath()+'/admin/popup_view.do?no=' + param;
+		document.form1.submit();
+	}
