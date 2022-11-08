@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.controller.board.ReviewController;
@@ -37,11 +38,18 @@ public class ExhibitionController {
 
 	// 전시 리스트
 	@RequestMapping("list") // 세부 rul
-	public ModelAndView getList(ModelAndView mav) {
+	public ModelAndView getList(
+			@RequestParam(defaultValue = "리뷰 많은순") String sort,
+			@RequestParam(defaultValue = "전체") List<String> location,			
+			ModelAndView mav) {
 		List<ExhibitionDTO> list = exhibitionService.listProduct();
+		
+		logger.info("ExhController/getList/sort/" + sort);
+		logger.info("ExhController/getList/location/" + location);
+		
 		mav.addObject("list", list);
 		mav.setViewName("/shop/exhibition_list");
-		logger.info("ExhController/getList/" + list);
+		//logger.info("ExhController/getList/" + list);
 		return mav;
 	}
 
@@ -51,7 +59,7 @@ public class ExhibitionController {
 		mav.setViewName("/shop/exhibition_detail");
 		mav.addObject("exhibition", exhibitionService.detailProduct(exhibitionCode));
 		logger.debug(mav.toString());
-		logger.debug("ExhController/list {}." + mav);
+		logger.debug("ExhController/list/" + mav);
 		return mav;
 	}
 
@@ -64,13 +72,13 @@ public class ExhibitionController {
 		logger.info("### getProductInfo/productInfo = " + productInfo);
 		mav.addObject("productInfo", productInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_product");
-		logger.info("### getProductInfo/mav {}. " + mav);
+		logger.info("### getProductInfo/mav/" + mav);
 		return mav;
 	}
 
 	//
 	@RequestMapping("getReserveInfo")
-	public ModelAndView reserveInfo(String code, ModelAndView mav) throws Exception {
+	public ModelAndView getReserveInfo(String code, ModelAndView mav) throws Exception {
 		logger.info("### reserveInfo/code = " + code);
 
 		String reserveInfo = exhibitionService.getReserveInfo(code);
@@ -78,7 +86,7 @@ public class ExhibitionController {
 
 		mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_reserve");
-		logger.info("### getReserveInfo/mav {}. " + mav);
+		logger.info("### getReserveInfo/mav/" + mav);
 		return mav;
 	}
 

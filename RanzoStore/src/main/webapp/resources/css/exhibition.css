@@ -3,7 +3,8 @@
 /* 검색 영역*/
 .sec-search {
 	with: 100%;
-	diplay: flex;
+	diplay: flex;	
+	color: #424242;
 }
 
 .sec-search div .sort {
@@ -17,6 +18,10 @@
 .sec-search div ul li {
 	position: relative;
 	margin: 5px
+}
+
+.selected{
+	color :red;
 }
 
 
@@ -33,7 +38,6 @@
 		display: block;
 		float: left;
 		margin-left: 5px;
-		color: #424242;
 	}
 }
 
@@ -46,6 +50,7 @@
 		float: left;
 	}
 	.sec-search .filter li {
+		padding: 3px;
 		border: solid 1px;
 		border-color: grey;
 		border-radius: 10px;

@@ -6,17 +6,37 @@
 <meta charset="UTF-8">
 <title>전시</title>
 <%@ include file="../include/header.jsp" %>	
-<link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
+<link rel="stylesheet" href="${path}/resources/css/exhibition.css">
 <script type="text/javascript">
+$(function(){
 
+	date = new Date();
+	console.log("date:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 
+	getList();
+});
+
+function getList(){
+	$.ajax({
+		type: "get",
+		url: "${path}/shop/exhibition/list",
+		success: function(result){
+			console.debug("getList success : " + result);
+			$("#exhibition_list").html(result);
+		},
+		error : function (result){
+			console.error("getList error : " + result);
+		}
+	});
+}
 </script>
 </head>
 <body>
-<%@ include file="../include/menu.jsp" %>
-<h2>현재전시</h2>
-<hr>
+	<%@ include file="../include/menu.jsp" %>
+	
 	<section class="sec-content">
+		<h2>현재전시 <span>()</span></h2>
+		<hr>
 		<div class="sec-search">
 
 			<div>		
@@ -42,7 +62,7 @@
 		</div>
 
 		<div id="exhibition_list"></div>
-
+		
 	</section>
 	
 	<%@ include file="../include/footer.jsp"%>

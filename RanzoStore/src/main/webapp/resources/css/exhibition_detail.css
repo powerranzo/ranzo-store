@@ -56,11 +56,6 @@ footer {
 	list-style-type: none;
 }
 
-/* 탭메뉴 위에 마우스 커서 올릴 경우 */
-.tab-list a:hover, tab-list a.active {
-	color: red;
-}
-
 .sec-detail .tab-list::after {
 	content: '';
 	display: block;
