@@ -12,12 +12,12 @@
 		<a class="a1" href="${path}/reserv/canclelist.do/${sessionScope.userid}">취소/반품내역</a>
 		<p><br>
 		<a class="a1" href="#">위시리스트</a>
+<%-- 		<p><br>
+		<a class="a1" href="${path}/member/addressList.do">배송지관리</a> --%>
 		<p><br>
-		<a class="a1" href="${path}/member/addressList.do">배송지관리</a>
+		<a class="a1" href="${path}/member/myReview.do">고객리뷰</a>
 		<p><br>
-		<a class="a1" href="#">고객리뷰</a>
-		<p><br>
-		<a class="a1" href="#">상품문의</a>
+		<a class="a1" href="${path}/member/myInquiry.do">상품문의</a>
 		<p><br>
 		<div class="title-s">MY INFO</div>
 		<hr noshade size="1px" color="black"><br>

@@ -1,7 +1,11 @@
 package com.ranzo.power.service.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 public interface MemberService {
@@ -19,4 +23,6 @@ public interface MemberService {
 	public String getAccessToken(String authorize_code);
 	public MemberDTO getUserInfo(String access_Token);
 	public void kakaoLogout(String access_Token);
+	public List<QnaDTO> qnaList();
+	public List<ReviewDTO> reviewList();
 }
