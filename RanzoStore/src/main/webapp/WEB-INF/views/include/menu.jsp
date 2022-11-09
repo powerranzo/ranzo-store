@@ -8,9 +8,6 @@
 
 <div style="text-align: center;">
 
-	<a href="${path}/upload/uploadForm">업로드 테스트</a> |
-	<a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a> |
-
 	<a href="${path}/reserv/list/${sessionScope.userid}">주문내역 확인하기 test</a>
 
 </div>

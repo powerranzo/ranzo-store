@@ -10,22 +10,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from (
 				select rownum as rn, A.*
 					from (
-						select bno,title,writer,name,reg_date,viewcnt,re_depth,show
+						select q.bno, q.title, q.writer, m.name, q.reg_date, q.viewcnt, q.re_depth, q.show
 						from qna_tb q, member_tb m 
 							<choose>
 								<when test="search_option != 'all' ">
 									where q.writer=m.userid
-									and show='y'and ${search_option} like #{keyword} 
+									and q.show='y'and ${search_option} like #{keyword} 
 								</when>
 								<otherwise>
 									where q.writer=m.userid
-									and show='y'
-									and (name like #{keyword}
-									or title like #{keyword}
-									or content like#{keyword}) 
+									and q.show='y'
+									and (m.name like #{keyword}
+									or q.title like #{keyword}
+									or q.content like#{keyword}) 
 								</otherwise>
 							</choose>
-						order by ref desc, re_depth asc
+						order by q.ref desc, q.re_depth asc
 					) A
 				) where rn between #{start} and #{end} 
 	</select>
@@ -35,12 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth,fileName) values
   	(seq_qna.nextval,#{title},#{content},#{writer},seq_qna.nextval,0,0,#{fileName})
 	</insert>
-	
-	<!-- 첨부파일 정보 저장 -->
-<!-- 	<insert id="addAttach">
-	 	insert into qna_attach_tb (fullName, bno) values
-	  (#{fullName}, seq_qna.currval)
-	</insert> -->
 	
 	<!-- 레코드 계산 -->
 	<select id="countArticle" resultType="int">
@@ -62,7 +56,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 
-	
 	<!-- 첨부파일 레코드 삭제 -->
 	<delete id="deleteFile">
 		delete from qna_tb
