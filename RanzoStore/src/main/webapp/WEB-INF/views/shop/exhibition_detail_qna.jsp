@@ -11,17 +11,11 @@
 </head>
 <body>
 	<h1>Q&A <span id="review-count">(${map.count})</span></h1>
-	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	<hr>
+	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	
 	<ul>
 		<c:forEach var="qna" items="${map.qnaInfo}">   
-		<%-- 
-			<c:set var="str" value="${fn:replace(str,'<','&lt;') }" />
-			<c:set var="str" value="${fn:replace(str,'>','&gt;') }" />	
-			<c:set var="str" value="${fn:replace(str,'  ','&nbsp;&nbsp;')}" />
-			<c:set var="str" value="${fn:replace(str,newLineChar,'<br>') }" />
- --%>
 			<li>
 				<div>
 					<span id='rvw-bno'>${qna.bno}</span> | 

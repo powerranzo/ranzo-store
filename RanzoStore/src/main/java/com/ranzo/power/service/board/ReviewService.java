@@ -20,4 +20,5 @@ public interface ReviewService {
 	public ReviewDTO read(int bno) throws Exception; //레코드 조회
 	int countArticle(String code) throws Exception;
 	public List<ReviewDTO> getReviewInfo(String code);
+	public float avgRating(String code);
 }

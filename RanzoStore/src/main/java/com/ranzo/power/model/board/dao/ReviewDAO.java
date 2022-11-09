@@ -20,5 +20,6 @@ public interface ReviewDAO {
 	public ReviewDTO read(int bno) throws Exception; //레코드 조회
 	public int countArticle(String code);
 	public List<ReviewDTO> getReviewInfo(String code);
+	public float avgRating(String code);
 
 }

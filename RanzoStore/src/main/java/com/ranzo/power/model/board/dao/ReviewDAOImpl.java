@@ -104,4 +104,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return reviewList;
 	}
 
+	@Override
+	public float avgRating(String code) {
+		float avgRating = sqlSession.selectOne("review.avgRating",code);
+		logger.info("### rvwDAO/avgRating/" + avgRating);
+		return avgRating;
+	}
+
 }

@@ -121,12 +121,14 @@ public class ReviewController {
 
 		List<ReviewDTO> reviewInfo = reviewService.getReviewInfo(code);
 		int count = reviewService.countArticle(code);
+		float avgRating = reviewService.avgRating(code);
 		logger.info("### getReviewInfo/reviewList {}. = " + reviewInfo);
 		logger.info("### getReviewInfo/count = " + count);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewInfo", reviewInfo); // map에 자료 저장
 		map.put("count", count); //레코드 개수 파일
+		map.put("avgRating", avgRating); //레코드 개수 파일
 		mav.addObject("map", map); // 보낼 데이터
 		
 		mav.setViewName("shop/exhibition_detail_review");

@@ -27,15 +27,11 @@
 			var target = $(this).find("a").attr('href');
 			/* console.log($target); */
 			$(target).show();
-		});
-		
+		});			
 		getProductInfo();
 		//getReserveInfo();
 		getReviewInfo();
 		getQnaInfo();
-
-		date = new Date();
-		console.log("date:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 	});
 	
 	// 전시상세
@@ -102,25 +98,30 @@
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
-<body>	
+<body>
+	<header>
+		<%@ include file="../include/menu.jsp" %>
+	</header>
+		
 	<section class="sec-prd">
 		<div class="prd-heading">
 			<span class="info-title"></span>
 			<span class="prd-title">${exhibition.title}</span>
-			<span class="prd-title">${exhibition.summary}</span>			 
+			<span class="prd-summary">${exhibition.summary}</span>			 
 			<hr>
 		</div>
 		<div class="prd-thumnail">
 			<img src="${exhibition.thumnail}">
 		</div>
 		<div class="prd-info">
-			<span class="prd-place">${exhibition.gallery}</span> 
+			<span class="prd-place"><span class="label">장소</span>${exhibition.gallery}</span> 
 			<span class="prd-period"> 
+				<span class="label">기간</span>
 				<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
 				<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 			</span>
-<%-- 			<span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
-			<span><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
+<%-- 			<span><span class="label">가격</span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
+			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 		</div>
 		<div>
 			<!-- 관리자용 -->
@@ -144,11 +145,11 @@
 		<div class="tab-content" id="reviewInfo"></div>
 		<div class="tab-content" id="qnaInfo" ></div>
 	</section>
-<%-- 
+
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>
-	 --%>
+
 </body>
 </html>
 

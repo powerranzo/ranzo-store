@@ -3,12 +3,12 @@
 /* 검색 영역*/
 .sec-search {
 	with: 100%;
-	diplay: flex;	
+	/* diplay: flex; */
 	color: #424242;
 }
 
 .sec-search div .sort {
-	flex: none;
+	/* flex: none; */
 }
 
 .sec-search div .filter {

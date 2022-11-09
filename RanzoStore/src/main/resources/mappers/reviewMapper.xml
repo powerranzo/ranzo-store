@@ -117,6 +117,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where product = #{code}
 		and show = 'y'
 	</select>
+	
+	<select id="avgRating" resultType="float">
+		select nvl(avg(rating),0)
+		from review_tb 
+		where product = #{code} 
+		and show='y'
+	</select>
 
 	<select id="getReviewInfo" resultType="ReviewDTO">
 		select rownum as bno, rating, product, writer, subject, content, reg_date, viewcnt, show

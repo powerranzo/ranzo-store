@@ -42,6 +42,7 @@ $(function(){
 
 
 function getList(){
+	// 검색 필터
 	sort = $('.sort .selected').text();
 	console.info("sort"+sort);
 	filter = $('.filter .selected').toArray();
@@ -52,7 +53,7 @@ function getList(){
 		location.push(filter[i].innerHTML);
 	}
 	console.info("location"+location);
-	
+
 	$.ajax({
 		type: "get",
 		url: "${path}/shop/exhibition/list",
@@ -72,7 +73,9 @@ function getList(){
 </script>
 </head>
 <body>
-	<%@ include file="../include/menu.jsp" %>
+	<header>
+		<%@ include file="../include/menu.jsp" %>
+	</header>
 	
 	<section class="sec-content">
 		<h2>현재전시</h2>
@@ -106,7 +109,10 @@ function getList(){
 		
 	</section>
 	
-	<%@ include file="../include/footer.jsp"%>
+	<footer>
+		<%@ include file="../include/footer.jsp"%>
+	</footer>
+	
 </body>
 </html>
 
