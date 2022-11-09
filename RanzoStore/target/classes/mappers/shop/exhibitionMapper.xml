@@ -14,13 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE sysdate <= end_date
 		]]>
 		
-
-		
-		AND location IN
-		<foreach collection="location" item="item" open="(" close=")" separator=",">
-		#{item}
-		</foreach>
-
+	<choose>
+		<when test="!location.contains('전체')">			
+			AND location IN
+			<foreach collection="location" item="item" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		</when>
+	</choose>
 		
 	<choose>
 		<when test="sort == '별점 높은순'">
@@ -32,9 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<when test="sort == '가격 낮은순'">
 			ORDER BY price desc
 		</when>
-		<otherwise>
+		<when test="sort == '종료 임박순'">
 			ORDER BY end_date
-		</otherwise>
+		</when>
 	</choose>
 	</select>
 	

@@ -34,6 +34,8 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		 int n = 0; for (String target : location) { map.put("location" + n++,
 		 target); }
 		 */
+		logger.info("### ExhDAO/location.contains/" + location.contains("전체"));
+		logger.info("### ExhDAO/location.size/" + location.size());
 		logger.info("### ExhDAO/map/" + map);
 
 		List<ExhibitionDTO> list = sqlSession.selectList("exhibition.list", map);

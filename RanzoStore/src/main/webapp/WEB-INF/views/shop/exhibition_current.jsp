@@ -97,7 +97,7 @@ function getList(){
 					<li id="rating">별점 높은순</li>
 					<li id="review">리뷰 많은순</li>
 					<li id ="end_date">종료 임박순</li>
-					<li id ="price">최저가순</li>
+					<li id ="price">가격 낮은순</li>
 				</ul>	
 			</div>
 		</div>
