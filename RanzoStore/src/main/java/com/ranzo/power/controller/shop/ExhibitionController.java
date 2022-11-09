@@ -42,7 +42,7 @@ public class ExhibitionController {
 			@RequestParam(defaultValue = "리뷰 많은순") String sort,
 			@RequestParam(defaultValue = "전체") List<String> location,			
 			ModelAndView mav) {
-		List<ExhibitionDTO> list = exhibitionService.listProduct();
+		List<ExhibitionDTO> list = exhibitionService.listProduct(sort, location);
 		
 		logger.info("ExhController/getList/sort/" + sort);
 		logger.info("ExhController/getList/location/" + location);

@@ -42,16 +42,16 @@ $(function(){
 
 
 function getList(){
-	console.info("getlistajax1");	
 	sort = $('.sort .selected').text();
-	console.info(sort);
+	console.info("sort"+sort);
 	filter = $('.filter .selected').toArray();
-	console.info(filter);
+	console.info("filter"+filter);
 	var location = [];
 	for(var i=0 ; i<filter.length ; i++){
+		//location.push(filter[i].innerHTML);
 		location.push(filter[i].innerHTML);
 	}
-	console.info(location);
+	console.info("location"+location);
 	
 	$.ajax({
 		type: "get",
@@ -75,7 +75,7 @@ function getList(){
 	<%@ include file="../include/menu.jsp" %>
 	
 	<section class="sec-content">
-		<h2>현재전시 <span>()</span></h2>
+		<h2>현재전시</h2>
 		<hr>
 		<div class="sec-search">
 
@@ -94,9 +94,10 @@ function getList(){
 
 			<div>
 				<ul class="sort">
-					<li>리뷰 많은순</li>
-					<li>종료 임박순</li>
-					<li>최저가순</li>
+					<li id="rating">별점 높은순</li>
+					<li id="review">리뷰 많은순</li>
+					<li id ="end_date">종료 임박순</li>
+					<li id ="price">최저가순</li>
 				</ul>	
 			</div>
 		</div>

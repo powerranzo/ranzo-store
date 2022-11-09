@@ -35,7 +35,7 @@ function getList(){
 	<%@ include file="../include/menu.jsp" %>
 	
 	<section class="sec-content">
-		<h2>현재전시 <span>()</span></h2>
+		<h2>지난전시</h2>
 		<hr>
 		<div class="sec-search">
 

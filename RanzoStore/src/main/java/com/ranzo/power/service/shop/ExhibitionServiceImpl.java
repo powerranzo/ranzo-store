@@ -21,8 +21,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	ExhibitionDAO exhibitionDAO;
 
 	@Override
-	public List<ExhibitionDTO> listProduct() {
-		return exhibitionDAO.listProduct();
+	public List<ExhibitionDTO> listProduct(String sort, List<String> location) {
+		return exhibitionDAO.listProduct(sort, location);
 	}
 
 	@Override

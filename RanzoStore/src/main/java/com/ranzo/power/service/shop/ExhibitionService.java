@@ -7,7 +7,7 @@ import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface ExhibitionService {
 
-	List<ExhibitionDTO> listProduct(); //목록보기
+	List<ExhibitionDTO> listProduct(String sort, List<String> location); //목록보기
 	ExhibitionDTO detailProduct(String exhibitionCode);//상세보기
 	void updateProduct(ExhibitionDTO dto);//수정
 	void deleteProduct(String exhibitionCode);//삭제
