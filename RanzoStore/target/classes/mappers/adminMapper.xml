@@ -588,7 +588,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getPopupOn" resultType="PopupDTO">
 		select no, title, img_src, img_width, img_height, pos_width, pos_height,
-		filename, filesize, start_date, end_date
+		filename, filesize, start_date, end_date, show
 		from popup_tb
 		where show='y' and 
 		(<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>

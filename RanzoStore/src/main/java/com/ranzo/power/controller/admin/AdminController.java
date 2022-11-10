@@ -333,12 +333,14 @@ public class AdminController {
 			uploadService.deleteServerFile(fileName, request, dirName);
 			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, dirName);
 			img_src=(String)fileInfo.get("fileUrl");
-			dto.setImg_src(img_src);
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
+//			dto.setImg_src(img_src);
+
 		}else {
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("/")+1));
 		}
+		dto.setImg_src(img_src);
 		dto.setStart_date(DateUtils.stringToDate(DateUtils.dateToString(dto.getStart_date())+" "+start_time, "yyyy-MM-dd HH:mm"));
 		dto.setEnd_date(DateUtils.stringToDate(DateUtils.dateToString(dto.getEnd_date())+" "+end_time, "yyyy-MM-dd HH:mm"));
 		adminService.updatePopup(dto);
@@ -365,7 +367,11 @@ public class AdminController {
 	public List<PopupDTO> popup(PopupDTO dto) {
 		logger.info("popup.do 호출");
 		List<PopupDTO> list=adminService.getPopupOn();
+//		for(int i=0; i<list.size(); i++) {
+//			list.get(i).setStart_date(DateUtils.dateToString(date)list.get(i).getStart_date());
+//		}
 		logger.info("popup show list"+list);
+		logger.info("popup show list_date"+list.get(0).start_date+"end date:"+list.get(0).end_date);
 		return list;
 	}
 	

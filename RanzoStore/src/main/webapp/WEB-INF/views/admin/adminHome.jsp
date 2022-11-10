@@ -19,10 +19,7 @@ $.ajax({
     contentType : "application/x-www-form-urlencoded; charset=utf-8",
     dataType : "json",
     success : function(data){
-    	
-    	console.log('success 호출');
-    	console.log(data);
-    	
+    	console.log('success');
     	var list=data;
     	
     	var img_src="";
@@ -39,7 +36,7 @@ $.ajax({
     	}
     	//여러개일 수 있음.
     },error : function(){
-        //Ajax 실패시
+       console.log('error');
     }
 });
 
@@ -50,18 +47,26 @@ function popup(i){
     var url = "${path}/admin/popup_img.do?no="+i.no;
     var name = "popup";
 	var img_src=i.img_src;
-	var start_date=i.start_date;
-	var end_date=i.end_date;
-	var img_width=i.img_width;
-	var img_height=i.img_height;
-	var pos_width=i.pos_width;
-	var pos_height=i.pos_height;
 	
-	var option = "width = " + img_width + ", height = " + img_height
-				+ ", top = " + pos_height + ", left = " + pos_width
-				+ ", location = no, scrollbars = no";
-	console.log('option:'+option);
-	window.open(url, name, option);
+	var today = new Date();
+	var date = new Date(i.end_date);
+	date.setDate(date.getDate());
+	if(date.getTime() >= today.getTime()){
+		var start_date=i.start_date;
+		var end_date=i.end_date;
+		var img_width=i.img_width;
+		var img_height=i.img_height;
+		var pos_width=i.pos_width;
+		var pos_height=i.pos_height;
+		
+		var option = "width = " + img_width + ", height = " + img_height
+					+ ", top = " + pos_height + ", left = " + pos_width
+					+ ", location = no, scrollbars = no";
+		console.log('option:'+option);
+		window.open(url, name, option);
+	}else {
+		return;
+	}
 	}
 </script>
 </head>
