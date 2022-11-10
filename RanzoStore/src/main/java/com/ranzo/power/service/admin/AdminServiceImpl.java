@@ -241,7 +241,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<PopupDTO> getPopupOn() {
 		List<PopupDTO> list=new ArrayList<PopupDTO>();
 		list=adminDao.getPopupOn();
-		list.remo 
+		//list.remo 
 		return list;
 	}
 

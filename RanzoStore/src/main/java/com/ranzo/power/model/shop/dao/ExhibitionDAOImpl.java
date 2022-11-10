@@ -83,6 +83,7 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		 * logger.info("### ExhDAO/getReserveInfo/" + reserveInfo); return reserveInfo;
 		 */
 		return null;
+	}
 
 	public List<ExhibitionDTO> searchProduct(String keyword) {
 		return sqlSession.selectList("exhibition.searchlist", keyword);
