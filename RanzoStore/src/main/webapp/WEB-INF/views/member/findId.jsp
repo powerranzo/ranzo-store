@@ -35,20 +35,19 @@ $(function() {
 </script>
 <style>
 * {
-	box-sizing: content-box;
+	margin: 0; padding: 0;
 }
-
-form {
+.finddiv{
 	width: 500px;
-	height: 600px;
-	display: inline;
+	height: 650px;
+	padding-top:5%;
+	padding-bottom:5%;
+	margin: auto;
 	align-items: center;
-	position: absolute;
-	top: 62%;
-	left: 55%;
-	transform: translate(-50%, -50%);
+	text-align: center;
+	flex: 1;
+	
 }
-
 .input-field1 {
 	width: 300px;
 	height: 40px;
@@ -87,13 +86,14 @@ form {
 }
 
 .a-div {
-	padding-left: 48px;
+	text-align: center;
 }
 
 </style>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<div class="finddiv">
 	<form name="findId" method="post">
 		<div class="title">아이디 찾기</div>
 		<p>
@@ -110,5 +110,9 @@ form {
 			<a href="javascript:history.back();" class="a">이전 화면으로 </a>|<a href="${path}/member/findPwdPage.do" class="a"> 비밀번호 찾기</a>
 			</div>
 	</form>
+	</div>
+	<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>

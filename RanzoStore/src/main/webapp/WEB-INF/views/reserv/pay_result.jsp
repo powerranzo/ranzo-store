@@ -11,7 +11,7 @@
 	margin: auto;
 	padding-top: 100px;
 	width: 500px;
-	height: 500px;
+	height: 650px;
 	text-align: center;
 }
 .payresult img{

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="faq">
+ <select id="listAll" resultType="FaqDTO">
+  select *
+			from (
+			    select rownum as rn, A.*
+			    from (
+			       select * from faq_tb 			      
+						<choose>
+						 <when test="searchOption != 'all'">
+							where category=#{searchOption}
+			      	and title like '%'||#{skeyword}||'%'
+						 </when>
+						 <otherwise>
+						 where title like '%'||#{skeyword}||'%'
+						 </otherwise>					
+						</choose>
+			    ) A 
+			) where rn between #{start} and #{end}
+ </select>
+ 
+ <select id="reservList" resultType="FaqDTO">
+  select *
+			from (
+			    select rownum as rn, A.*
+			    from (
+			       select * from faq_tb
+			       where category = #{data}      	      	
+			    ) A 
+			) where rn between #{start} and #{end}
+ </select>
+ 
+ <select id="countList" resultType="int">
+  select count(*) from faq_tb
+ </select>
+ 
+ <select id="resultCount" resultType="int">
+  select count(*) from faq_tb 
+  where category = #{data}
+ </select>
+ 
+ <select id="view" resultType="FaqDTO">
+  select * from faq_tb 
+  where no=#{no}
+ </select>
+ 
+ <insert id="insert">
+ INSERT INTO FAQ_TB (no, title, content, category)
+	VALUES (seq_faq.nextval, #{title}, #{content},#{category})
+ </insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

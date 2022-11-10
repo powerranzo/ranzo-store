@@ -13,13 +13,19 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <%@ include file="include/header.jsp"%>
-<link rel="stylesheet" href="${path}/resources/css/home.css">
+
 <script type="text/javascript">
 	function btn1() {
 		location.href = "${path}/shop/exhibition/detail/testcode04";
 	}
 	function btn2() {
 		location.href = "${path}/reserv/detail/testcode04";
+	}
+	function btn3() {
+		location.href = "${path}/shop/exhibition/detail/testcode06";
+	}
+	function btn4() {
+		location.href = "${path}/reserv/detail/testcode06";
 	}
 </script>
 </head>
@@ -31,12 +37,12 @@
 			<div class="swiper-slide">
 				<a><img class="simage"
 					src="${path}/resources/images/main_1.jpg"></a>
-				<div class="text1">디뮤지엄</div>
+				<div class="text1">국립중앙박물관</div>
 				<div class="image_text">
-					<p style="font-size: 18px; font-weight: bold;">2022.03.16 ~
-						2022.11.27</p>
-					<p style="font-weight: bold;" id="title1">Romantic Days</p>
-					<p>어쨌든, 사랑</p>
+					<p style="font-size: 18px; font-weight: bold;">2022.10.25 ~
+						2023.03.01</p>
+					<p style="font-weight: bold;" id="title1">합스부르크 600년,</p>
+					<p>매혹의 걸작들</p>
 				</div>
 				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
 				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
@@ -49,8 +55,8 @@
 					<p style="font-weight: bold;" id="title1">Then, There</p>
 					<p>장 줄리앙</p>
 				</div>
-				<button class="btn1" type="button" onclick="btn1()">자세히보기</button>
-				<button class="btn2" type="button" onclick="btn2()">예매하기</button>
+				<button class="btn1" type="button" onclick="btn3()">자세히보기</button>
+				<button class="btn2" type="button" onclick="btn4()">예매하기</button>
 			</div>
 		</div>
 
@@ -95,17 +101,18 @@
 		</div>
 		<div style="display: inline-block;" class="reco">
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
+			<a href="${path}/shop/exhibition/detail/testcode31"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
 			</div>
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
+			<a href="${path}/shop/exhibition/detail/testcode02"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
 			</div>
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="r3"></a>
+			<a href="${path}/shop/exhibition/detail/testcode26"><img src="https://ticketimage.interpark.com/Play/image/large/22/22004804_p.gif" id="r3"></a>
 			</div>
 		</div>
 	</div>
-
+<footer>
 <%@ include file="include/footer.jsp"%>
+</footer>
 </body>
 </html>

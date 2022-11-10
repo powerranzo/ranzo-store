@@ -6,34 +6,33 @@
 <meta charset="UTF-8">
 <title>회원 정보 수정 확인</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 <script type="text/javascript">
 <c:if test="${message == 'error' }">
 	alert("비밀번호를 확인해주세요.");
 </c:if>
 </script>
 <style>
-* {box-sizing: content-box;}
-
 * {
 	margin:0px; 
 }
 .content{
-	margin: 20px 80px 0 80px;
-
+	margin: 0 80px 0 80px;
 }
 section {
+	margin-top:6%;
 	width: 75%;
-	float: right;
+	float: left;
+	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
 	padding:5px;
 	float: left;
 	display: inline-block;
-	min-height: 100%;
-	width: 80%;
-	flex: 1;
+	width: 90%;
+/* 	min-height: 100%;
+	flex: 1; */
 }
 .p {
 	margin-bottom: 15px;
@@ -55,7 +54,7 @@ section {
 	font-size: 1px;
 }
 
-button {
+#btnCheck{
 	background-color: black;
 	color: white;
 	width: 320px;
@@ -68,7 +67,6 @@ footer{
 	clear : both;
 	bottom: 0;
 }
-
 html, body{
 	height: 100%;
 }

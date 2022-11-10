@@ -16,7 +16,7 @@ public interface ReservDAO {
 	public int firstorder(String userid);
 	public List<ReservDTO> canclelist(String userid, int start, int end);
 	public int countcancle(String userid);
-	public List<ReservDTO> mypagelist(String userid);
+	public List<ReservDTO> mypagelist(String userid, String today, String before7);
 
 
 	
