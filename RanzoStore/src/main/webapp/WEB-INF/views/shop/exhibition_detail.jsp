@@ -29,7 +29,7 @@
 			$(target).show();
 		});			
 		getProductInfo();
-		//getReserveInfo();
+		getReserveInfo();
 		getReviewInfo();
 		getQnaInfo();
 	});
@@ -134,14 +134,14 @@
 
 	<section class="sec-detail">
 		<ul class="tab-list"> 
-			<li><a href="productInfo">전시상세</a></li>
-			<li><a href="#reservInfo">예매/취소</a></li>
+			<li><a href="#productInfo">전시상세</a></li>
+			<li><a href="#reserveInfo">예매/취소</a></li>
 			<li><a href="#reviewInfo">관람후기</a></li>
 			<li><a href="#qnaInfo">Q&A</a></li>
 		</ul>
 
 		<div class="tab-content" id="productInfo"></div>
-		<div class="tab-content" id="reservInfo"></div>
+		<div class="tab-content" id="reserveInfo"></div>
 		<div class="tab-content" id="reviewInfo"></div>
 		<div class="tab-content" id="qnaInfo" ></div>
 	</section>

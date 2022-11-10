@@ -78,9 +78,11 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 
 	@Override
 	public String getReserveInfo(String code) {
-		String reserveInfo = sqlSession.selectOne("exhibition.getReserveInfo", code);
-		logger.info("### ExhDAO/getReserveInfo/" + reserveInfo);
-		return reserveInfo;
+		/*
+		 * String reserveInfo = sqlSession.selectOne("exhibition.getReserveInfo", code);
+		 * logger.info("### ExhDAO/getReserveInfo/" + reserveInfo); return reserveInfo;
+		 */
+		return null;
 	}
 
 }

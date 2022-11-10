@@ -27,7 +27,7 @@ public class ExhibitionController {
 	@Inject
 	ExhibitionService exhibitionService;
 
-	// 현재전시
+	// 현재전시 페이지
 	@RequestMapping("list/current") // 세부 rul
 	public ModelAndView listCurrent(ModelAndView mav) {
 		mav.setViewName("/shop/exhibition_current");
@@ -53,17 +53,16 @@ public class ExhibitionController {
 		return mav;
 	}
 
-	// 전시 상세
+	// 전시 상세 페이지
 	@RequestMapping("detail/{exhibitionCode}")
 	public ModelAndView detail(@PathVariable String exhibitionCode, ModelAndView mav) {
 		mav.setViewName("/shop/exhibition_detail");
 		mav.addObject("exhibition", exhibitionService.detailProduct(exhibitionCode));
-		logger.debug(mav.toString());
-		logger.debug("ExhController/list/" + mav);
+		logger.info("ExhController/mav/" + mav);
 		return mav;
 	}
 
-	//
+	// 전시 상세
 	@RequestMapping("getProductInfo")
 	public ModelAndView getProductInfo(String code, ModelAndView mav) throws Exception {
 		logger.info("### getProductInfo/code = " + code);
@@ -72,19 +71,19 @@ public class ExhibitionController {
 		logger.info("### getProductInfo/productInfo = " + productInfo);
 		mav.addObject("productInfo", productInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_product");
-		logger.info("### getProductInfo/mav/" + mav);
+		logger.info("### ExhController/mav/" + mav);
 		return mav;
 	}
 
-	//
+	// 예매/취소 안내
 	@RequestMapping("getReserveInfo")
 	public ModelAndView getReserveInfo(String code, ModelAndView mav) throws Exception {
 		logger.info("### reserveInfo/code = " + code);
 
-		String reserveInfo = exhibitionService.getReserveInfo(code);
-		logger.info("### getReserveInfo/reviewList {}. = " + reserveInfo);
+		//String reserveInfo = exhibitionService.getReserveInfo(code);
+		//logger.info("### getReserveInfo/reviewList {}. = " + reserveInfo);
 
-		mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
+		//mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_reserve");
 		logger.info("### getReserveInfo/mav/" + mav);
 		return mav;
