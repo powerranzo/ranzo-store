@@ -75,8 +75,7 @@
 	       <mapping path="/board/review/update.do"/>
 	       <mapping path="/board/review/delete.do"/>
 	       
-	       
-				<beans:ref bean="loginInterceptor" />
+		<beans:ref bean="loginInterceptor" />
 			</interceptor>		
 			<interceptor>
 				<mapping path="/admin/**/" />

@@ -7,12 +7,17 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO {
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 
 	@Inject
 	SqlSession sqlSession;
@@ -70,6 +75,20 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public void update_reply(QnaDTO dto) throws Exception {
 		sqlSession.update("qna.update_reply", dto);		
+	}
+
+	@Override
+	public List<QnaDTO> getQnaInfo(String code) {
+		List<QnaDTO> qnaInfo= sqlSession.selectList("qna.getQnaInfo", code);
+		logger.info("### QnaDAO/getQnaInfo{}. " + qnaInfo);
+		return qnaInfo;
+	}
+
+	@Override
+	public int countArticle(String code) {
+		int count = sqlSession.selectOne("qna.countArticleExhibition",code);
+		logger.info("### QnaDAO/count" + count);
+		return count;
 	}
 
 }

@@ -22,4 +22,8 @@ public class MediaUtils {
 	public static String getServerUploadPath(HttpServletRequest request) {
 		return request.getServletContext().getRealPath("/resources/images/");
 	} 
+	
+	public static String getFileUrlPath(HttpServletRequest request) {
+		return request.getContextPath()+"/resources/images/";
+	}
 }
