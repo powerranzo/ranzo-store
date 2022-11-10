@@ -24,7 +24,7 @@ td {
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>Review게시판</h2>
+<h2><a href="${path}/board/review/list.do">REVIEW</a></h2>
 <br>
 
 <table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
