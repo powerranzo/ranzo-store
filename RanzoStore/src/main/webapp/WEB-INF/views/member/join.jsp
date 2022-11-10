@@ -295,7 +295,7 @@ tr {
 			<p>
 			<tr>
 				<td><label>성별</label></td>
-				<td><div class="gender-chk"><input type="radio" name="gender" value="여자" />여자 
+				<td><div class="gender-chk"><input type="radio" name="gender" value="여자" checked />여자 
 				<input type="radio" name="gender" value="남자" />남자
 					</div></td>
 			</tr>
