@@ -10,8 +10,6 @@
 		<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매목록</a>
 		<p><br>
 		<a class="a1" href="#">위시리스트</a>
-<%-- 		<p><br>
-		<a class="a1" href="${path}/member/addressList.do">배송지관리</a> --%>
 		<p><br>
 		<a class="a1" href="${path}/member/myReview.do">고객리뷰</a>
 		<p><br>
