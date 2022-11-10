@@ -196,4 +196,9 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.popupShow", no);
 	}
 
+	@Override
+	public List<PopupDTO> getPopupOn(String today) {
+		return sqlSession.selectList("admin.getPopupOn", today);
+	}
+
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -34,9 +34,9 @@ $(function(){ //페이지가 뜨자마자 실행
 	$("#btnList").click(function(){
 		location.href="${path}/board/qna/list.do";
 	});
-	//수정 버튼
-	$("#btnUpdate").click(function(){
-		document.form1.action="${path}/board/qna/update.do";
+	//수정하러 이동하는 버튼
+	$("#btnEdit").click(function(){
+		document.form1.action="${path}/board/qna/edit.do";
 		document.form1.submit();
 	});
 	//삭제 버튼
@@ -46,11 +46,6 @@ $(function(){ //페이지가 뜨자마자 실행
 			document.form1.submit();
 		}
 	});
-	//답변 버튼
-	/* $("#btnReply").click(function() {
-		location.href="${path}/board/qna/reply_write.do";
-		//location.href="${path}/board/qna/reply_write.do?bno="+${dto.bno};
-	}); */
 });
 </script>
 
@@ -59,14 +54,14 @@ $(function(){ //페이지가 뜨자마자 실행
 <div align="center">
 <%@ include file="../include/menu.jsp" %>
 
-<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do">
+<form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do" enctype="multipart/form-data">
  <table  class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
  	<tr>
  		<th colspan="2" style="background-color: #eeeeee; text-align: center;">문의 내역 보기</th>
  	</tr>
  	<tr>
  		<th>제목</th>
- 		<td><input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요"></td>
+ 		<td>${dto.title}</td>
  	</tr>
  	<tr>
  		<th>글 번호</th>
@@ -79,25 +74,19 @@ $(function(){ //페이지가 뜨자마자 실행
 	 <tr>
  		<th>내용</th>
  		<td>
- 			<div style="width: 700px;">	
-				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
+ 			<div style="height: 200px;">	
+				${dto.content}
 			</div>
  		</td>
  	</tr>
- 	<tr>
- 		<th>첨부파일</th>
- 		<td>
- 			<input type="file" name="uploadFile">
- 		</td>
- 	</tr> 
-	<c:if test="${board.fileName ne null}">
+ 	<!-- 첨부파일이 있다면-->
+	<c:if test="${dto.fileName ne null}">
 			<tr>
-				<td bgcolor="orange">첨부파일</td>
-				<td align="left"><a href="fileDownload.do?fileName=${board.fileName}">${board.fileName}</a></td>
+				<th>업로드된 파일</th>
+				<td><a href="${path}/board/download/fileDownload.do?fileName=${dto.fileName}">${dto.fileName}</a></td>
 			</tr>
 	</c:if>
- </table>
-	
+ </table>	
 
 	<br>
 	<div style="width: 700px;" align="center">
@@ -106,10 +95,11 @@ $(function(){ //페이지가 뜨자마자 실행
 			
 		<!-- 본인만 수정,삭제 버튼 표시 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
+			<button type="button" id="btnEdit" class="btn btn-primary">수정</button>
 			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		
+		<!-- 관리자 권한이 있을 경우만 답변 가능 -->
 		<c:if test="${sessionScope.admin == 'y' }">
 			<button type="button" id="btnReply" onclick="location.href='${path}/board/qna/reply_write.do?bno=${dto.bno}'" class="btn btn-primary">답변</button>		
 		</c:if>

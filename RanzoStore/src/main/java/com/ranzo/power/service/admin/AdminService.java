@@ -34,10 +34,6 @@ public interface AdminService {
 	public void deletePopup(int[] pop_no);
 	public void deletePopupFile(int no);
 	public void popupShow(int no);
-	public List<PopupDTO> getpopupOn();
-	
-
-	
-	
+	public List<PopupDTO> getPopupOn();
 	
 }

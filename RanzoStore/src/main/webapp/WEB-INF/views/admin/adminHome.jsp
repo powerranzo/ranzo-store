@@ -9,7 +9,7 @@
 <%@ include file="../include/adminHeader.jspf" %>
 <script type="text/javascript">
 $(function(){
-	//
+// 	window.open("${path}/admin/popup_view.do", "pop", "width = 500, height = 500, top = 100, left = 200, location = no");
 	//날짜체크
 // 	$.ajaxSettings.traditional = true;
 $.ajax({
@@ -19,23 +19,50 @@ $.ajax({
     contentType : "application/x-www-form-urlencoded; charset=utf-8",
     dataType : "json",
     success : function(data){
+    	
+    	console.log('success 호출');
+    	console.log(data);
+    	
+    	var list=data;
+    	
+    	var img_src="";
+    	var start_date="";
+    	var end_date="";
+    	var img_width="";
+    	var img_height="";
+    	var pos_width="";
+    	var pos_height="";
+    	
+    	for(var i=0; i<list.length; i++){
+    		console.log(list[i]);
+    		popup(list[i]);
+    	}
     	//여러개일 수 있음.
-    	var url = "${path}/admin/popup.do";
-    	var name = "popup main";
-    	var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
-    	popup(url, name, option);
     },error : function(){
         //Ajax 실패시
     }
 });
-	popup();
-});
-function popup(url, name, option){
-    var url = "${path}/admin/popup.do";
-    var name = "popup test";
-    var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
-    window.open(url, name, option);
-} 
+
+}); //ready
+
+function popup(i){
+	console.log('popup() 호출');
+    var url = "${path}/admin/popup_img.do?no="+i.no;
+    var name = "popup";
+	var img_src=i.img_src;
+	var start_date=i.start_date;
+	var end_date=i.end_date;
+	var img_width=i.img_width;
+	var img_height=i.img_height;
+	var pos_width=i.pos_width;
+	var pos_height=i.pos_height;
+	
+	var option = "width = " + img_width + ", height = " + img_height
+				+ ", top = " + pos_height + ", left = " + pos_width
+				+ ", location = no, scrollbars = no";
+	console.log('option:'+option);
+	window.open(url, name, option);
+	}
 </script>
 </head>
 <body>

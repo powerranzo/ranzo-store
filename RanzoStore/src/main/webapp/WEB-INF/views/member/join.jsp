@@ -179,8 +179,9 @@ function daumZipCode() {
 } */
 .joindiv{
 	margin: auto;
-	width: 500px;
+	width: 600px;
 	align-items: center;
+	text-align: center;
 }
 
 .input-field {
@@ -192,7 +193,7 @@ function daumZipCode() {
 }
 
 .input-field-b {
-	width: 210px;
+	width: 208px;
 	height: 40px;
 	border: 1px solid gray;
 	padding: 0 10px;
@@ -200,9 +201,10 @@ function daumZipCode() {
 }
 
 label {
-	width: 50px;
+	width: 100px;
 	height: 30px;
-	margin-top: 4px;
+	margin-top: 10px;
+	text-align: left;
 }
 
 #btnJoin{
@@ -218,8 +220,8 @@ label {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 84px;
-	height: 42px;
+	width: 77px;
+	height: 41px;
 	font-size: 14px;
 	border: none;
 	margin: 20px 0 0 0;
@@ -257,7 +259,7 @@ tr {
 		<br>
 		<table>
 			<tr>
-				<td width="120px"><label>아이디</label></td>
+				<td width="30%"><label>아이디</label></td>
 				<td><input class="input-field-b" type="text" id="userid" name="userid" placeholder="아이디를 입력해주세요."> 
 					<button type="button" id="btnIdChk" class="button-s" onclick="idChk()">중복확인</button>
 					<div class="msg" id="idChkMsg"></div>
@@ -293,7 +295,7 @@ tr {
 			<p>
 			<tr>
 				<td><label>성별</label></td>
-				<td><div class="gender-chk"><input type="radio" name="gender" value="여자" />여자 
+				<td><div class="gender-chk"><input type="radio" name="gender" value="여자" checked />여자 
 				<input type="radio" name="gender" value="남자" />남자
 					</div></td>
 			</tr>

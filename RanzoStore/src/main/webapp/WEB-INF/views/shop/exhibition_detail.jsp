@@ -27,74 +27,70 @@
 			var target = $(this).find("a").attr('href');
 			/* console.log($target); */
 			$(target).show();
-		});
-		
-		// 리뷰작성 (미완)
-		$("#btn-review-write").on("click", function(){alert("btn-review-write")});		
-		reviewList();
-
-		console.log("0643");
+		});			
+		getProductInfo();
+		getReserveInfo();
+		getReviewInfo();
+		getQnaInfo();
 	});
 	
-	
-	// 리뷰 리스트 ajax
-	function reviewList() {
+	// 전시상세
+	function getProductInfo() {
 		$.ajax({
-			type: "post",
-			url: "${path}/board/review/exhibitionReviewList",
-			data : {
-				code : "${exhibition.code}" 
-			},
+			type: "get",
+			url: "${path}/shop/exhibition/getProductInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : " + result);
-				result = JSON.parse(data);
-				console.info("@@@ success : " + result);
-				var html = "<ul class='review-box'>";
-				$.each(result, function(idx, review){
-					html+="<li>";
-					html+="<div class='rvw-info'>";
-					html+="<span id='rvw-bno'>${review.bno}</span> |";
-					html+="<span id='rvw-rating'>별점:${review.rating}</span> |";
-					html+="<span id='rvw-writer'>작성자 :${review.writer}</span> |";
-					html+="<span id='rvw-date'>작성일:${review.reg_date}</span>";
-					html+="</div>";
-					html+="<div class='rvw-subject'>${review.subject}</div>";
-					html+="<div class='rvw-content'>${review.content}</div>";
-					html+="</li> ";
-				});
-				$("#review-list").html(html);
-
-/*
-				$("#review-list").html(result);
-				alert("success:${map.count}");
-				console.info("stringify : "+JSON.stringify(result));
-				console.info("result[0]"+result[0].content);
-*/
+				console.debug("getProductInfo success : " + result);
+				$("#productInfo").html(result);
 			},
 			error : function (result){
-				console.error("@@@ error : " + result);
+				console.error("getProductInfo error : " + result);
 			}
 		});
 	}
 	
-	// 리뷰 
-	function reviewWrite() {
-		console.log("@@@ reviewWrite");
+	// 예매/취소
+	function getReserveInfo() {
 		$.ajax({
-			type: "post",
-			url: "${path}/board/review/exhibitionReviewWrite",
-			dataType:"json",
-			data : {
-				code : "${exhibition.code}" 
-			},
+			type: "get",
+			url: "${path}/shop/exhibition/getReserveInfo?code=${exhibition.code}",
 			success: function(result){
-				console.info("@@@ success : "+result)
-				$("#review-list").html(result); 
+				console.debug("getReserveInfo success : " + result);
+				$("#reserveInfo").html(result);
 			},
-			error : function (){
-				console.error("@@@ error : ")
-				$("#review-list").html(
-                        "<div>review function error</div>");
+			error : function (result){
+				console.error("getReserveInfo error : " + result);
+			}
+		});
+	}
+	
+	
+	// 관람후기
+	function getReviewInfo() {
+		$.ajax({
+			type: "get",
+			url: "${path}/board/review/getReviewInfo?code=${exhibition.code}",
+			success: function(result){
+				console.debug("getReviewInfo success : " + result);
+				$("#reviewInfo").html(result);
+			},
+			error : function (result){
+				console.error("getReviewInfo error : " + result);
+			}
+		});
+	}
+	
+	// Q&A
+	function getQnaInfo() {
+		$.ajax({
+			type: "get",
+			url: "${path}/board/qna/getQnaInfo?code=${exhibition.code}",
+			success: function(result){
+				console.debug("getQnaInfo success : " + result);
+				$("#qnaInfo").html(result);
+			},
+			error : function (result){
+				console.error("getQnaInfo error : " + result);
 			}
 		});
 	}
@@ -103,26 +99,29 @@
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
 <body>
-	<%@ include file="../include/menu.jsp"%>
-	
+	<header>
+		<%@ include file="../include/menu.jsp" %>
+	</header>
+		
 	<section class="sec-prd">
 		<div class="prd-heading">
 			<span class="info-title"></span>
 			<span class="prd-title">${exhibition.title}</span>
-			<span class="prd-title">${exhibition.summary}</span>			 
+			<span class="prd-summary">${exhibition.summary}</span>			 
 			<hr>
 		</div>
 		<div class="prd-thumnail">
 			<img src="${exhibition.thumnail}">
 		</div>
 		<div class="prd-info">
-			<span class="prd-place">${exhibition.gallery}</span> 
+			<span class="prd-place"><span class="label">장소</span>${exhibition.gallery}</span> 
 			<span class="prd-period"> 
+				<span class="label">기간</span>
 				<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
 				<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 			</span>
-<%-- 			<span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
-			<span><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
+<%-- 			<span><span class="label">가격</span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
+			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 		</div>
 		<div>
 			<!-- 관리자용 -->
@@ -135,32 +134,21 @@
 
 	<section class="sec-detail">
 		<ul class="tab-list"> 
-			<li><a href="#prdInfo">전시상세</a></li>
-			<li><a href="#reservInfo">예매/취소</a></li>
+			<li><a href="#productInfo">전시상세</a></li>
+			<li><a href="#reserveInfo">예매/취소</a></li>
 			<li><a href="#reviewInfo">관람후기</a></li>
 			<li><a href="#qnaInfo">Q&A</a></li>
 		</ul>
 
-		<div class="tab-content" id="prdInfo"><img class="img-prdInfo" src="${exhibition.product_info}"></div>
-		<div class="tab-content" id="reservInfo">예매/취소</div>
-		<div class="tab-content" id="reviewInfo">
-			<h1>관람후기 div <span id="review-count">${map.count}</span></h1>
-			<hr>
-			게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
-			<div id="review-content">
-				<div class="reviewInfo-Input">
-					<!-- rating  -->
-		            <textarea class="review-textarea" id="com_content" cols="80" rows="2" name="com_content" ></textarea>
-	             </div>
-				<div class="review-util">
-	            	<button id="btn-attach"> 첨부파일</button>
-	            	<button id="btn-review-write"> 리뷰등록</button>
-	            </div>
-			</div>
-			<div id="review-list"></div>
-		</div>
-		<div class="tab-content" id="qnaInfo" >Q&A</div>
+		<div class="tab-content" id="productInfo"></div>
+		<div class="tab-content" id="reserveInfo"></div>
+		<div class="tab-content" id="reviewInfo"></div>
+		<div class="tab-content" id="qnaInfo" ></div>
 	</section>
+
+	<footer>
+		<%@ include file="../include/footer.jsp"%>
+	</footer>
 
 </body>
 </html>

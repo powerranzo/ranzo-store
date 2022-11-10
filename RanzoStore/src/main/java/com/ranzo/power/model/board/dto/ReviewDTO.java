@@ -1,6 +1,5 @@
 package com.ranzo.power.model.board.dto;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class ReviewDTO {
@@ -13,7 +12,6 @@ public class ReviewDTO {
 	private String content; //내용
 	private Date reg_date; //작성일자 
 	private int viewcnt; //조회수
-	private String[] files; //첨부파일 이름 배열
 	private String show; //화면 표시 여부
 	private int rating; //별점
 	private int thumb; //좋아요
@@ -73,12 +71,7 @@ public class ReviewDTO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	public String[] getFiles() {
-		return files;
-	}
-	public void setFiles(String[] files) {
-		this.files = files;
-	}
+
 	public String getShow() {
 		return show;
 	}
@@ -108,7 +101,8 @@ public class ReviewDTO {
 	public String toString() {
 		return "ReviewDTO [bno=" + bno + ", product=" + product + ", writer=" + writer + ", name=" + name + ", subject="
 				+ subject + ", title=" + title + ", content=" + content + ", reg_date=" + reg_date + ", viewcnt="
-				+ viewcnt + ", files=" + Arrays.toString(files) + ", show=" + show + ", rating=" + rating + ", thumb="
-				+ thumb + ", cnt=" + cnt + "]";
+				+ viewcnt + ", show=" + show + ", rating=" + rating + ", thumb=" + thumb + ", cnt=" + cnt + "]";
 	}
+
+	
 }

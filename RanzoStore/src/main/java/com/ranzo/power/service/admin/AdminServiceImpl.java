@@ -1,6 +1,7 @@
 package com.ranzo.power.service.admin;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -234,6 +235,13 @@ public class AdminServiceImpl implements AdminService {
 	public void popupShow(int no) {
 		adminDao.popupShow(no);
 		
+	}
+
+	@Override
+	public List<PopupDTO> getPopupOn() {
+		List<PopupDTO> list=new ArrayList<PopupDTO>();
+		list=adminDao.getPopupOn(DateUtils.getToday());
+		return list;
 	}
 
 
