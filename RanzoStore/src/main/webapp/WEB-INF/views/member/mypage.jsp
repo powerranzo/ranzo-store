@@ -103,7 +103,7 @@ function orderlist(){
 			</div>
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
-			<a class="a1" href="#">나의 후기</a>
+			<a class="a1" href="${path}/member/myReview.do">나의 후기</a>
 			</div>
 			<div class="myinfo">
 			<img src="${path}/resources/images/user_icon.png" height="20">
@@ -113,7 +113,7 @@ function orderlist(){
 		<article class="recentOrder">
 			<div class="title-s">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
-			<a class="a1" href="#">최근 예매 내역 ></a></div>
+			<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a></div>
  			<hr noshade size="1px" color="black"> 
  			<div id="resultList"></div>
 		</article>
