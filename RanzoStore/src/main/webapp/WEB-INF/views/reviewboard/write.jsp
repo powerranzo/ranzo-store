@@ -44,7 +44,7 @@ $(function(){
 		document.form1.submit();
 	});
 });
-</script>
+</script> 
 
 </head>
 <body>
