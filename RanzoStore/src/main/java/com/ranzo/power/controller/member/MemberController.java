@@ -246,12 +246,6 @@ public class MemberController {
 		return "home";
 	}
 	
-//	//배송지관리 페이지 이동
-//	@RequestMapping("addressList.do")
-//	public String addressList() {
-//		return "member/addressList";
-//	}
-	
 	//마이페이지 - 상품 문의
 	@RequestMapping("myInquiry.do")
 	public ModelAndView myInquiry() {
