@@ -44,14 +44,13 @@ $(function(){
 		});
 	});
 	
-	
 	//목록 버튼
 	$("#btnList").click(function(){
 		location.href="${path}/board/review/list.do";
 	});
 	//수정 버튼
-	$("#btnEdit").click(function(){
-		document.form1.action="${path}/board/review/edit.do";
+	$("#btnUpdate").click(function(){
+		document.form1.action="${path}/board/review/update.do";
 		document.form1.submit();
 	});
 	//삭제 버튼
@@ -66,7 +65,6 @@ $(function(){
 		document.form1.submit();
 	});
 });
-
 //댓글 목록 출력 함수
 function listReply(){
 	$.ajax({
@@ -78,6 +76,20 @@ function listReply(){
 		}
 	});
 }
+//타임스탬프값(숫자형)을 문자열 형식으로 변환
+function changeDate(date){
+	date = new Date(parseInt(date));
+	year=date.getFullYear();
+	month=date.getMonth();
+	day=date.getDate();
+	hour=date.getHours();
+	minute=date.getMinutes();
+	second=date.getSeconds();
+	strDate = 
+		year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+	return strDate;
+}
+
 </script>
 </head>
 <body>
@@ -92,25 +104,31 @@ function listReply(){
 		<tr>
 			<th>별점</th>
 			<td>
-				<c:forEach begin="1" end="${dto.rating}" step="1">
-					<span class="glyphicon glyphicon-star"></span>
-				</c:forEach>
+				<select name="rating">
+					<option value="5" selected="selected"> ★★★★★</option>
+					<option value="4"> ★★★★</option>
+					<option value="3"> ★★★</option>
+					<option value="2"> ★★</option>
+					<option value="1"> ★</option>
+				</select>
 			</td>
 		</tr>
 		<tr>
 			<th>전시코드</th>
-			<td>${dto.product}</td>
+			<td>				
+			<input id="product" name="product" value="${dto.product}" placeholder="전시명을 입력하세요.">
+			</td>
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td>${dto.subject}</td>
+			<td>
+			<input id="subject" name="subject" value="${dto.subject}" size="70" placeholder="제목을 입력하세요.">
+			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<div style="height: 300px;" >
-					${dto.content}
-				</div>
+			<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 			</td>
 		</tr>
 	</table>
@@ -121,13 +139,13 @@ function listReply(){
 		
 		<!-- 본인만 수정, 삭제 버튼 표시 -->		
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnEdit" class="btn btn-primary">수정</button>
+			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
 			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 			<button type="button" id="btnList" class="btn btn-secondary">목록</button>
 	</div>
 </form>
-<hr>
+<%-- <hr>
 <h3>댓글</h3><small>(로그인 후 사용 가능)</small> 
 <div class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 	 <c:if test="${sessionScope.userid != null }">
@@ -136,7 +154,7 @@ function listReply(){
 	 </c:if>
 </div>
 <!-- 댓글 목록 -->
-<div id="listReply"></div>
+<div id="listReply"></div> --%>
 </div>
 </body>
 </html>

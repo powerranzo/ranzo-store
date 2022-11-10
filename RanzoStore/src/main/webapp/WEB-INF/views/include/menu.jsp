@@ -27,6 +27,14 @@
 	}); 
 </script>
 
+
+<div style="text-align: center;">
+
+	<a href="${path}/reserv/list/${sessionScope.userid}">주문내역 확인하기 test</a>
+
+</div>
+<hr>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 	<nav class="nav">
 		<div class="logo">

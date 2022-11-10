@@ -34,9 +34,9 @@ $(function(){ //페이지가 뜨자마자 실행
 	$("#btnList").click(function(){
 		location.href="${path}/board/qna/list.do";
 	});
-	//수정하러 이동하는 버튼
-	$("#btnEdit").click(function(){
-		document.form1.action="${path}/board/qna/edit.do";
+	//수정 버튼
+	$("#btnUpdate").click(function(){
+		document.form1.action="${path}/board/qna/update.do";
 		document.form1.submit();
 	});
 	//삭제 버튼
@@ -61,7 +61,7 @@ $(function(){ //페이지가 뜨자마자 실행
  	</tr>
  	<tr>
  		<th>제목</th>
- 		<td>${dto.title}</td>
+ 		<td><input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요"></td>
  	</tr>
  	<tr>
  		<th>글 번호</th>
@@ -74,11 +74,17 @@ $(function(){ //페이지가 뜨자마자 실행
 	 <tr>
  		<th>내용</th>
  		<td>
- 			<div style="height: 200px;">	
-				${dto.content}
+ 			<div style="width: 700px;">	
+				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 			</div>
  		</td>
  	</tr>
+ 	<tr>
+ 		<th>첨부파일</th>
+ 		<td>
+ 			<input type="file" name="uploadFile">
+ 		</td>
+ 	</tr> 
  	<!-- 첨부파일이 있다면-->
 	<c:if test="${dto.fileName ne null}">
 			<tr>
@@ -95,7 +101,7 @@ $(function(){ //페이지가 뜨자마자 실행
 			
 		<!-- 본인만 수정,삭제 버튼 표시 -->
 		<c:if test="${sessionScope.userid == dto.writer}">
-			<button type="button" id="btnEdit" class="btn btn-primary">수정</button>
+			<button type="button" id="btnUpdate" class="btn btn-primary">수정</button>
 			<button type="button" id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		
