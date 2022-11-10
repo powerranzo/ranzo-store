@@ -24,11 +24,11 @@ function list(page) {
 }
 </script>
 
-<style type="text/css">
+<!-- <style type="text/css">
 td {
 	text-align: center;
 }
-</style>
+</style> -->
 
 </head>
 <body>
@@ -36,7 +36,7 @@ td {
 <h2><a href="${path}/board/qna/list.do">QNA</a></h2>
 <br>
 
-<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
+<table class="table table-striped" style="width: 100%;  border: 1px solid #dddddd">
 <tr>
 	<th style="background-color: #eeeeee; text-align: center; width: 10%;">No.</th>
 	<th style="background-color: #eeeeee; text-align: center; width: 40%;">제목</th>
@@ -48,11 +48,11 @@ td {
 	<c:choose>
 		<c:when test="${row.show == 'y'}">
 		<tr>
-			<td>${row.bno}</td>
+			<td style="text-align: center;">${row.bno}</td>
 			<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
-			<td>${row.name}(${row.writer})</td>
-			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-			<td>${row.viewcnt}</td>
+			<td style="text-align: center;">${row.name}(${row.writer})</td>
+			<td style="text-align: center;"><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+			<td style="text-align: center;">${row.viewcnt}</td>
 		</tr>
 		</c:when>
 	</c:choose>
