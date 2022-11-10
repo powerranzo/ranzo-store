@@ -8,7 +8,7 @@
 <style type="text/css">
 .checkDiv {
 	position: fixed; bottom : 0;
-	width: 100%;
+	width: 100%;  
 	background-color: gray;
 	color: white;
 	left:0;
