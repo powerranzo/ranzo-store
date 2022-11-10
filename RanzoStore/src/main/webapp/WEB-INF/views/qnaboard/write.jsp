@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 
 <!-- include libraries(jQuery, bootstrap) -->
@@ -26,13 +26,20 @@ $(function() {
 </script>
 
 <script>
-$(function(){ 
+$(function(){ 	
+	$("#fileReset").click(function() {
+		$("form1").each(function() {
+			if(this.className == "reset1") this.reset();			
+		});
+	});
+	
 	$("#btnSave").click(function(){
 		document.form1.submit();
 	});
 });
 </script>
-	
+
+
 
 </head>
 <body>
@@ -47,19 +54,20 @@ $(function(){
 		<tr>
 			<th>제목</th>
 			<td>
-				<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요">	
+				<input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력하세요" required="required">	
 			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>		
+				<textarea name="content" id="content" rows="2" cols="80" placeholder="내용을 입력하세요" required="required">${dto.content}</textarea>		
 			</td>
 		</tr>
 		<tr>
 			<th>첨부파일</th>
 			<td>
-				<input type="file" name="uploadFile">
+				<input type="file" name="uploadFile"> 
+				<input type="reset" id="fileReset" class="reset1" value="첨부 취소">
 			</td>
 		</tr>
 	</table>

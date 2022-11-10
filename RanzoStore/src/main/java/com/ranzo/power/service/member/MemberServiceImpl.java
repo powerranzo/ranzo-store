@@ -7,7 +7,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -25,10 +28,11 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dao.MemberDAO;
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.util.DateFunction;
+import com.ranzo.power.util.DateUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -84,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
-		map.put("today", DateFunction.getToday());
+		map.put("today", DateUtils.getToday());
 		memberDao.deleteMember(map);
 	}
 
@@ -97,12 +101,39 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO findPwd(MemberDTO dto) {
 		return memberDao.findPwd(dto);
 	}
-
 	
-	//임시 비번 네이버 메일 발송
+	// 임시 비번 발행 & 임시 비번으로 회원 비번 설정
+	// 네이버 메일 발송
 	@Override
-	public void sendPwd(String email) throws Exception {
-		
+	public void sendPwd(String userid, String email) throws Exception {
+        
+		//임시 비번 발행 & 임시 비번으로 회원 비번 변경
+		char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                '!', '@', '#', '$', '%', '^', '&' };
+
+        StringBuffer sb = new StringBuffer();
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(new Date().getTime());
+
+        int idx = 0;
+        int len = charSet.length;
+        for (int i=0; i<10; i++) {
+            idx = sr.nextInt(len);  
+            sb.append(charSet[idx]);
+        }
+        
+        String tempPwd = sb.toString();
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userid", userid);
+		map.put("tempPwd", tempPwd);
+        memberDao.tempPwd(map);
+		//임시 비번 끝
+        
+        
 		//메일 관련 정보
 		String host = "smtp.naver.com";
 		final String username = "ranzostore";
@@ -112,7 +143,8 @@ public class MemberServiceImpl implements MemberService {
 		//메일 내용
 		String recipient = email;
 		String subject = "Ranzo Store 임시 비밀번호가 발급되었습니다.";
-		String body="임시 비번 아직 안만듬 ㅈㅅ";
+		String body="임시 비밀번호 : " + tempPwd 
+				+ "\r\n 확인 후 로그인하여 회원 정보 수정을 통해 비밀번호를 변경해주세요.\r\n";
 		
 		Properties props = System.getProperties();
 		
@@ -136,9 +168,8 @@ public class MemberServiceImpl implements MemberService {
         mimeMessage.setText(body);
         Transport.send(mimeMessage);
 	}
-
 	
-	//카카오 로그인
+	//카카오 로그인 (인가 코드 주고 토큰 받아오기)
 	@Override
 	public String getAccessToken(String authorize_code) {
 		String access_Token = "";
@@ -159,8 +190,8 @@ public class MemberServiceImpl implements MemberService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
             
-			sb.append("&client_id=c25de70aa517d0143d2b73595c73dc86"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost/power/member/kakaoLogin"); // 본인이 설정한 주소
+			sb.append("&client_id=c25de70aa517d0143d2b73595c73dc86"); //발급받은 key
+			sb.append("&redirect_uri=http://localhost/power/member/kakaoLogin"); //설정한 주소
             
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -199,8 +230,9 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	//받아온 카카오 회원 정보 저장 및 처리
 	@Override
-	public KakaoDTO getUserInfo(String access_Token) {
+	public MemberDTO getUserInfo(String access_Token) {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -241,9 +273,9 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 		
-		KakaoDTO result = memberDao.findkakao(userInfo);
+		MemberDTO result = memberDao.findkakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
-		System.out.println("S:" + result);
+		System.out.println("userInfo:" + result);
 		if(result==null) {
 		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
 			memberDao.kakaoinsert(userInfo);
@@ -255,6 +287,42 @@ public class MemberServiceImpl implements MemberService {
 			return result;
 			// 정보가 이미 있기 때문에 result를 리턴함.
 		}
+	}
+	
+	@Override
+	public void kakaoLogout(String access_Token) {
+		String reqURL = "https://kapi.kakao.com/v1/user/logout";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String result = "";
+            String line = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+
+	@Override
+	public List<QnaDTO> qnaList() {
+		return memberDao.qnaList();
+	}
+
+	@Override
+	public List<ReviewDTO> reviewList() {
+		return memberDao.reviewList();
 	}
 
 }

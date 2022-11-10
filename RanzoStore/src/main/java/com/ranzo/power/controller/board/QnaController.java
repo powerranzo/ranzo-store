@@ -33,7 +33,6 @@ public class QnaController {
 	@Inject
 	QnaService qnaService;
 	
-	
 	@RequestMapping("list.do")
 	public ModelAndView list(
 			@RequestParam(defaultValue = "all") String search_option,
@@ -73,11 +72,21 @@ public class QnaController {
 		String fileName=null;
 		MultipartFile uploadFile = dto.getUploadFile();
 		if (!uploadFile.isEmpty()) {
+			
 			String originalFileName = uploadFile.getOriginalFilename();
 			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
-			fileName=uuid+"."+ext;
-			uploadFile.transferTo(new File("c:\\dev\\upload\\" + fileName));
+			fileName=originalFileName+"_"+uuid+"."+ext;
+			
+			//배포디렉토리
+			try {
+				String path="c:\\dev\\qna\\";
+				new File(path).mkdir();
+				uploadFile.transferTo(new File(path + fileName));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			fileName="(null)";
 		}
@@ -101,10 +110,45 @@ public class QnaController {
 		return mav;
 	}
 	
+	//수정하러 이동
+	@RequestMapping("edit.do")
+	public ModelAndView edit(int bno, HttpSession session) throws Exception {
+		//조회수 증가 처리
+		qnaService.increaseViewcnt(bno, session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaboard/edit");
+		mav.addObject("dto", qnaService.read(bno));
+		return mav;
+	}
 	
 	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(QnaDTO dto) throws Exception {
+		
+		//파일 업로드 처리
+				String fileName=null;
+				MultipartFile uploadFile = dto.getUploadFile();
+				if (!uploadFile.isEmpty()) {
+					
+					String originalFileName = uploadFile.getOriginalFilename();
+					logger.info("oriname:"+originalFileName);
+					String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+					UUID uuid = UUID.randomUUID();	//UUID 구하기
+					fileName=originalFileName+"_"+uuid+"."+ext;
+					
+					//배포디렉토리
+					try {
+						String path="c:\\dev\\qna\\";
+						new File(path).mkdir();
+						uploadFile.transferTo(new File(path + fileName));
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					fileName="-";
+				}
+				dto.setFileName(fileName);		
 		if(dto != null) {
 			qnaService.update(dto);
 		}
@@ -146,6 +190,23 @@ public class QnaController {
 		//레코드 저장
 		qnaService.create_reply(dto);
 		return "redirect:/board/qna/list.do";	
+	}
+	
+	@RequestMapping("getQnaInfo")
+	public ModelAndView getQnaInfo(String code, ModelAndView mav) throws Exception {
+		logger.info("### getQnaInfo/code = " + code);
+
+		List<QnaDTO> qnaInfo = qnaService.getQnaInfo(code);
+		int count = qnaService.countArticle(code);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaInfo", qnaInfo); // map에 자료 저장
+		map.put("count", count); //레코드 개수 파일
+		mav.addObject("map", map); // 보낼 데이터		
+		mav.setViewName("shop/exhibition_detail_qna");
+		logger.info("### qnController/getQnaInfo/qnaInfo {}. " + qnaInfo);
+		logger.info("### qnController/getQnaInfo/mav {}. " + mav);
+		return mav;
 	}
 		
 }

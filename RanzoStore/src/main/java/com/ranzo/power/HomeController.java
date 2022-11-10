@@ -35,9 +35,14 @@ public class HomeController {
 		
 		return "home";
 	}
-	@RequestMapping("kakaotest.do")
-	public String kakao() {
-		return "kakaotest";
+	@RequestMapping("about.do")
+	public String about() {
+		return "about/about";
 	}
+	@RequestMapping("date.do")
+	public String date() {
+		return "reserv/reservDate";
+	}
+
 	
 }

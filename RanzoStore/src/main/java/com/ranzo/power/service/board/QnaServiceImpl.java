@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.model.board.dao.QnaDAO;
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 @Service
 public class QnaServiceImpl implements QnaService {
 
@@ -78,6 +79,18 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void update_reply(QnaDTO dto) throws Exception {
 		qnaDao.update_reply(dto);		
+	}
+
+
+	@Override
+	public List<QnaDTO> getQnaInfo(String code) {
+		return qnaDao.getQnaInfo(code);
+	}
+
+
+	@Override
+	public int countArticle(String code) {
+		return qnaDao.countArticle(code);
 	}
 
 }
