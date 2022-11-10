@@ -36,7 +36,7 @@ $(function() {
 		 }
 	});
 });
-</script>
+</script> 
 
 <script>
 $(function(){
