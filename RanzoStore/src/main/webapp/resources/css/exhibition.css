@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/* 검색 영역*/
+.sec-search {
+	with: 100%;
+	/* diplay: flex; */
+	color: #424242;
+}
+
+.sec-search div .sort {
+	/* flex: none; */
+}
+
+.sec-search div .filter {
+	margin-left: auto;
+}
+
+.sec-search div ul li {
+	position: relative;
+	margin: 5px
+}
+
+.selected{
+	color :red;
+}
+
+
+/* 태블릿용 CSS */
+@media all and (min-width:768px) {
+	.sec-content {
+		margin: 0 auto;
+	}
+	.sec-search .sort {
+		float: right;
+		width: auto;
+	}
+	.sec-search ul li {
+		display: block;
+		float: left;
+		margin-left: 5px;
+	}
+}
+
+/* PC용 CSS */
+@media all and (min-width:1132px) {
+	.sec-content {
+		max-width: 1300px;
+	}
+	.sec-search ul li {
+		float: left;
+	}
+	.sec-search .filter li {
+		padding: 3px;
+		border: solid 1px;
+		border-color: grey;
+		border-radius: 10px;
+	}
+}

@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="review">
-
 <select id="listAll" resultType="ReviewDTO">   
       select *
          from (
@@ -33,7 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              ) A    
          ) where rn between #{start} and #{end}
    </select>
-
 
 	<insert id="insert">
 		insert into review_tb(bno, rating, product, subject, content, writer) values
@@ -112,6 +110,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where r.replyer = m.userid and bno=#{bno}
 		order by rno
 	</select>
+	
+	<select id="countArticleExhibieion" resultType="int">
+		select count (*)
+		from review_tb
+		where product = #{code}
+		and show = 'y'
+	</select>
+	
+	<select id="avgRating" resultType="float">
+		select nvl(avg(rating),0)
+		from review_tb 
+		where product = #{code} 
+		and show='y'
+	</select>
+
+	<select id="getReviewInfo" resultType="ReviewDTO">
+		select rownum as bno, rating, product, writer, subject, content, reg_date, viewcnt, show
+		from review_tb
+		where product = #{code}
+		and show = 'y'
+	</select>
+
 </mapper>
 
 

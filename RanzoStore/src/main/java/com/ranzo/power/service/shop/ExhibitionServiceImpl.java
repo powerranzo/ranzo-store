@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dao.ExhibitionDAO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Service
 public class ExhibitionServiceImpl implements ExhibitionService {
@@ -20,8 +21,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	ExhibitionDAO exhibitionDAO;
 
 	@Override
-	public List<ExhibitionDTO> listProduct() {
-		return exhibitionDAO.listProduct();
+	public List<ExhibitionDTO> listProduct(String sort, List<String> location) {
+		return exhibitionDAO.listProduct(sort, location);
 	}
 
 	@Override
@@ -54,6 +55,14 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	}
 
 	@Override
+	public ProductInfoDTO getProductInfo(String code) {
+		return exhibitionDAO.getProductInfo(code);
+	}
+	
+	@Override
+	public String getReserveInfo(String code) {		
+		return exhibitionDAO.getReserveInfo(code);
+
 	public List<ExhibitionDTO> searchProduct(String keyword) {
 		return exhibitionDAO.searchProduct(keyword);
 	}

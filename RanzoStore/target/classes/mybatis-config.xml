@@ -10,6 +10,7 @@
 		<typeAlias alias="ReviewReplyDTO" type="com.ranzo.power.model.board.dto.ReviewReplyDTO"/>
 		<typeAlias alias="MemberDTO" type="com.ranzo.power.model.member.dto.MemberDTO"  />
 		<typeAlias alias="ExhibitionDTO" type="com.ranzo.power.model.shop.dto.ExhibitionDTO"/>
+		<typeAlias alias="ProductInfoDTO" type="com.ranzo.power.model.shop.dto.ProductInfoDTO"/>
 		<typeAlias alias="reservDTO" type="com.ranzo.power.model.reserv.dto.ReservDTO"/>
 		<typeAlias alias="PopupDTO" type="com.ranzo.power.model.admin.dto.PopupDTO"/>
 		<typeAlias alias="ReservDTO" type="com.ranzo.power.model.reserv.dto.ReservDTO"/>

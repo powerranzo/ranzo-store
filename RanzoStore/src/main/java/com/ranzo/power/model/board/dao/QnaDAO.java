@@ -3,6 +3,7 @@ package com.ranzo.power.model.board.dao;
 import java.util.List;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 
 public interface QnaDAO {
 	public void create(QnaDTO dto) throws Exception; //글쓰기
@@ -15,5 +16,8 @@ public interface QnaDAO {
 	
 	public void create_reply(QnaDTO dto) throws Exception; //답글 작성
 	public void update_reply(QnaDTO dto) throws Exception; //답글 순서 수정
+	
+	public List<QnaDTO> getQnaInfo(String code);
+	public int countArticle(String code);
 
 }

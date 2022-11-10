@@ -18,4 +18,7 @@ public interface ReviewService {
 	public void increaseViewcnt(int bno, HttpSession session) throws Exception; //조회수 증가 처리
 	public int countArticle() throws Exception;//레코드 갯수 계산
 	public ReviewDTO read(int bno) throws Exception; //레코드 조회
+	int countArticle(String code) throws Exception;
+	public List<ReviewDTO> getReviewInfo(String code);
+	public float avgRating(String code);
 }

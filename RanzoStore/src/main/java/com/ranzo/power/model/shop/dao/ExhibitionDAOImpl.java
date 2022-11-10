@@ -1,6 +1,11 @@
 package com.ranzo.power.model.shop.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
 public class ExhibitionDAOImpl implements ExhibitionDAO {
@@ -20,9 +26,17 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<ExhibitionDTO> listProduct() {
-		List<ExhibitionDTO> list = sqlSession.selectList("exhibition.list");
-		logger.info("### ExhDAO/productList {}." + list);
+	public List<ExhibitionDTO> listProduct(String sort, List<String> location) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("sort", sort);
+		map.put("location", location);
+
+		logger.info("### ExhDAO/location.contains/" + location.contains("전체"));
+		logger.info("### ExhDAO/location.size/" + location.size());
+		logger.info("### ExhDAO/map/" + map);
+
+		List<ExhibitionDTO> list = sqlSession.selectList("exhibition.list", map);
+		 logger.info("### ExhDAO/productList/" + list);
 		return list;
 	}
 
@@ -56,6 +70,20 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	}
 
 	@Override
+	public ProductInfoDTO getProductInfo(String code) {
+		ProductInfoDTO productInfo = sqlSession.selectOne("exhibition.getProductInfo", code);
+		logger.info("### ExhDAO/getProductInfo/" + productInfo);
+		return productInfo;
+	}
+
+	@Override
+	public String getReserveInfo(String code) {
+		/*
+		 * String reserveInfo = sqlSession.selectOne("exhibition.getReserveInfo", code);
+		 * logger.info("### ExhDAO/getReserveInfo/" + reserveInfo); return reserveInfo;
+		 */
+		return null;
+
 	public List<ExhibitionDTO> searchProduct(String keyword) {
 		return sqlSession.selectList("exhibition.searchlist", keyword);
 	}
@@ -73,6 +101,7 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	@Override
 	public int searchDateCount(String searchDate) {
 		return sqlSession.selectOne("exhibition.searchDateCount", searchDate);
+
 	}
 
 }
