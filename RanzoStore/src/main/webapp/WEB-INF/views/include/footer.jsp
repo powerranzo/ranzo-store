@@ -11,8 +11,6 @@
 	text-align: center;
 	padding: 30px 100px;
 	font-size: 14px;
-	height: 60px;
-	clear: both;
 }
 
 

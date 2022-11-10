@@ -83,11 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  where userid=#{userid} and pay='n'
  </select>
  <select id="mypagelist" resultType="ReservDTO">
-	select * from (select e.title, r.res_date
+	select * from (select r.no, e.title, r.res_date, r.reg_date
 	from RESERV_ITEM_TB r, EXHIBITION_TB e, MEMBER_TB m
 	where r.code = e.code and r.userid=m.userid
-	and res_date  between '22-10-28' and '22-11-02' and m.userid=#{userid})
-	where rownum between 1 and 5
+	and reg_date  between #{before7} and #{today} and m.userid=#{userid})
+	where rownum between 1 and 5 order by reg_date desc
  </select>
  
 	

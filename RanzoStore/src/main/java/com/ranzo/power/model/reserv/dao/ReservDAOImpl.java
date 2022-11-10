@@ -94,8 +94,12 @@ public class ReservDAOImpl implements ReservDAO {
 	}
 
 	@Override
-	public List<ReservDTO> mypagelist(String userid) {
-		return sqlSession.selectList("reserv.mypagelist", userid);
+	public List<ReservDTO> mypagelist(String userid, String today, String before7) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("today", today);
+		map.put("before7", before7);
+		return sqlSession.selectList("reserv.mypagelist", map);
 	}
 
 }
