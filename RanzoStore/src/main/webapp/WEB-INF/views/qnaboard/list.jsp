@@ -113,5 +113,8 @@ td {
 </form>
 </div>
 
+<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>
