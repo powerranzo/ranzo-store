@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 <link href="../include/header.jsp" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
