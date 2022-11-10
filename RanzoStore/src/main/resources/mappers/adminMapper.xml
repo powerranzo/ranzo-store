@@ -334,7 +334,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		and r.show='y'
-	</select>
+	</select> 
 
 	<select id="getReservList" resultType="ReservDTO">
 		select * from (
