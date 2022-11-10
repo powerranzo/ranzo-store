@@ -36,11 +36,12 @@ public class ReservDTO {
 	private String strDate; //시작날짜
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private String endDate; //끝날짜
-	private int coupon;
+	private Date reg_date;
 	
-	public ReservDTO(int coupon) {
-		this.coupon = coupon;
-	}
+	
+
+	
+
 	
 	public ReservDTO() {
 
@@ -54,13 +55,14 @@ public class ReservDTO {
 		this.res_date = res_date;
 	}
 	
-	
-	public int getCoupon() {
-		return coupon;
+
+
+	public Date getReg_date() {
+		return reg_date;
 	}
 
-	public void setCoupon(int coupon) {
-		this.coupon = coupon;
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
 
 	public String getStrDate() {

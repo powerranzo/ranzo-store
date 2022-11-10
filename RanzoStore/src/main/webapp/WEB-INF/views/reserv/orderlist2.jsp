@@ -6,26 +6,27 @@
 <meta charset="UTF-8">
 <title>티켓예매 목록</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 <style type="text/css">
 * {
 	margin:0px; 
 }
 .content{
-	margin: 20px 80px 0 80px;
-
+	margin: 0 80px 0 80px;
 }
 section {
+	margin-top:6%;
 	width: 75%;
-	float: right;
+	float: left;
+	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
 	padding:5px;
 	float: left;
 	display: inline-block;
+	width: 90%;
 	min-height: 100%;
-	width: 80%;
 	flex: 1;
 }
 .orderdiv a:hover{ font-weight: bold;}
@@ -34,7 +35,7 @@ section {
 .orderdiv a:active { text-decoration: none; color:black;}
 .ordertable{
 	margin: 10px;
-	text-align: center;
+	text-align: left;
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -147,15 +148,15 @@ function list(page){
 </form>
 <table class="ordertable">
 <tr>
- <th>예매번호</th>
+ <th width="10%">예매번호</th>
  <th>전시명</th>
- <th>관람일</th>
- <th>매수</th>
- <th>상태</th>
+ <th width="15%">관람일</th>
+ <th width="10%">매수</th>
+ <th width="15%">상태</th>
 </tr>
 <c:forEach var="row" items="${map.list}">
 <tr>
- <td width="10%"><a href="${path}/reserv/orderdetail/${row.no}">${row.no}</a></td>
+ <td ><a href="${path}/reserv/orderdetail/${row.no}">${row.no}</a></td>
  <td>${row.title}</td>
  <td><fmt:formatDate value="${row.res_date}" pattern="yyyy-MM-dd" /></td>
  <td>${row.quantity}장</td>

@@ -16,5 +16,5 @@ public interface ReservService {
 	public int firstorder(String userid);
 	public List<ReservDTO> canclelist(String userid, int start, int end);//취소리스트
 	public int countcancle(String userid);
-	public List<ReservDTO> mypagelist(String userid);
+	public List<ReservDTO> mypagelist(String userid, String today, String before7);
 }
