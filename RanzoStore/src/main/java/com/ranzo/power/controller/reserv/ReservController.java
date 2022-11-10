@@ -1,5 +1,7 @@
 package com.ranzo.power.controller.reserv;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,9 +176,18 @@ public class ReservController {
 		mav.addObject("map", map);	
 		return mav;
 	}
+	
 	@RequestMapping("mypagelist.do/{userid}")
-	public ModelAndView mypagelist(ModelAndView mav, @PathVariable String userid){	
-		List<ReservDTO> list = reservService.mypagelist(userid);
+	public ModelAndView mypagelist(ModelAndView mav, @PathVariable String userid){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		c.add(c.DATE, +1);
+		String today = sdf.format(c.getTime());
+		c.add(c.DATE, -7);
+		String before7 = sdf.format(c.getTime());
+		System.out.println("현재:"+ today);
+		System.out.println("일주일전:"+ before7);
+		List<ReservDTO> list = reservService.mypagelist(userid, today, before7);
 		mav.setViewName("/reserv/mypagelist");
 		mav.addObject("list", list);	
 		return mav;

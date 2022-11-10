@@ -8,26 +8,31 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
-<style>
+<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
+<style type="text/css">
+*{
+	margin: 0;
+}
 .content{
-	margin: 20px 80px 0 80px;
+	margin: 0 80px 0 80px;
 }
 section {
+	margin-top:3%;
 	width: 75%;
-	float: right;
+	float: left;
+	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
 	padding:5px;
 	float: left;
 	display: inline-block;
-	width: 80%;
+	width: 100%;
 	min-height: 100%;
 	flex: 1;
 }
 .profile {
-	width: 800px;
+	width: 90%;
 	height: 200px;
 	background-color: rgb(230, 230, 230);
 }
@@ -36,7 +41,7 @@ section {
 	margin-top: 40px;
 	padding: 20px 70px 70px 70px;
 	display: inline-block;
-	width: 30%;
+	width: 400px;
 }
 .myreview {
 	font-size: 22px;
@@ -57,19 +62,6 @@ section {
 	display: inline-block;
 	width: 350px;
 }
-@media screen and (max-width: 1000px){
-	.profile{
-	background-color: rgb(230, 230, 230);
-	}
-	.orderdiv2{
-		width: 100%;
-	}
-	.welcome{
-		margin: 10px;
-		padding: 20px;
-		width: 90%;		
-	}
-}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -83,9 +75,8 @@ function orderlist(){
 			$("#resultList").html(result);
 		}
 	});
+	
 }
-
-
 </script>
 
 
@@ -103,7 +94,7 @@ function orderlist(){
 			</div>
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
-			<a class="a1" href="#">나의 후기</a>
+			<a class="a1" href="${path}/member/myReview.do">나의 후기</a>
 			</div>
 			<div class="myinfo">
 			<img src="${path}/resources/images/user_icon.png" height="20">
@@ -113,7 +104,7 @@ function orderlist(){
 		<article class="recentOrder">
 			<div class="title-s">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
-			<a class="a1" href="#">최근 예매 내역 ></a></div>
+			<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a></div>
  			<hr noshade size="1px" color="black"> 
  			<div id="resultList"></div>
 		</article>

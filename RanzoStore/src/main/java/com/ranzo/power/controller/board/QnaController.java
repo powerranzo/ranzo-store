@@ -33,7 +33,6 @@ public class QnaController {
 	@Inject
 	QnaService qnaService;
 	
-	
 	@RequestMapping("list.do")
 	public ModelAndView list(
 			@RequestParam(defaultValue = "all") String search_option,
@@ -73,11 +72,21 @@ public class QnaController {
 		String fileName=null;
 		MultipartFile uploadFile = dto.getUploadFile();
 		if (!uploadFile.isEmpty()) {
+			
 			String originalFileName = uploadFile.getOriginalFilename();
 			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
 			UUID uuid = UUID.randomUUID();	//UUID 구하기
-			fileName=uuid+"."+ext;
-			uploadFile.transferTo(new File("c:\\dev\\upload\\" + fileName));
+			fileName=originalFileName+"_"+uuid+"."+ext;
+			
+			//배포디렉토리
+			try {
+				String path="c:\\dev\\qna\\";
+				new File(path).mkdir();
+				uploadFile.transferTo(new File(path + fileName));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
 			fileName="(null)";
 		}
@@ -101,10 +110,45 @@ public class QnaController {
 		return mav;
 	}
 	
+	//수정하러 이동
+	@RequestMapping("edit.do")
+	public ModelAndView edit(int bno, HttpSession session) throws Exception {
+		//조회수 증가 처리
+		qnaService.increaseViewcnt(bno, session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaboard/edit");
+		mav.addObject("dto", qnaService.read(bno));
+		return mav;
+	}
 	
 	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(QnaDTO dto) throws Exception {
+		
+		//파일 업로드 처리
+				String fileName=null;
+				MultipartFile uploadFile = dto.getUploadFile();
+				if (!uploadFile.isEmpty()) {
+					
+					String originalFileName = uploadFile.getOriginalFilename();
+					logger.info("oriname:"+originalFileName);
+					String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+					UUID uuid = UUID.randomUUID();	//UUID 구하기
+					fileName=originalFileName+"_"+uuid+"."+ext;
+					
+					//배포디렉토리
+					try {
+						String path="c:\\dev\\qna\\";
+						new File(path).mkdir();
+						uploadFile.transferTo(new File(path + fileName));
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					fileName="-";
+				}
+				dto.setFileName(fileName);		
 		if(dto != null) {
 			qnaService.update(dto);
 		}

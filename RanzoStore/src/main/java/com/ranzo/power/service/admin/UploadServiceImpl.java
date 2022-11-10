@@ -5,35 +5,38 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ranzo.power.util.MediaUtils;
+import com.ranzo.power.util.UploadFileUtils;
 
 @Service
 public class UploadServiceImpl implements UploadService {
 
 	@Override
-	public void uploadCKEditor(HttpServletRequest request, HttpServletResponse response, 
-			HttpSession session, MultipartFile upload) throws Exception {
+	public void uploadCKEditor(HttpServletRequest request, 
+			HttpServletResponse response, @RequestParam MultipartFile upload) throws Exception {
+		System.out.println("uploadCKEditor() 호출");
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
 		String fileName=uid+"_"+upload.getOriginalFilename();
 		byte[] bytes=upload.getBytes();
-		String uploadPath=request.getServletContext().getRealPath("/resources/images/");
+		String uploadPath=MediaUtils.getServerUploadPath(request);
 		out=new FileOutputStream(new File(uploadPath+fileName));
 		out.write(bytes);
 		printWriter=response.getWriter();
-		String fileUrl=request.getContextPath()+"/resources/images/"+fileName;
-		session.setAttribute("fileUrl", fileUrl);
+		String fileUrl=MediaUtils.getFileUrlPath(request)+fileName;
 		printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
 		printWriter.flush();
 		try {
@@ -49,23 +52,37 @@ public class UploadServiceImpl implements UploadService {
 	}
 
 	@Override
-	public String uploadFile(MultipartFile file, HttpServletRequest request) {
+	public Map<String,Object> uploadFile(MultipartFile file, HttpServletRequest request, String dirName) {
 		UUID uid=UUID.randomUUID();
-		String savedName=uid.toString()+"_"+file.getOriginalFilename(); 
-		String uploadPath=request.getServletContext().getRealPath("/resources/images/");
-		File target=new File(uploadPath, savedName);
+		String savedName="";
+		if(file.getOriginalFilename().indexOf("_")!=-1) 
+			savedName=uid.toString()+"_"+file.getOriginalFilename().replace("_", "");
+		else
+			savedName=uid.toString()+"_"+file.getOriginalFilename();
+		String uploadPath=MediaUtils.getServerUploadPath(request);
+		if(dirName==null) dirName="";
+		UploadFileUtils.makeDir(uploadPath, dirName);
+		File target=new File(uploadPath+dirName, savedName);
 		try {
 			FileCopyUtils.copy(file.getBytes(), target);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return request.getContextPath()+"/resources/images/"+savedName;
+		
+		Map<String,Object> fileInfo = new HashMap<String,Object>();
+		fileInfo.put("fileUrl", MediaUtils.getFileUrlPath(request)+dirName+"/"+savedName);
+		fileInfo.put("fileName", savedName);
+		fileInfo.put("fileSize", file.getSize());
+		System.out.println("fileSize:"+file.getSize());
+		return fileInfo;
 	}
 
 	@Override
-	public void deleteServerFile(String fileName, HttpServletRequest request) {
+	public void deleteServerFile(String fileName, HttpServletRequest request
+			, String dirName) {
+		if(dirName==null) dirName="";
 		if(fileName != null && !fileName.equals("-")) {
-			File f=new File(MediaUtils.getServerUploadPath(request)+fileName);
+			File f=new File(MediaUtils.getServerUploadPath(request)+dirName+"/"+fileName);
 			if(f.exists()) 
 				f.delete(); 
 		}		

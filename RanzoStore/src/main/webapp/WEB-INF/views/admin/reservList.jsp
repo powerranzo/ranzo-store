@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../include/admin_head.jspf"%>
-<title>전시 목록</title>
+<title>예약 목록</title>
+<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
 		optionSelect(2);
 		optionSelect(3);
 		
-		$("#btnDelete").click(function() {
+		$("#btnDelReserv").click(function() {
 			if (confirm('삭제 처리하시겠습니까?')) {
 				document.form1.action = "${path}/admin/reserv_delete.do";
 				document.form1.submit();
@@ -46,13 +47,8 @@
 						.prop("selected", "selected");
 		}
 	}
-	function reservList(param) {
-		document.form1.action = "${path}/admin/reserv_list.do?curPage=" + param;
-		document.form1.submit();
-	}
+
 </script>
-<%@ include file="../include/header.jsp"%>
-<%@ include file="../include/admin_head.jspf"%>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
@@ -60,18 +56,20 @@
 		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
-				<h3>예약현황</h3>
+				<h3>예약현황 <button class="btn btn-sm" id="btnApproval">
+							<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
+						</button></h3>
 				<form name="form1" class="form-inline" method="post">
 <!-- 					<div class="form-group"> -->
 						<table class="adminTable1">
 							<tr>
 								<th>전체 예약</th>
-								<th>진행 중인 전시</th>
+								<th>결제 완료 예약</th>
 								<th></th>
 							</tr>
 							<tr>
 								<td>${ reserv.reserv_count_all}개</td>
-								<td>${ reserv.reserv_count_ing}개</td>
+								<td>${ reserv.reserv_count_pay}개</td>
 								<td>
 								<td>
 							</tr>
@@ -82,8 +80,8 @@
 								<td><label for="searchOption1"></label> <select
 									name="searchOption1" class="form-control" id="searchOption1">
 										<option value="r.no">주문번호</option>
-										<option value="r.userid">예매자</option>
-										<option value="e.code">전시코드</option>
+										<option value="r.userid">예매자ID</option>
+										<option value="r.code">전시코드</option>
 										<option value="e.title">전시명</option>
 										<option value="all">전체</option>
 								</select>
@@ -122,10 +120,10 @@
 						</table>
 						<br>
 						<div class="sectiondiv" align="center">
-							<button class="btn btn-default" type="button" id="btnSearch">
-								검색 <i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
+						<button class="btn btn-default" type="button" id="btnSearch">
+							검색 <i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
 <!-- 					</div> -->
 
 					<table class="ordertable">
@@ -134,7 +132,7 @@
 								<th>#</th>
 								<th>예약번호</th>
 								<th>예매자</th>
-								<th>전시명(전시코드)</th>
+								<th style="width:30%;">전시명(전시코드)</th>
 								<th>성인/청소년/어린이</th>
 								<th>총 수량</th>
 								<th>총가격</th>
@@ -162,8 +160,7 @@
 							</tbody>
 						</c:forEach>
 					</table>
-				<button id="btnDelReserv" type="button" class="btn btn-default">삭제
-					처리</button>
+				
 					<div class="row" align="center">
 						<div class="col-sm-12">
 							<ul class="pagination pagination">
@@ -194,9 +191,12 @@
 							</ul>
 						</div>
 					</div>
+					<button id="btnDelReserv" type="button" class="btn btn-default">삭제
+					처리</button>
 				</form>
 			</div>
 		</section>
 	</div>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

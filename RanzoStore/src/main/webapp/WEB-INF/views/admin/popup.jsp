@@ -4,17 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<%@ include file="../include/header.jsp" %>	
+<title>popup</title>
 </head>
 <body>
-<c:forEach var="dto" items="${list}">
-${dto.title}<br>
-
-</c:forEach>
-
-
-
 
 </body>
 </html>

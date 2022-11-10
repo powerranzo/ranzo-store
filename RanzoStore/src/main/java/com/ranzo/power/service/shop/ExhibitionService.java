@@ -15,4 +15,8 @@ public interface ExhibitionService {
 	String fileInfo(String exhibitionCode);//첨부파일정보
 	String getReserveInfo(String code);
 	ProductInfoDTO getProductInfo(String code);
+	List<ExhibitionDTO> searchProduct(String keyword);
+	int searchCount(String keyword);
+	List<ExhibitionDTO> searchdate(String searchDate);
+	int searchDateCount(String searchDate);
 }

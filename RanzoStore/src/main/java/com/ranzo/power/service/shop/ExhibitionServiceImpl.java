@@ -62,5 +62,23 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	@Override
 	public String getReserveInfo(String code) {		
 		return exhibitionDAO.getReserveInfo(code);
+
+	public List<ExhibitionDTO> searchProduct(String keyword) {
+		return exhibitionDAO.searchProduct(keyword);
+	}
+
+	@Override
+	public int searchCount(String keyword) {
+		return exhibitionDAO.searchCount(keyword);
+	}
+
+	@Override
+	public List<ExhibitionDTO> searchdate(String searchDate) {
+		return exhibitionDAO.searchdate(searchDate);
+	}
+
+	@Override
+	public int searchDateCount(String searchDate) {
+		return exhibitionDAO.searchDateCount(searchDate);
 	}
 }

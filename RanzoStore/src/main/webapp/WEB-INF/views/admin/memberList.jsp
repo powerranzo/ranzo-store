@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../include/header.jsp" %>
-<%@ include file="../include/admin_head.jspf"%>
+<%@ include file="../include/adminHeader.jspf"%>
 <title>회원 목록</title>
 <script type="text/javascript">
 	$(function() {
@@ -46,23 +46,8 @@
 						.prop("selected", "selected");
 		}
 	}
-	function memberList(param) {
-		document.form1.action = "${path}/admin/member_list.do?curPage=" + param;
-		document.form1.submit();
-	}
-	function memberView(param) {
-		let frm = document.createElement('form');
-		frm.setAttribute('method', 'post');
-		frm.setAttribute('action', '${path}/admin/member_view.do');
-		let ipt = document.createElement('input');
-		ipt.setAttribute('type', 'hidden');
-		ipt.setAttribute('name', 'userid');
-		ipt.setAttribute('value', param);
 
-		frm.appendChild(ipt);
-		document.body.appendChild(frm);
-		frm.submit();
-	}
+
 </script>
 </head>
 <body>

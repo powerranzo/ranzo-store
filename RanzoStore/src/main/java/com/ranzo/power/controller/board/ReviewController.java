@@ -79,15 +79,28 @@ public class ReviewController {
 		return mav;
 	}
 
-	// 첨부파일 목록을 리턴
-	// json 배열로 변환하여 리턴
+	
+	//수정하러 이동 
+	@RequestMapping("edit.do")
+	public ModelAndView edit(int bno, HttpSession session) throws Exception {
+		//조회수 증가 처리
+		reviewService.increaseViewcnt(bno, session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("reviewboard/edit");
+		mav.addObject("dto", reviewService.read(bno));
+		return mav;
+	}
+		
+	//첨부파일 목록을 리턴
+	//json 배열로 변환하여 리턴
 	@RequestMapping("getAttach/{bno}")
 	@ResponseBody // view가 아닌 List<String> 데이터 자체를 리턴
 	public List<String> getAttach(@PathVariable int bno) {
 		return reviewService.getAttach(bno);
 	}
 
-	// 게시물 내용 수정
+	
+	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(ReviewDTO dto) throws Exception {
 		System.out.println("dto : " + dto);
@@ -104,17 +117,7 @@ public class ReviewController {
 		return "redirect:/board/review/list.do";
 
 	}
-/*
-	@RequestMapping("exhibitionReviewList")
-	public @ResponseBody List<ReviewDTO> exhibitionReviewList(String code) throws Exception {
-		logger.info("### exhibitionReviewList/code = " + code);
 
-		List<ReviewDTO> reviewList = reviewService.exhibitionReviewList(code);
-		logger.info("### reviewList {}. " + reviewList);
-
-		return reviewList;
-	}
-*/
 	@RequestMapping("getReviewInfo")
 	public ModelAndView getReviewInfo(String code, ModelAndView mav) throws Exception {
 		logger.info("### getReviewInfo/code = " + code);

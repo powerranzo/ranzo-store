@@ -74,8 +74,8 @@ public class ReservServiceImpl implements ReservService {
 	}
 
 	@Override
-	public List<ReservDTO> mypagelist(String userid) {
-		return reservDao.mypagelist(userid);
+	public List<ReservDTO> mypagelist(String userid, String today, String before7) {
+		return reservDao.mypagelist(userid, today, before7);
 	}
 
 

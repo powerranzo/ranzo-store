@@ -12,7 +12,9 @@
 		<typeAlias alias="ExhibitionDTO" type="com.ranzo.power.model.shop.dto.ExhibitionDTO"/>
 		<typeAlias alias="ProductInfoDTO" type="com.ranzo.power.model.shop.dto.ProductInfoDTO"/>
 		<typeAlias alias="reservDTO" type="com.ranzo.power.model.reserv.dto.ReservDTO"/>
-		<typeAlias alias="reservDTO" type="com.ranzo.power.model.reserv.dto.ReservDTO"/>
+		<typeAlias alias="PopupDTO" type="com.ranzo.power.model.admin.dto.PopupDTO"/>
+		<typeAlias alias="ReservDTO" type="com.ranzo.power.model.reserv.dto.ReservDTO"/>
+		<typeAlias alias="FaqDTO" type="com.ranzo.power.model.board.dto.FaqDTO"/>
 	</typeAliases>
 	
 </configuration>
