@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 
 public interface QnaService {
 	public void create(QnaDTO dto) throws Exception; //글쓰기
@@ -17,6 +18,8 @@ public interface QnaService {
 	
 	public void create_reply(QnaDTO dto) throws Exception; //답글 작성
 	public void update_reply(QnaDTO dto) throws Exception; //답글 순서 수정
+	public List<QnaDTO> getQnaInfo(String code);
+	public int countArticle(String code);
 
 
 }

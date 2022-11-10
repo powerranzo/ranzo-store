@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.shop.ExhibitionService;
 
 @Controller
@@ -26,22 +27,65 @@ public class ExhibitionController {
 	@Inject
 	ExhibitionService exhibitionService;
 
-	// 전시 리스트
-	@RequestMapping("list") // 세부 rul
-	public ModelAndView list(ModelAndView mav) {
-		mav.setViewName("/shop/exhibition_list");
-		mav.addObject("list", exhibitionService.listProduct());
-		logger.debug("ExhController/list {}." + mav);
+	// 현재전시 페이지
+	@RequestMapping("list/current") // 세부 rul
+	public ModelAndView listCurrent(ModelAndView mav) {
+		mav.setViewName("/shop/exhibition_current");
+		// mav.addObject("list", exhibitionService.listProduct());
+		logger.debug("ExhController/listCurrent/" + mav);
 		return mav;
 	}
 
-	// 전시 상세
+	// 전시 리스트
+	@RequestMapping("list") // 세부 rul
+	public ModelAndView getList(
+			@RequestParam(defaultValue = "리뷰 많은순") String sort,
+			@RequestParam(defaultValue = "전체") List<String> location,			
+			ModelAndView mav) {
+		List<ExhibitionDTO> list = exhibitionService.listProduct(sort, location);
+		
+		logger.info("ExhController/getList/sort/" + sort);
+		logger.info("ExhController/getList/location/" + location);
+		
+		mav.addObject("list", list);
+		mav.setViewName("/shop/exhibition_list");
+		//logger.info("ExhController/getList/" + list);
+		return mav;
+	}
+
+	// 전시 상세 페이지
 	@RequestMapping("detail/{exhibitionCode}")
 	public ModelAndView detail(@PathVariable String exhibitionCode, ModelAndView mav) {
 		mav.setViewName("/shop/exhibition_detail");
 		mav.addObject("exhibition", exhibitionService.detailProduct(exhibitionCode));
-		logger.debug(mav.toString());
-		logger.debug("ExhController/list {}." + mav);
+		logger.info("ExhController/mav/" + mav);
+		return mav;
+	}
+
+	// 전시 상세
+	@RequestMapping("getProductInfo")
+	public ModelAndView getProductInfo(String code, ModelAndView mav) throws Exception {
+		logger.info("### getProductInfo/code = " + code);
+
+		ProductInfoDTO productInfo = exhibitionService.getProductInfo(code);
+		logger.info("### getProductInfo/productInfo = " + productInfo);
+		mav.addObject("productInfo", productInfo); // 보낼 데이터
+		mav.setViewName("shop/exhibition_detail_product");
+		logger.info("### ExhController/mav/" + mav);
+		return mav;
+	}
+
+	// 예매/취소 안내
+	@RequestMapping("getReserveInfo")
+	public ModelAndView getReserveInfo(String code, ModelAndView mav) throws Exception {
+		logger.info("### reserveInfo/code = " + code);
+
+		//String reserveInfo = exhibitionService.getReserveInfo(code);
+		//logger.info("### getReserveInfo/reviewList {}. = " + reserveInfo);
+
+		//mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
+		mav.setViewName("shop/exhibition_detail_reserve");
+		logger.info("### getReserveInfo/mav/" + mav);
 		return mav;
 	}
 	//키워드 검색 리스트
