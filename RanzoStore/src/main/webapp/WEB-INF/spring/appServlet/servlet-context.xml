@@ -69,12 +69,13 @@
 	       <mapping path="/board/qna/insert.do"/>
 	       <mapping path="/board/qna/update.do"/>
 	       <mapping path="/board/qna/delete.do"/>
+	       
+	       <mapping path="/board/review/write.do"/>
 	       <mapping path="/board/review/insert.do"/>
 	       <mapping path="/board/review/update.do"/>
 	       <mapping path="/board/review/delete.do"/>
 	       
-	       
-				<beans:ref bean="loginInterceptor" />
+		<beans:ref bean="loginInterceptor" />
 			</interceptor>		
 			<interceptor>
 				<mapping path="/admin/**/" />

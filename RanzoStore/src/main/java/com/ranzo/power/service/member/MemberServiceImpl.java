@@ -10,6 +10,7 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,9 +28,11 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dao.MemberDAO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.util.DateFunction;
+import com.ranzo.power.util.DateUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -85,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
-		map.put("today", DateFunction.getToday());
+		map.put("today", DateUtils.getToday());
 		memberDao.deleteMember(map);
 	}
 
@@ -310,6 +313,16 @@ public class MemberServiceImpl implements MemberService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+
+	@Override
+	public List<QnaDTO> qnaList() {
+		return memberDao.qnaList();
+	}
+
+	@Override
+	public List<ReviewDTO> reviewList() {
+		return memberDao.reviewList();
 	}
 
 }

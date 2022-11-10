@@ -4,297 +4,595 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin">
+	<!-- 공통 -->
+	<update id="updateShowN">
+		update ${value} set show='n' where
+		<foreach collection="list" item="list" separator="or"
+			index="index">
+			${condition}=#{list}
+		</foreach>
+	</update>
 
-<select id="countTbAll" resultType="int">
-	select count(*) from ${value}
-</select>
+	<select id="countTbAll" resultType="int">
+		select count(*) from ${value}
+	</select>
+
+	<!-- 회원 -->
 	<select id="countMemberToday" resultType="int">
-	select count(*) from member_tb
-	where to_char(join_date,'YYYY-MM-DD')=#{now}
+		select count(*) from
+		member_tb
+		where to_char(join_date,'YYYY-MM-DD')=#{now}
 	</select>
-	
+
 	<select id="countMemberQuit" resultType="int">
-	select count(*) from member_tb
-	where quit='y'
+		select count(*) from
+		member_tb
+		where quit='y'
 	</select>
-	
+
 	<select id="countSearchMember" resultType="int">
-			select count(*)
-			from member_tb 
-			<choose>
+		select count(*)
+		from member_tb
+		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
 			</when>
-			 <otherwise>
-			where userid like '%'||#{searchOp.searchKeyword}||'%' or name like '%'||#{searchOp.searchKeyword}||'%' 
-			or addr1 like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			  and join_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-			<choose>
+			<otherwise>
+				where (userid like '%'||#{searchOp.searchKeyword}||'%' or
+				name like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or addr1 like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and join_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and
+		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		<choose>
 			<when test='searchOp.searchOption2.equals("user")'>
-			and quit='n' 
+				and quit='n'
 			</when>
 			<when test='searchOp.searchOption2.equals("quit")'>
-			and quit='y'
+				and quit='y'
 			</when>
-			</choose>
+		</choose>
 	</select>
 	<select id="getMemberList" resultType="MemberDTO">
-select * from (
-		select M.*, rownum as rn from ( 
-			select userid, passwd, name, email, gender, hp, zipcode,
-			addr1, addr2, quit, join_date, quit_date
-			from member_tb 
-			<choose>
+		select * from (
+		select M.*, rownum as rn from (
+		select userid, passwd,
+		name, email, gender, hp, zipcode,
+		addr1, addr2, quit, join_date,
+		quit_date
+		from member_tb
+		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
 			</when>
-			 <otherwise>
-			where userid like '%'||#{searchOp.searchKeyword}||'%' or name like '%'||#{searchOp.searchKeyword}||'%' 
-			or addr1 like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			
-			  and join_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-            <choose>
-            <when test='searchOp.orderOption.equals("join_date")'>
-            order by join_date desc
-            </when>
-            <otherwise>
-            order by ${searchOp.orderOption}
-            </otherwise>
-            </choose> 
-			) M
-	) where rn between #{start} and #{end}
-			<choose>
+			<otherwise>
+				where (userid like '%'||#{searchOp.searchKeyword}||'%' or
+				name like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or addr1 like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+
+		and join_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and
+		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		<choose>
+			<when test='searchOp.orderOption.equals("join_date")'>
+				order by join_date desc
+			</when>
+			<otherwise>
+				order by ${searchOp.orderOption}
+			</otherwise>
+		</choose>
+		) M
+		) where rn between #{start} and #{end}
+		<choose>
 			<when test='searchOp.searchOption2.equals("user")'>
-			and quit='n' 
+				and quit='n'
 			</when>
 			<when test='searchOp.searchOption2.equals("quit")'>
-			and quit='y'
+				and quit='y'
 			</when>
-			</choose>
+		</choose>
 	</select>
-	
-	
-<select id="getMemberView" resultType="MemberDTO">
-		select userid, passwd, name, email, gender, hp, zipcode,
-		addr1, addr2, quit, join_date, quit_date
+
+
+	<select id="getMemberView" resultType="MemberDTO">
+		select userid, passwd,
+		name, email, gender, hp, zipcode,
+		addr1, addr2, quit, join_date,
+		quit_date
 		from member_tb
 		where userid=#{userid}
-</select>
+	</select>
 
-<select id="getMemberQna" resultType="QnaDTO">
-	select * from (
+	<select id="getMemberQna" resultType="QnaDTO">
+		select * from (
 		select Q.*, rownum as rn from (
-			select
-			q.bno, q.writer, m.name, q.title, q.content, q.reg_date, q.viewcnt,
-			q.reply_state, q.show
-			from qna_tb q, member_tb m
-			where q.writer=#{userid}
-			and m.userid=#{userid}
-			order by q.reg_date desc
+		select
+		q.bno, q.writer,
+		m.name, q.title, q.content, q.reg_date, q.viewcnt,
+		q.reply_state,
+		q.show
+		from qna_tb q, member_tb m
+		where q.writer=#{userid}
+		and
+		m.userid=#{userid}
+		order by q.reg_date desc
 		) Q
-	) where <![CDATA[rn <= 6]]> 
-</select>
+		) where <![CDATA[rn <= 6]]>
+	</select>
 
-<select id="getMemberReserv" resultType="ReservDTO">
-	select * from (
-			select R.*, rownum as rn from (
-			select no, r.userid, e.code, r.res_date, 
-			r.adult, r.teen, r.kids, r.quantity,
-			r.sub_total, r.pay, m.name, e.title
-			from reserv_item_tb r, member_tb m, exhibition_tb e
-			where r.userid=m.userid and r.code=e.code and r.userid=#{userid}
-			order by r.res_date desc
+	<select id="getMemberReserv" resultType="ReservDTO">
+		select * from (
+		select R.*, rownum as rn from (
+		select no, r.userid,
+		e.code, r.res_date,
+		r.adult, r.teen, r.kids, r.quantity,
+		r.sub_total,
+		r.pay, m.name, e.title
+		from reserv_item_tb r, member_tb m,
+		exhibition_tb e
+		where r.userid=m.userid and r.code=e.code and
+		r.userid=#{userid}
+		order by r.res_date desc
 		) R
-		) where <![CDATA[rn <= 6]]> 
-</select>
+		) where <![CDATA[rn <= 6]]>
+	</select>
 
-<update id="deleteMember">
-	update member_tb set quit='y', quit_date=#{today}
-	where
-	<foreach collection="userids" item="list" separator="or" index="index"> 
-	userid=#{list} 
-	</foreach>
-</update>
+	<update id="deleteMember">
+		update member_tb set quit='y', quit_date=#{today}
+		where
+		<foreach collection="userids" item="list" separator="or"
+			index="index">
+			userid=#{list}
+		</foreach>
+	</update>
 
-<update id="deleteReserv">
-	delete from reserv_item_tb where 
-	<foreach collection="reserv_no" item="list" separator="or" index="index"> 
-	no=#{list}
-	</foreach>
-</update>
+	<!-- <update id="deleteReserv"> -->
+	<!-- update reserv_item_tb set show='n' where -->
+	<!-- <foreach collection="reserv_no" item="list" separator="or" -->
+	<!-- index="index"> -->
+	<!-- no=#{list} -->
+	<!-- </foreach> -->
+	<!-- </update> -->
 
-<update id="deleteQna">
-	update qna_tb set show='n' where
-	<foreach collection="qna_bno" item="list" separator="or" index="index"> 
-	bno=#{list}
-	</foreach>
-</update>
+	<!-- 전시 -->
 
-<!-- 전시  -->
+	<select id="countExbIng" resultType="int">
+		select count(
+		case when  
+	<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>
+		or
+	 <![CDATA[to_char(end_date, 'YYYY-MM-DD') >= #{today}]]>
+		then 1 end)
+		from exhibition_tb
+	</select>
 
-<select id="countExbIng" resultType="int">
-	select count(
-	case when  
-	<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>  or
-	 <![CDATA[to_char(end_date, 'YYYY-MM-DD') >= #{today}]]>  then 1 end)
-	from exhibition_tb
-</select>	
-
-<select id="countSearchExb" resultType="int">
-	select count(*) from exhibition_tb
-	<choose>
+	<select id="countSearchExb" resultType="int">
+		select count(*) from exhibition_tb
+		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
 			</when>
-			 <otherwise>
-			where code like '%'||#{searchOp.searchKeyword}||'%' 
-			or title like '%'||#{searchOp.searchKeyword}||'%' 
-			or location like '%'||#{searchOp.searchKeyword}||'%' 
-			or gallery like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			  and (
-			  start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-              or end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-                   )
-	
-</select>
-<select id="getExbList" resultType="ExhibitionDTO">
-select * from (
-		select E.*, rownum as rn from ( 
-			select code, location, gallery, title, summary, thumnail, start_date,
-			end_date, hit, sales
-			from exhibition_tb 
-			<choose>
+			<otherwise>
+				where (code like '%'||#{searchOp.searchKeyword}||'%'
+				or
+				title like '%'||#{searchOp.searchKeyword}||'%'
+				or location like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or gallery like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and (
+		start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		or end_date between
+		to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and
+		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		)
+		<choose>
+			<when test='searchOp.searchOption2.equals("ing")'>
+				and show='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("end")'>
+				and show='n'
+			</when>
+		</choose>
+	</select>
+	<select id="getExbList" resultType="ExhibitionDTO">
+		select * from (
+		select E.*, rownum as rn from (
+		select code, location,
+		gallery, title, summary, thumnail, start_date,
+		end_date, hit, sales, show
+		from exhibition_tb
+		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
 			</when>
-			 <otherwise>
-			where code like '%'||#{searchOp.searchKeyword}||'%' 
-			or title like '%'||#{searchOp.searchKeyword}||'%' 
-			or location like '%'||#{searchOp.searchKeyword}||'%' 
-			or gallery like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			  and (
-			  start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-              or end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-                   )
-            <choose>
-            <when test='searchOp.orderOption.equals("start_date") 
-            or searchOp.orderOption.equals("end_date")
-            or searchOp.orderOption.equals("hit") 
-            or searchOp.orderOption.equals("sales")'> 
-            order by ${searchOp.orderOption} desc
-            </when>
-            <otherwise>
-            order by ${searchOp.orderOption}
-            </otherwise>
-            </choose> 
-			) E
-	) where rn between #{start} and #{end}
-</select>
+			<otherwise>
+				where (code like '%'||#{searchOp.searchKeyword}||'%'
+				or title like '%'||#{searchOp.searchKeyword}||'%'
+				or location like '%'||#{searchOp.searchKeyword}||'%'
+				or gallery like '%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		<choose>
+			<when test='searchOp.searchOption2.equals("ing")'>
+				and show='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("end")'>
+				and show='n'
+			</when>
+		</choose>
+		and (
+		(start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		or (end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		)
+		<choose>
+			<when test='searchOp.orderOption.equals("code")'>
+				order by ${searchOp.orderOption}
+			</when>
+			<when test='searchOp.orderOption.equals("title")'>
+				order by ltrim(title)
+			</when>
+			<otherwise>
+				order by ${searchOp.orderOption} desc
+			</otherwise>
+		</choose>
+		) E
+		) where rn between #{start} and #{end}
+	</select>
 
-<insert id="insertExb">
-	insert into exhibition_tb 
-	(code, location, gallery, title, summary, thumnail, start_date, end_date)
-	values
-	(#{code}, #{location}, #{gallery}, #{title}, #{summary}, 
-	#{thumnail}, #{start_date}, #{end_date})
-</insert>
+	<insert id="insertExb">
+		insert into exhibition_tb
+		(code, location, gallery,
+		title, summary, thumnail, product_info,
+		start_date, end_date)
+		values
+		(#{code}, #{location}, #{gallery}, #{title}, #{summary},
+		#{thumnail},
+		#{product_info}, #{start_date}, #{end_date})
+	</insert>
 
-<select id="getExbView" resultType="ExhibitionDTO">
-	select 
-		code, location, gallery, title, summary, 
-		thumnail, start_date, end_date, hit, sales
-	from exhibition_tb
-	where code=#{code}
-</select>
+	<select id="getExbView" resultType="ExhibitionDTO">
+		select
+		code, location,
+		gallery, title, summary,
+		thumnail, product_info, start_date, end_date,
+		hit, sales
+		from exhibition_tb
+		where code=#{code}
+	</select>
 
-<update id="updateExb">
-	update exhibition_tb set
+	<update id="updateExb">
+		update exhibition_tb set
 		location=#{location}, gallery=#{gallery}, title=#{title},
-		summary=#{summary}, thumnail=#{thumnail}, 
+		summary=#{summary},	thumnail=#{thumnail}, 
+		product_info=#{product_info},
 		start_date=#{start_date}, end_date=#{end_date}
-	where code=#{code}
-</update>
+		where code=#{code}
+	</update>
 
-<update id="deleteThumnail">
-	update exhibition_tb set thumnail='-'
-	where code=#{code}
-</update>
+	<update id="deleteExbFile">
+		update exhibition_tb set ${fileType}='-'
+		where
+		code=#{code}
+	</update>
 
-<update id="deleteExb">
-	update exhibition_tb set show='n'
-	where code=#{code}
-</update>
+	<update id="deleteExb">
+		update exhibition_tb set show='n'
+		where code=#{code}
+	</update>
 
-<select id="countSearchReserv" resultType="int">
-	 select count(distinct r.no)
-			from reserv_item_tb r, exhibition_tb e 
-			<choose>
+	<!-- 예약 -->
+	<select id="countReservPay" resultType="int">
+		select count(*) from
+		reserv_item_tb where pay='y'
+	</select>
+	<select id="countSearchReserv" resultType="int">
+		select count(distinct r.no)
+		from reserv_item_tb r, exhibition_tb e
+		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
 			</when>
-			 <otherwise>
-			where r.no like '%'||#{searchOp.searchKeyword}||'%' 
-			or r.userid like '%'||#{searchOp.searchKeyword}||'%' 
-			or e.code like '%'||#{searchOp.searchKeyword}||'%'
-			or e.title like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			  and res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-              and  r.code=e.code
-</select>
-
-<select id="getReservList" resultType="ReservDTO">
-select * from (
-		select R.*, rownum as rn from ( 
-			select no, r.userid, e.code, r.res_date, r.adult, r.teen, r.kids,
-			r.quantity, r.sub_total, e.title, e.gallery, r.r_name, r.pay, r.r_addr1
-			from reserv_item_tb r, exhibition_tb e
-			<choose>
-			<when test="searchOp.searchOption1 != 'all'">
-			where ${searchOp.searchOption1} like '%'||#{searchOp.searchKeyword}||'%'
-			</when>
-			 <otherwise>
-			where r.no like '%'||#{searchOp.searchKeyword}||'%'
-			or r.userid like '%'||#{searchOp.searchKeyword}||'%'
-			or e.code like '%'||#{searchOp.searchKeyword}||'%'
-			or e.title like '%'||#{searchOp.searchKeyword}||'%'
-			 </otherwise>
-			</choose>
-			  and res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd') 
-                   and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-            <choose>
-            <when test='searchOp.orderOption.equals("res_date")
-             or searchOp.orderOption.equals("quantity")'>
-            order by #{searchOp.orderOption} desc
-            </when>
-            <otherwise>
-            order by ${searchOp.orderOption}
-            </otherwise>
-            </choose> 
-			) R
-	) where rn between #{start} and #{end}
-			<choose>
+			<otherwise>
+				where (r.no like '%'||#{searchOp.searchKeyword}||'%'
+				or
+				r.userid like '%'||#{searchOp.searchKeyword}||'%'
+				or e.code like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or e.title like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and (r.res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		and r.code=e.code
+		<choose>
 			<when test='searchOp.searchOption2.equals("pay_y")'>
-			and pay='y' 
+				and r.pay='y'
 			</when>
 			<when test='searchOp.searchOption2.equals("pay_n")'>
-			and pay='n'
+				and r.pay='n'
 			</when>
-			</choose>
-</select>
+		</choose>
+		and r.show='y'
+	</select>
+
+	<select id="getReservList" resultType="ReservDTO">
+		select * from (
+		select I.*, rownum as rn from (
+		select r.no, r.userid,
+		r.code, r.res_date, r.adult, r.teen, r.kids,
+		r.quantity, r.sub_total,
+		e.title, e.gallery, r.r_name, r.pay,
+		r.r_addr1, r.show
+		from
+		reserv_item_tb r, exhibition_tb e
+		where r.code=e.code
+		<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+				and ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			<otherwise>
+				and (r.no like '%'||#{searchOp.searchKeyword}||'%'
+				or
+				r.userid like '%'||#{searchOp.searchKeyword}||'%'
+				or r.code like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or e.title like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and (r.res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		and r.show='y'
+		<choose>
+			<when
+				test='searchOp.orderOption.equals("r.res_date")
+             or searchOp.orderOption.equals("r.quantity")'>
+				order by ${searchOp.orderOption} desc
+			</when>
+			<otherwise>
+				order by ${searchOp.orderOption}
+			</otherwise>
+		</choose>
+		) I
+		) where rn between #{start} and #{end}
+		<choose>
+			<when test='searchOp.searchOption2.equals("pay_y")'>
+				and pay='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("pay_n")'>
+				and pay='n'
+			</when>
+		</choose>
+	</select>
+
+
+	<!-- Qna -->
+	<select id="countQnaNew" resultType="int">
+		select count(*) from qna_tb
+		where reply_state='n'
+	</select>
+
+	<select id="countQnaDel" resultType="int">
+		select count(*) from qna_tb
+		where show='n'
+	</select>
+
+	<select id="countSearchQna" resultType="int">
+		select count(*)
+		from qna_tb
+		<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			<otherwise>
+				where (bno like '%'||#{searchOp.searchKeyword}||'%'
+				or
+				writer like '%'||#{searchOp.searchKeyword}||'%'
+				or title like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or content like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and (reg_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and
+		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		and show='y'
+		<choose>
+			<when test='searchOp.searchOption2.equals("reply_state_y")'>
+				and reply_state='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("reply_state_n")'>
+				and reply_state='n'
+			</when>
+		</choose>
+	</select>
+	<select id="getQnaList" resultType="QnaDTO">
+		select * from (
+		select Q.*, rownum as rn from (
+		select bno, writer,
+		title, m.name, content, q.reg_date, viewcnt,
+		reply_state, q.show
+		from
+		qna_tb q, member_tb m
+		where q.writer=m.userid
+		<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+				and ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			<otherwise>
+				and (bno like '%'||#{searchOp.searchKeyword}||'%'
+				or writer
+				like '%'||#{searchOp.searchKeyword}||'%'
+				or title like
+				'%'||#{searchOp.searchKeyword}||'%'
+				or content like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		and (q.reg_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		and q.show='y'
+		<choose>
+			<when test='searchOp.orderOption.equals("bno")'>
+				order by ${searchOp.orderOption}
+			</when>
+			<otherwise>
+				order by ${searchOp.orderOption} desc
+			</otherwise>
+		</choose>
+		) Q
+		) where rn between #{start} and #{end}
+		<choose>
+			<when test='searchOp.searchOption2.equals("reply_state_y")'>
+				and reply_state='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("reply_state_n")'>
+				and reply_state='n'
+			</when>
+		</choose>
+	</select>
+
+	<!-- 팝업 -->
+	<select id="countSearchPopup" resultType="int">
+		select count(*)
+		from popup_tb
+		<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			<otherwise>
+				where (no like '%'||#{searchOp.searchKeyword}||'%'
+				or title
+				like '%'||#{searchOp.searchKeyword}||'%'
+				or filename like
+				'%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		<choose>
+			<when test='searchOp.searchOption2.equals("show_y")'>
+				and show='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("show_n")'>
+				and show='n'
+			</when>
+		</choose>
+		and (start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		or end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+	</select>
+
+	<select id="getPopupList" resultType="PopupDTO">
+		select * from (
+		select P.*, rownum as rn from (
+		select no, title,
+		img_src, img_width, img_height, pos_width, pos_height,
+		filename, filesize,
+		start_date, end_date, reg_date, show
+		from
+		popup_tb
+		<choose>
+			<when test="searchOp.searchOption1 != 'all'">
+				where ${searchOp.searchOption1} like
+				'%'||#{searchOp.searchKeyword}||'%'
+			</when>
+			<otherwise>
+				where (no like '%'||#{searchOp.searchKeyword}||'%'
+				or title like '%'||#{searchOp.searchKeyword}||'%'
+				or filename like '%'||#{searchOp.searchKeyword}||'%')
+			</otherwise>
+		</choose>
+		<choose>
+			<when test='searchOp.searchOption2.equals("show_y")'>
+				and show='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("show_n")'>
+				and show='n'
+			</when>
+		</choose>
+		and (start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		or end_date between	to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		<choose>
+			<when test='searchOp.orderOption.equals("no")'>
+				order by ${searchOp.orderOption}
+			</when>
+			<otherwise>
+				order by ${searchOp.orderOption} desc
+			</otherwise>
+		</choose>
+		) P
+		) where rn between #{start} and #{end}
+	</select>
+	<select id="getPopupView" resultType="PopupDTO">
+		select no, title, img_src, img_width, img_height,
+		pos_width, pos_height, filename, filesize, 
+		start_date, end_date, reg_date, show
+		from popup_tb
+		where no=#{no}
+	</select>
+	
+	<insert id="insertPopup">
+		insert into popup_tb
+		(no, title, img_src, img_width, img_height, pos_width, pos_height,
+		filename, filesize, start_date, end_date)
+		values
+		(seq_popup.nextval, #{title}, #{img_src}, #{img_width}, #{img_height},
+		#{pos_width}, #{pos_height}, #{filename}, #{filesize}, #{start_date}, #{end_date})
+	</insert>
+	
+		<update id="deletePopupFile">
+		update popup_tb set img_src='-', filename='-', filesize=0
+		where
+		no=#{no}
+	</update>
+	
+	<update id="updatePopup">
+		update popup_tb set 
+		title=#{title}, img_src=#{img_src}, img_width=#{img_width},
+		img_height=#{img_height}, pos_width=#{pos_width}, pos_height=#{pos_height},
+		filename=#{filename}, filesize=#{filesize}, start_date=#{start_date},
+		end_date=#{end_date}
+	</update>
+	
+	<update id="popupShow">
+		update popup_tb set show='y' where no=#{no}
+	</update>
+	
+	<select id="getPopupOn" resultType="PopupDTO">
+		select no, title, img_src, img_width, img_height, pos_width, pos_height,
+		filename, filesize, start_date, end_date
+		from popup_tb
+		where show='y' and 
+		(<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>
+		or
+	 <![CDATA[to_char(end_date, 'YYYY-MM-DD') >= #{today}]]>)
+	</select>
 </mapper>

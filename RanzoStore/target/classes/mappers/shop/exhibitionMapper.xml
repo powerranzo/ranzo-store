@@ -5,10 +5,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="exhibition">
+
+	<!-- 현재 전시 리스트 -->
 	<select id="list" resultType="ExhibitionDTO">
-		SELECT * FROM EXHIBITION_TB
+		SELECT code, location, gallery, title, summary, thumnail, start_date, end_date
+		FROM EXHIBITION_TB
+		<![CDATA[
+		WHERE sysdate <= end_date
+		]]>
+		
+	<choose>
+		<when test="!location.contains('전체')">			
+			AND location IN
+			<foreach collection="location" item="item" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		</when>
+	</choose>
+		
+	<choose>
+		<when test="sort == '별점 높은순'">
+			ORDER BY nvl((select avg(rating) from review_tb where code=product and show='y'),0) desc
+		</when>
+		<when test="sort == '리뷰 많은순'">
+			ORDER BY nvl((select count(*) from review_tb where code=product and show='y'),0) desc
+		</when>
+		<when test="sort == '가격 낮은순'">
+			ORDER BY price desc
+		</when>
+		<when test="sort == '종료 임박순'">
+			ORDER BY end_date
+		</when>
+	</choose>
 	</select>
 	
+	
+	
+	
+	<!-- 전시 상세 리스트 -->
 	<select id="detail" resultType="ExhibitionDTO">
 		SELECT code, location, gallery, title, summary, thumnail, product_info, start_date, end_date, hit, sales FROM EXHIBITION_TB
 		WHERE code = #{exhibitionCode}
@@ -35,6 +69,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where (#{searchDate} between START_DATE and END_DATE)
 	</select>
 
+	<!-- 전시 상세 - 상품상세 탭 리스트 -->
+	<select id="getProductInfo" resultType="ProductInfoDTO">
+		SELECT code, content, attach
+		FROM PRODUCT_INFO_TB
+		WHERE code = #{code}
+	</select>
+
+	<!-- 전시 상세 - 예약/취소 탭 리스트 -->
+<!-- 	
+	<select id="getReserveInfo" resultType="ReserveInfoDTO">
+		SELECT code, attach, content 
+		FROM Reserve_Info_TB
+		WHERE code = #{code}
+	</select>
+	 -->
+	
+	
 </mapper>
 
 

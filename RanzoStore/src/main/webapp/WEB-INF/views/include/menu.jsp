@@ -26,7 +26,6 @@
 	
 	}); 
 </script>
-
 <c:set var="path" value="${pageContext.request.contextPath}" />
 	<nav class="nav">
 		<div class="logo">
@@ -37,10 +36,10 @@
 		<ul class="menu">
 			<li><a href="${path}">HOME</a></li>
 			<li><a href="${path}/about.do">ABOUT</a></li>
-			<li><a href="#">EXHIBITION</a>
+			<li><a href="${path}/shop/exhibition/list/current">EXHIBITION</a>
 				<ul class="depth_1">
-					<li><a href="${path}/shop/exhibition/list.do">현재전시</a></li>
-					<li><a href="#">지난전시</a></li>
+					<li><a href="${path}/shop/exhibition/list/current">현재전시</a></li>
+					<li><a href="${path}/shop/exhibition/list/past">지난전시</a></li>
 				</ul></li>		
 			<li><a href="${path}/board/review/list.do">REVIEW</a></li>
 			<li><a href="#">고객센터</a>

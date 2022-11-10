@@ -13,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("board/download/*")
 public class FileDownController {
 
-	@RequestMapping(value="fileDownload.do")
+	@RequestMapping("fileDownload.do")
 	public void fileDownload4(HttpServletRequest request,HttpServletResponse response) throws Exception {
-        //String path =  request.getSession().getServletContext().getRealPath("저장경로");
         
         String filename =request.getParameter("fileName");
         String realFilename="";
@@ -63,5 +63,4 @@ public class FileDownController {
             System.out.println("FileNotFoundException : " + e);
         }
     }
-
 }

@@ -6,13 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>전시 등록</title>
+<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
 .form-group{
 width:80%;
 }
 </style>
-<%@ include file="../include/header.jsp" %>
-<%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
 $(function(){
 	$("#summary").summernote({
@@ -57,14 +57,14 @@ $(function(){
 				id="location" placeholder="">
 			</div>
 			<div class="form-group">
-				<label for="startDate">전시 시작일</label> 
-				<input type="date" name="startDate" class="form-control input-sm" 
-				id="startDate"> 
+				<label for="start_date">전시 시작일</label> 
+				<input type="date" name="start_date" class="form-control input-sm" 
+				id="start_date"> 
 			</div>
 			<div class="form-group">
-				<label for="endDate">전시 마감일</label> 
-				<input type="date" name="endDate" class="form-control input-sm" 
-				id="endDate">
+				<label for="end_date">전시 마감일</label> 
+				<input type="date" name="end_date" class="form-control input-sm" 
+				id="end_date">
 			</div>
 			<div class="form-group" style="width:inherit;">
 				<label for="summary">내용</label>
@@ -72,9 +72,14 @@ $(function(){
 					placeholder="내용을 입력해주세요." rows="20"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="files">썸네일</label> 
+				<label for="file">포스터 썸네일</label> 
 				<input type="file" name="file"	
 				class="form-control input-sm" id="file">
+			</div>
+			<div class="form-group">
+				<label for="file2">전시 정보 이미지</label> 
+				<input type="file" name="file2"	
+				class="form-control input-sm" id="file2">
 			</div>
 		</form>
 		<div class="form-group" align="right">

@@ -7,18 +7,21 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 
 	@Inject
 	SqlSession sqlSession;
-	
-	//첨부파일 레코드 삭제
+
+	// 첨부파일 레코드 삭제
 	@Override
 	public void deleteFile(String fullName) {
 		sqlSession.delete("review.deleteFile", fullName);
@@ -32,18 +35,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public void addAttach(String fullName) {
-		sqlSession.insert("review.addAttach",fullName);
+		sqlSession.insert("review.addAttach", fullName);
 	}
 
-	//첨부파일 정보 수정
+	// 첨부파일 정보 수정
 	@Override
 	public void updateAttach(String fullName, int bno) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("fullName", fullName);
 		map.put("bno", bno);
 		sqlSession.insert("review.updateAttach", map);
 	}
-	
+
 	@Override
 	public void create(ReviewDTO dto) throws Exception {
 		sqlSession.insert("review.insert", dto);
@@ -52,7 +55,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public void update(ReviewDTO dto) throws Exception {
-		sqlSession.update("review.update",dto);
+		sqlSession.update("review.update", dto);
 	}
 
 	@Override
@@ -63,9 +66,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public List<ReviewDTO> listAll(String search_option, String keyword, int start, int end) throws Exception {
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("search_option", search_option);
-		map.put("keyword", "%"+keyword+"%");
+		map.put("keyword", "%" + keyword + "%");
 		map.put("start", start);
 		map.put("end", end);
 		return sqlSession.selectList("review.listAll", map);
@@ -83,8 +86,29 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
+	public int countArticle(String code) {
+		int count = sqlSession.selectOne("review.countArticleExhibieion", code);
+		logger.info("### countArticle/count = " + count);
+		return count;
+	}
+
+	@Override
 	public ReviewDTO read(int bno) throws Exception {
-		return sqlSession.selectOne("review.read",bno);
+		return sqlSession.selectOne("review.read", bno);
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewInfo(String code) {
+		List<ReviewDTO> reviewList = sqlSession.selectList("review.getReviewInfo", code);
+		logger.info("### reviewList {}. " + reviewList);
+		return reviewList;
+	}
+
+	@Override
+	public float avgRating(String code) {
+		float avgRating = sqlSession.selectOne("review.avgRating",code);
+		logger.info("### rvwDAO/avgRating/" + avgRating);
+		return avgRating;
 	}
 
 }

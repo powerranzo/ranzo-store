@@ -84,8 +84,8 @@ function orderlist(){
 <body>
 <%@ include file="../include/menu.jsp"%>
 <div class="content">
-<%@ include file="../include/CommonDashboard.jspf" %>
 <section>
+<%@ include file="../include/CommonDashboard.jspf" %>
  <div class="orderdiv">
 		<article class="profile">
 			<div class="welcome">
@@ -94,7 +94,7 @@ function orderlist(){
 			</div>
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
-			<a class="a1" href="#">나의 후기</a>
+			<a class="a1" href="${path}/member/myReview.do">나의 후기</a>
 			</div>
 			<div class="myinfo">
 			<img src="${path}/resources/images/user_icon.png" height="20">

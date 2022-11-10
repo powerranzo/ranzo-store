@@ -1,6 +1,7 @@
 package com.ranzo.power.model.member.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,6 +9,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 
 @Repository
@@ -88,6 +91,16 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("닉네임: "+userInfo.get("nickname"));
 		System.out.println("이메일: "+userInfo.get("email"));
 		return sqlSession.selectOne("member.findKakao", userInfo);
+	}
+
+	@Override
+	public List<QnaDTO> qnaList() {
+		return sqlSession.selectList("member.qnaList");
+	}
+
+	@Override
+	public List<ReviewDTO> reviewList() {
+		return sqlSession.selectList("member.reviewList");
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.ranzo.power.model.admin.dto;
 
-import com.ranzo.power.util.DateFunction;
+import com.ranzo.power.util.DateUtils;
 
 public class SearchDTO {
 	private String searchOption1;
@@ -59,7 +59,7 @@ public class SearchDTO {
 		this.searchOption1 = "all";
 		this.searchOption2 = "all";
 		this.startDate="2000-01-01";
-		this.endDate=DateFunction.getToday();
+		this.endDate=DateUtils.getToday();
 		this.searchKeyword ="";
 	}
 	public SearchDTO(String searchOption1, String startDate, String endDate, String searchOption2, String searchKeyword,
