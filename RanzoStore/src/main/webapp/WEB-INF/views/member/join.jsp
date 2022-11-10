@@ -193,7 +193,7 @@ function daumZipCode() {
 }
 
 .input-field-b {
-	width: 210px;
+	width: 208px;
 	height: 40px;
 	border: 1px solid gray;
 	padding: 0 10px;
@@ -220,8 +220,8 @@ label {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 84px;
-	height: 42px;
+	width: 77px;
+	height: 41px;
 	font-size: 14px;
 	border: none;
 	margin: 20px 0 0 0;
