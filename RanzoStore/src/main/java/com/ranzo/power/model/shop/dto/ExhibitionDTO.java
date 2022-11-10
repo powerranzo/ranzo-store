@@ -21,8 +21,21 @@ public class ExhibitionDTO {
 	private int sales; //
 	private int rn;
 	private String show;
+	private String keyword;
+	private String searchDate;
 	
-	
+	public String getSearchDate() {
+		return searchDate;
+	}
+	public void setSearchDate(String searchDate) {
+		this.searchDate = searchDate;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getCode() {
 		return code;
 	}

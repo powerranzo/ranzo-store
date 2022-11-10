@@ -82,18 +82,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid} 
 	</update> 
 
-	<!-- 정보 저장 -->
+	<!-- 카카오 회원 가입 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
 		insert into member_tb (userid, name, email, passwd)
 		values (#{nickname}, #{nickname}, #{email}, 'kakaopwd')
 	</insert>
 	
-	<!-- 정보 찾기 -->
+	<!-- 카카오 회원 로그인 -->
 	<select id="findKakao" 
 	parameterType="java.util.HashMap" 
 	resultType="com.ranzo.power.model.member.dto.MemberDTO">
 		select * from member_tb 
 		where name=#{nickname} and email=#{email}
+	</select>
+	
+	<!-- 마이페이지 - 상품 문의 -->
+	<select id="qnaList" resultType="com.ranzo.power.model.board.dto.QnaDTO">
+		select * from ( 
+				select bno, title, content, writer, reg_date, viewcnt, show 
+				from qna_tb
+				order by ref desc, re_depth asc) 
+	</select>
+	
+	<!-- 마이페이지 - 고객 리뷰 -->
+	<select id="reviewList" resultType="com.ranzo.power.model.board.dto.ReviewDTO">
+		select * from ( 
+				select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, r.reg_date, r.viewcnt, r.show,
+					(select count(*) from review_reply_tb where bno=r.bno) cnt
+				from review_tb r, member_tb m, exhibition_tb e
+				where r.writer=m.userid and r.product=e.code) 
 	</select>
 	
 </mapper>

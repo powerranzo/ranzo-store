@@ -1,5 +1,9 @@
 package com.ranzo.power.controller.member;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.service.member.MemberService;
 
@@ -51,11 +57,21 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session, ModelAndView mav) {
-		memberService.logout(session);
-		mav.setViewName("home");
-		mav.addObject("message", "logout");
-		return mav;
+	public String logout(HttpSession session) {
+		 String access_Token = (String)session.getAttribute("access_Token");
+
+	        if(access_Token != null && !"".equals(access_Token)){
+	            memberService.kakaoLogout(access_Token);
+	            session.removeAttribute("access_Token");
+	            session.removeAttribute("userid");
+	            session.removeAttribute("name");
+	            session.removeAttribute("email");
+	            System.out.println("카카오 로그아웃");
+	        }else{
+	        	memberService.logout(session);
+	            System.out.println("일반 로그아웃");
+	        }
+		return "home";
 	}
 	
 	//회원가입 등록
@@ -223,17 +239,43 @@ public class MemberController {
 		MemberDTO dto = memberService.getUserInfo(access_Token);
 		System.out.println("$$$access_Token$$$$ : " + access_Token);
 		
-		// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 		session.setAttribute("userid", dto.getUserid());
 		session.setAttribute("name", dto.getName());
 		session.setAttribute("email", dto.getEmail());
+		session.setAttribute("access_Token", access_Token);
 		return "home";
 	}
 	
-	//배송지관리 페이지 이동
-	@RequestMapping("addressList.do")
-	public String addressList() {
-		return "member/addressList";
+//	//배송지관리 페이지 이동
+//	@RequestMapping("addressList.do")
+//	public String addressList() {
+//		return "member/addressList";
+//	}
+	
+	//마이페이지 - 상품 문의
+	@RequestMapping("myInquiry.do")
+	public ModelAndView myInquiry() {
+		List<QnaDTO> list=memberService.qnaList();
+		logger.info(list.toString());
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list); 
+		mav.setViewName("member/myInquiry");
+		mav.addObject("map", map);
+		return mav;
+	}
+	
+	//마이페이지 - 상품 문의
+	@RequestMapping("myReview.do")
+	public ModelAndView myReview() {
+		List<ReviewDTO> list=memberService.reviewList();
+		logger.info(list.toString());
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list); 
+		mav.setViewName("member/myReview");
+		mav.addObject("map", map);
+		return mav;
 	}
 
 }

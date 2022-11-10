@@ -80,6 +80,17 @@ public class ReviewController {
 		return mav;
 	}
 	
+	//수정하러 이동 
+	@RequestMapping("edit.do")
+	public ModelAndView edit(int bno, HttpSession session) throws Exception {
+		//조회수 증가 처리
+		reviewService.increaseViewcnt(bno, session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("reviewboard/edit");
+		mav.addObject("dto", reviewService.read(bno));
+		return mav;
+	}
+		
 	//첨부파일 목록을 리턴
 	//json 배열로 변환하여 리턴
 	@RequestMapping("getAttach/{bno}")
@@ -88,7 +99,7 @@ public class ReviewController {
 		return reviewService.getAttach(bno);
 	}
 	
-	//게시물 내용 수정
+	//게시물 수정
 	@RequestMapping("update.do")
 	public String update(ReviewDTO dto) throws Exception {
 		System.out.println("dto : "+ dto);
