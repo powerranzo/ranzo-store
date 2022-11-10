@@ -11,10 +11,11 @@
 .div1 {
 	text-align: center;
 	margin: auto;
-	padding: 20px;
+	padding: 10px;
 }
 .table1 {
 	margin: auto;
+	margin-top: 20px;
 	padding: 10px;
 	width: 80%;
 	text-align: center;
@@ -56,13 +57,17 @@
 	font-size: 12px;
 	color: gray;
 }
+.div1{
+	justify-content: space-between;
+	display: flex;
+	margin: 10px 120px;
+}
 .diva1,.diva2,.diva3 {
-	display: inline-block;
-	width: 380px;
+	width: 350px;
 	padding: 5px;
 	vertical-align: top;
 }
-.diva3{
+.diva3, .diva2{
 	text-align: left;
 }
 .diva2 li{
@@ -75,6 +80,13 @@
 	background-color: #f4f4f4;
 	font-size: 13px;
 }
+@media screen and (max-width: 760px) {
+	.div1{
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 8px 24px;
+	}
+
 </style>
 <script type="text/javascript">
 	/* 권종더보기  */
@@ -146,7 +158,6 @@
 	<%@ include file="../include/menu.jsp"%>
 	<form name="reserv" method="post" id="form"
 		action="${path}/reserv/pay/${dto.code}">
-		<div class="div1">
 			<table class="table1">
 				<thead>
 					<tr>
@@ -158,6 +169,7 @@
 					</tr>
 				</thead>
 			</table>
+		<div class="div1">
 			<div class="diva1">
 				<img src="${dto.thumnail}" width="90%">
 			</div>
@@ -177,7 +189,7 @@
 			</div>
 
 			<div class="diva3">
-				<h2>관람일</h2>
+				<h3>관람일</h3>
 				<input type="date" id="res_date" name="res_date" min="" max="
 				<fmt:formatDate value="${dto.end_date}" pattern="yyyy-MM-dd" />">
 				<script>
@@ -191,13 +203,13 @@
 				<br>
 				<hr noshade size="1px" color="#ddd">
 				<br>
-				<h2>회차</h2>
+				<h3>회차</h3>
 				전일 입장가능 10:00 ~ 19:00
 				<br>
 				<br>
 				<hr noshade size="1px" color="#ddd">
 				<br>
-				<h2>관람인원 및 권종</h2>
+				<h3>관람인원 및 권종</h3>
 				<div class="more">
 					<span style="color: gray;">권종안내</span> <a><img
 						src="${path}/resources/images/questionmark_icon.png" width="20"></a>
@@ -210,7 +222,7 @@
 				</div>
 				<table>
 					<tr>
-						<td>성인</td>
+						<td width="50%">성인</td>
 						<td><input type="number" name="adult" id="adult" step="1"
 							min="0" max="4" placeholder="0" value="0" onchange="user()"
 							size="5">명</td>
@@ -241,6 +253,7 @@
 					onclick="check(this.form)" name="check2" id="check2"> 관람시
 				유의 사항 동의 <input type="button" name="checkButton" id="checkButton"
 					value="예매하기" disabled="disabled">
+			</div>
 			</div>
 
 			<div class="diva4">
@@ -276,7 +289,6 @@
 					</ol>
 				</div>
 			</div>
-		</div>
 	</form>
 
 

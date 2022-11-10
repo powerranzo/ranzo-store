@@ -4,11 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="${path}/include/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="${path}/include/menu_style.css">
+<link rel="stylesheet" href="${path}/resources/css/menu_style.css">
 <link href="${path}/include/alertify.css" rel="stylesheet">
 <script src="${path}/include/alertify.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/home.css">
 
-<%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
 
 <!-- admin_head -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -9,11 +9,11 @@
 <%--   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> --%>
 <%--   <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> --%>
 <%--   <c:set var="path" value="${pageContext.request.contextPath}"/><!-- path 변수 설정 --> --%>
-<!-- <!--   <link rel="stylesheet" type="text/css" href="mycss.css"> --> -->
+<!-- <!--   <link rel="stylesheet" type="text/css" href="mycss.css"> -->
 <%--   <script src="${path}/include/jquery-3.6.0.min.js"></script> --%>
-<!-- <!-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> --> -->
+<!-- <!-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <%--   <script src="${path}/resources/js/admin_script.js"></script> --%>
-<!--   <!-- ckeditor --> -->
+<!--   <!-- ckeditor -->
 <!-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
 
 <!-- <!-- summernote  -->

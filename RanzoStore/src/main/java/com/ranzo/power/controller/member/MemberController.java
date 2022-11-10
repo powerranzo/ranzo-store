@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.service.member.MemberService;
 
@@ -52,11 +51,21 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session, ModelAndView mav) {
-		memberService.logout(session);
-		mav.setViewName("home");
-		mav.addObject("message", "logout");
-		return mav;
+	public String logout(HttpSession session) {
+		 String access_Token = (String)session.getAttribute("access_Token");
+
+	        if(access_Token != null && !"".equals(access_Token)){
+	            memberService.kakaoLogout(access_Token);
+	            session.removeAttribute("access_Token");
+	            session.removeAttribute("userid");
+	            session.removeAttribute("name");
+	            session.removeAttribute("email");
+	            System.out.println("카카오 로그아웃");
+	        }else{
+	        	memberService.logout(session);
+	            System.out.println("일반 로그아웃");
+	        }
+		return "home";
 	}
 	
 	//회원가입 등록
@@ -197,6 +206,7 @@ public class MemberController {
 		MemberDTO dto2 = memberService.findPwd(dto);
 		ModelAndView mav=new ModelAndView();
 		if(dto2 != null) {
+			mav.addObject("userid", userid);
 			mav.addObject("email", email);
 			mav.setViewName("redirect:sendPwd.do");
 		}else {
@@ -208,8 +218,8 @@ public class MemberController {
 	
 	//임시 비밀번호 이메일 전송
 	@RequestMapping("sendPwd.do")
-	public String sendPwd(String email) throws Exception {
-		memberService.sendPwd(email);
+	public String sendPwd(String userid, String email) throws Exception {
+		memberService.sendPwd(userid, email);
 		return "member/foundPwd";
 	}
 	
@@ -220,12 +230,14 @@ public class MemberController {
 		String access_Token = memberService.getAccessToken(code);
 		System.out.println("###access_Token#### : " + access_Token);
 		
-		KakaoDTO userInfo = memberService.getUserInfo(access_Token);
+		MemberDTO dto = memberService.getUserInfo(access_Token);
 		System.out.println("$$$access_Token$$$$ : " + access_Token);
 		
 		// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
-		session.setAttribute("name", userInfo.getK_name());
-		session.setAttribute("userid", userInfo.getK_email());
+		session.setAttribute("userid", dto.getUserid());
+		session.setAttribute("name", dto.getName());
+		session.setAttribute("email", dto.getEmail());
+		session.setAttribute("access_Token", access_Token);
 		return "home";
 	}
 	

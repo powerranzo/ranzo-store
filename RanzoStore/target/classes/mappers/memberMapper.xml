@@ -76,24 +76,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid} and name=#{name} and email=#{email} and quit='n'
 	</select>
 	
- 	<!-- 비밀번호 변경 -->
-<!-- 	<update id="tempPwd">
-		update member_tb set passwd=#{passwd} 
+ 	<!-- 임시 비밀번호로 비번 변경 -->
+	<update id="tempPwd">
+		update member_tb set passwd=#{tempPwd} 
 		where userid=#{userid} 
-	</update> -->
+	</update> 
 
-	<!-- 정보 저장 -->
+	<!-- 카카오 회원 가입 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
-		insert into kakao_tb (k_name, k_email)
-		values (#{nickname}, #{email})
+		insert into member_tb (userid, name, email, passwd)
+		values (#{nickname}, #{nickname}, #{email}, 'kakaopwd')
 	</insert>
 	
-	<!-- 정보 찾기 -->
+	<!-- 카카오 회원 로그인 -->
 	<select id="findKakao" 
 	parameterType="java.util.HashMap" 
-	resultType="com.ranzo.power.model.member.dto.KakaoDTO">
-		select * from kakao_tb 
-		where k_name=#{nickname} and k_email=#{email}
+	resultType="com.ranzo.power.model.member.dto.MemberDTO">
+		select * from member_tb 
+		where name=#{nickname} and email=#{email}
 	</select>
 	
 </mapper>
