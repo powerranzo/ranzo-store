@@ -129,9 +129,9 @@ function listReply(){
 </form>
 <hr>
 <h3>댓글</h3><small>(로그인 후 사용 가능)</small> 
-<div class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
+<div class="table table-striped" style="width: 800px;">
 	 <c:if test="${sessionScope.userid != null }">
-	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
+	 	<textarea rows="4" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
 	 	<button type="button" id="btnReply" class="btn btn-primary">댓글쓰기</button>
 	 </c:if>
 </div>
