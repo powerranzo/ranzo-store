@@ -7,7 +7,36 @@
 <title>관리자페이지</title>
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/adminHeader.jspf" %>
-
+<script type="text/javascript">
+$(function(){
+	//
+	//날짜체크
+// 	$.ajaxSettings.traditional = true;
+$.ajax({
+    type: "POST",
+    url : "${path}/admin/popup.do",
+    data : {},
+    contentType : "application/x-www-form-urlencoded; charset=utf-8",
+    dataType : "json",
+    success : function(data){
+    	//여러개일 수 있음.
+    	var url = "${path}/admin/popup.do";
+    	var name = "popup main";
+    	var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
+    	popup(url, name, option);
+    },error : function(){
+        //Ajax 실패시
+    }
+});
+	popup();
+});
+function popup(url, name, option){
+    var url = "${path}/admin/popup.do";
+    var name = "popup test";
+    var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
+    window.open(url, name, option);
+} 
+</script>
 </head>
 <body>
 <%@ include file="../include/menu.jsp"%>
@@ -81,9 +110,6 @@
 	 </div>
 	</div>
 	</div>
-<footer>
-<%@ include file="../include/footer.jsp" %>
-</footer>
-
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

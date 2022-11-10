@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전시 목록</title>
+<title>예약 목록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
@@ -47,10 +47,7 @@
 						.prop("selected", "selected");
 		}
 	}
-	function reservList(param) { 
-		document.form1.action = "${path}/admin/reserv_list.do?curPage=" + param;
-		document.form1.submit();
-	}
+
 </script>
 </head>
 <body>
@@ -67,12 +64,12 @@
 						<table class="adminTable1">
 							<tr>
 								<th>전체 예약</th>
-								<th>진행 중인 전시</th>
+								<th>결제 완료 예약</th>
 								<th></th>
 							</tr>
 							<tr>
 								<td>${ reserv.reserv_count_all}개</td>
-								<td>${ reserv.reserv_count_ing}개</td>
+								<td>${ reserv.reserv_count_pay}개</td>
 								<td>
 								<td>
 							</tr>
@@ -200,5 +197,6 @@
 			</div>
 		</section>
 	</div>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

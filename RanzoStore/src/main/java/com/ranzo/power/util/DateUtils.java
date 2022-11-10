@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class DateFunction {
+public class DateUtils {
 
 	public static String getToday() {
 		LocalDate now=LocalDate.now();
@@ -20,8 +20,8 @@ public class DateFunction {
 		return format.format(date);
 	}
 	
-	public static Date stringToDate(String date) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	public static Date stringToDate(String date, String type) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat(type);
 		return format.parse(date);
 	}
 }

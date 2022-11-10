@@ -16,20 +16,25 @@ public interface AdminService {
 	public void deleteMember(String[] userids);
 	public List<QnaDTO> getMemberQna(String userid);
 	public List<ReservDTO> getMemberReserv(String userid);
-	public void deleteQna(String[] qna_bno);
+	public void deleteQna(int[] qna_bno);
 	public void deleteReserv(String[] reserv_no);
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage);
 	public void insertExb(ExhibitionDTO dto);
 	public ExhibitionDTO getExbView(String code);
 	public void updateExb(ExhibitionDTO dto);
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
-	public void deleteFile(String code, String fileType);
+	public void deleteExbFile(String code, String fileType);
+	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage);
 	
-	public List<PopupDTO> popupList();//팝업 리스트 
-	public void insertPopup(PopupDTO dto);//팝업 등록
-	public void updatePopup(PopupDTO dto);//팝업 수정
-	public void deletePopup(PopupDTO dto);//팝업 삭제 (파일고려)
+	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage);
+	public void insertPopup(PopupDTO dto);
+	public void updatePopup(PopupDTO dto);
 	public void deleteExb(String code);
+	public PopupDTO getPopupView(int no);
+	public void deletePopup(int[] pop_no);
+	public void deletePopupFile(int no);
+	public void popupShow(int no);
+	public List<PopupDTO> getpopupOn();
 	
 
 	

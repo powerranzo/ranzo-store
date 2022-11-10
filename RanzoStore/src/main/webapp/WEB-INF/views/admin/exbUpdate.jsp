@@ -33,27 +33,31 @@ $(function(){
 	});
 	$("#fileDel").click(function(){
 		console.log('fileDel clicked');
-		fileDel(1);
+		fileDel('thumnail');
 	});
 	$("#fileDel2").click(function(){
-		fileDel(2);
+		fileDel('product_info');
 	});
 });
 
 function fileDel(param){
 	console.log(param);
-	var type="";
-	if(param==1) type="thumnail";
-	else if(param==2) type="product_info";
-	console.log(type);
 	if(confirm('삭제하시겠습니까?')){
-		let ipt = document.createElement('input');
-		ipt.setAttribute('type', 'hidden');
-		ipt.setAttribute('name', 'fileType');
-		ipt.setAttribute('value', type);
-		document.form1.appendChild(ipt);
-		document.form1.action="${path}/admin/file_delete.do";
-		document.form1.submit();
+		$.ajax({
+			type:"post",
+			url:"${path}/admin/exb_file_delete.do",
+			async: false,
+			data: {"code":"${dto.code}", "fileType":param},
+			success: function(result){
+				if(result=='deleted'){
+					if(param=="thumnail")
+					$("#thumnailImg").remove();
+					if(param=="product_info")
+					$("#pdtInfoImg").remove();
+					alert('삭제되었습니다.');
+			}
+			}
+		})
 	}
 }
 </script>
@@ -84,13 +88,13 @@ function fileDel(param){
 					class="form-control input-sm" id="location" value="${dto.location}">
 			</div>
 			<div class="form-group">
-				<label for="startDate">전시 시작일</label> <input type="date"
-					name="startDate" class="form-control input-sm" id="startDate"
+				<label for="start_date">전시 시작일</label> <input type="date"
+					name="start_date" class="form-control input-sm" id="start_date"
 					value="${fn:substring(startDate,0,10)}">
 			</div>
 			<div class="form-group">
-				<label for="endDate">전시 마감일</label> <input type="date"
-					name="endDate" class="form-control input-sm" id="endDate"
+				<label for="end_date">전시 마감일</label> <input type="date"
+					name="end_date" class="form-control input-sm" id="end_date"
 					value="${fn:substring(endDate,0,10)}">
 			</div>
 			<div class="form-group">
@@ -103,10 +107,8 @@ function fileDel(param){
 			<c:if test="${dto.thumnail != '-'}">
 					<div class="sectiondiv">
 						${thumnailName}
-						<%--       (${dto.filesize / 1024} KB) --%>
-						<img src="${dto.thumnail}" width="100" height="100">
+						<img id="thumnailImg" src="${dto.thumnail}" width="100" height="100">
 						</div>
-<!-- 						<button type="button" name="fileDel" id="fileDel">삭제</button> -->
 						<button class="btn btn-sm" name="fileDel" id="fileDel">
 					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
 				</button>
@@ -121,7 +123,7 @@ function fileDel(param){
 					<div class="sectiondiv">
 						${product_infoName}
 						<%--       (${dto.filesize / 1024} KB) --%>
-						<img src="${dto.product_info}" width="100" height="100">
+						<img id="pdtInfoImg"src="${dto.product_info}" width="100" height="100">
 					</div>
 						<button class="btn btn-sm" id="fileDel2" name="fileDel2">
 					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
@@ -137,13 +139,13 @@ function fileDel(param){
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;수정
 				</button>
 				<button class="btn btn-sm" id="btnDelete">
-					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+					<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
 				</button>
 			</div>
 			<br>
 	</div>
 </section>
 </div>
-
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
