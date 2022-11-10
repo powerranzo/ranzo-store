@@ -353,12 +353,21 @@ public class AdminController {
 		return "redirect:popup_list.do";
 	}
 	
+	
+	@RequestMapping("/popup_img.do")
+	public String popupView(Model m, PopupDTO dto) {
+		m.addAttribute("dto", adminService.getPopupView(dto.getNo()));
+		return "admin/popup";
+	}
 //	@ResponseStatus(value = HttpsStatus.OK)
 	@ResponseBody
 	@RequestMapping("/popup.do")
 	public List<PopupDTO> popup(PopupDTO dto) {
+		logger.info("popup.do 호출");
 		List<PopupDTO> list=adminService.getPopupOn();
-		
+		logger.info("popup show list"+list);
 		return list;
 	}
+	
+
 }

@@ -46,7 +46,7 @@ public interface AdminDAO {
 		public void deletePopupFile(int no);
 		public void updatePopup(PopupDTO dto);
 		public void popupShow(int no);
-		public List<PopupDTO> getPopupOn();
+		public List<PopupDTO> getPopupOn(String today);
 		
 
 }
