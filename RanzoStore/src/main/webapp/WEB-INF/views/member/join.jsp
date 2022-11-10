@@ -179,8 +179,9 @@ function daumZipCode() {
 } */
 .joindiv{
 	margin: auto;
-	width: 500px;
+	width: 600px;
 	align-items: center;
+	text-align: center;
 }
 
 .input-field {
@@ -200,9 +201,10 @@ function daumZipCode() {
 }
 
 label {
-	width: 50px;
+	width: 100px;
 	height: 30px;
-	margin-top: 4px;
+	margin-top: 10px;
+	text-align: left;
 }
 
 #btnJoin{
@@ -257,7 +259,7 @@ tr {
 		<br>
 		<table>
 			<tr>
-				<td width="120px"><label>아이디</label></td>
+				<td width="30%"><label>아이디</label></td>
 				<td><input class="input-field-b" type="text" id="userid" name="userid" placeholder="아이디를 입력해주세요."> 
 					<button type="button" id="btnIdChk" class="button-s" onclick="idChk()">중복확인</button>
 					<div class="msg" id="idChkMsg"></div>

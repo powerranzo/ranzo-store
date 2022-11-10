@@ -8,7 +8,7 @@
 	<%@ include file="../include/header.jsp" %>	
 	<link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
 	<style type="text/css">
-	.resultdiv{
+		.resultdiv{
 		font-size: 20px;
 		color: gray;
 		text-align: center;
@@ -57,11 +57,10 @@
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+
 <div class="result">
-
-<h3><span style="color: #5c81c7;">'${map.keyword}'</span> 에 대한 검색결과 입니다. (${map.count} 건)</h3>
+<h3><span style="color: #5c81c7;">'${map.searchDate}'</span> 날짜에 총 ${map.count}개의 전시가 있습니다.</h3>
 </div>
-
 
 	<section class="sec-content">
 	<c:choose>

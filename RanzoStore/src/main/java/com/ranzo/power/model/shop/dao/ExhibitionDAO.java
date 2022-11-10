@@ -15,4 +15,6 @@ public interface ExhibitionDAO {
 	String fileInfo(String exhibitionCode);//첨부파일정보
 	List<ExhibitionDTO> searchProduct(String keyword);
 	int searchCount(String keyword);
+	List<ExhibitionDTO> searchdate(String searchDate);
+	int searchDateCount(String searchDate);
 }

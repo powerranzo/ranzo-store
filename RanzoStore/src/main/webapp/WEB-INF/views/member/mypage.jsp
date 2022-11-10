@@ -75,6 +75,7 @@ function orderlist(){
 			$("#resultList").html(result);
 		}
 	});
+	
 }
 </script>
 
@@ -103,7 +104,7 @@ function orderlist(){
 		<article class="recentOrder">
 			<div class="title-s">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
-			<a class="a1" href="#">최근 예매 내역 ></a></div>
+			<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a></div>
  			<hr noshade size="1px" color="black"> 
  			<div id="resultList"></div>
 		</article>

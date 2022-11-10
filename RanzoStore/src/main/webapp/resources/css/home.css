@@ -30,7 +30,7 @@
 .simage {
 	postiion: relative;
 }
-button.btn1 {
+.btn1 {
 	position: absolute;
 	top: 550px;
 	left: 150px;
@@ -42,7 +42,7 @@ button.btn1 {
 	font-size: 18px;
 	color: white;
 }
-button.btn2 {
+.btn2 {
 	position: absolute;
 	top: 550px;
 	left: 350px;
@@ -106,23 +106,5 @@ button.btn2 {
 	transform:scale(1.1);
    transition: transform .5s;
 }
-@media screen and (max-width:300px) {
-	.image_text {
-		position: absolute;
-		top: 280px;
-		left: 150px;
-		font-size: 30px;
-		color: white;
-		text-align: left;
-	}
-}
-@media screen and (min-width:1132px) {
-	.image_text {
-		position: absolute;
-		top: 280px;
-		left: 150px;
-		font-size: 70px;
-		color: white;
-		text-align: left;
-	}
-}
+
+

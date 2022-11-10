@@ -65,4 +65,14 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		return sqlSession.selectOne("exhibition.searchCount", keyword);
 	}
 
+	@Override
+	public List<ExhibitionDTO> searchdate(String searchDate) {
+		return sqlSession.selectList("exhibition.searchDate", searchDate);
+	}
+
+	@Override
+	public int searchDateCount(String searchDate) {
+		return sqlSession.selectOne("exhibition.searchDateCount", searchDate);
+	}
+
 }

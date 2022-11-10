@@ -17,8 +17,15 @@ public class ExhibitionDTO {
 	private int sales; //
 	private int rn;
 	private String keyword;
+	private String searchDate;
 	
 	
+	public String getSearchDate() {
+		return searchDate;
+	}
+	public void setSearchDate(String searchDate) {
+		this.searchDate = searchDate;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

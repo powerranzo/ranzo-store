@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <%@ include file="include/header.jsp"%>
-<link rel="stylesheet" href="${path}/resources/css/home.css">
+
 <script type="text/javascript">
 	function btn1() {
 		location.href = "${path}/shop/exhibition/detail/testcode04";
@@ -101,13 +101,13 @@
 		</div>
 		<div style="display: inline-block;" class="reco">
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
+			<a href="${path}/shop/exhibition/detail/testcode31"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
 			</div>
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
+			<a href="${path}/shop/exhibition/detail/testcode02"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
 			</div>
 			<div class="reco1">
-			<a href="#"><img src="${path}/resources/images/2022-Busan-Biennale-Poster-768x1152.jpg" id="r3"></a>
+			<a href="${path}/shop/exhibition/detail/testcode26"><img src="https://ticketimage.interpark.com/Play/image/large/22/22004804_p.gif" id="r3"></a>
 			</div>
 		</div>
 	</div>

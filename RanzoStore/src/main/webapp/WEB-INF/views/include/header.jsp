@@ -7,8 +7,7 @@
 <link rel="stylesheet" href="${path}/resources/css/menu_style.css">
 <link href="${path}/include/alertify.css" rel="stylesheet">
 <script src="${path}/include/alertify.min.js"></script>
-
-<%-- <link href="${path}/views/include/home.css" rel="stylesheet"> --%>
+<link rel="stylesheet" href="${path}/resources/css/home.css">
 
 
 <!-- admin_head -->

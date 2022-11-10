@@ -35,7 +35,7 @@ section {
 .orderdiv a:active { text-decoration: none; color:black;}
 .ordertable{
 	margin: 10px;
-	text-align: center;
+	text-align: left;
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -147,15 +147,15 @@ function list(page){
 </form>
 <table class="ordertable">
 <tr>
- <th>예매번호</th>
+<th width="10%">예매번호</th>
  <th>전시명</th>
- <th>관람일</th>
- <th>매수</th>
- <th>상태</th>
+ <th width="15%">관람일</th>
+ <th width="10%">매수</th>
+ <th width="15%">상태</th>
 </tr>
 <c:forEach var="row" items="${map.list}">
 <tr>
- <td width="14%"><a href="${path}/reserv/orderdetail/${row.no}">${row.no}</a></td>
+ <td><a href="${path}/reserv/orderdetail/${row.no}">${row.no}</a></td>
  <td>${row.title}</td>
  <td><fmt:formatDate value="${row.res_date}" pattern="yyyy-MM-dd" /></td>
  <td>${row.quantity}장</td>

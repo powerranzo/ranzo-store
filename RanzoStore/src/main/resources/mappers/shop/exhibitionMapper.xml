@@ -24,6 +24,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 select count(*) from EXHIBITION_TB
 	 where title like '%'||#{keyword}||'%'
 	</select>
+	<!-- 날짜검색 -->
+	<select id="searchDate" resultType="ExhibitionDTO">
+	select * from EXHIBITION_TB 
+	where (#{searchDate} between START_DATE and END_DATE)
+	</select>
+	<!-- 날짜 검색 카운트 -->
+	<select id="searchDateCount" resultType="int">
+	select count(*) from EXHIBITION_TB 
+	where (#{searchDate} between START_DATE and END_DATE)
+	</select>
 
 </mapper>
 
