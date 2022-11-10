@@ -28,7 +28,7 @@ import com.google.gson.JsonParser;
 import com.ranzo.power.model.member.dao.MemberDAO;
 import com.ranzo.power.model.member.dto.KakaoDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.util.DateFunction;
+import com.ranzo.power.util.DateUtils;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -84,7 +84,7 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(String userid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
-		map.put("today", DateFunction.getToday());
+		map.put("today", DateUtils.getToday());
 		memberDao.deleteMember(map);
 	}
 

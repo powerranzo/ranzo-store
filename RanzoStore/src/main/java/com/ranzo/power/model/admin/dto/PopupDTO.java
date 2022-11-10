@@ -7,12 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class PopupDTO {
 	public int no;
 	public String title;
-	public String content;
 	public String img_src;
 	public int img_width;
 	public int img_height;
+	public int pos_width;
+	public int pos_height;
 	public String filename;
-	public int filesize;
+	public long filesize;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date start_date; 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -32,12 +33,6 @@ public class PopupDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
 	public String getImg_src() {
 		return img_src;
 	}
@@ -56,16 +51,28 @@ public class PopupDTO {
 	public void setImg_height(int img_height) {
 		this.img_height = img_height;
 	}
+	public int getPos_width() {
+		return pos_width;
+	}
+	public void setPos_width(int pos_width) {
+		this.pos_width = pos_width;
+	}
+	public int getPos_height() {
+		return pos_height;
+	}
+	public void setPos_height(int pos_height) {
+		this.pos_height = pos_height;
+	}
 	public String getFilename() {
 		return filename;
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	public int getFilesize() {
-		return filesize;
-	}
-	public void setFilesize(int filesize) {
+	public long getFilesize() {
+		return filesize; 
+	} 
+	public void setFilesize(long filesize) {
 		this.filesize = filesize;
 	}
 	public Date getStart_date() {
@@ -92,23 +99,23 @@ public class PopupDTO {
 	public void setShow(String show) {
 		this.show = show;
 	}
-	
 	@Override
 	public String toString() {
-		return "PopupDTO [no=" + no + ", title=" + title + ", content=" + content + ", img_src=" + img_src
-				+ ", img_width=" + img_width + ", img_height=" + img_height + ", filename=" + filename + ", filesize="
-				+ filesize + ", start_date=" + start_date + ", end_date=" + end_date + ", reg_date=" + reg_date
-				+ ", show=" + show + "]";
+		return "PopupDTO [no=" + no + ", title=" + title + ", img_src=" + img_src + ", img_width=" + img_width
+				+ ", img_height=" + img_height + ", pos_width=" + pos_width + ", pos_height=" + pos_height
+				+ ", filename=" + filename + ", filesize=" + filesize + ", start_date=" + start_date + ", end_date="
+				+ end_date + ", reg_date=" + reg_date + ", show=" + show + "]";
 	}
 	
-	public PopupDTO(int no, String title, String content, String img_src, int img_width, int img_height,
-			String filename, int filesize, Date start_date, Date end_date, Date reg_date, String show) {
+	public PopupDTO(int no, String title, String img_src, int img_width, int img_height, int pos_width, int pos_height,
+			String filename, long filesize, Date start_date, Date end_date, Date reg_date, String show) {
 		this.no = no;
 		this.title = title;
-		this.content = content;
 		this.img_src = img_src;
 		this.img_width = img_width;
 		this.img_height = img_height;
+		this.pos_width = pos_width;
+		this.pos_height = pos_height;
 		this.filename = filename;
 		this.filesize = filesize;
 		this.start_date = start_date;

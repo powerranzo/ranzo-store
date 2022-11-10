@@ -30,7 +30,7 @@ public interface AdminDAO {
 		public void insertExb(ExhibitionDTO dto);
 		public ExhibitionDTO getExbView(String code);
 		public void updateExb(ExhibitionDTO dto);
-		public void deleteFile(Map<String, Object> map);
+		public void deleteExbFile(Map<String, Object> map);
 		public void deleteExb(String code);
 		public int countSearchReserv(Map<String, Object> map);
 		public List<ReservDTO> getReservList(Map<String, Object> map);
@@ -43,6 +43,9 @@ public interface AdminDAO {
 		public List<PopupDTO> getPopupList(Map<String, Object> map);
 		public PopupDTO getPopupView(int no);
 		public void insertPopup(PopupDTO dto);
+		public void deletePopupFile(int no);
+		public void updatePopup(PopupDTO dto);
+		public void popupShow(int no);
 		
 
 }

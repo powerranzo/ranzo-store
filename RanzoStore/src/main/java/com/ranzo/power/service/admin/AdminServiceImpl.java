@@ -20,7 +20,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
-import com.ranzo.power.util.DateFunction;
+import com.ranzo.power.util.DateUtils;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
 		List<MemberDTO> list=adminDao.getMemberList(map);
 		MemberCountDTO mcount=
 				new MemberCountDTO(adminDao.countTbAll("member_tb"), 
-						adminDao.countMemberToday(DateFunction.getToday()),
+						adminDao.countMemberToday(DateUtils.getToday()),
 						adminDao.countMemberQuit());
 		map.clear();
 		map.put("mcount", mcount);
@@ -70,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteMember(String[] userids) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("userids", userids);
-		map.put("today", DateFunction.getToday());
+		map.put("today", DateUtils.getToday());
 		adminDao.deleteMember(map);
 	}
 
@@ -104,7 +104,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("end", pager.getPageEnd());
 		List<MemberDTO> list=adminDao.getExbList(map);
 		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
-		map.put("exb_count_ing", adminDao.countExbIng(DateFunction.getToday()));
+		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));
 		map.put("list", list);
 		map.put("pager", pager);
 		return map;
@@ -138,11 +138,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void deleteFile(String code, String fileType) {
+	public void deleteExbFile(String code, String fileType) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("code", code);
 		map.put("fileType", fileType);
-		adminDao.deleteFile(map);
+		adminDao.deleteExbFile(map);
 	}
 
 	@Override
@@ -213,17 +213,27 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void updatePopup(PopupDTO dto) {
-		// TODO Auto-generated method stub
-
+		adminDao.updatePopup(dto);
 	}
 
 	@Override
-	public void deletePopup(int[] pop_no) {
+	public void deletePopup(int[] no) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("value", "popup_tb");
 		map.put("condition", "no");
-		map.put("list", pop_no);
+		map.put("list", no);
 		adminDao.updateShowN(map);
+	}
+
+	@Override
+	public void deletePopupFile(int no) {
+		adminDao.deletePopupFile(no);
+	}
+
+	@Override
+	public void popupShow(int no) {
+		adminDao.popupShow(no);
+		
 	}
 
 

@@ -23,7 +23,7 @@ public interface AdminService {
 	public ExhibitionDTO getExbView(String code);
 	public void updateExb(ExhibitionDTO dto);
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
-	public void deleteFile(String code, String fileType);
+	public void deleteExbFile(String code, String fileType);
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage);
 	
 	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage);
@@ -32,6 +32,9 @@ public interface AdminService {
 	public void deleteExb(String code);
 	public PopupDTO getPopupView(int no);
 	public void deletePopup(int[] pop_no);
+	public void deletePopupFile(int no);
+	public void popupShow(int no);
+	public List<PopupDTO> getpopupOn();
 	
 
 	

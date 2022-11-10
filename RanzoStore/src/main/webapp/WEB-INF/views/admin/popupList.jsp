@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA</title>
+<title>Popup</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <script type="text/javascript">
@@ -13,8 +13,8 @@
 		optionSelect(2);
 		optionSelect(3);
 		
-		$("#btnEnd").click(function() {
-			if(confirm('노출 종료하시겠습니까?')){
+		$("#btnDel").click(function() {
+			if(confirm('종료하시겠습니까?')){
 				document.form1.action = "${path}/admin/popup_delete.do";
 				document.form1.submit();
 			}
@@ -47,6 +47,7 @@
 						.prop("selected", "selected");
 		}
 	}
+	
 </script>
 </head>
 <body>
@@ -65,7 +66,6 @@
 									name="searchOption1" class="form-control" id="searchOption1">
 										<option value="no">번호</option>
 										<option value="title">제목</option>
-										<option value="content">내용</option>
 										<option value="filename">이미지명</option>
 										<option value="all">전체</option>
 								</select>
@@ -114,22 +114,40 @@
 							<tr>
 								<th>#</th>
 								<th>번호</th>
-								<th style="width:30%;">제목</th>
-								<th>이미지명</th>
-								<th>작성일자</th>
+								<th>제목</th>
+								<th>이미지</th>
+								<th>시작일</th>
+								<th>만료일</th>
 								<th>상태</th>
+								<th>처리</th>
 							</tr>
 						</thead>
 						<c:forEach var="pop" varStatus="loop" items="${pop.popup_list}">
 							<tbody>
 								<tr>
-									<td><input name="pop_no" type="checkbox"
+									<td><input name="no" type="checkbox"
 										value="${pop.no}"></td>
 									<td>${pop.no}</td>
 									<td><a href="#" onclick="popupView('${pop.no}')">${pop.title}</a></td>
-									<td>${pop.filename}</td>
-									<td><fmt:formatDate value="${pop.reg_date}" type="date" pattern="yyyy-MM-dd" /></td>
-									<td>${pop.show == 'y' ? '노출' : '종료'}</tr>
+									<td><img src="${pop.img_src}" width="50"></td>
+									<td><fmt:formatDate value="${pop.start_date}" type="date" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td><fmt:formatDate value="${pop.end_date}" type="date" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td>${pop.show =='y'? '진행':'종료'}</td>
+									<td>
+									<c:choose>
+									<c:when test="${pop.show =='y'}">
+									<button class="btn btn-sm" type="button" id="btnUpdate" onclick="popupView('${pop.no}')">
+									<span class="glyphicon glyphicon-check"></span>&nbsp;수정</button>
+									<button class="btn btn-sm" type="button" id="btnDel2" onclick="popupDel('${pop.no}')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료</button>
+									</c:when>
+									<c:otherwise>
+									<button class="btn btn-sm" type="button" id="btnShow" onclick="popupShow('${pop.no}')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;재개</button>
+									</c:otherwise>
+									</c:choose>
+									</td>
+									</tr>
 							</tbody>
 						</c:forEach>
 					</table>
@@ -164,12 +182,13 @@
 							</ul>
 						</div>
 					</div>
-					<button id="btnEnd" type="button" class="btn btn-default">종료 처리</button>
+					<button id="btnDel" type="button" class="btn btn-default">종료 처리</button>
 					<button id="btnWrite" type="button" 
 					onclick="location.href='${path}/admin/popup_write.do'" class="btn btn-default">신규 등록</button>
 				</form>
 			</div>
 		</section>
 	</div>
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

@@ -117,8 +117,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void deleteFile(Map<String, Object> map) {
-		sqlSession.update("admin.deleteFile",map);
+	public void deleteExbFile(Map<String, Object> map) {
+		sqlSession.update("admin.deleteExbFile",map);
 	}
 	
 	@Override
@@ -179,6 +179,21 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void insertPopup(PopupDTO dto) {
 		sqlSession.insert("admin.insertPopup", dto);
+	}
+
+	@Override
+	public void deletePopupFile(int no) {
+		sqlSession.update("admin.deletePopupFile",no);
+	}
+
+	@Override
+	public void updatePopup(PopupDTO dto) {
+		sqlSession.update("admin.updatePopup",dto);
+	}
+
+	@Override
+	public void popupShow(int no) {
+		sqlSession.update("admin.popupShow", no);
 	}
 
 }

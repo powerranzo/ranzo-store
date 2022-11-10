@@ -71,3 +71,27 @@ function memberView(param) {
 		document.form1.action = getContextPath()+'/admin/popup_view.do?no=' + param;
 		document.form1.submit();
 	}
+	 
+	function popupDel(param) {
+		if(confirm('종료하시겠습니까?')) {
+		document.form1.action = getContextPath()+'/admin/popup_delete.do?no=' + param;
+		document.form1.submit();
+		}
+	}
+	function popupShow(param) {
+		if(confirm('재개하시겠습니까?')) {
+			document.form1.action = getContextPath()+'/admin/popup_show.do?no=' + param;
+			document.form1.submit();
+		}
+	}
+$(function() {
+		$("#img_src").change(function() {
+			console.log($("#img_src").val());
+			if ($("#img_src").val() == "") {
+				$("#urlImage").hide();
+			} else {
+				$("#urlImage").show();
+				$("#urlImage").attr('src', $("#img_src").val());
+			}
+		});
+	});

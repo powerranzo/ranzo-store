@@ -215,8 +215,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select E.*, rownum as rn from (
 		select code, location,
 		gallery, title, summary, thumnail, start_date,
-		end_date, hit, sales,
-		show
+		end_date, hit, sales, show
 		from exhibition_tb
 		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
@@ -225,21 +224,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<otherwise>
 				where (code like '%'||#{searchOp.searchKeyword}||'%'
-				or
-				title like '%'||#{searchOp.searchKeyword}||'%'
-				or location like
-				'%'||#{searchOp.searchKeyword}||'%'
-				or gallery like
-				'%'||#{searchOp.searchKeyword}||'%')
+				or title like '%'||#{searchOp.searchKeyword}||'%'
+				or location like '%'||#{searchOp.searchKeyword}||'%'
+				or gallery like '%'||#{searchOp.searchKeyword}||'%')
 			</otherwise>
 		</choose>
+		<choose>
+			<when test='searchOp.searchOption2.equals("ing")'>
+				and show='y'
+			</when>
+			<when test='searchOp.searchOption2.equals("end")'>
+				and show='n'
+			</when>
+		</choose>
 		and (
-		start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
-		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
-		or end_date between
-		to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
-		and
-		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		(start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
+		or (end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 		)
 		<choose>
 			<when test='searchOp.orderOption.equals("code")'>
@@ -254,15 +256,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 		) E
 		) where rn between #{start} and #{end}
-		<choose>
-			<when test='searchOp.searchOption2.equals("ing")'>
-				and show='y'
-			</when>
-			<when test='searchOp.searchOption2.equals("end")'>
-				and show='n'
-			</when>
-		</choose>
-
 	</select>
 
 	<insert id="insertExb">
@@ -288,17 +281,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="updateExb">
 		update exhibition_tb set
-		location=#{location},
-		gallery=#{gallery},
-		title=#{title},
-		summary=#{summary},
-		thumnail=#{thumnail},
+		location=#{location}, gallery=#{gallery}, title=#{title},
+		summary=#{summary},	thumnail=#{thumnail}, 
 		product_info=#{product_info},
 		start_date=#{start_date}, end_date=#{end_date}
 		where code=#{code}
 	</update>
 
-	<update id="deleteFile">
+	<update id="deleteExbFile">
 		update exhibition_tb set ${fileType}='-'
 		where
 		code=#{code}
@@ -500,8 +490,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where (no like '%'||#{searchOp.searchKeyword}||'%'
 				or title
 				like '%'||#{searchOp.searchKeyword}||'%'
-				or content like
-				'%'||#{searchOp.searchKeyword}||'%'
 				or filename like
 				'%'||#{searchOp.searchKeyword}||'%')
 			</otherwise>
@@ -515,18 +503,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		and (start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		or end_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
-		or (end_date between
-		to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
-		and
-		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 	</select>
 
 	<select id="getPopupList" resultType="PopupDTO">
 		select * from (
 		select P.*, rownum as rn from (
 		select no, title,
-		content, img_src, img_width, img_height,
+		img_src, img_width, img_height, pos_width, pos_height,
 		filename, filesize,
 		start_date, end_date, reg_date, show
 		from
@@ -538,12 +524,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<otherwise>
 				where (no like '%'||#{searchOp.searchKeyword}||'%'
-				or title
-				like '%'||#{searchOp.searchKeyword}||'%'
-				or content like
-				'%'||#{searchOp.searchKeyword}||'%'
-				or filename like
-				'%'||#{searchOp.searchKeyword}||'%')
+				or title like '%'||#{searchOp.searchKeyword}||'%'
+				or filename like '%'||#{searchOp.searchKeyword}||'%')
 			</otherwise>
 		</choose>
 		<choose>
@@ -555,13 +537,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		and (start_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
+		or end_date between	to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
-		or (end_date between
-		to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
-		and
-		to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 		<choose>
-			<when test='searchOp.orderOption.equals("bno")'>
+			<when test='searchOp.orderOption.equals("no")'>
 				order by ${searchOp.orderOption}
 			</when>
 			<otherwise>
@@ -572,18 +552,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) where rn between #{start} and #{end}
 	</select>
 	<select id="getPopupView" resultType="PopupDTO">
-		select no, title, content, img_src, img_width, img_height,
-		filename, filesize, start_date, end_date, reg_date, show
+		select no, title, img_src, img_width, img_height,
+		pos_width, pos_height, filename, filesize, 
+		start_date, end_date, reg_date, show
 		from popup_tb
 		where no=#{no}
 	</select>
 	
 	<insert id="insertPopup">
 		insert into popup_tb
-		(no, title, content, img_src, img_width, img_height,
+		(no, title, img_src, img_width, img_height, pos_width, pos_height,
 		filename, filesize, start_date, end_date)
 		values
-		(popup_seq.nextval, #{title}, #{content}, #{img_src}, #{img_width},
-		#{img_height}, #{filename}, #{filesize}, #{start_date}, #{end_date})
+		(seq_popup.nextval, #{title}, #{img_src}, #{img_width}, #{img_height},
+		#{pos_width}, #{pos_height}, #{filename}, #{filesize}, #{start_date}, #{end_date})
 	</insert>
+	
+		<update id="deletePopupFile">
+		update popup_tb set img_src='-', filename='-', filesize=0
+		where
+		no=#{no}
+	</update>
+	
+	<update id="updatePopup">
+		update popup_tb set 
+		title=#{title}, img_src=#{img_src}, img_width=#{img_width},
+		img_height=#{img_height}, pos_width=#{pos_width}, pos_height=#{pos_height},
+		filename=#{filename}, filesize=#{filesize}, start_date=#{start_date},
+		end_date=#{end_date}
+	</update>
+	
+	<update id="popupShow">
+		update popup_tb set show='y' where no=#{no}
+	</update>
 </mapper>
