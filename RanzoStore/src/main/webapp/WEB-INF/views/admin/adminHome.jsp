@@ -19,9 +19,21 @@ $.ajax({
     contentType : "application/x-www-form-urlencoded; charset=utf-8",
     dataType : "json",
     success : function(data){
+    	
+    	var list=data.list;
+    	var img_src="";
+    	var start_date="";
+    	var end_date="";
+    	var img_width="";
+    	var img_height="";
+    	var pos_width="";
+    	var pos_height="";
+    	var tmp="";
+    	
+    	for(var i=0; i<list.length; i++){
+    		popup(list[i]);
+    	}
     	//여러개일 수 있음.
-    	var url = "${path}/admin/popup.do";
-    	var name = "popup main";
     	var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
     	popup(url, name, option);
     },error : function(){
@@ -30,8 +42,17 @@ $.ajax({
 });
 	popup();
 });
-function popup(url, name, option){
+function popup(i){
+	
     var url = "${path}/admin/popup.do";
+	var img_src=i.img_src;
+	var start_date=i.start_date;
+	var end_date=i.end_date;
+	var img_width=i.img_width;
+	var img_height=i.img_height;
+	var pos_width=i.pos_width;
+	var pos_height=i.pos_height;
+	
     var name = "popup test";
     var option = "width = 400, height = 500, top = 100, left = 200, location = no, scrollbars = no";
     window.open(url, name, option);

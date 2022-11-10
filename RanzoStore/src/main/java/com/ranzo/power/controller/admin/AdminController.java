@@ -1,12 +1,13 @@
 package com.ranzo.power.controller.admin;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,6 @@ import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.admin.AdminService;
 import com.ranzo.power.service.admin.UploadService;
 import com.ranzo.power.util.DateUtils;
-import com.ranzo.power.util.UploadFileUtils;
 
 @Controller
 @RequestMapping("admin/*")
@@ -353,8 +353,12 @@ public class AdminController {
 		return "redirect:popup_list.do";
 	}
 	
+//	@ResponseStatus(value = HttpsStatus.OK)
+	@ResponseBody
 	@RequestMapping("/popup.do")
-	public String popup() {
-		return "admin/popup";
+	public List<PopupDTO> popup(PopupDTO dto) {
+		List<PopupDTO> list=adminService.getPopupOn();
+		
+		return list;
 	}
 }
