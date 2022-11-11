@@ -130,14 +130,35 @@ function list(page) {
 	
 <c:forEach var="row" items="${map.list}">
 	<c:choose>
-		<c:when test="${row.show == 'y'}">
+		<c:when test="${row.show == 'y'}">	
+		<c:choose>
+		<c:when test="${sessionScope.userid == row.writer || sessionScope.admin == 'y'}">
 		<tr>
-			<td>${row.bno}</td>
+			<td>${row.bno}</td>		
 			<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
 			<td>${row.name}(${row.writer})</td>
 			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
 			<td>${row.viewcnt}</td>
 		</tr>
+		</c:when>
+		<c:otherwise>
+		<tr>
+			<td>${row.bno}</td>
+			<c:choose>
+			 <c:when test="${row.writer=='admin'}">
+			  <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+			 </c:when>
+			 <c:otherwise>			 
+				<td>비밀글입니다.</td>
+			 </c:otherwise>
+			</c:choose>
+			<td>${row.name}(${row.writer})</td>
+			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+			<td>${row.viewcnt}</td>
+		</tr>
+		</c:otherwise>
+		</c:choose>	
+		
 		</c:when>
 	</c:choose>
 </c:forEach>

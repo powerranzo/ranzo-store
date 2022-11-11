@@ -82,4 +82,9 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	public int searchDateCount(String searchDate) {
 		return exhibitionDAO.searchDateCount(searchDate);
 	}
+
+	@Override
+	public Object detailreserv(String exhibitionCode) {
+		return exhibitionDAO.detailreserv(exhibitionCode);
+	}
 }

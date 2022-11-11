@@ -19,4 +19,5 @@ public interface ExhibitionService {
 	int searchCount(String keyword);
 	List<ExhibitionDTO> searchdate(String searchDate);
 	int searchDateCount(String searchDate);
+	Object detailreserv(String exhibitionCode);
 }

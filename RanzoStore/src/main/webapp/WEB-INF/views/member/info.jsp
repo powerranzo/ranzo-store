@@ -145,19 +145,12 @@ function daumZipCode() {
 
 </script>
 <style>
-* {
-	box-sizing: content-box;
+ * {
+	 margin: 0;
 }
-
-form {
-	width: 500px;
-	height: 600px;
-	display: inline;
-	align-items: center;
-	position: absolute;
-	top: 60%;
-	left: 51%;
-	transform: translate(-50%, -50%);
+.infodiv{
+	width: 550px;
+	margin: auto;
 }
 
 .input-field {
@@ -175,6 +168,8 @@ form {
 }
 
 label {
+
+	width: 120px;
 	height: 30px;
 	margin-top: 4px;
 }
@@ -217,6 +212,7 @@ tr{
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<div class="infodiv">
 	<form name="infoForm" method="post">
 		<div class="title">회원정보 수정</div>
 		<br>
@@ -278,5 +274,11 @@ tr{
 			</tr>
 		</table>
 	</form>
+	</div>
+	<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
+	
+	
 </body>
 </html>
