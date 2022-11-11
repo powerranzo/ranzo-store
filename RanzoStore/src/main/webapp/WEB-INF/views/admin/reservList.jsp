@@ -14,10 +14,10 @@
 		optionSelect(3);
 
 		$("#btnDelete").click(function() {
-			if (confirm('삭제 처리하시겠습니까?')) {
+			alertify.confirm("삭제하시겠습니까?", function() {
 				document.form1.action = "${path}/admin/reserv_delete.do";
 				document.form1.submit();
-			}
+			});
 		});
 		$("#btnSearch").click(function() {
 			document.form1.action = "${path}/admin/reserv_list.do";

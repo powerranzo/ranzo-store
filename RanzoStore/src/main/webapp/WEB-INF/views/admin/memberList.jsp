@@ -15,10 +15,10 @@
 		optionSelect(3);
 
 		$("#btnDelete").click(function() {
-			if (confirm('탈퇴처리하시겠습니까?')) {
+			alertify.confirm("탈퇴처리하시겠습니까?", function() {
 				document.form1.action = "${path}/admin/member_delete.do";
 				document.form1.submit();
-			}
+			});
 		});
 		$("#btnSearch").click(function() {
 			document.form1.action = "${path}/admin/member_list.do";

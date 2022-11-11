@@ -20,10 +20,10 @@ $(function(){
 		height : 300
 	});
 	$("#btnWrite").click(function(){
-		if(confirm('등록하시겠습니까?')){
+		alertify.confirm("수정하시겠습니까?", function() {
 		document.form1.action="${path}/admin/exb_write.do";
 		document.form1.submit();			
-		}
+		});
 	});
 });
 </script>

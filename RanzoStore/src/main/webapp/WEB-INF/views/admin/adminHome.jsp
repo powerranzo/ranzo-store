@@ -24,17 +24,13 @@ body {
 		$.ajax({
 			type : "POST",
 			url : "${path}/admin/popup.do",
-			data : {},
-			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			dataType : "json",
 			success : function(data) {
-				if(getStorage()){
-					for (var i = 0; i < data.length; i++) 
+					for (var i = 0; i < data.length; i++) {
+						if(getStorage(data[i].no))
 						popup(data[i]);
-				}
-			},
-			error : function(){
-				console.log('error');
+					}
+					
 			}
 		});
 	}); //ready
@@ -61,8 +57,8 @@ body {
 		}
 	}
 	
-	function getStorage(){
-		var key="exp";
+	function getStorage(no){
+		var key="exp"+no;
 		var exp=parseInt(localStorage.getItem(key));
 		
 		if(exp==null || exp=="")
@@ -74,9 +70,10 @@ body {
 		    console.log("exp:"+exp+", exp-now:"+(exp-now));
 		    if(exp > now) 
 		    	return false;
-		    else 
+		    else {
 		    	window.localStorage.removeItem(key);
 		    	return true;
+		    }
 		}
 	}
 </script>

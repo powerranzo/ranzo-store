@@ -14,10 +14,10 @@
 		optionSelect(3);
 
 		$("#btnDelete").click(function() {
-			if (confirm('종료하시겠습니까?')) {
+			alertify.confirm("종료하시겠습니까?", function() {
 				document.form1.action = "${path}/admin/popup_delete.do";
 				document.form1.submit();
-			}
+			});
 		});
 		$("#btnSearch").click(function() {
 			document.form1.action = "${path}/admin/popup_list.do";
@@ -63,8 +63,8 @@
 									<option value="filename">이미지명</option>
 									<option value="all">전체</option>
 								</select>
-								<div class="input-group">
-									<input type="text" name="searchKeyword" value="${ pop.searchOp.searchKeyword}">
+								<div class="input-group" style="width:65%;">
+									<input type="text" name="searchKeyword" value="${pop.searchOp.searchKeyword}">
 								</div>
 							</td>
 						</tr>
@@ -183,7 +183,7 @@
 					</div>
 				</form>
 					<input type="submit" value="종료 처리" id="btnDelete" name="btnDelete">
-					<input type="submit" value="신규 등록" id="btnWrite" name="btnWrite"
+					<input type="submit" value="신규 등록" id="btnWrite" name="btnWrite" style="margin-right:5px;"
 					onclick="location.href='${path}/admin/popup_write.do'">
 			</div>
 		</section>
