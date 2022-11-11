@@ -25,10 +25,6 @@ public class AdminDAOImpl implements AdminDAO {
 	public int countTbAll(String table) {
 		return sqlSession.selectOne("admin.countTbAll", table);
 	}
-//	@Override
-//	public int countMemberAll() {
-//		return sqlSession.selectOne("admin.countMemberAll");
-//	}
 
 	@Override
 	public int countMemberToday(String now) {
@@ -75,21 +71,11 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateShowN", map);
 		
 	}
-	
-//	@Override
-//	public void deleteReserv(Map<String, Object> map) {
-//		sqlSession.update("admin.deleteQna", map);
-//	}
 
 	@Override
 	public int countExbIng(String today) {
 		return sqlSession.selectOne("admin.countExbIng", today);
 	}
-
-//	@Override
-//	public int countExbAll() {
-//		return sqlSession.selectOne("admin.countExbAll");
-//	}
 
 	@Override
 	public int countSearchExb(Map<String, Object> map) {

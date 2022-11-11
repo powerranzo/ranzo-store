@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 * {box-sizing: content-box;}
-footer {
-	position: fixed;
-	bottom: 0;
-	left:0;
-	right:0;
-	}
+/* footer { */
+/* 	position: fixed; */
+/* 	bottom: 0; */
+/* 	left:0; */
+/* 	right:0; */
+/* 	} */
 aside {
 	float:left;
 	margin-left:5%;
@@ -40,14 +40,7 @@ aside {
 	color: black;
 	font-weight: bold;	
 }
-html, body{
-	height: 100%;
-}
-body {
-display: flex;
-  flex-direction: column;
-  margin: 0;
-}
+
 
 /* adminHome.jsp */
 .content{
@@ -65,8 +58,9 @@ section {
 }
 .sectiondiv {
 	width:70%;
-	margin-bottom:5%;
-	margin-left: 5%;
+	margin: auto 2% 5% 3%;
+/* 	margin-bottom:5%; */
+/* 	margin-left: 5%; */
 	display: inline-block;
 	min-height: 100%;
 	flex: 1;
@@ -118,25 +112,26 @@ section {
 }
 
 
-.ordertable{
+.adminTable3{
 /* 	float:left; */
-	padding: 10px;
+/* 	padding: 10px; */
 	width: 100%;
-	margin-top: 5%;
 	text-align: center;
+	border: 2px solid #e4e4e4;
 /* 	border-collapse: collapse; */
 }
-.ordertable th {
+.adminTable3 th {
 	border-top: 2px solid #e4e4e4;
 	background-color: #f8f9fa;
 	color: #7b7e83;
 }
-.ordertable td{	border-bottom: 1px solid #e4e4e4;}
-.ordertable th, td{ padding: 10px; text-align:center;}
+.adminTable3 td{	border-bottom: 1px solid #e4e4e4;}
+.adminTable3 th, td{ padding: 10px; text-align:center;}
 .adminTableDiv{
 	width:100%;
 }
 .adminTable1{
+	border: 2px solid #e4e4e4;
 	float:left;
 	padding: 10px;
 	width: 60%;
@@ -152,12 +147,11 @@ section {
 .adminTable1 td{	border-bottom: 1px solid #e4e4e4;}
 .adminTable1 th, td{ padding: 10px; text-align:center;}
 .adminTable2{
-	border-top: 2px solid #e4e4e4;
-	border-bottom: 2px solid #e4e4e4;
+	border: 2px solid #e4e4e4;
+	width: 60%;
 	float:left;
 	padding: 10px; 
-	width: 100%;
-	margin: 2% 0 3% 0;
+	margin: 0 0 3% 0;
 /* 	border-collapse: collapse; */
 }
 .adminTable2 th {
@@ -168,3 +162,45 @@ section {
 }
 .adminTable2 td{	border-bottom: 1px solid #e4e4e4; text-align: left;}
 .adminTable2 th, td{ height:inherit; text-align:center;}
+#adminTB2_th{
+	width:15%;
+}
+#adminTB2_td1{
+	width:80%;
+}
+#adminTB2_search{
+	width:80%;
+}
+#startDate, #endDate, #searchOption2, #orderOption{
+	width: 40%;
+}
+#btnSearch, #btnDelete, #btnWrite{
+	float:right;
+	padding:7px;
+	width: 70px;
+	height:20px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+	
+/* #btnSearch:hover, #btnDelete:hover {
+	background-color: white;
+	color: black;
+} */
+
+.sectiondiv input{
+	width:70%;
+	padding: 8px;
+	border: 1px solid #e4e4e4;
+}
+.sectiondiv select{
+	width:30%;
+	padding: 8px;
+	border: 1px solid #e4e4e4;
+}
+
+.sectiondiv a:hover{ font-weight: bold;}
+.sectiondiv a:visited, .sectiondiv a:link, .sectiondiv a:active{ text-decoration: none; color: black;}
+/*  { text-decoration: none; color:black; } */
+/*  { text-decoration: none; color:black;} */

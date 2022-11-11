@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (
 		select R.*, rownum as rn from (
 		select no, r.userid,
-		e.code, r.res_date,
+		e.code, r.res_date, 
 		r.adult, r.teen, r.kids, r.quantity,
 		r.sub_total,
 		r.pay, m.name, e.title
@@ -330,7 +330,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				'%'||#{searchOp.searchKeyword}||'%')
 			</otherwise>
 		</choose>
-		and (r.res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and (r.reg_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 		and r.code=e.code
 		<choose>
@@ -351,7 +351,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		r.code, r.res_date, r.adult, r.teen, r.kids,
 		r.quantity, r.sub_total,
 		e.title, e.gallery, r.r_name, r.pay,
-		r.r_addr1, r.show
+		r.r_addr1, r.show, r.reg_date
 		from
 		reserv_item_tb r, exhibition_tb e
 		where r.code=e.code
@@ -370,12 +370,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				'%'||#{searchOp.searchKeyword}||'%')
 			</otherwise>
 		</choose>
-		and (r.res_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
+		and (r.reg_date between to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 		and to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 		and r.show='y'
 		<choose>
 			<when
-				test='searchOp.orderOption.equals("r.res_date")
+				test='searchOp.orderOption.equals("r.reg_date")
              or searchOp.orderOption.equals("r.quantity")'>
 				order by ${searchOp.orderOption} desc
 			</when>

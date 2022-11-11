@@ -116,17 +116,6 @@ public class AdminServiceImpl implements AdminService {
 	public void insertExb(ExhibitionDTO dto) {
 		adminDao.insertExb(dto);
 	}
-//	@Override
-//	public void insertExb(String startDate, String endDate, 
-//			ExhibitionDTO dto) {
-//		try {
-//			dto.setStart_date(DateFunction.stringToDate(startDate));
-//			dto.setEnd_date(DateFunction.stringToDate(endDate));
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		} 
-//		adminDao.insertExb(dto);
-//	}
 
 	@Override
 	public ExhibitionDTO getExbView(String code) {

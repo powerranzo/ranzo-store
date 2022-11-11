@@ -363,7 +363,6 @@ public class AdminController {
 		return "redirect:popup_list.do";
 	}
 
-
 	@RequestMapping("/popup_img.do")
 	public String popupView(Model m, PopupDTO dto) {
 		m.addAttribute("dto", adminService.getPopupView(dto.getNo()));
