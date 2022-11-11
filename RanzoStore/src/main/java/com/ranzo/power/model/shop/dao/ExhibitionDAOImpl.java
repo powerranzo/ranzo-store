@@ -105,4 +105,9 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 
 	}
 
+	@Override
+	public ExhibitionDTO detailreserv(String exhibitionCode) {
+		return sqlSession.selectOne("reserv.detail", exhibitionCode);
+	}
+
 }
