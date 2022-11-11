@@ -16,8 +16,9 @@ public interface ExhibitionDAO {
 	String fileInfo(String exhibitionCode);//첨부파일정보
 	String getReserveInfo(String code);
 	ProductInfoDTO getProductInfo(String code);
-	List<ExhibitionDTO> searchProduct(String keyword);
-	int searchCount(String keyword);
-	List<ExhibitionDTO> searchdate(String searchDate);
-	int searchDateCount(String searchDate);
+	List<ExhibitionDTO> searchProduct(String keyword); //전시검색
+	int searchCount(String keyword); //검색전시 카운트
+	List<ExhibitionDTO> searchdate(String searchDate); //날짜검색
+	int searchDateCount(String searchDate); //날짜검색전시카운트
+	ExhibitionDTO detailreserv(String exhibitionCode);//상세보기(예매용)
 }

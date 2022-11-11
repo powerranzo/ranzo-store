@@ -18,7 +18,7 @@ h2 a:active{text-decoration: none; color: black;}
 .searchdiv {
 	background-color: #ecedf2;
 	height: 100px;
-	width: 75%;
+	width: 880px;
 	text-align: center;
 	margin: auto;
 	margin-bottom: 20px;
@@ -204,11 +204,13 @@ function list(page){
 	</tr>
 	</thead>
 <c:forEach var="row" items="${map.list}">
+	<c:if test="${row.show=='y'}">
 	<tr>
 		<td>${row.category}</td>
 		<td><a href="${path}/faq/view.do?no=${row.no}">${row.title}</a></td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></td>
 	</tr>
+</c:if>
 </c:forEach>
 <tr>
 		<td colspan="6" align="center">
@@ -249,9 +251,7 @@ function list(page){
 <div id="tab-4" class="tab-content"></div>
 <div id="tab-5" class="tab-content"></div>
 </div>
-
 </div>
-<a href="${path}/faq/write.do">글쓰기</a>
 <footer>
 <%@ include file="../include/footer.jsp"%>
 </footer>
