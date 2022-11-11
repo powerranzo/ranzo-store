@@ -20,12 +20,12 @@
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-			if (confirm('등록하시겠습니까?')) {
+			alertify.confirm("등록하시겠습니까?", function() {
 				if (popCheck()) {
 					document.form1.action = '${path}/admin/popup_write.do';
 					document.form1.submit();
 				}
-			}
+			});
 		});
 
 // 		$("#img_src").change(function() {
