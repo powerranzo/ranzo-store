@@ -1,44 +1,55 @@
 @charset "UTF-8";
 
+.sec-content {
+	margin: 0 auto;
+	padding: 10px;
+}
+
 .sec-prd {
-	width: 100%;
+	display: grid;
+	grid-template-areas: 'head head' 'thumnail body';
+	grid-template-columns: 2fr 3fr;
+	gap: 10px;
+	display: grid;
 }
 
-.label{
-	font-weight: bold;	
+.prd-thumnail {
+	grid-area: thumnail;
 }
 
-.sec-prd .prd-heading .prd-title, .sec-prd .prd-heading .summary {
-	font-size: 24px;
-	font-weight: bold;
-}
-
-.sec-prd .prd-thumnail {
-	width: 35%;
-	float: left;
-	aspect-ratio: 3/4;
-}
-
-.sec-prd .prd-thumnail img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.sec-prd .prd-heading {
+.prd-head {
+	grid-area: head;
+	border-bottom: 1px solid;
+	border-color: grey;
+	text-align: center;
+	font-size: 26px;
 	text-align: center;
 }
-
-.sec-prd .prd-info {
-	width: 65%;
-	float: right;
+.button-reserve{
+	background-color: orange;
+	color: #f2f2f2;
+}
+/* 전시 정보  */
+.prd-body {
+	padding-top:10px;
+	font-size: 14px;
 }
 
-.sec-prd .prd-info span {
+.itemLabel {
+	padding-right:10px;
+	width: 50px;
+	font-weight: bold;
+	color: orange;
+}
+
+.prd-thumnail img {
 	width: 100%;
-	display: block;
+	height: auto;
 }
 
+
+
+/* 상세정보 탭 */
 .sec-detail {
 	width: 100%;
 }
@@ -47,7 +58,7 @@
 	width: 100%;
 	position: sticky;
 	top: 0;
-	background-color: #ffffff;
+	background-color: white;
 	display: flex;
 	text-align: center;
 	border-bottom: 2px solid #ccc;
@@ -55,7 +66,7 @@
 }
 
 .sec-detail .tab-list::after {
-	content: '';
+	/* content: ''; */
 	display: block;
 	clear: both;
 }
@@ -73,9 +84,9 @@
 }
 
 .active {
-	border-bottom: 2px solid red;
-	margin-bottom: -2px;
+	border-bottom: 2px solid orange;
 	color: orange;
+	margin-bottom: -2px;
 	font-weight: bold;
 }
 
@@ -85,27 +96,29 @@
 
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
-	.sec-prd, .sec-detail {
-		max-width: 1020px;
-		margin: 0 auto;
+	.sec-prd {
+		grid-template-areas: 'thumnail head' 'thumnail body';
+		grid-template-columns: minmax(auto, 300px);
+		grid-template-rows: 60px auto;
 	}
-	/* 
-	.sec-prd .prd-thumnail {
-		width: 35%;
-		float: left;
-	}
-	.sec-prd .prd-heading, .sec-prd .prd-info {
-		width: 65%;
-		float: right;
+	.prd-head {
 		text-align: left;
 	}
-	 */
-	.sec-prd .prd-thumnail img {
-		/* margin-right: 40px; */
-		max-width: 405px;
+	.prd-title {
+		font-size: 26px;
 	}
-}
+	.prd-summary {
+		display: block;
+		font-size: 16px;
+	}
+	prd-body {
+		font-size: 16px;
+	}
 
-/* PC용 CSS */
-@media all and (min-width:1132px) {
+	/* PC용 CSS */
+	@media all and (min-width:1132px) {
+		.sec-content {
+			max-width: 1200px;
+		}
+	}
 }

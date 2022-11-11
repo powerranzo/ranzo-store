@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	<h1>Q&A <span id="review-count">(${map.count})</span></h1>
+	<h2>Q&A <span id="review-count">(${map.count})</span></h2>
 	<hr>
 	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	

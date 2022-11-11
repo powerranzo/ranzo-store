@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-
+.sec-review{
+	padding: 10px;
+}
 
 .comment-notice, review-info{
 	color: grey;

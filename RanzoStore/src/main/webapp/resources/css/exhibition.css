@@ -16,7 +16,7 @@ a:hover{
 	/* 스크롤 시 고정 */
 	top: 0;
 	position: sticky;
-	background-color: skyblue;
+	background-color: pink;
 	border-top: 1px solid;
 	border-bottom: 1px solid;
 	border-color: grey;

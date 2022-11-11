@@ -28,17 +28,17 @@ $(function(){
 	
 	$('.filter-dropdown').click(function(){
 		if($('.sort-dropdown').css('display') != 'none'){
-			/* 태블릿 이상 */
+			/* @media all and (min-width:768px) */
 			$('.sort').hide();			
 		}
+		$('.filter-dropdown').text($('.filter').css('display') == "none" ? "닫기 ✕" : "지역 ▾");			
 		$('.filter').slideToggle(500);
-		$(this).text($(this).text() == "지역 ▾" ? "닫기 ✕" : "지역 ▾");
-		console.log("filter-dropdown"+$('.filter-dropdown').css('display'));
-		console.log("filter"+$('.filter').css('display'));
+		console.log("filter-토글후"+$('.filter').css('display'));
 	});
+	
 	$('.sort-dropdown').click(function(){
 		if($('.filter-dropdown').css('display') != 'none'){
-			/* 태블릿 이상 */
+			/*  @media all and (min-width:1132px) */
 			$('.filter').hide();	
 		}
 		$('.sort').slideToggle(500);	
@@ -69,6 +69,9 @@ $(function(){
 	sortList.click(function(e){
 		sortList.removeClass('selected');
 		$(this).addClass('selected');
+		/* 선탣괸 정렬방식으로 텍스트 변경 */
+		$('.change').text($(this).text());
+		$('.sort').hide();			
 		getList();
 	});
 
@@ -126,7 +129,7 @@ function getList(){
 					<li>제주</li>
 				</ul>
 
-				<span class="sort-dropdown">정렬</span>
+				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
 				<ul class="sort">
 					<li id="rating">별점 높은순</li>
 					<li id="review">리뷰 많은순</li>
