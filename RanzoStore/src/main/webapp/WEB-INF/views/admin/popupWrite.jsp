@@ -41,7 +41,7 @@
 	function fileSize(target) {
 		const file = target.files[0];
 		const maxsize = 2000 * 1024;
-		console.log(file.size);
+// 		console.log(file.size);
 		var filesize = 0;
 		if (file.size > maxsize) {
 			$("#filesize").css('color', 'red');
@@ -56,29 +56,7 @@
 		}
 	}
 
-	function popCheck() {
-		if ($("#title").val() == "") {
-			alert('제목을 입력하세요.');
-			$("#title").focus();
-			return;
-		}
-		if ($("#start_date").val() == "") {
-			alert('시작일을 입력하세요.');
-			$("#start_date").focus();
-			return;
-		}
-		if ($("#end_date").val() == "") {
-			alert('종료일을 입력하세요.');
-			$("#end_date").focus();
-			return;
-		}
-		if ($("#file").val() == "" && $("#img_src").val() == "") {
-			alert('파일 등록 또는 URL을 입력하세요.');
-			$("#img_src").focus();
-			return;
-		}
-		return true;
-	}
+
 </script>
 </head>
 <body>

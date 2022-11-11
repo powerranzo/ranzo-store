@@ -21,7 +21,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- <script src="https://kit.fontawesome.com/a72ff6c63d.js" crossorigin="anonymous"></script> -->
 
-<link rel="stylesheet" href="${path}/include/admin_dashboard.css">
+
+<link rel="stylesheet" href="${path}/resources/css/admin_dashboard.css">
 
 <%-- <link rel="stylesheet" href="${path}/include/admin_dashboard.css"> --%>
 

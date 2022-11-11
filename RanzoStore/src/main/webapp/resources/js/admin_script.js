@@ -84,6 +84,7 @@ function memberView(param) {
 			document.form1.submit();
 		}
 	}
+
 $(function() {
 		$("#img_src").change(function() {
 			console.log($("#img_src").val());
@@ -95,3 +96,51 @@ $(function() {
 			}
 		});
 	});
+	
+	function popCheck() {
+		console.log('popCheck()호출');
+		var title=document.getElementById('title').value;
+		var start_date=document.getElementById('start_date').value;
+		var end_date=document.getElementById('start_date').value;
+		var file=document.getElementById('file').value;
+		var img_src=document.getElementById('img_src').value;
+		var fileImage=document.getElementById('fileImage');
+		console.log(fileImage);
+		if (title == "") {
+			alert('제목을 입력하세요.');
+			title.focus();
+			return;
+		}
+		if (start_date == "") {
+			alert('시작일을 입력하세요.');
+			start_date.focus();
+			return;
+		}
+		if (end_date == "") {
+			alert('종료일을 입력하세요.');
+			end_date.focus();
+			return;
+		}
+		if (file == "" && img_src == "") {
+			alert('파일 등록 또는 URL을 입력하세요.');
+			img_src.focus();
+			return;
+		}
+		
+		if (file != "" && img_src != "") {
+			alert('파일과 URL을 중복 등록할 수 없습니다.');
+			img_src.focus();
+			return;
+		}
+		
+		if (fileImage !="" && img_src != ""){
+			if(confirm('파일이 URL로 교체됩니다. 진행하시겠습니까?')){
+				return true;
+			}else{
+				img_src.focus();
+				return;
+			}
+			 
+		}
+		return true;
+	}

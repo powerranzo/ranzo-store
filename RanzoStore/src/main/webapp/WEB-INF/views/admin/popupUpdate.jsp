@@ -16,25 +16,23 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#content").summernote({
-			width : 880,
-			height : 300
-		});
 		$("#btnUpdate").click(function() {
-			if (confirm('수정하시겠습니까?')) {
+			alertify.confirm("수정하시겠습니까?", function() {
+				if(popCheck()){
 				document.form1.action = '${path}/admin/popup_update.do';
 				document.form1.submit();
-			}
+				}
+		});
 		});
 		$("#btnDelete").click(function(){
-			if (confirm('종료하시겠습니까?')) {
+			alertify.confirm("종료하시겠습니까?", function() {
 				document.form1.action = '${path}/admin/popup_delete.do';
 				document.form1.submit();
-		}
+		});
 		});
 		
 		$("#fileDel").click(function(){
-			if(confirm('삭제하시겠습니까?')){
+			alertify.confirm("삭제하시겠습니까?", function() {
 				$.ajax({
 					type:"post",
 					url:"${path}/admin/popup_file_delete.do",
@@ -47,17 +45,8 @@
 					}
 					}
 				})
-			}
 		});
-// 		$("#img_src").change(function() {
-// 			console.log($("#img_src").val());
-// 			if ($("#img_src").val() == "") {
-// 				$("#urlImage").hide();
-// 			} else {
-// 				$("#urlImage").show();
-// 				$("#urlImage").attr('src', $("#img_src").val());
-// 			}
-// 		});
+		});
 	});
 
 	function fileSize(target) {
@@ -78,6 +67,30 @@
 		}
 	}
 </script>
+<style type="text/css">
+input{
+position: inherit;
+margin-left: auto;
+margin-right: auto;
+} 
+
+.panel panel-default{
+width:50;
+}
+.panel-body{
+/* margin:30px 30px 30px 10px; */
+padding: 0 2% 2% 2%;
+align-content: center;
+align-self: center;
+height:80%;
+}
+form{
+margin-top:3%;
+}
+.form-group{
+margin-left:8%;
+}
+</style>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
@@ -115,6 +128,16 @@
 											value="${fn:substring(dto.end_date,11,19)}">
 									</div>
 									<div class="form-group">
+										<label for="pos_height">상단 위치</label> <input type="number"
+											name="pos_height" id="pos_height"
+											class="form-control input-sm" value="100">
+									</div>
+									<div class="form-group">
+										<label for="pos_width">좌측 위치</label> <input type="number"
+											name="pos_width" id="pos_width" class="form-control input-sm"
+											value="100">
+									</div>
+									<div class="form-group">
 										<label for="img_width">가로 사이즈</label> <input type="number"
 											name="img_width" id="img_width" class="form-control input-sm"
 											value="${dto.img_width}">
@@ -127,7 +150,7 @@
 									<div class="form-group">
 										<label for="title">이미지 URL</label>
 										<c:choose>
-											<c:when test="${dto.filesize==0}">
+											<c:when test="${dto.filename=='-'}">
 												<input name="img_src" class="form-control input-sm"
 													id="img_src" value="${dto.img_src}">
 												<div>
@@ -148,26 +171,28 @@
 										<input type="file" name="file" class="form-control input-sm"
 											id="file" onchange="fileSize(this)">
 									</div>
+								</form>
 									<c:if test="${dto.filesize > 0}">
 										<div class="form-group">
 											<label for="sectiondiv">썸네일</label>
 											<div class="sectiondiv">
-											<img src="${dto.img_src}" id="fileImage" width="100" height="100">
+											<img id="fileImage" src="${dto.img_src}" width="100" height="100">
 												${dto.filename} 
 											</div>
-											<button class="btn btn-sm" name="fileDel" id="fileDel">
-												<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+											<div align="right">
+											<button type="button" class="btn btn-sm" name="fileDel" id="fileDel">
+												<span class="glyphicon glyphicon-remove"></span>&nbsp;파일 삭제
 											</button>
+											</div>
 										</div>
 									</c:if>
-								</form>
 							</div>
 						</div>
 						<div class="form-group" align="right">
-				<button class="btn btn-sm" id="btnUpdate">
+				<button type="button" class="btn btn-sm" id="btnUpdate">
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;수정
 				</button>
-				<button class="btn btn-sm" id="btnDelete">
+				<button type="button" class="btn btn-sm" id="btnDelete">
 					<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
 				</button>
 			</div>

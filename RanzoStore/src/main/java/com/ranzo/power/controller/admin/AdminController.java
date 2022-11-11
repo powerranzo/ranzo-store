@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.ranzo.power.common.Constants;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
@@ -134,15 +135,14 @@ public class AdminController {
 			, MultipartFile file, MultipartFile file2) {
 		String thumnail="-";
 		String product_info="-";
-		String dirName="exhibition";
 		if(!file.isEmpty()) {
 			logger.info("multipartfile:"+file.getOriginalFilename());
-			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, dirName);
+			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, Constants.DIR_EXHIBITION);
 			thumnail=(String)fileInfo.get("fileUrl");
 		}
 		if(!file2.isEmpty()) {
 			logger.info("multipartfile:"+file2.getOriginalFilename());
-			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, dirName);
+			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, Constants.DIR_EXHIBITION);
 			product_info=(String)fileInfo.get("fileUrl");
 		}
 		dto.setThumnail(thumnail);
@@ -170,17 +170,16 @@ public class AdminController {
 			, MultipartFile file, MultipartFile file2) {
 		String thumnail=adminService.getExbView(dto.getCode()).getThumnail();
 		String product_info=adminService.getExbView(dto.getCode()).getProduct_info();
-		String dirName="exhibition";
 		if(!file.isEmpty()) {
 			thumnail=thumnail.substring(thumnail.lastIndexOf("/")+1);
-			uploadService.deleteServerFile(thumnail, request, dirName);
-			thumnail=(String)uploadService.uploadFile(file, request, dirName).get("fileUrl");
+			uploadService.deleteServerFile(thumnail, request, Constants.DIR_EXHIBITION);
+			thumnail=(String)uploadService.uploadFile(file, request, Constants.DIR_EXHIBITION).get("fileUrl");
 		}
 		dto.setThumnail(thumnail);
 		if(!file2.isEmpty()) {
 			product_info=product_info.substring(product_info.lastIndexOf("/")+1);
-			uploadService.deleteServerFile(product_info, request, dirName);
-			product_info=(String)uploadService.uploadFile(file2, request, dirName).get("fileUrl");
+			uploadService.deleteServerFile(product_info, request, Constants.DIR_EXHIBITION);
+			product_info=(String)uploadService.uploadFile(file2, request, Constants.DIR_EXHIBITION).get("fileUrl");
 		}
 		dto.setProduct_info(product_info);
 		adminService.updateExb(dto);
@@ -193,14 +192,13 @@ public class AdminController {
 		logger.info("file_delete.do 호출");
 		ExhibitionDTO dto=adminService.getExbView(code);
 		String fileName="";
-		String dirName="exhibition";
 		logger.info("fileType:"+fileType);
 		if(fileType.equals("thumnail"))
 			fileName=dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
 		else if(fileType.equals("product_info"))
 			fileName=dto.getProduct_info().substring(dto.getProduct_info().lastIndexOf("/")+1);
 		logger.info("fileName_for_delete:"+fileName);
-		uploadService.deleteServerFile(fileName, request, dirName);
+		uploadService.deleteServerFile(fileName, request, Constants.DIR_EXHIBITION);
 		adminService.deleteExbFile(code, fileType);
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	} 
@@ -282,18 +280,17 @@ public class AdminController {
 			String end_time, HttpServletRequest request, 
 			MultipartFile file) throws ParseException {
 		String img_src="";
-		logger.info("dto_img_src:"+img_src);
+		logger.info("pop_write_in_dto:"+dto.toString());
 		if(!file.isEmpty()) { 
-			String dirName="popup";
 			logger.info("multipartfile:"+file.getOriginalFilename());
-			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, dirName);
+			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, Constants.DIR_POPUP);
 			img_src=(String)fileInfo.get("fileUrl");
 			dto.setImg_src(img_src);
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
-		}else {
-			img_src=dto.getImg_src();
-			dto.setFilename(img_src.substring(img_src.lastIndexOf("/")+1));
+		}else if(!(dto.getImg_src()==null && "".equals(dto.getImg_src()))) {
+//			dto.setFilename("");
+			logger.info("url_filename"+dto.getFilename());
 		}
 		dto.setStart_date(DateUtils.stringToDate(DateUtils.dateToString(
 				dto.getStart_date())+" "+start_time, "yyyy-MM-dd HH:mm"));
@@ -311,10 +308,9 @@ public class AdminController {
 		if(no!=0) {
 			PopupDTO dto=adminService.getPopupView(no);
 			String fileName="";
-			String dirName="popup";
 			fileName=dto.getImg_src().substring(dto.getImg_src().lastIndexOf("/")+1);
 			logger.info("fileName_for_delete:"+fileName);
-			uploadService.deleteServerFile(fileName, request, dirName);
+			uploadService.deleteServerFile(fileName, request, Constants.DIR_POPUP);
 			adminService.deletePopupFile(no);
 			return new ResponseEntity<String>("deleted", HttpStatus.OK);
 		}else {
@@ -326,21 +322,33 @@ public class AdminController {
 	public String updatePopup(PopupDTO dto, String start_time, 
 			String end_time, HttpServletRequest request, 
 			MultipartFile file) throws ParseException {
-		String img_src=adminService.getPopupView(dto.getNo()).getImg_src();
+		logger.info("popup_dto:"+dto.toString());
+		logger.info("popupdto_filesize:"+dto.getFilesize());
+		PopupDTO dtoOrigin=adminService.getPopupView(dto.getNo());
+		String img_src="";
+		//첨부파일 있는 경우
 		if(!file.isEmpty()) { 
-			String dirName="popup";
+			img_src=dtoOrigin.getImg_src();
 			String fileName=img_src.substring(img_src.lastIndexOf("/")+1);
-			uploadService.deleteServerFile(fileName, request, dirName);
-			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, dirName);
+			uploadService.deleteServerFile(fileName, request, Constants.DIR_POPUP);
+			Map<String,Object> fileInfo=uploadService.uploadFile(file, request, Constants.DIR_POPUP);
 			img_src=(String)fileInfo.get("fileUrl");
+			logger.info("fileInfo_fileURL:"+img_src);
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
-//			dto.setImg_src(img_src);
-
+			dto.setImg_src(img_src);
+			//url인 경우
+		}else if(!(dto.getImg_src()==null && "".equals(dto.getImg_src()))) {
+			img_src=dto.getImg_src();
+			String fileName=img_src.substring(img_src.lastIndexOf("/")+1);
+			uploadService.deleteServerFile(fileName, request, Constants.DIR_POPUP);
+			dto.setFilename("-");
+			//이미지 변경 없는 경우
 		}else {
-			dto.setFilename(img_src.substring(img_src.lastIndexOf("/")+1));
+			dto.setImg_src(dtoOrigin.getImg_src());
+			dto.setFilename(dtoOrigin.getFilename());
+			dto.setFilesize(dtoOrigin.getFilesize());
 		}
-		dto.setImg_src(img_src);
 		dto.setStart_date(DateUtils.stringToDate(DateUtils.dateToString(dto.getStart_date())+" "+start_time, "yyyy-MM-dd HH:mm"));
 		dto.setEnd_date(DateUtils.stringToDate(DateUtils.dateToString(dto.getEnd_date())+" "+end_time, "yyyy-MM-dd HH:mm"));
 		adminService.updatePopup(dto);
@@ -354,26 +362,23 @@ public class AdminController {
 		}
 		return "redirect:popup_list.do";
 	}
-	
-	
+
+
 	@RequestMapping("/popup_img.do")
 	public String popupView(Model m, PopupDTO dto) {
 		m.addAttribute("dto", adminService.getPopupView(dto.getNo()));
 		return "admin/popup";
 	}
-//	@ResponseStatus(value = HttpsStatus.OK)
+	//	@ResponseStatus(value = HttpsStatus.OK)
 	@ResponseBody
 	@RequestMapping("/popup.do")
 	public List<PopupDTO> popup(PopupDTO dto) {
 		logger.info("popup.do 호출");
 		List<PopupDTO> list=adminService.getPopupOn();
-//		for(int i=0; i<list.size(); i++) {
-//			list.get(i).setStart_date(DateUtils.dateToString(date)list.get(i).getStart_date());
-//		}
 		logger.info("popup show list"+list);
 		logger.info("popup show list_date"+list.get(0).start_date+"end date:"+list.get(0).end_date);
 		return list;
 	}
-	
+
 
 }
