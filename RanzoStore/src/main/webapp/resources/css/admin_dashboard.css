@@ -64,11 +64,11 @@ section {
 	text-align: left;
 }
 .sectiondiv {
+	width:70%;
 	margin-bottom:5%;
-/* 	float: right; */
+	margin-left: 5%;
 	display: inline-block;
 	min-height: 100%;
-	width: 60%;
 	flex: 1;
 }
 .profile {
