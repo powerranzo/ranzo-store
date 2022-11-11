@@ -86,8 +86,8 @@ function orderlist(){
 <body>
 <%@ include file="../include/menu.jsp"%>
 <div class="content">
-<%@ include file="../include/CommonDashboard.jspf" %>
 <section>
+<%@ include file="../include/CommonDashboard.jspf" %>
  <div class="orderdiv">
 		<article class="profile">
 			<div class="welcome">

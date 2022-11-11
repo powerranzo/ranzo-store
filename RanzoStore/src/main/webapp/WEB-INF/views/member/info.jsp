@@ -168,6 +168,7 @@ function daumZipCode() {
 }
 
 label {
+
 	width: 120px;
 	height: 30px;
 	margin-top: 4px;
@@ -176,7 +177,7 @@ label {
 .button {
 	background-color: black;
 	color: white;
-	width: 147px;
+	width: 141px;
 	height: 50px;
 	font-size: 17px;
 	border: none;
@@ -186,8 +187,8 @@ label {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 84px;
-	height: 42px;
+	width: 75px;
+	height: 41px;
 	font-size: 14px;
 	border: none;
 }
@@ -217,7 +218,7 @@ tr{
 		<br>
 		<table>
 			<tr>
-				<td width="130px"><label>아이디</label></td>
+				<td width="30%"><label>아이디</label></td>
 				<td><input class="input-field" value="${dto.userid}" name="userid" id="userid" readonly="readonly"></td>
 			</tr>
 			<p>

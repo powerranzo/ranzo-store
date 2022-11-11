@@ -36,8 +36,4 @@ public interface AdminService {
 	public void popupShow(int no);
 	public List<PopupDTO> getPopupOn();
 	
-
-	
-	
-	
 }

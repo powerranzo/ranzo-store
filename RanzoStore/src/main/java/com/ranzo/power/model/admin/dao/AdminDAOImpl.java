@@ -197,9 +197,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PopupDTO> getPopupOn() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PopupDTO> getPopupOn(String today) {
+		return sqlSession.selectList("admin.getPopupOn", today);
 	}
 
 }

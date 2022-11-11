@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 
 <!-- include libraries(jQuery, bootstrap) -->

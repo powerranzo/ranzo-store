@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>나의 상품 문의</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 
 <style>
 * {box-sizing: content-box;}

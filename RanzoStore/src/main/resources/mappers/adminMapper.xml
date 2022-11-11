@@ -334,7 +334,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 		and r.show='y'
-	</select>
+	</select> 
 
 	<select id="getReservList" resultType="ReservDTO">
 		select * from (
@@ -585,4 +585,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="popupShow">
 		update popup_tb set show='y' where no=#{no}
 	</update>
+	
+	<select id="getPopupOn" resultType="PopupDTO">
+		select no, title, img_src, img_width, img_height, pos_width, pos_height,
+		filename, filesize, start_date, end_date
+		from popup_tb
+		where show='y' and 
+		(<![CDATA[to_char(start_date, 'YYYY-MM-DD') >= #{today}]]>
+		or
+	 <![CDATA[to_char(end_date, 'YYYY-MM-DD') >= #{today}]]>)
+	</select>
 </mapper>

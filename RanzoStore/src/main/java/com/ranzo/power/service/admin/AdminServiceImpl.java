@@ -240,8 +240,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<PopupDTO> getPopupOn() {
 		List<PopupDTO> list=new ArrayList<PopupDTO>();
-		list=adminDao.getPopupOn();
-		//list.remo 
+		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
 
