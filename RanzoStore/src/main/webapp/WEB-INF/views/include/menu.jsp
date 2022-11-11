@@ -47,10 +47,6 @@
 					<li><a href="${path}/faq/list.do">FAQ</a></li>
 					<li><a href="${path}/board/qna/list.do">QNA</a></li>
 				</ul></li>
-			
-			
-			<li><a href="${path}/upload/uploadForm">업로드 테스트</a></li>
-			<li><a href="${path}/upload/uploadAjax">업로드 테스트(ajax)</a></li>
 		</ul>
 		
 		<div>
