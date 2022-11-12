@@ -1,8 +1,10 @@
 package com.ranzo.power.model.shop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.HeartDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 
@@ -20,4 +22,7 @@ public interface ExhibitionDAO {
 	int searchCount(String keyword);
 	List<ExhibitionDTO> searchdate(String searchDate);
 	int searchDateCount(String searchDate);
+	public HeartDTO findHeart(Map<String, String> map);
+	public void pressHeart(HeartDTO heart);
+	public void cancelHeart(HeartDTO heart);
 }

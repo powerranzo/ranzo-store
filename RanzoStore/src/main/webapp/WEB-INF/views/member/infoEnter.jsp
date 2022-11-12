@@ -27,7 +27,7 @@ section {
 	text-align: left;
 }
 .orderdiv {
-	padding:5px;
+	padding:0 0 0 50px;
 	float: left;
 	display: inline-block;
 	width: 90%;
