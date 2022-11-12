@@ -126,8 +126,9 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 	@Override
 	public void cancelHeart(HeartDTO heart) {
 		sqlSession.update("exhibition.cancelHeart", heart);
+	}
     
-  @Override
+	@Override
 	public ExhibitionDTO detailreserv(String exhibitionCode) {
 		return sqlSession.selectOne("reserv.detail", exhibitionCode);
 	}
