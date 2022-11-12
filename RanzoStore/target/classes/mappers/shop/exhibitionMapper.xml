@@ -85,7 +85,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	 -->
 	
+	<!-- 위시리스트_tb에 row가 있는 지 확인 -->
+	<select id="checkWish" 
+	parameterType="java.util.HashMap" 
+	resultType="int">
+	 select count(*) from WISHLIST_TB
+	 where product = #{product} and userid=#{userid}
+	</select>
 	
+	<!-- 위시리스트_tb에 row 생성 -->
+	<insert id="insertWish">
+		insert into WISHLIST_TB(no, product, userid, heart)
+		values(SEQ_WISHLIST.nextval, #{product}, #{userid}, 0)
+	</insert>
+	
+	<!-- 좋아요 확인 -->
+	<select id="findHeart" 
+	parameterType="java.util.HashMap" 
+	resultType="com.ranzo.power.model.shop.dto.HeartDTO">
+		select * from WISHLIST_TB
+		where product = #{product} and userid=#{userid}
+	</select>
+	
+	<!-- 좋아요 누름 -->
+	<update id="pressHeart" parameterType="java.util.HashMap">
+		update WISHLIST_TB set heart=1 
+		where product = #{product} and userid=#{userid}
+	</update>
+
+	<!-- 좋아요 취소 -->
+	<update id="cancelHeart" parameterType="java.util.HashMap">
+		update WISHLIST_TB set heart=0 
+		where product = #{product} and userid=#{userid}
+	</update>
+		
 </mapper>
 
 
