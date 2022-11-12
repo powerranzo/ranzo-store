@@ -10,13 +10,11 @@
 
 <style>
 * {box-sizing: content-box;}
-
 * {
 	margin:0px; 
 }
 .content{
 	margin: 0 80px 0 80px;
-
 }
 section {
 	width: 75%;
@@ -34,12 +32,10 @@ section {
 .p {
 	margin: 15px 0 15px 0;
 }
-
 footer{
 	clear : both;
 	bottom: 0;
 }
-
 html, body{
 	height: 100%;
 }
@@ -48,7 +44,6 @@ body {
   flex-direction: column;
   margin: 0;
 }
-
 th, td {
 	border-bottom: 1px solid black;
   padding: 10px;

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ public class FaqController {
 	@Inject
 	FaqService faqService;
 	
+	//FAQ 리스트
 	@RequestMapping("list.do")
 	public ModelAndView list(ModelAndView mav, 
 			@RequestParam(defaultValue = "all") String searchOption,
@@ -44,7 +46,7 @@ public class FaqController {
 		mav.addObject("map",map);
 		return mav;
 	}
-	
+	//세부리스트 불러오기
 	@ResponseBody
 	@RequestMapping("reservlist.do")
 	public ModelAndView reservlist(ModelAndView mav, 
@@ -63,23 +65,46 @@ public class FaqController {
 		mav.addObject("map",map);
 		return mav;
 	}
+	//상세보기
 	@RequestMapping("view.do")
 	public ModelAndView detail(ModelAndView mav, int no) {
 		mav.setViewName("/faq/view");
 		mav.addObject("dto", faqService.view(no));
 		return mav;
 	}
+	//FAQ작성 페이지로 이동
 	@RequestMapping("write.do")
 	public String write() {
 		return "faq/write";
 	}
-		
+	//FAQ 추가	
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute FaqDTO dto) throws Exception {
 		faqService.insert(dto);
 		return "redirect:/faq/list.do";
 	}
-	
+	//업데이트 페이지로 이동
+	@RequestMapping("update.do")
+	public ModelAndView updatepage(FaqDTO dto, ModelAndView mav, int no)throws Exception {
+		mav.setViewName("faq/update");
+		mav.addObject("dto", faqService.view(no));
+		return mav;
+	}
+	//정보 업데이트
+	@RequestMapping("update/{no}")
+	public String update(FaqDTO dto)throws Exception{
+		if(dto != null) {
+			faqService.update(dto);
+		}
+		return "redirect:/faq/view.do?no="+dto.getNo();
+	}
+	//faq삭제
+	@RequestMapping("delete/{no}")
+	public String delete(int no)throws Exception{
+		faqService.delete(no);
+		return "redirect:/faq/list.do";
+	}
+
 
 	
 }

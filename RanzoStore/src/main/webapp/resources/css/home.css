@@ -58,7 +58,7 @@
 	position: absolute;
 	top: 280px;
 	left: 150px;
-	font-size: 70px;
+	font-size: 60px;
 	color: white;
 	text-align: left;
 }
@@ -70,22 +70,12 @@
 	color: white;
 	padding: 10px;
 	text-align: center;
+	width: auto;
 }
 #s0 {
 	margin: 20px 10px 30 0;
 	height: 300px;
 	vertical-align: bottom;
-}
-.image_ex{
-	position: relative;
-	margin: auto;
-	width: 300px;
-	height: 400px;
-}
-.image_child{
-	position: absolute;
-	top: 10px;
-	right: 60px;
 }
 .reco1{
 	height: 320px;
@@ -106,5 +96,33 @@
 	transform:scale(1.1);
    transition: transform .5s;
 }
+@media screen and (max-width: 900px) {
+		.image_text p{
+			font-size: 30px;
+		}
 
-
+		.btn1 {
+		position: absolute;
+		top: 450px;
+		left: 150px;
+		width: 180px;
+		height: 60px;
+		border: 1px solid white;
+		background: none;
+		font-weight: bold;
+		font-size: 15px;
+		color: white;
+	}
+	.btn2 {
+		position: absolute;
+		top:450px;
+		left: 350px;
+		width: 180px;
+		height: 60px;
+		border: 1px solid white;
+		background-color: white;
+		color: black;
+		font-weight: bold;
+		font-size: 15px;
+	}
+}

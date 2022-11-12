@@ -15,6 +15,8 @@
 }
 .content{
 	margin: 0 80px 0 80px;
+	display: flex;
+	justify-content:space-between;
 }
 section {
 	margin-top:3%;
@@ -84,8 +86,8 @@ function orderlist(){
 <body>
 <%@ include file="../include/menu.jsp"%>
 <div class="content">
-<%@ include file="../include/CommonDashboard.jspf" %>
 <section>
+<%@ include file="../include/CommonDashboard.jspf" %>
  <div class="orderdiv">
 		<article class="profile">
 			<div class="welcome">

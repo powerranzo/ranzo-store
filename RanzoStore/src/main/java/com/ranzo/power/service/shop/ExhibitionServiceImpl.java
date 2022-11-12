@@ -107,5 +107,10 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 			exhibitionDAO.pressHeart(heart);
 			return 1;
 		}
+
+  @Override
+	public Object detailreserv(String exhibitionCode) {
+		return exhibitionDAO.detailreserv(exhibitionCode);
+
 	}
 }

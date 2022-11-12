@@ -47,6 +47,11 @@
 						.prop("selected", "selected");
 		}
 	}
+	$(function(){
+		$("#btnApproval").click(function(){
+			location.href="https://classic-admin.iamport.kr/payments";
+		});
+	});
 
 </script>
 </head>
@@ -59,6 +64,9 @@
 				<h3>예약현황 <button class="btn btn-sm" id="btnApproval">
 							<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
 						</button></h3>
+						<!-- https://classic-admin.iamport.kr/payments 
+						email: tn5us@hanmail.net, pwd: Rlatn123$
+						-->
 				<form name="form1" class="form-inline" method="post">
 <!-- 					<div class="form-group"> -->
 						<table class="adminTable1">
