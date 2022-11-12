@@ -73,16 +73,16 @@ function memberView(param) {
 	}
 	 
 	function popupDel(param) {
-		if(confirm('종료하시겠습니까?')) {
+		alertify.confirm("종료하시겠습니까?", function() {
 		document.form1.action = getContextPath()+'/admin/popup_delete.do?no=' + param;
 		document.form1.submit();
-		}
+		});
 	}
 	function popupShow(param) {
-		if(confirm('재개하시겠습니까?')) {
+		alertify.confirm("재개하시겠습니까?", function() {
 			document.form1.action = getContextPath()+'/admin/popup_show.do?no=' + param;
 			document.form1.submit();
-		}
+		});
 	}
 
 $(function() {
@@ -107,40 +107,30 @@ $(function() {
 		var fileImage=document.getElementById('fileImage');
 		console.log(fileImage);
 		if (title == "") {
-			alert('제목을 입력하세요.');
+			alertify.alert('제목을 입력하세요.');
 			title.focus();
 			return;
 		}
 		if (start_date == "") {
-			alert('시작일을 입력하세요.');
+			alertify.alert('시작일을 입력하세요.');
 			start_date.focus();
 			return;
 		}
 		if (end_date == "") {
-			alert('종료일을 입력하세요.');
+			alertify.alert('종료일을 입력하세요.');
 			end_date.focus();
 			return;
 		}
 		if (file == "" && img_src == "") {
-			alert('파일 등록 또는 URL을 입력하세요.');
+			alertify.alert('파일 등록 또는 URL을 입력하세요.');
 			img_src.focus();
 			return;
 		}
 		
 		if (file != "" && img_src != "") {
-			alert('파일과 URL을 중복 등록할 수 없습니다.');
+			alertify.alert('파일과 URL을 중복 등록할 수 없습니다.');
 			img_src.focus();
 			return;
-		}
-		
-		if (fileImage !="" && img_src != ""){
-			if(confirm('파일이 URL로 교체됩니다. 진행하시겠습니까?')){
-				return true;
-			}else{
-				img_src.focus();
-				return;
-			}
-			 
 		}
 		return true;
 	}

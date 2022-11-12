@@ -85,7 +85,8 @@
 							<th>가입일</th>
 							<td colspan="2">
 								<input type="date" id="startDate" name="startDate" 
-								value="${searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+								value="${searchOp.startDate}">
+								<span style="float:left; padding:7px;">~</span>
 								<input type="date" id="endDate" name="endDate" 
 								value="${searchOp.endDate}"></td>
 						</tr>

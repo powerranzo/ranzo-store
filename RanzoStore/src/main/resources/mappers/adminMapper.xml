@@ -215,8 +215,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select E.*, rownum as rn from (
 		select code, location,
 		gallery, title, summary, thumnail, start_date,
-		end_date, hit, sales,
-		show
+		end_date, hit, sales, show
 		from exhibition_tb
 		<choose>
 			<when test="searchOp.searchOption1 != 'all'">
@@ -277,10 +276,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getExbView" resultType="ExhibitionDTO">
 		select
-		code, location,
-		gallery, title, summary,
+		code, location, gallery, title, summary,
 		thumnail, product_info, start_date, end_date,
-		hit, sales
+		hit, sales, show
 		from exhibition_tb
 		where code=#{code}
 	</select>

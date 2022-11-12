@@ -55,6 +55,7 @@
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>전시현황</h2>
+				<p><span style="color: #fa5041;">전시명</span>를 클릭하면 전시 정보를 수정할 수 있습니다.</p>
 				<form name="form1" class="form-inline" method="post">
 					<table class="adminTable1">
 						<tr>
@@ -87,7 +88,8 @@
 							<th>전시 기간</th>
 							<td colspan="2">
 								<input type="date" id="startDate" name="startDate" 
-								value="${exb.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+								value="${exb.searchOp.startDate}">
+								<span style="float:left; padding:7px;">~</span>
 								<input type="date" id="endDate" name="endDate"
 								value="${exb.searchOp.endDate}"></td>
 						</tr>
@@ -141,7 +143,7 @@
 									<td><a href="#" onclick="exbUpdate('${dto.code}')">${dto.title}</a></td>
 									<td>${dto.location}</td>
 									<td>${dto.gallery}</td>
-									<td><fmt:formatDate value="${dto.start_date}" type="date" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
+									<td><fmt:formatDate value="${dto.start_date}" type="date" pattern="yyyy-MM-dd" />  <fmt:formatDate
 											value="${dto.end_date}" type="date" pattern="yyyy-MM-dd" />
 									</td>
 									<td>${dto.hit}</td>

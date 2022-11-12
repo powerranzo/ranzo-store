@@ -7,6 +7,9 @@
 <title>Popup</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
+<style type="text/css">
+form{margin-top:3%;}
+</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
@@ -52,6 +55,7 @@
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>PopUp</h2>
+				<p><span style="color: #fa5041;">제목</span>을 클릭하면 팝업 정보를 수정할 수 있습니다.</p>
 				<form name="form1" class="form-inline" method="post">
 					<table class="adminTable2">
 						<tr>
@@ -82,7 +86,8 @@
 							<th>노출기간</th>
 							<td colspan="2">
 								<input type="date" id="startDate" name="startDate"
-								value="${ pop.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+								value="${ pop.searchOp.startDate}">
+								<span style="float:left; padding:7px;">~</span>
 								<input type="date" id="endDate" name="endDate"
 								value="${ pop.searchOp.endDate}">
 							</td>
@@ -99,7 +104,6 @@
 							<td><input type="button" value="검색" id="btnSearch" 	name="btnSearch"></td>
 						</tr>
 					</table>
-					<br>
 					<table class="adminTable3">
 						<thead>
 							<tr>
@@ -127,17 +131,17 @@
 									<td>${pop.show =='y'? '진행':'종료'}</td>
 									<td><c:choose>
 											<c:when test="${pop.show =='y'}">
-												<button class="btn btn-sm" type="button" id="btnUpdate"
+												<button class="btn btn-sm" type="button" id=""
 													onclick="popupView('${pop.no}')">
 													<span class="glyphicon glyphicon-check"></span>&nbsp;수정
 												</button>
-												<button class="btn btn-sm" type="button" id="btnDel2"
+												<button class="btn btn-sm" type="button" id=""
 													onclick="popupDel('${pop.no}')">
 													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-sm" type="button" id="btnShow"
+												<button class="btn btn-sm" type="button" id=""
 													onclick="popupShow('${pop.no}')">
 													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;재개
 												</button>

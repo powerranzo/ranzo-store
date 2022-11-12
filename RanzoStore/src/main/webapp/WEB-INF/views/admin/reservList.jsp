@@ -102,7 +102,8 @@
 							<th>예약일</th>
 							<td colspan="2">
 							<input type="date" id="startDate" name="startDate" 
-								value="${ reserv.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+								value="${ reserv.searchOp.startDate}">
+							<span style="float:left; padding:7px;">~</span>
 								<input type="date" id="endDate" name="endDate"
 								value="${ reserv.searchOp.endDate}">
 							</td>

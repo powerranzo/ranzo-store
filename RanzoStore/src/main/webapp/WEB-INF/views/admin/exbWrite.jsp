@@ -6,26 +6,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>전시 등록</title>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
-.form-group{
-width:80%;
+.adminTable3 input{float:left;}
+.adminTable3{width:90%;}
+#adminTB2_th{width: 20%;}
+#summary {
+	width:30% !important;
+	height:300px !important;
 }
+form{margin-top:3%;}
 </style>
 <script type="text/javascript">
-$(function(){
-	$("#summary").summernote({
-		width : 880,
-		height : 300
-	});
-	$("#btnWrite").click(function(){
-		alertify.confirm("수정하시겠습니까?", function() {
-		document.form1.action="${path}/admin/exb_write.do";
-		document.form1.submit();			
+	$(function() {
+		$("#summary").summernote({
+			height : 300
+		});
+		$("#btnWrite").click(function() {
+			alertify.confirm("등록하시겠습니까?", function() {
+				document.form1.action = "${path}/admin/exb_write.do";
+				document.form1.submit();
+			});
 		});
 	});
-});
 </script>
 </head>
 <body>
@@ -34,63 +38,74 @@ $(function(){
 		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
-		<h2>전시 등록</h2>
-		<form name="form1" enctype="multipart/form-data" method="post">
-			<div class="form-group">
-				<label for="code">전시코드</label> 
-				<input name="code" class="form-control input-sm" 
-				id="code" placeholder="">
+				<h2>전시 등록</h2>
+				<form name="form1" enctype="multipart/form-data" method="post">
+					<table class="adminTable3">
+						<tr>
+							<th id="adminTB2_th">전시코드</th>
+							<td>
+								<input name="code" id="code" placeholder="">
+							</td>
+						</tr>
+						<tr>
+							<th>전시명</th>
+							<td>
+								<input name="title" id="title" placeholder="">
+							</td>
+						</tr>
+						<tr>
+						<tr>
+							<th>전시관</th>
+							<td>
+								<input name="gallery" id="gallery" placeholder="">
+							</td>
+						</tr>
+						<tr>
+							<th>전시지역</th>
+							<td>
+								<input name="location" id="location" placeholder="">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 시작일</th>
+							<td>
+								<input type="date" name="start_date" id="start_date">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 마감일</th>
+							<td>
+								<input type="date" name="end_date" id="end_date">
+							</td>
+						</tr>
+						<tr>
+							<th>포스터 이미지</th>
+							<td>
+								<input type="file" name="file" id="file">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 정보 이미지</th>
+							<td>
+								<input type="file" name="file2"	id="file2">
+							</td>
+						</tr>
+					</table>
+					<table class="adminTable3">
+						<tr>
+							<th style="width:15%;">내용</th>
+							<td>
+								<textarea name="summary" id="summary" 
+								placeholder="내용을 입력해주세요." rows="20"></textarea>
+							</td>
+						</tr>
+					</table>
+				</form>
+				<input type="submit" value="등록하기" id="btnWrite" name="btnWrite" style="margin-right:10%;">
+				<br>
 			</div>
-			<div class="form-group">
-				<label for="title">전시명</label> 
-				<input name="title" class="form-control input-sm" 
-				id="title" placeholder="">
-			</div>
-			<div class="form-group">
-				<label for="gallery">전시관</label> 
-				<input name="gallery" class="form-control input-sm" 
-				id="gallery" placeholder="">
-			</div>
-			<div class="form-group">
-				<label for="location">전시지역</label> 
-				<input name=location class="form-control input-sm" 
-				id="location" placeholder="">
-			</div>
-			<div class="form-group">
-				<label for="start_date">전시 시작일</label> 
-				<input type="date" name="start_date" class="form-control input-sm" 
-				id="start_date"> 
-			</div>
-			<div class="form-group">
-				<label for="end_date">전시 마감일</label> 
-				<input type="date" name="end_date" class="form-control input-sm" 
-				id="end_date">
-			</div>
-			<div class="form-group" style="width:inherit;">
-				<label for="summary">내용</label>
-				<textarea name="summary" class="form-control input-sm" id="summary"
-					placeholder="내용을 입력해주세요." rows="20"></textarea>
-			</div>
-			<div class="form-group">
-				<label for="file">포스터 썸네일</label> 
-				<input type="file" name="file"	
-				class="form-control input-sm" id="file">
-			</div>
-			<div class="form-group">
-				<label for="file2">전시 정보 이미지</label> 
-				<input type="file" name="file2"	
-				class="form-control input-sm" id="file2">
-			</div>
-		</form>
-		<div class="form-group" align="right">
-			<button class="btn btn-lg" id="btnWrite">
-				<span class="glyphicon glyphicon-pencil"></span>&nbsp;등록
-			</button>
-		</div>
-		<br>
+		</section>
 	</div>
-</section>
-</div>
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>

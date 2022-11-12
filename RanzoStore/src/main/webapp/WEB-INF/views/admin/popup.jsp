@@ -45,8 +45,8 @@
 $(function(){
 	$("#btnClose").click(function(){
 		var date = new Date();
-		date = date.setTime(date.getTime() + 60 * 1000); //테스트용
-// 		date = date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+// 		date = date.setTime(date.getTime() + 60 * 1000); //테스트용
+		date = date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
 		window.localStorage.setItem("exp"+'${dto.no}', date);
 		window.close();
 	});

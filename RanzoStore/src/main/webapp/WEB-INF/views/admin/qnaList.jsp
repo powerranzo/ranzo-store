@@ -99,7 +99,8 @@
 							<th>예약일</th>
 							<td colspan="2">
 							<input type="date" id="startDate" name="startDate" 
-									value="${ qna.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+									value="${ qna.searchOp.startDate}">
+							<span style="float:left; padding:7px;">~</span>
 							<input type="date" id="endDate" name="endDate"
 									value="${ qna.searchOp.endDate}">
 							</td>
