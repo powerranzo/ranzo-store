@@ -172,31 +172,8 @@
 			좋아요</a>
 			</c:if>
 			<!-- 임시 좋아요 자리 -->
-			
 		</div>
-<div>
-		<!-- 하트? -->
-<%-- 		
-		<c:choose>
-		 <!-- 로그인 했을때 -->
-		 <c:when test="${sessionScope.userid != null}">
-		 <!-- 좋아요가 되어있을때 -->
-		  <c:if test="">
-		   <img src="${path}/resources/images/favorite2.png" class="imgch">
-		  </c:if>
-		  <!-- 좋아요 안되어있을떄 -->
-		  <c:if test="">
-		   <img src="${path}/resources/images/favorite1.png" class="imgch">
-		  </c:if>
-		  
-		 </c:when>
-		 <c:otherwise>
-		 <!-- 로그인 안했을떄 -->
-		 <img src="${path}/resources/images/favorite1.png" class="imgch">
-		 </c:otherwise>
-		</c:choose>--%>
-		 <img src="${path}/resources/images/favorite1.png" class="imgch">
-</div>
+
 		<div> 
 			<!-- 관리자용 -->
 			<c:if test="${sessionScope.admin_userid != null }">
