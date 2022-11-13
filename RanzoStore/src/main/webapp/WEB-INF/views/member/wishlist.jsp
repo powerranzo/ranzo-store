@@ -17,7 +17,11 @@ function emptyWish() {
 		dataType : "json",
 		data : {"userid": "${sessionScope.userid}"},
 		success : function(data){
-			alert("총 "+data+"개의 좋아요가 지워졌습니다.");
+			if(data == 0){
+				alert("위시리스트를 채워주세요.");
+			}else{
+				alert("총 "+data+"개의 좋아요가 지워졌습니다.");
+			}
 			$('.sec-exhibition').load(location.href+' .sec-exhibition');
 		}
 	});

@@ -88,9 +88,9 @@ section {
 
 	<section>
 	 <div class="orderdiv">
-		<div class="title">개인 정보 수정</div>
-		<p>비밀번호 재확인</p>
-		<p class="p">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
+		<div class="title">개인 정보 수정</div><br>
+		<p class="p">비밀번호 재확인<p></p>
+		회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
 		<hr noshade size="2px" width="700px" color="black">
 		<div class="check">
 			<table>
