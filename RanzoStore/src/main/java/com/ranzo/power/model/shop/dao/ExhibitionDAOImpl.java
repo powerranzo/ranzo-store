@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.HeartDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
@@ -105,6 +106,28 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 
 	}
 
+	@Override
+	public HeartDTO findHeart(Map<String, String> map) {
+		// 위시테이블에 row가 있는 지 먼저 확인. 
+		// 있으면 좋아요 바로 찾기  // 없으면 row 생성 후 좋아요 찾기.
+		int result = sqlSession.selectOne("exhibition.checkWish", map);
+		if(result > 0) 
+			return sqlSession.selectOne("exhibition.findHeart", map);
+		else 
+			sqlSession.selectOne("exhibition.insertWish", map);
+			return sqlSession.selectOne("exhibition.findHeart", map);
+	}
+
+	@Override
+	public void pressHeart(HeartDTO heart) {
+		sqlSession.update("exhibition.pressHeart", heart);
+	}
+
+	@Override
+	public void cancelHeart(HeartDTO heart) {
+		sqlSession.update("exhibition.cancelHeart", heart);
+	}
+    
 	@Override
 	public ExhibitionDTO detailreserv(String exhibitionCode) {
 		return sqlSession.selectOne("reserv.detail", exhibitionCode);
