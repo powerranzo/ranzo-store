@@ -42,10 +42,12 @@ section {
 	text-align: left;
 }
 .orderdiv {
-	padding:0 0 0 50px;
+	padding: 50px 0 0 0;
 	float: left;
 	display: inline-block;
+	min-height: 100%;
 	width: 80%;
+	flex: 1;
 }
 .p {
 	margin-bottom: 15px;
@@ -87,7 +89,7 @@ section {
 	<section>
 	 <div class="orderdiv">
 		<div class="title">개인 정보 수정</div>
-		<div class="title-s">비밀번호 재확인</div>
+		<p>비밀번호 재확인</p>
 		<p class="p">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
 		<hr noshade size="2px" width="700px" color="black">
 		<div class="check">

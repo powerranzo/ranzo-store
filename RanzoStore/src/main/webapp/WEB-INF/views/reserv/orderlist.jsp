@@ -25,10 +25,12 @@ section {
 	margin: 15px 0 15px 0;
 }
 .orderdiv {
-	padding:5px;
+	padding: 50px 0 0 0;
 	float: left;
 	display: inline-block;
-	width: 80%;	
+	min-height: 100%;
+	width: 80%;
+	flex: 1;
 }
 .orderdiv a:hover{ font-weight: bold;}
 .orderdiv a:visited{ text-decoration: none; color: black;}
