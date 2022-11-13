@@ -76,7 +76,7 @@
 							<th id="adminTB2_th">검색옵션</th>
 							<td colspan="2" id="adminTB2_td1">
 								<select	name="searchOption1" id="searchOption1">
-										<option value="r.no">주문번호</option>
+										<option value="r.no">예약번호</option>
 										<option value="r.userid">예매자ID</option>
 										<option value="r.code">전시코드</option>
 										<option value="e.title">전시명</option>

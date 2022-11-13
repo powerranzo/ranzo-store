@@ -47,11 +47,6 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public MemberDTO getMemberView(String userid) {
-		return sqlSession.selectOne("admin.getMemberView", userid);
-	}
-	
-	@Override
 	public List<QnaDTO> getMemberQna(String userid) {
 		return sqlSession.selectList("admin.getMemberQna", userid);
 	}
@@ -106,11 +101,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void deleteExbFile(Map<String, Object> map) {
 		sqlSession.update("admin.deleteExbFile",map);
-	}
-	
-	@Override
-	public void deleteExb(String code) {
-		sqlSession.update("admin.deleteExb",code);
 	}
 
 	@Override
@@ -191,11 +181,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void insertProductInfo(ProductInfoDTO idto) {
 		sqlSession.insert("admin.insertProductInfo", idto);
-	}
-
-	@Override
-	public ProductInfoDTO getProductInfoView(String code) {
-		return sqlSession.selectOne("admin.getProductInfoView", code);
 	}
 
 	@Override

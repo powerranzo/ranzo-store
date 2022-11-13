@@ -9,25 +9,15 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
-.adminTable3 input {
-	float: left;
-}
-
-.adminTable3 {
-	width: 90%;
-}
-
-#adminTB2_th {
-	width: 20%;
-}
-form {
-	margin-top: 3%;
-}
+.adminTable3 input {float: left;}
+.adminTable3 {width: 90%;}
+#adminTB2_th {width: 20%;}
+form {margin-top: 3%;}
+#category, #title {float:left; width:90%;}
 #content {
 	width:30% !important;
 	height:30% !important;
 }
-#category, #title {float:left; width:90%;}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -35,8 +25,7 @@ form {
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-				if (faqCheck()) 
-					document.form1.submit();
+				if (faqCheck()) document.form1.submit();
 		});
 	});	
 </script>
