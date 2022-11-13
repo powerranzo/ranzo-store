@@ -5,19 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>팝업 등록</title>
+
+<title>전시 등록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
+
 .adminTable3 input {float: left;}
 .adminTable3 {width: 90%;}
 #adminTB2_th {width: 20%;}
 form {margin-top: 3%;}
 #category, #title {float:left; width:90%;}
-#content {
-	width:30% !important;
-	height:30% !important;
-}
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -32,6 +31,7 @@ form {margin-top: 3%;}
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
+
 	<div class="content">
 		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
