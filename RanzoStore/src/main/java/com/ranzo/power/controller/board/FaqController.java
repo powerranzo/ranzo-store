@@ -61,7 +61,7 @@ public class FaqController {
 		map.put("list", list);
 		map.put("count", count);
 		map.put("pager", pager);
-		mav.setViewName("/faq/resultList");
+		mav.setViewName("/faq/result");
 		mav.addObject("map",map);
 		return mav;
 	}

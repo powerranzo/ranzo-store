@@ -7,36 +7,7 @@
 <title>전시</title>
 <%@ include file="../include/header.jsp" %>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
-<style type="text/css">
-/* .prd-imgbox{
-	position: relative;
-	margin: auto;
-}
-.image_child{
-	position: absolute;
-	top: 8px;
-	right: 8px;
-	z-index: 1000;
-} */
 
-</style>
-
-
-<!-- <script type="text/javascript">
-$(function(){
-	$(".imgch").mouseover(function(){
-		$(this).attr("src","${path}/resources/images/favorite2.png");			
-	});
-	$(".imgch").mouseout(function(){
-		$(this).attr("src","${path}/resources/images/favorite1.png");
-	});
-	$(".imgch").click(function(){
-		$(this).attr("src","${path}/resources/images/favorite2.png");
-		location.href="${path}/wish.do";
-	});
-}); -->
-
-</script>
 </head>
 <body>
 		<div class="sec-exhibition">

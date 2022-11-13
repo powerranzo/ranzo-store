@@ -9,6 +9,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface AdminService {
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage);
@@ -19,9 +20,9 @@ public interface AdminService {
 	public void deleteQna(int[] qna_bno);
 	public void deleteReserv(String[] reserv_no);
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage);
-	public void insertExb(ExhibitionDTO dto);
+	public void insertExb(ExhibitionDTO dto, ProductInfoDTO idto);
 	public ExhibitionDTO getExbView(String code);
-	public void updateExb(ExhibitionDTO dto);
+	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto);
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
 	public void deleteExbFile(String code, String fileType);
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage);
@@ -35,5 +36,6 @@ public interface AdminService {
 	public void deletePopupFile(int no);
 	public void popupShow(int no);
 	public List<PopupDTO> getPopupOn();
+	public ProductInfoDTO getProductInfoView(String code);
 	
 }
