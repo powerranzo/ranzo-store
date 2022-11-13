@@ -111,11 +111,12 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 		// 위시테이블에 row가 있는 지 먼저 확인. 
 		// 있으면 좋아요 바로 찾기  // 없으면 row 생성 후 좋아요 찾기.
 		int result = sqlSession.selectOne("exhibition.checkWish", map);
-		if(result > 0) 
+		if(result > 0) {
 			return sqlSession.selectOne("exhibition.findHeart", map);
-		else 
-			sqlSession.selectOne("exhibition.insertWish", map);
+		}else {
+			sqlSession.insert("exhibition.insertWish", map);
 			return sqlSession.selectOne("exhibition.findHeart", map);
+		}
 	}
 
 	@Override

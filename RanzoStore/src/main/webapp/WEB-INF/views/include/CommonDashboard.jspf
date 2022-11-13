@@ -57,7 +57,6 @@
 }
 
 
-
 </style>
 	<div class="asidediv">
 	  <div class="title"><a href="${path}/member/mypage.do">MY PAGE</a></div>
@@ -65,7 +64,7 @@
 	   <h4>MY SHOPPING</h4>
 	   <ul> 
 	    <li><a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매 목록</a></li>
-	    <li><a class="a1" href="#">위시리스트</a></li>
+	    <li><a class="a1" href="${path}/member/wishlist.do">위시리스트</a></li>
 	    <li><a class="a1" href="${path}/member/myReview.do">나의 리뷰</a></li>
 	    <li><a class="a1" href="${path}/member/myInquiry.do">나의 상품 문의</a></li>
 	   </ul>
@@ -77,3 +76,4 @@
 	  	</ul>
 	  </div>	
 	</div>
+
