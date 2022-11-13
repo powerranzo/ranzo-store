@@ -12,6 +12,9 @@
 	width: 80%;
 	margin-top: 10px;
 }
+.container{
+	height: 700px;
+}
 h2 a:link{text-decoration: none; color: black;}
 h2 a:visited{text-decoration: none; color: black;}
 h2 a:active{text-decoration: none; color: black;}
@@ -32,13 +35,9 @@ h2 a:active{text-decoration: none; color: black;}
 	width: 300px;
 	padding: 5px;
 } 
-.container{
-	margin: auto;
-	width: 950px;
-}
 
 ul.tabs{
-	margin: 0px;
+	margin-left: 130px;
 	padding: 0px;
 	list-style: none;
 }
@@ -48,9 +47,8 @@ ul.tabs li{
 	display: inline-block;
 	padding: 10px 15px;
 	cursor: pointer;
-	width:19%;
+	width:173px;
 	border : 1px solid #ddd;
-	margin-bottom: 20px;
 	text-align: center;
 }
 
@@ -59,18 +57,17 @@ ul.tabs li.current{
 	color: white;
 }
 
+
 .tab-content{
 	display: none;
-	width: 100%;
 }
 
 .tab-content.current{
 	display: inherit;
-	width: 100%;
 }
 .faqtable{
+	width: 880px;
 	margin: auto;
-	width: 100%;
 }
 .faqtable thead{
 	background-color: #f8f9fa;
@@ -98,19 +95,18 @@ body {
   flex-direction: column;
   margin: 0;
 }
+#numstyle{
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	padding: 8px 12px 8px 12px;
+}
+table i{
+	color: silver;
+}
 </style>
 <script type="text/javascript">
-$(document).ready(function(){	
-	$('ul.tabs li').click(function(){
-		var tab_id = $(this).attr('data-tab');
 
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-  });	
-});
 function rlist(a){
 	switch (a) {
 	case 1:
@@ -123,7 +119,7 @@ function rlist(a){
 			}
 		});	
 		break;
-	case 2:
+	 case 2:
 		$.ajax({
 			type: "post",
 			data: {data:"결제"},
@@ -157,7 +153,21 @@ function rlist(a){
 }
 function list(page){
 	location.href="${path}/faq/list.do?curPage="+page;
-} 
+}
+
+$(document).ready(function(){
+	
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
 </script>
 </head>
 <body>
@@ -165,7 +175,10 @@ function list(page){
 
 <div class="faq">
 <h2><a href="${path}/faq/list.do">FAQ</a></h2>
-<div class="searchdiv">
+
+
+  <div class="container">
+  <div class="searchdiv">
 <form action="${path}/faq/list.do" name="sform" id="sform" method="post">
 <select name="searchOption">
  <option value="all" selected>전체</option>
@@ -174,17 +187,11 @@ function list(page){
  <option value="회원" <c:if test="${map.searchOption == '회원'}"> selected </c:if> >회원</option>
  <option value="기타" <c:if test="${map.searchOption == '기타'}"> selected </c:if> >기타</option>
 
- 
 </select>
 <input type="text" placeholder="검색어를 입력하세요." id="skeyword" name="skeyword">
 <input type="submit" value="검색" id="searchBtn" name="searchBtn">
 </form>
 </div>
-
-
-
-
-<div class="container">
 
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">전체</li>
@@ -195,7 +202,7 @@ function list(page){
 	</ul>
 
 <div id="tab-1" class="tab-content current">
-	<table class="faqtable">
+<table class="faqtable">
 	<thead>
 	<tr>
 		<th width="15%">카테고리</th>
@@ -212,14 +219,14 @@ function list(page){
 	</tr>
 </c:if>
 </c:forEach>
-<tr>
+	<tr>
 		<td colspan="6" align="center">
 			<c:if test="${map.pager.curBlock > 1}">
-				<a href="#" onclick="list('1')">[처음]</a>
+				<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curBlock > 1}">
 				<a href="#" onclick="list('${map.pager.prevPage}')">
-				[이전]</a>
+				<i class="fa-solid fa-less-than"></i></a>
 			</c:if>
 			<c:forEach var="num" 
 				begin="${map.pager.blockBegin}"
@@ -227,25 +234,25 @@ function list(page){
 				<c:choose>
 					<c:when test="${num == map.pager.curPage}">
 					<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-						<span style="color:red;">${num}</span>
+						<span id="numstyle">${num}</span>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="list('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')"><span style="color:gray;">${num}</span></a>&nbsp;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
 				<a href="#" 
-				onclick="list('${map.pager.nextPage}')">[다음]</a>
+				onclick="list('${map.pager.nextPage}')"><i class="fa-solid fa-greater-than"></i></a>&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curPage < map.pager.totPage}">
-				<a href="#" 
-				onclick="list('${map.pager.totPage}')">[끝]</a>
+				&nbsp;<a href="#" 
+				onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
 			</c:if>
 		</td>
 	</tr>
 </table>
-</div>
+	</div>
 <div id="tab-2" class="tab-content"></div>
 <div id="tab-3" class="tab-content"></div>
 <div id="tab-4" class="tab-content"></div>

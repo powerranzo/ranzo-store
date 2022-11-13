@@ -104,7 +104,7 @@
 			<a href="${path}/shop/exhibition/detail/testcode31"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
 			</div>
 			<div class="reco1">
-			<a href="${path}/shop/exhibition/detail/testcode02"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
+			<a href="${path}/shop/exhibition/detail/testcode11"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
 			</div>
 			<div class="reco1">
 			<a href="${path}/shop/exhibition/detail/testcode26"><img src="https://ticketimage.interpark.com/Play/image/large/22/22004804_p.gif" id="r3"></a>

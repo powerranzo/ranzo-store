@@ -18,9 +18,24 @@
 }
 .content{
 	margin: 0 80px 0 80px;
+	display: flex;
+	justify-content: space-between;
+	min-height: 100%;
+	flex: 1;
+}
+footer{
+	clear : both;
+	bottom: 0;
+}
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 section {
-	margin-top:6%;
 	width: 75%;
 	float: left;
 	margin-left: 50px;
@@ -30,9 +45,7 @@ section {
 	padding:0 0 0 50px;
 	float: left;
 	display: inline-block;
-	width: 90%;
-/* 	min-height: 100%;
-	flex: 1; */
+	width: 80%;
 }
 .p {
 	margin-bottom: 15px;
@@ -62,18 +75,6 @@ section {
 	font-size: 17px;
 	border: none;
 	margin: 50px 0 30px 190px;
-}
-footer{
-	clear : both;
-	bottom: 0;
-}
-html, body{
-	height: 100%;
-}
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
 }
 </style>
 </head>

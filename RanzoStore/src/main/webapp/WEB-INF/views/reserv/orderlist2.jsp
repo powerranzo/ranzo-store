@@ -8,33 +8,35 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 <style type="text/css">
+<style type="text/css">
 * {
 	margin:0px; 
 }
 .content{
 	margin: 0 80px 0 80px;
+	display: flex;
+	justify-content: space-between;
 }
 section {
-	margin-top:6%;
 	width: 75%;
-	float: left;
-	margin-left: 50px;
+	float: right;
 	text-align: left;
+}
+.p {
+	margin: 15px 0 15px 0;
 }
 .orderdiv {
 	padding:5px;
 	float: left;
 	display: inline-block;
-	width: 90%;
-	min-height: 100%;
-	flex: 1;
+	width: 80%;	
 }
 .orderdiv a:hover{ font-weight: bold;}
 .orderdiv a:visited{ text-decoration: none; color: black;}
 .orderdiv a:link { text-decoration: none; color:black; }
 .orderdiv a:active { text-decoration: none; color:black;}
 .ordertable{
-	margin: 10px;
+	margin-top:10px;
 	text-align: left;
 	width: 100%;
 	border-collapse: collapse;
@@ -55,7 +57,7 @@ section {
 .filterDate{
 	border: 1px solid #e4e4e4;
 	padding: 7px;
-	width: 75px;
+	width: 85px;
 	text-align: center;
 	background: none;
 }
@@ -70,18 +72,23 @@ section {
 .datediv {
 	margin: 10px 0 0 0;
 }
-footer{
-	clear : both;
-	bottom: 0;
-}
 
-html, body{
-	height: 100%;
+@media screen and (max-width: 800px) {
+	.content{
+		display: block;
+	}
+	.orderdiv {
+		width:100%;
+	}
 }
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
+#numstyle{
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	padding: 8px 12px 8px 12px;
+}
+table i{
+	color: silver;
 }
 </style>
 <script type="text/javascript">
@@ -132,8 +139,9 @@ function list(page){
 <%@ include file="../include/CommonDashboard.jspf" %>
 <section>
 <div class="orderdiv">
-<h2>티켓예매 목록</h2>
-<p><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
+<div class="title">티켓예매 목록</div>
+<p class="p"><span style="color: #fa5041;">예매번호</span>를 클릭하면 예매 상세 내용을 확인할 수 있습니다.</p>
+<hr noshade size="2px" width="820px" color="black">
 <form action="${path}/reserv/list2.do/${sessionScope.userid}" method="post" name="orderlist">
 <div class="datediv">
  <button type="button" name="filterDate" value="1" onclick="date(1)" class="filterDate">1주일</button>
@@ -173,14 +181,14 @@ function list(page){
 </tr>
 </c:forEach>
 <!-- 페이지 네비게이션 출력 -->
-	<tr>
+<tr>
 		<td colspan="6" align="center">
 			<c:if test="${map.pager.curBlock > 1}">
-				<a href="#" onclick="list('1')">[처음]</a>
+				<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curBlock > 1}">
 				<a href="#" onclick="list('${map.pager.prevPage}')">
-				[이전]</a>
+				<i class="fa-solid fa-less-than"></i></a>
 			</c:if>
 			<c:forEach var="num" 
 				begin="${map.pager.blockBegin}"
@@ -188,20 +196,20 @@ function list(page){
 				<c:choose>
 					<c:when test="${num == map.pager.curPage}">
 					<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-						<span style="color:red;">${num}</span>
+						<span id="numstyle">${num}</span>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="list('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')"><span style="color:gray;">${num}</span></a>&nbsp;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
 				<a href="#" 
-				onclick="list('${map.pager.nextPage}')">[다음]</a>
+				onclick="list('${map.pager.nextPage}')"><i class="fa-solid fa-greater-than"></i></a>&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curPage < map.pager.totPage}">
-				<a href="#" 
-				onclick="list('${map.pager.totPage}')">[끝]</a>
+				&nbsp;<a href="#" 
+				onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
 			</c:if>
 		</td>
 	</tr>
