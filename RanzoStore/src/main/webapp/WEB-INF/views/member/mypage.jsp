@@ -68,6 +68,7 @@ section {
 <script type="text/javascript">
 $(function(){
 	orderlist();
+	miniWish();
 });
 function orderlist(){
 	$.ajax({
@@ -77,7 +78,16 @@ function orderlist(){
 			$("#resultList").html(result);
 		}
 	});
-	
+}
+
+function miniWish(){
+	$.ajax({
+		url :"${path}/member/miniWish.do/${sessionScope.userid}",
+		type :"POST",
+		success: function(result){
+			$("#miniWish").html(result);
+		}
+	});
 }
 </script>
 
@@ -113,9 +123,9 @@ function orderlist(){
 		<article class="recentWish">
 			<div class="title-s">
 			<img src="${path}/resources/images/favorite1.png" height="25">
-			<a class="a1" href="#">최근 찜한 상품 ></a></div>
+			<a class="a1" href="${path}/member/wishlist.do">최근 찜한 상품 ></a></div>
  			<hr noshade size="1px" color="black"> 
- 			<div>아직</div>
+ 			<div id="miniWish"></div>
 		</article>
 	 </div>
 	</section>

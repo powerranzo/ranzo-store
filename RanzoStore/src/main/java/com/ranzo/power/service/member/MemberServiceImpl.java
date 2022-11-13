@@ -32,6 +32,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dao.MemberDAO;
 import com.ranzo.power.model.member.dto.MemberDTO;
+import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.util.DateUtils;
 
 @Service
@@ -323,6 +324,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ReviewDTO> reviewList() {
 		return memberDao.reviewList();
+	}
+
+	@Override
+	public List<ExhibitionDTO> wishlist(String userid) {
+		return memberDao.wishlist(userid);
+	}
+
+	@Override
+	public int emptyWish(String userid) {
+		return memberDao.emptyWish(userid);
 	}
 
 }
