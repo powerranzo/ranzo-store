@@ -136,6 +136,7 @@ body {
 		<p>
 			<button type="button" class="kakao" id="btnKakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c25de70aa517d0143d2b73595c73dc86&redirect_uri=http://localhost/power/member/kakaoLogin'">
 			kakao로 로그인하기</button>
+			
 	 </div>
 	</form>
 <footer>

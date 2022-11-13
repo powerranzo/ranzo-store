@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>전시 등록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
@@ -39,59 +40,83 @@
 footer{
 	clear : both;
 	bottom: 0;
+
+.adminTable3 input {
+	float: left;
 }
-html, body{
-	height: 100%;
+
+.adminTable3 {
+	width: 90%;
 }
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
+
+#adminTB2_th {
+	width: 20%;
+
 }
+form {
+	margin-top: 3%;
+}
+#content {
+	width:30% !important;
+	height:30% !important;
+}
+
 h3 a:link{text-decoration: none; color: black;}
 h3 a:visited{text-decoration: none; color: black;}
 h3 a:active{text-decoration: none; color: black;}
+
+#category, #title {float:left; width:90%;}
+
 </style>
+<script type="text/javascript">
+	$(function() {
+		$("#content").summernote({
+			height : 300
+		});
+		$("#btnWrite").click(function() {
+				if (faqCheck()) 
+					document.form1.submit();
+		});
+	});	
+</script>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
-		<section>
+
 	<div class="content">
+		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
-			<div class="faq">
-				<h3><a href="${path}/faq/list.do">FAQ 작성</a></h3>
-				<form action="${path}/faq/insert.do" method="post">
-					<table class="faqtable3">
+			<div class=sectiondiv>
+				<h2><a href="${path}/faq/list.do">FAQ</a></h2>
+				<form name="form1" action="${path}/faq/insert.do" method="post">
+					<table class="adminTable3">
 						<tr>
-							<td>카테고리</td>
-							<td><select name="category" id="category">
-									<option value="예매/취소">예매/취소</option>
-									<option value="결제">결제</option>
-									<option value="회원">회원</option>
-									<option value="기타">기타</option>
-							</select></td>
+							<th id="adminTB2_th">카테고리</th>
+							<td>
+								 <select name="category" id="category">
+									 <option value="예매/취소">예매/취소</option>
+									 <option value="결제">결제</option>
+									 <option value="회원">회원</option>
+									 <option value="기타">기타</option> 
+								</select>
+							</td>
 						</tr>
 						<tr>
-							<td>제목</td>
-							<td><input id="title" name="title"></td>
+							<th>제목</th>
+							<td><input type="text" name="title" id="title"></td>
 						</tr>
 						<tr>
-							<td>내용</td>
-							<td><textarea rows="15" cols="50" id="content"
-									name="content"></textarea></td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td style="text-align: right;"><input type="submit"
-								value="작성" id="insertBtn"></td>
+							<th>내용</th>
+							<td>
+								<textarea rows="15" cols="80" id="content" name="content"></textarea>
+							</td>
 						</tr>
 					</table>
-				</form>
+					</form>
+				<input id="btnWrite" name="btnWrite" type="button" value="등록하기" style="margin-right:10%;">
 			</div>
-	</div>
 		</section>
-	<footer>
-		<%@ include file="../include/footer.jsp"%>
-	</footer>
+	</div>
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

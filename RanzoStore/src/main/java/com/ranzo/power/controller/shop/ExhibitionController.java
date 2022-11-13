@@ -5,17 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.HeartDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.shop.ExhibitionService;
 
@@ -55,10 +60,19 @@ public class ExhibitionController {
 
 	// 전시 상세 페이지
 	@RequestMapping("detail/{exhibitionCode}")
-	public ModelAndView detail(@PathVariable String exhibitionCode, ModelAndView mav) {
+	public ModelAndView detail(@PathVariable String exhibitionCode, ModelAndView mav, HttpSession session) {
 		mav.setViewName("/shop/exhibition_detail");
 		mav.addObject("exhibition", exhibitionService.detailProduct(exhibitionCode));
 		logger.info("ExhController/mav/" + mav);
+		mav.addObject("dto.heart", 0);
+		
+		// 좋아요 기능 추가
+		// 전시 상세 페이지 들어가기 전, 유저가 좋아요 체크 했는 지 확인하는 부분
+		if((String) session.getAttribute("userid")!=null) {
+			String userid = (String) session.getAttribute("userid");
+			HeartDTO dto = exhibitionService.findHeart(exhibitionCode, userid);
+			mav.addObject("dto", dto);
+		}
 		return mav;
 	}
 
@@ -117,4 +131,10 @@ public class ExhibitionController {
 		return mav;
 	}
 
+	// 좋아요 ajax
+	@ResponseBody
+	@RequestMapping("heart.do")
+	public int heart(String exhibitionCode, String userid) {
+		return exhibitionService.clickHeart(exhibitionCode, userid);
+	}
 }

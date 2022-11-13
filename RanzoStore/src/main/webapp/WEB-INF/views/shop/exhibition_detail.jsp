@@ -32,6 +32,7 @@
 		getReserveInfo();
 		getReviewInfo();
 		getQnaInfo();
+		findHeart(); 
 	});
 	
 	// 전시상세
@@ -94,24 +95,47 @@
 			}
 		});
 	}
-	//좋아요
 
-$(function(){
-	$(".imgch").mouseover(function(){
-		$(this).attr("src","${path}/resources/images/favorite2.png");			
-	});
-	$(".imgch").mouseout(function(){
-		$(this).attr("src","${path}/resources/images/favorite1.png");
-	});
-	$(".imgch").click(function(){
-		if(${sessionScope.userid==null}){
-			alert("로그인한 후 이용가능합니다.");
-			location.href="${path}/member/login.do"
-		}else{			
-			location.href="${path}/heartinsert.do";
+	
+  // 좋아요 체크 되어있는 지 확인
+	function findHeart() {				
+	   
+	  // 로그인 했을 때만 좋아요 가능
+		<c:if test="${sessionScope.userid != null}">
+		// 좋아요가 있는지 확인한 값을 heartval에 저장
+  	var heartval = ${dto.heart}
+  
+		// heartval이 1이면 좋아요가 이미 되있는것이므로 꽉 찬 하트를 출력하는 코드
+ 	 if(heartval>0) {
+			$("#heart").prop("src", "${pageContext.request.contextPath}/resources/images/favorite2.png");
+		} else {
+			$("#heart").prop("src", "${pageContext.request.contextPath}/resources/images/favorite1.png");
 		}
-	});
-});
+ 	</c:if>
+	}  
+
+	// 좋아요 버튼을 클릭 시 실행되는 코드
+	function clickHeart() {
+		
+	// 로그인 했을 때만 좋아요 가능
+	<c:if test="${sessionScope.userid != null}">
+		
+	$.ajax({
+		url :"${path}/shop/exhibition/heart.do",
+		type :"GET",
+		dataType : "json",
+		data : {"exhibitionCode": "${exhibition.code}", "userid": "${sessionScope.userid}"},
+		success : function(data){
+  				if(data==1) { // 좋아요 누름
+					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite2.png");
+				} else { // 좋아요 취소
+					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite1.png");
+				}  
+			}
+	   });
+	</c:if>
+	}  
+	
 
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
@@ -140,6 +164,15 @@ $(function(){
 			</span>
 <%-- 			<span><span class="label">가격</span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
 			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
+			
+			<!-- 임시 좋아요 자리 -->
+			<!-- 로그인 해야만 좋아요 가능 -->
+			<c:if test="${sessionScope.userid != null }">
+			<a onclick="clickHeart()"><img id="heart" src="${pageContext.request.contextPath}/resources/images/favorite1.png">
+			좋아요</a>
+			</c:if>
+			<!-- 임시 좋아요 자리 -->
+			
 		</div>
 <div>
 		<!-- 하트? -->
@@ -190,6 +223,7 @@ $(function(){
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>
+
 
 </body>
 </html>
