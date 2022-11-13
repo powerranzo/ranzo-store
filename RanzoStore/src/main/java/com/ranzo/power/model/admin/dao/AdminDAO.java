@@ -9,6 +9,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface AdminDAO {
 		public int countTbAll(String table);
@@ -47,6 +48,9 @@ public interface AdminDAO {
 		public void updatePopup(PopupDTO dto);
 		public void popupShow(int no);
 		public List<PopupDTO> getPopupOn(String today);
+		public void insertProductInfo(ProductInfoDTO idto);
+		public ProductInfoDTO getProductInfoView(String code);
+		public void updateProductInfo(ProductInfoDTO idto);
 		
 
 }

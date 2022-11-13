@@ -1,31 +1,8 @@
 @charset "UTF-8";
 
 * {box-sizing: content-box;}
-aside {
-	float:left;
-	margin-left:20px;
-	width: 20%;
-	height: 100%;
-	
-}
-.asidediv{
-	float: left;	
-	padding: 5px;
-	margin-left: 10%;
-}
-.title {
-	font-size: 30px;
-/* 	margin-top: 40px; */
-	font-weight: bold;
-}
-.title a:link{text-decoration: none; color: black;}
-.title a:visited{text-decoration: none; color: black;}
-.title a:active{text-decoration: none; color: black;}
-.title-s {
-	font-size: 20px;
-	margin: 30px 0 15px 0;
-}
 .a1 {
+	padding: 10px 0 10px 0;
 	text-decoration: none;
 	color: gray;
 	font-weight: normal;
@@ -34,102 +11,49 @@ aside {
 	color: black;
 	font-weight: bold;	
 }
-html, body{
-	height: 100%;
-}
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
-}
 
 /* adminHome.jsp */
 .content{
-	margin: 20px 80px 10% 80px;
+	margin: 20px 80px 0 80px;
+	bottom:0;
+	min-height:1300px;
 
 }
 section {
 	margin-top:5%;
+	bottom:0;
 /* 	margin-left: 30%; */
 	width: 100%;
 /* 	float: right; */
 	text-align: left;
 }
 .sectiondiv {
-	padding-left:4%;
-	margin-bottom:5%;
-/* 	float: right; */
+	float:right;
+	width:70%;
+	margin: auto 2% 5% 0;
 	display: inline-block;
 	min-height: 100%;
-	width: 70%;
 	flex: 1;
 }
-.profile {
-	width: 90%;
-	height: 200px;
-	background-color: rgb(230, 230, 230);
-}
 
-.welcome {
-	font-size: 30px;
-	margin-top: 40px;
-	padding: 20px 70px 70px 70px;
-	display: inline-block;
-	width: 30%;
-}
-
-.myreview {
-	font-size: 22px;
-	display: inline-block;
-}
-
-.myinfo{
-	font-size: 22px;
-	display: inline-block;
-	margin-left: 60px;
-}
-.recentOrder {
-	margin: 20px 20px 0 70px;
-	display: inline-block;
-}
-.recentWish {
-	margin: 20px 0 0 90px;
-	display: inline-block;
-}
-@media screen and (max-width: 1000px){
-	.profile{
-	background-color: rgb(230, 230, 230);
-	}
-	.orderdiv2{
-		width: 100%;
-	}
-	.welcome{
-		margin: 10px;
-		padding: 20px;
-		width: 90%;
-	}
-}
-
-
-.ordertable{
-/* 	float:left; */
-	padding: 10px;
+.adminTable3{
 	width: 100%;
-	margin-top: 5%;
 	text-align: center;
+	border: 2px solid #e4e4e4;
 /* 	border-collapse: collapse; */
 }
-.ordertable th {
+.adminTable3 th {
 	border-top: 2px solid #e4e4e4;
 	background-color: #f8f9fa;
 	color: #7b7e83;
 }
-.ordertable td{	border-bottom: 1px solid #e4e4e4;}
-.ordertable th, td{ padding: 10px; text-align:center;}
+.adminTable3 td{	border-bottom: 1px solid #e4e4e4;}
+.adminTable3 th, td{ padding: 10px; text-align:center;}
 .adminTableDiv{
 	width:100%;
 }
 .adminTable1{
+	border: 2px solid #e4e4e4;
 	float:left;
 	padding: 10px;
 	width: 60%;
@@ -145,12 +69,11 @@ section {
 .adminTable1 td{	border-bottom: 1px solid #e4e4e4;}
 .adminTable1 th, td{ padding: 10px; text-align:center;}
 .adminTable2{
-	border-top: 2px solid #e4e4e4;
-	border-bottom: 2px solid #e4e4e4;
+	border: 2px solid #e4e4e4;
+	width: 60%;
 	float:left;
 	padding: 10px; 
-	width: 100%;
-	margin: 2% 0 3% 0;
+	margin: 0 0 3% 0;
 /* 	border-collapse: collapse; */
 }
 .adminTable2 th {
@@ -161,3 +84,56 @@ section {
 }
 .adminTable2 td{	border-bottom: 1px solid #e4e4e4; text-align: left;}
 .adminTable2 th, td{ height:inherit; text-align:center;}
+#adminTB2_th{
+	width:15%;
+}
+#adminTB2_td1{
+	width:80%;
+}
+#adminTB2_search{
+	width:80%;
+}
+#startDate, #endDate, #searchOption2, #orderOption{
+	width: 40%;
+}
+#btnDelete, #btnWrite, #btnUpdate, #btnDelete2, #btnShow {
+	float:right;
+	margin-top:20px;
+	margin-bottom:30px;
+	padding:7px;
+	width: 70px;
+	height:20px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+#btnSearch {
+	float:right;
+	padding:7px;
+	width: 70px;
+	height:20px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+	
+.sectiondiv input{
+	float:left;
+	width:70%;
+	padding: 8px;
+	border: 1px solid #e4e4e4;
+}
+.sectiondiv select{
+	width:30%;
+	padding: 8px;
+	border: 1px solid #e4e4e4;
+}
+@media screen and (max-width: 900px) {
+	.sectiondiv {width:100% !important;}
+	.asidediv {width:100% !important;}
+	#adminULul li{margin-left:50%; padding:100%; display:inline;}
+}
+.sectiondiv a:hover{ font-weight: bold;}
+.sectiondiv a:visited, .sectiondiv a:link, .sectiondiv a:active{ text-decoration: none; color: black;}
+/*  { text-decoration: none; color:black; } */
+/*  { text-decoration: none; color:black;} */
