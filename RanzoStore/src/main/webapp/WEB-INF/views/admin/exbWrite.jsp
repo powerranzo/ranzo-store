@@ -12,24 +12,52 @@
 .adminTable3 input{float:left;}
 .adminTable3{width:90%;}
 #adminTB2_th{width: 20%;}
-#summary {
+#content {
 	width:30% !important;
 	height:300px !important;
+}
+#adult_price, #teen_price, #kids_price{
+	width:21%;
+	margin-right:5px;
 }
 form{margin-top:3%;}
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#summary").summernote({
+		$("#content").summernote({
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-			alertify.confirm("등록하시겠습니까?", function() {
-				document.form1.action = "${path}/admin/exb_write.do";
-				document.form1.submit();
-			});
+				if(exbCheck()){
+					document.form1.action = "${path}/admin/exb_write.do";
+					document.form1.submit();
+				}
 		});
 	});
+	function fileSize(target, name) {
+		console.log(name);
+		const file = target.files[0];
+		const maxsize = 2000 * 1024;
+		var filesize = 0;
+		if (file.size > maxsize) {
+			$("#"+name).html('&nbsp;&nbsp;용량을 초과했습니다.');
+			if(name=='filesize1')
+			$("#file1").val('');
+			if(name=='filesize2')
+			$("#file2").val('');
+		} else {
+			if (file.size >= 1024)
+				filesize = Math.round(file.size / 1024);
+			else
+				filesize = file.size;
+			$("#"+name).html(filesize + 'KB');
+		}
+	}
+	
+	function resetFile(param) {
+		$("#file"+param).val("");
+		$("#filesize"+param).html("0 KB");
+	}
 </script>
 </head>
 <body>
@@ -79,23 +107,54 @@ form{margin-top:3%;}
 							</td>
 						</tr>
 						<tr>
-							<th>포스터 이미지</th>
+							<th>전시 가격</th>
 							<td>
-								<input type="file" name="file" id="file">
+								<input type="number" name="adult_price" id="adult_price" placeholder="성인">
+								<input type="number" name="teen_price" id="teen_price" placeholder="청소년">
+								<input type="number" name="kids_price" id="kids_price" placeholder="아동">
 							</td>
 						</tr>
 						<tr>
-							<th>전시 정보 이미지</th>
+							<th>포스터 이미지(10MB)</th>
 							<td>
-								<input type="file" name="file2"	id="file2">
+								<input type="file" name="file1" id="file1" onchange="fileSize(this, 'filesize1')">
+								<span id="filesize1"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile('1')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;파일리셋
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>전시 정보 이미지(10MB)</th>
+							<td>
+								<input type="file" name="file2"	id="file2" onchange="fileSize(this, 'filesize2')">
+								<span id="filesize2"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile('2')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;파일리셋
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>전시 정보 URL</th>
+							<td>
+								<input type="text" name="attach" id="attach">
+								<div>
+									<img id="urlImage" style="width: 50%; height: 50%">
+								</div>
 							</td>
 						</tr>
 					</table>
 					<table class="adminTable3">
 						<tr>
-							<th style="width:15%;">내용</th>
+							<th style="width:15%;">전시 요약</th>
 							<td>
-								<textarea name="summary" id="summary" 
+								<input name="summary" id="summary">
+							</td>
+						</tr>
+						<tr>
+							<th style="width:15%;">전시 정보</th>
+							<td>
+								<textarea name="content" id="content" 
 								placeholder="내용을 입력해주세요." rows="20"></textarea>
 							</td>
 						</tr>

@@ -14,6 +14,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -185,6 +186,22 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PopupDTO> getPopupOn(String today) {
 		return sqlSession.selectList("admin.getPopupOn", today);
+	}
+
+	@Override
+	public void insertProductInfo(ProductInfoDTO idto) {
+		sqlSession.insert("admin.insertProductInfo", idto);
+	}
+
+	@Override
+	public ProductInfoDTO getProductInfoView(String code) {
+		return sqlSession.selectOne("admin.getProductInfoView", code);
+	}
+
+	@Override
+	public void updateProductInfo(ProductInfoDTO idto) {
+		sqlSession.update("admin.updateProductInfo", idto);
+		
 	}
 
 }

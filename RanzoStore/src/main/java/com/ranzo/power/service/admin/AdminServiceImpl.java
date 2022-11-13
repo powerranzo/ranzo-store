@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.controller.admin.AdminController;
 import com.ranzo.power.model.admin.dao.AdminDAO;
@@ -21,6 +22,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.util.DateUtils;
 
 @Service
@@ -111,10 +113,11 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 
-
+	@Transactional
 	@Override
-	public void insertExb(ExhibitionDTO dto) {
+	public void insertExb(ExhibitionDTO dto, ProductInfoDTO idto) {
 		adminDao.insertExb(dto);
+		adminDao.insertProductInfo(idto);
 	}
 
 	@Override
@@ -122,9 +125,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getExbView(code);
 	}
 	
+	@Transactional
 	@Override
-	public void updateExb(ExhibitionDTO dto) {
+	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto) {
 		adminDao.updateExb(dto);
+		adminDao.updateProductInfo(idto);
+		
 	}
 	
 	@Override
@@ -232,6 +238,15 @@ public class AdminServiceImpl implements AdminService {
 		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
+
+	@Override
+	public ProductInfoDTO getProductInfoView(String code) {
+		return adminDao.getProductInfoView(code);
+	}
+
+
+
+ 
 
 
 

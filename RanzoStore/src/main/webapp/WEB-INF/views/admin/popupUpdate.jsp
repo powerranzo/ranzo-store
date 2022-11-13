@@ -140,7 +140,8 @@ form {
 							<td><input name="img_src" id="img_src">
 								<div>
 									<img id="urlImage" style="width: 50%; height: 50%">
-								</div></td>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th>이미지 등록(10MB 이하)<br>
