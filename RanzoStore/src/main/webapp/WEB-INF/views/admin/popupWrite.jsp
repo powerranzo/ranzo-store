@@ -60,6 +60,10 @@ form {
 			$("#filesize").html('&nbsp;&nbsp;' + filesize + 'KB');
 		}
 	}
+	function resetFile() {
+		$("#file").val("");
+		$("#filesize").html("0 KB");
+	}
 </script>
 </head>
 <body>
@@ -123,16 +127,17 @@ form {
 							</td>
 						</tr>
 						<tr>
-							<th>이미지 등록(10MB 이하)<br><span id="filesize"></span></th>
+							<th>이미지 등록(10MB 이하)</th>
 							<td>
 								<input type="file" name="file" id="file" onchange="fileSize(this)">
-					</form>
-								<button class="btn btn-sm" type="button" id="btnResetFile"">
+								<span id="filesize"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile()">
 								<span class="glyphicon glyphicon-minus-sign">
 								</span>&nbsp;파일 리셋</button>
 							</td>
 						</tr>
 					</table>
+					</form>
 				<input id="btnWrite" name="btnWrite" type="button" value="등록하기" style="margin-right:10%;">
 					
 			</div>

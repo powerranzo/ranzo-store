@@ -81,8 +81,8 @@ body {
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<%@ include file="../include/adminDashboard.jspf"%>
 		<section>
+		<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv"></div>
 		</section>
 	</div>

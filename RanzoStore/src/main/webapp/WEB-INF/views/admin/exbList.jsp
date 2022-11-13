@@ -52,7 +52,7 @@
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
 		<section>
-			<%@ include file="../include/adminDashboard.jspf"%>
+	<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>전시현황</h2>
 				<p><span style="color: #fa5041;">전시명</span>를 클릭하면 전시 정보를 수정할 수 있습니다.</p>

@@ -147,7 +147,7 @@
 											<c:otherwise>
 												<button class="btn btn-sm" type="button" id="btnReply"
 													onclick='location.href="${path}/board/qna/reply_write.do?bno=${qna.bno}"'>
-													<span class="glyphicon glyphicon-check"></span>&nbsp;답글	</button>
+													<span class="glyphicon glyphicon-pencil"></span>&nbsp;답글</button>
 											</c:otherwise>
 										</c:choose>
 									</td>

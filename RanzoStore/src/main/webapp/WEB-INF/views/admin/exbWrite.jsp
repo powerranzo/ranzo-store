@@ -14,7 +14,7 @@
 #adminTB2_th{width: 20%;}
 #content {
 	width:30% !important;
-	height:300px !important;
+	height:30% !important;
 }
 #adult_price, #teen_price, #kids_price{
 	width:21%;

@@ -56,7 +56,6 @@ form {
 					success: function(result){
 						if(result=='deleted'){
 							$("#fileImage").remove();
-							alert('삭제되었습니다.');
 						}
 					}
 				})
@@ -81,6 +80,11 @@ form {
 			$("#filesize").html('&nbsp;&nbsp;' + filesize + 'KB');
 		}
 	}
+	
+	function resetFile() {
+		$("#file").val("");
+		$("#filesize").html("0 KB");
+	}
 </script>
 </head>
 <body>
@@ -103,15 +107,15 @@ form {
 						<tr>
 							<th>시작일</th>
 							<td><input type="date" name="start_date" id="start_date"
-								value="${fn:substring(startDate,0,10)}">> <input
-								type="time" name="start_time" id="start_time"
+								value="${fn:substring(startDate,0,10)}"> 
+								<input type="time" name="start_time" id="start_time"
 								value="${fn:substring(dto.start_date,11,19)}"></td>
 						</tr>
 						<tr>
 							<th>마감일</th>
 							<td><input type="date" name="end_date" id="end_date"
-								value="${fn:substring(endDate,0,10)}"> <input
-								type="time" name="end_time" id="end_time"
+								value="${fn:substring(endDate,0,10)}"> 
+								<input type="time" name="end_time" id="end_time"
 								value="${fn:substring(dto.end_date,11,19)}"></td>
 						</tr>
 						<tr>
@@ -144,12 +148,11 @@ form {
 							</td>
 						</tr>
 						<tr>
-							<th>이미지 등록(10MB 이하)<br>
-							<span id="filesize"></span></th>
+							<th>이미지 등록(10MB 이하)</th>
 							<td><input type="file" name="file" id="file"
 								onchange="fileSize(this)">
-					</form>
-								<button class="btn btn-sm" type="button" id="btnResetFile">
+								<span id="filesize"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile()">
 									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;파일리셋
 								</button>
 							</td>
@@ -170,6 +173,7 @@ form {
 								</c:if></td>
 						</tr>
 					</table>
+					</form>
 					<input id="btnUpdate" name="btnUpdate" type="button" value="수정하기" style="margin-right:10%;">
 					<input id="btnDelete" name="btnDelete" type="button" value="팝업종료" style="margin-right:10px;">
 			</div>

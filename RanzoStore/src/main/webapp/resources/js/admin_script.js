@@ -127,12 +127,16 @@ $(function() {
 			end_date.focus();
 			return;
 		}
+		if (start_date > end_date) {
+			alertify.alert('종료일이 시작일보다 빠릅니다.');
+			end_date.focus();
+			return;
+		}
 		if (file == "" && img_src == "") {
 			alertify.alert('파일 등록 또는 URL을 입력하세요.');
 			img_src.focus();
 			return;
 		}
-		
 		if (file != "" && img_src != "") {
 			alertify.alert('파일과 URL을 중복 등록할 수 없습니다.');
 			img_src.focus();
@@ -189,7 +193,6 @@ $(function() {
 			end_date.focus();
 			return;
 		}
-		
 		if (adult_price == "" || teen_price == "" || kids_price == "") {
 			alertify.alert('가격을 모두 입력하세요.');
 			adult_price.focus();
@@ -207,6 +210,22 @@ $(function() {
 		if (file != "" && attach != "") {
 			alertify.alert('파일과 URL을 중복 등록할 수 없습니다.');
 			img_src.focus();
+			return;
+		}
+		return true;
+	}
+	
+		function faqCheck(){
+		var title=document.getElementById('title').value;
+		var content=document.getElementById('content').value;
+		if (title == "") {
+			alertify.alert('제목을 입력하세요.');
+			title.focus();
+			return;
+		}
+		if (content == "") {
+			alertify.alert('내용을 입력하세요.');
+			content.focus();
 			return;
 		}
 		return true;

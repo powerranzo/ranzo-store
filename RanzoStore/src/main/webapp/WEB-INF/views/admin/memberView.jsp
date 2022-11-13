@@ -7,6 +7,8 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <title>회원 정보</title>
+<style type="text/css">
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#btnDelete").click(function() {
@@ -35,7 +37,7 @@
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>회원 정보</h2>
-				<div style="margin: 5% 0 40% 0;">
+				<div style="margin: 5% 0 50% 0;">
 					<table class="adminTable2" style="width:50%;">
 						<tr>
 							<th id="adminTB2_th" style="width:20%;">아이디</th>
