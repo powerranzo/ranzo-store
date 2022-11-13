@@ -15,7 +15,7 @@
 	margin:0px; 
 }
 .content{
-	margin: 20px 80px 0 80px;
+	margin: 0px 80px 0 80px;
 
 }
 section {

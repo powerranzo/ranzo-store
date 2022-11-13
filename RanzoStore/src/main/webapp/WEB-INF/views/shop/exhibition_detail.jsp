@@ -94,7 +94,25 @@
 			}
 		});
 	}
-		
+	//좋아요
+
+$(function(){
+	$(".imgch").mouseover(function(){
+		$(this).attr("src","${path}/resources/images/favorite2.png");			
+	});
+	$(".imgch").mouseout(function(){
+		$(this).attr("src","${path}/resources/images/favorite1.png");
+	});
+	$(".imgch").click(function(){
+		if(${sessionScope.userid==null}){
+			alert("로그인한 후 이용가능합니다.");
+			location.href="${path}/member/login.do"
+		}else{			
+			location.href="${path}/heartinsert.do";
+		}
+	});
+});
+
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
@@ -123,7 +141,30 @@
 <%-- 			<span><span class="label">가격</span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
 			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 		</div>
-		<div>
+<div>
+		<!-- 하트? -->
+<%-- 		
+		<c:choose>
+		 <!-- 로그인 했을때 -->
+		 <c:when test="${sessionScope.userid != null}">
+		 <!-- 좋아요가 되어있을때 -->
+		  <c:if test="">
+		   <img src="${path}/resources/images/favorite2.png" class="imgch">
+		  </c:if>
+		  <!-- 좋아요 안되어있을떄 -->
+		  <c:if test="">
+		   <img src="${path}/resources/images/favorite1.png" class="imgch">
+		  </c:if>
+		  
+		 </c:when>
+		 <c:otherwise>
+		 <!-- 로그인 안했을떄 -->
+		 <img src="${path}/resources/images/favorite1.png" class="imgch">
+		 </c:otherwise>
+		</c:choose>--%>
+		 <img src="${path}/resources/images/favorite1.png" class="imgch">
+</div>
+		<div> 
 			<!-- 관리자용 -->
 			<c:if test="${sessionScope.admin_userid != null }">
 				<br>
