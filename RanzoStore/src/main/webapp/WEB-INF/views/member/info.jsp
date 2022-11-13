@@ -153,6 +153,10 @@ function daumZipCode() {
 	margin: auto;
 }
 
+.infoForm{
+	margin-left: 60px;
+}
+
 .input-field {
 	width: 300px;
 	height: 40px;
@@ -187,7 +191,7 @@ label {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 75px;
+	width: 85px;
 	height: 41px;
 	font-size: 14px;
 	border: none;
@@ -213,7 +217,7 @@ tr{
 <body>
 <%@ include file="../include/menu.jsp" %>
 <div class="infodiv">
-	<form name="infoForm" method="post">
+	<form name="infoForm" method="post" class="infoForm">
 		<div class="title">회원정보 수정</div>
 		<br>
 		<table>

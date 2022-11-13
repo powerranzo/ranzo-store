@@ -95,6 +95,7 @@
 			}
 		});
 	}
+
 	
   // 좋아요 체크 되어있는 지 확인
 	function findHeart() {				
@@ -135,6 +136,7 @@
 	</c:if>
 	}  
 	
+
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
@@ -170,9 +172,9 @@
 			좋아요</a>
 			</c:if>
 			<!-- 임시 좋아요 자리 -->
-			
 		</div>
-		<div>
+
+		<div> 
 			<!-- 관리자용 -->
 			<c:if test="${sessionScope.admin_userid != null }">
 				<br>

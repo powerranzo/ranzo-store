@@ -113,6 +113,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where r.writer=m.userid and r.product=e.code) 
 	</select>
 	
+	<!-- 위시리스트 -->
+	<select id="wishlist" resultType="com.ranzo.power.model.shop.dto.ExhibitionDTO">
+		select e.thumnail, e.title, e.gallery, e.code
+		from EXHIBITION_TB e, WISHLIST_TB w
+		where e.code=w.product and w.userid=#{userid} and w.heart=1
+		order by w.reg_date desc
+	</select>
+	
+	<!-- 위시리스트 비우기 -->
+	<update id="emptyWish">
+		update WISHLIST_TB set heart=0 
+		where userid=#{userid} and heart=1
+	</update>
+	
 </mapper>
 
 
