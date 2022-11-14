@@ -81,11 +81,15 @@ body {
 	display: block;
 	text-align: right;
 	color: black;
-
+/* 
 	margin-bottom: 20px;
+	 */
 /*
 parent of bc5cc7b (Merge branch 'develop' into tn5us12)
 */
+/* 
+	margin-bottom: 20px;
+ */
 }
 
 </style>
@@ -99,7 +103,6 @@ parent of bc5cc7b (Merge branch 'develop' into tn5us12)
 		<div class="title">위시리스트</div>
 		<p class="p">위시리스트는 최대 12개까지만 보여집니다.</p>
 		<a class="a" onclick="emptyWish()">위시리스트 비우기</a>
-		<hr noshade size="1px" width="820px" color="black">
 		<div class="sec-exhibition">
 		<ul class="shop-list">
 			<c:forEach var="dto" items="${list}" varStatus="status" begin="0" end="11">
