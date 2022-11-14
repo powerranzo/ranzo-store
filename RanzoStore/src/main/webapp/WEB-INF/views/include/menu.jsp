@@ -55,12 +55,16 @@
 					<li><a href="${path}/faq/list.do">FAQ</a></li>
 					<li><a href="${path}/board/qna/list.do">QNA</a></li>
 				</ul></li>
+		</ul>
+		
+
 				<li><form action="${path}/shop/exhibition/searchDate.do" id="dateform" name="dateform" method="post">
 				<i class="fa-solid fa-calendar-days" style="color: black;"></i> 
 				<input type="date" name="searchDate" id="searchDate" onchange="datesearch()" value="${map.searchDate}">
 					</form></li>
 				<li><button class="btn-open-popup"><i class="fa-solid fa-magnifying-glass"></i></button></li>
 				</ul>
+
 		<div>
 	 </div> 	
 	<ul class="my">
