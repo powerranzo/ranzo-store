@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-
+.sec-review{
+	padding: 10px;
+}
 
 .comment-notice, review-info{
 	color: grey;
@@ -13,7 +15,7 @@
 	font-size: 14px;
 }
 
-.review-title{
+.review .title{
 	font-weight: bord;
 	font-size:16px; 
 }
