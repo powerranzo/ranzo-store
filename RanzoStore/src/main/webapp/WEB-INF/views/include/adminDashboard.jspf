@@ -1,37 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%> 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+ <style>
+ * {box-sizing: content-box;}
+ 
+ @media screen and (max-width: 900px) { 
+	.asidediv {width:100% !important;}
+}
+aside {
+	float:left;
+	margin-left:5%;
+	margin-top:4%;
+	width: 20%;
+}
+.asidediv{
+	float: left;
+	width:20%;
+	padding: 5px;
+	margin-left: 5%;
+	margin-right: 0;
+}
+
+#adminULul {list-style:none;}
+#adminULul li{list-style-type:none; float: left; margin-left:30%;}
+.title {
+	font-size: 30px;
+/* 	margin-top: 40px; */
+	font-weight: bold;
+}
+.title a:link{text-decoration: none; color: black;}
+.title a:visited{text-decoration: none; color: black;}
+.title a:active{text-decoration: none; color: black;}
+.title-s {
+	font-size: 20px;
+	margin: 25px 0 3% 0;
+}
+</style>
 <c:set var="path" value="${pageContext.request.contextPath}" /> 
-		<aside>
+<!-- 		<aside> -->
+		
+		
 	<div class="asidediv">
-	  <div class="title"><a href="${path}/admin/home.do">ADMIN PAGE</a></div>
-		<div class="title-s">MEMBER</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/member_list.do">회원 목록</a>
-		<p><br>
-		<a class="a1" href="${path}/admin/qna_list.do">QnA</a>
-		<p><br>
-		<div class="title-s">EXHIBITION</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/exb_list.do">전시 목록</a>
-		<p><br>
-		<a class="a1" href="${path}/admin/exb_write.do">전시 등록</a> 
-		<p><br>
-		<div class="title-s">RESERVATION</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/reserv_list.do">예약 목록</a></a>
-		<p><br>
-		<div class="title-s">POPUP</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/admin/popup_list.do">팝업 목록</a></a>
-		<p><br>
-		<a class="a1" href="${path}/admin/popup_write.do">팝업 등록</a></a>
-		<p><br>
-		<div class="title-s">STATICS</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="#"></a></a>
-		<p><br>
-		<a class="a1" href="#"></a></a>
-		<p><br>
+	<ul id="adminUL">
+		<li class="title"><a href="${path}/admin/home.do">ADMIN PAGE</a></li> 
+		<li class="title-s">MEMBER</li> 
+<!-- 		<li><hr noshade size="1px" color="gray"></li> -->
+		<li><a class="a1" href="${path}/admin/member_list.do">회원 목록</a></li>
+		<li><a class="a1" href="${path}/admin/qna_list.do">QnA</a></li>
+<!-- 		<li><hr noshade size="1px" color="gray"></li> -->
+		<li class="title-s">EXHIBITION</li>
+		<li><a class="a1" href="${path}/admin/exb_list.do">전시 목록</a></li>
+		<li><a class="a1" href="${path}/admin/exb_write.do">전시 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+<!-- 		<li><hr noshade size="1px" color="gray"></li> -->
+		<li class="title-s">RESERVATION</li>
+		<li><a class="a1" href="${path}/admin/reserv_list.do">예약 목록</a></li>
+<!-- 		<li><hr noshade size="1px" color="gray"></li> -->
+		<li class="title-s">FAQ</li>
+		<li><a class="a1" href="${path}/faq/write.do">FAQ 작성&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+<!-- 		<li><hr noshade size="1px" color="gray"></li> -->
+		<li class="title-s">POPUP</li>
+		<li><a class="a1" href="${path}/admin/popup_list.do">팝업 목록</a></li>
+		<li><a class="a1" href="${path}/admin/popup_write.do">팝업 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+	</ul>
 	</div>
-	</aside>
+		
+<!-- 	<div class="asidediv"> -->
+<%-- 	  <ul class="title"><a href="${path}/admin/home.do">ADMIN PAGE</a></ul> --%>
+<!-- 		<li class="title-s">MEMBER</li> -->
+<!-- 		<hr noshade size="1px" color="gray"> -->
+<%-- 		<a class="a1" href="${path}/admin/member_list.do">회원 목록</a><br> --%>
+<%-- 		<a class="a1" href="${path}/admin/qna_list.do">QnA</a> --%>
+<!-- 		<div class="title-s">EXHIBITION</div> -->
+<!-- 		<hr noshade size="1px" color="gray"> -->
+<%-- 		<a class="a1" href="${path}/admin/exb_list.do">전시 목록</a><br> --%>
+<%-- 		<a class="a1" href="${path}/admin/exb_write.do">전시 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a>  --%>
+<!-- 		<div class="title-s">RESERVATION</div> -->
+<!-- 		<hr noshade size="1px" color="gray"> -->
+<%-- 		<a class="a1" href="${path}/admin/reserv_list.do">예약 목록</a> --%>
+<!-- 		<div class="title-s">FAQ</div> -->
+<!-- 		<hr noshade size="1px" color="black"> -->
+<%-- 		<a class="a1" href="${path}/faq/write.do">FAQ 작성&nbsp;<span class="glyphicon glyphicon-pencil"></span></a> --%>
+<!-- 		<div class="title-s">POPUP</div> -->
+<!-- 		<hr noshade size="1px" color="gray"> -->
+<%-- 		<a class="a1" href="${path}/admin/popup_list.do">팝업 목록</a></a><br>  --%>
+<%-- 		<a class="a1" href="${path}/admin/popup_write.do">팝업 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></a> --%>
+<!-- 		<p><br> -->
+<!-- 	</div> -->
+<!-- 	</aside> -->

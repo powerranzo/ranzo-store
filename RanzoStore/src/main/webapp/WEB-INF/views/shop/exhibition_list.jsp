@@ -7,6 +7,7 @@
 <title>전시</title>
 <%@ include file="../include/header.jsp" %>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
+
 </head>
 <body>
 		<div class="sec-exhibition">
@@ -16,6 +17,9 @@
 					<a href="${path}/shop/exhibition/detail/${dto.code}">
 						<div class="prd-imgbox">
 							<img class="prd-img" src="${dto.thumnail}">
+							<%-- <div class="image_child">
+	  					 <img src="${path}/resources/images/favorite1.png" class="imgch">
+	  					</div> --%>
 						</div>
 						<div class="prd-info">
 							<span class="prd-title">${dto.title}</span>

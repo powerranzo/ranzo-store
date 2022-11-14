@@ -129,6 +129,7 @@ function list(page) {
 	</thead>
 	
 <c:forEach var="row" items="${map.list}">
+
 			<c:choose>
       <c:when test="${row.show == 'y'}">   
       <c:choose>

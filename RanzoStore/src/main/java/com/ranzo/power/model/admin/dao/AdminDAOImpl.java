@@ -14,6 +14,7 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -25,10 +26,6 @@ public class AdminDAOImpl implements AdminDAO {
 	public int countTbAll(String table) {
 		return sqlSession.selectOne("admin.countTbAll", table);
 	}
-//	@Override
-//	public int countMemberAll() {
-//		return sqlSession.selectOne("admin.countMemberAll");
-//	}
 
 	@Override
 	public int countMemberToday(String now) {
@@ -75,21 +72,11 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateShowN", map);
 		
 	}
-	
-//	@Override
-//	public void deleteReserv(Map<String, Object> map) {
-//		sqlSession.update("admin.deleteQna", map);
-//	}
 
 	@Override
 	public int countExbIng(String today) {
 		return sqlSession.selectOne("admin.countExbIng", today);
 	}
-
-//	@Override
-//	public int countExbAll() {
-//		return sqlSession.selectOne("admin.countExbAll");
-//	}
 
 	@Override
 	public int countSearchExb(Map<String, Object> map) {
@@ -197,9 +184,24 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PopupDTO> getPopupOn() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PopupDTO> getPopupOn(String today) {
+		return sqlSession.selectList("admin.getPopupOn", today);
+	}
+
+	@Override
+	public void insertProductInfo(ProductInfoDTO idto) {
+		sqlSession.insert("admin.insertProductInfo", idto);
+	}
+
+	@Override
+	public ProductInfoDTO getProductInfoView(String code) {
+		return sqlSession.selectOne("admin.getProductInfoView", code);
+	}
+
+	@Override
+	public void updateProductInfo(ProductInfoDTO idto) {
+		sqlSession.update("admin.updateProductInfo", idto);
+		
 	}
 
 }
