@@ -129,13 +129,13 @@ function getList(){
 					<li>제주</li>
 				</ul>
 
-				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
 				<ul class="sort">
 					<li id="rating">별점 높은순</li>
 					<li id="review">리뷰 많은순</li>
-					<li id ="end_date">종료 임박순</li>
 					<li id ="price">가격 낮은순</li>
+					<li id ="end_date">종료 임박순</li>
 				</ul>	
+				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
 
 		</div>
 

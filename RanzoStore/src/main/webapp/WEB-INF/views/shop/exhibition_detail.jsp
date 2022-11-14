@@ -125,8 +125,11 @@
 						<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 				</span>
 				</div>
-	<%-- 		<span class="itemLabel">가격</span>
-				<span class="item"><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
+		 		<span class="itemLabel">가격</span>
+				<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
+				<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
+				<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
+				
 			</div>
 
 			<span class="button-reserve"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>

@@ -19,15 +19,15 @@
 			<c:forEach var="review" items="${map.reviewInfo}">   
 				<li class='review'>
 					<div class='review-info'>
-						<span class='review-bno'>${review.bno}</span> | 
-						<span class='review-rating'>${review.rating}</span> | 
-						<span class='review-writer'>작성자 :${review.writer}</span> | 					
-						<span class='review-date'>작성일:
+						<span class='bno'>${review.bno}</span> | 
+						<span class='rating'>${review.rating}</span> | 
+						<span class='writer'>${review.writer}</span> | 					
+						<span class='date'>
 							<fmt:formatDate value="${review.reg_date}" pattern="yyyy-MM-dd" />
 						</span>
 					</div>
-					<div class='review-title'>${review.subject}</div>
-					<div class='review-content'>${review.content}</div>
+					<div class='title'>${review.subject}</div>
+					<div class='content'>${review.content}</div>
 				</li>
 		</c:forEach>
 		</ul>
