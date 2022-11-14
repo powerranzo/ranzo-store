@@ -6,146 +6,260 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>전시 수정</title>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
-.form-group{
-width:80%;
+.adminTable3 input{float:left;}
+.adminTable3{width:90%;}
+#adminTB2_th{width: 20%;}
+#content {
+	width:30% !important;
+	height:300px !important;
 }
+#tb3 td{width:25%;}
+#tb3 th{width:25%;}
+#adult_price, #teen_price, #kids_price{
+	width:21%;
+	margin-right:5px;
+}
+form{margin-top:3%;}
 </style>
 <script type="text/javascript">
-$(function(){
-	$("#summary").summernote({
-		width : 800,
-		height : 300
+	$(function() {
+		$("#content").summernote({
+			height : 300
+		});
+		$("#btnUpdate").click(function() {
+				if(exbCheck()){
+					document.form1.action = "${path}/admin/exb_update.do";
+					document.form1.submit();
+				}
+		});
+		$("#btnDelete").click(function() {
+			alertify.confirm("종료하시겠습니까?", function() {
+				document.form1.action = "${path}/admin/exb_delete.do";
+				document.form1.submit();
+			});
+		});
+		$("#btnShow").click(function() {
+			alertify.confirm("재개하시겠습니까?", function() {
+				document.form1.action = "${path}/admin/exb_show.do";
+				document.form1.submit();
+			});
+		});
+		$("#fileDel").click(function() {
+			console.log('fileDel clicked');
+			fileDel('thumnail');
+		});
+		$("#fileDel2").click(function() {
+			fileDel('product_info');
+		});
 	});
-	$("#btnUpdate").click(function(){
-		if(confirm('수정하시겠습니까?')){
-		document.form1.action="${path}/admin/exb_update.do";
-		document.form1.submit();			
-		}
-	});
-	$("#btnDelete").click(function(){
-		if(confirm('삭제하시겠습니까?')){
-		document.form1.action="${path}/admin/exb_delete.do";
-		document.form1.submit();			
-		}
-	});
-	$("#fileDel").click(function(){
-		console.log('fileDel clicked');
-		fileDel('thumnail');
-	});
-	$("#fileDel2").click(function(){
-		fileDel('product_info');
-	});
-});
 
-function fileDel(param){
-	console.log(param);
-	if(confirm('삭제하시겠습니까?')){
-		$.ajax({
-			type:"post",
-			url:"${path}/admin/exb_file_delete.do",
-			async: false,
-			data: {"code":"${dto.code}", "fileType":param},
-			success: function(result){
-				if(result=='deleted'){
-					if(param=="thumnail")
-					$("#thumnailImg").remove();
-					if(param=="product_info")
-					$("#pdtInfoImg").remove();
-					alert('삭제되었습니다.');
-			}
-			}
-		})
+	function fileDel(param) {
+		console.log(param);
+		alertify.confirm("삭제하시겠습니까?", function() {
+			$.ajax({
+				type : "post",
+				url : "${path}/admin/exb_file_delete.do",
+				async : false,
+				data : {
+					"code" : "${dto.code}",
+					"fileType" : param
+				},
+				success : function(result) {
+					if (result == 'deleted') {
+						if (param == "thumnail"){
+							$("#thumnailImg").remove();
+							$("#fileDel").remove();
+						}
+						if (param == "product_info"){
+							$("#pdtInfoImg").remove();
+							$("#fileDel2").remove();
+						}
+						alertify.alert('삭제되었습니다.');
+					}
+				}
+			})
+		});
 	}
-}
+	
+	function fileSize(target, name) {
+		console.log(name);
+		const file = target.files[0];
+		const maxsize = 2000 * 1024;
+		var filesize = 0;
+		if (file.size > maxsize) {
+			$("#"+name).html('&nbsp;&nbsp;용량을 초과했습니다.');
+			if(name=='filesize1')
+			$("#file").val('');
+			if(name=='filesize2')
+			$("#file2").val('');
+		} else {
+			if (file.size >= 1024)
+				filesize = Math.round(file.size / 1024);
+			else
+				filesize = file.size;
+			$("#"+name).html(filesize + 'KB');
+		}
+	}
+	
+	function resetFile(param) {
+		$("#file"+param).val("");
+		$("#filesize"+param).html("0 KB");
+	}
 </script>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv">
-		<h2>전시 수정</h2>
-		<form name="form1" enctype="multipart/form-data" method="post">
-			<div class="form-group">
-				<label for="code">전시코드</label> <input name="code"
-					class="form-control input-sm" id="code" value="${dto.code}"
-					readonly>
+				<h2>전시 수정</h2>
+				<form name="form1" enctype="multipart/form-data" method="post">
+					<table class="adminTable3">
+						<tr>
+							<th id="adminTB2_th">전시코드</th>
+							<td>
+								<input name="code" id="code" value="${dto.code}" readonly style="background-color:#e4e4e4;">
+							</td>
+						</tr>
+						<tr>
+							<th>전시명</th>
+							<td>
+								<input name="title" id="title" value="${dto.title}">
+							</td>
+						</tr>
+						<tr>
+						<tr>
+							<th>전시관</th>
+							<td>
+								<input name="gallery" id="gallery" value="${dto.gallery}">
+							</td>
+						</tr>
+						<tr>
+							<th>전시지역</th>
+							<td>
+								<input name="location" id="location" value="${dto.location}">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 시작일</th>
+							<td>
+								<input type="date" name="start_date" id="start_date" 
+								value="${fn:substring(startDate,0,10)}">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 마감일</th>
+							<td>
+								<input type="date" name="end_date" id="end_date"
+								value="${fn:substring(endDate,0,10)}">
+							</td>
+						</tr>
+						<tr>
+							<th>전시 가격</th>
+							<td>
+								<input type="number" name="adult_price" id="adult_price" placeholder="성인"
+								value="${dto.adult_price}">
+								<input type="number" name="teen_price" id="teen_price" placeholder="청소년"
+								value="${dto.teen_price}">
+								<input type="number" name="kids_price" id="kids_price" placeholder="아동"
+								value="${dto.kids_price}">
+							</td>
+						</tr>
+						<tr>
+							<th>포스터 이미지(10MB)</th>
+							<td>
+								<input type="file" name="file1" id="file1" onchange="fileSize(this, 'filesize1')">
+								<span id="filesize1"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile('1')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;파일리셋
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>전시 정보 이미지(10MB)</th>
+							<td>
+								<input type="file" name="file2"	id="file2" onchange="fileSize(this, 'filesize2')">
+								<span id="filesize2"></span>
+								<button class="btn btn-sm" type="button" onclick="resetFile('2')">
+									<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;파일리셋
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>전시 정보 URL</th>
+							<td>
+							<c:choose>
+							<c:when test="${idto.attach == '-' || mark == 1}">
+								<input type="text" name="attach" id="attach">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="attach" id="attach" value="${idto.attach}">
+							</c:otherwise>
+							</c:choose>
+							<div>
+								<img id="urlImage" style="width: 50%; height: 50%">
+							</div>
+							</td>
+						</tr>
+					</table>
+					
+					<table class="adminTable3">
+						<tr>
+							<th style="width:15%;">전시 요약</th>
+							<td>
+								<input name="summary" id="summary" value="${dto.summary}">
+							</td>
+						</tr>
+						<tr>
+							<th style="width:15%;">전시 정보</th>
+							<td>
+								<textarea name="content" id="content" 
+								placeholder="내용을 입력해주세요." rows="20">${idto.content}</textarea>
+							</td>
+						</tr>
+					</table>
+				</form>
+				
+				<table class="adminTable3" id="tb3">
+						<tr>
+							<th id="adminTB2_th">현재 포스터</th>
+							<td>
+								<c:if test="${dto.thumnail != '-'}">
+								${thumnailName} 
+								<img id="thumnailImg" src="${dto.thumnail}" width="100" height="100">
+								<button class="btn btn-sm" name="fileDel" id="fileDel" type="button">
+									<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+								</button>
+								</c:if>
+							</td>
+							<th>현재 전시정보</th>
+							<td>
+								<c:if test="${idto.attach != '-'}">
+								${product_infoName} 
+								<img id="pdtInfoImg" src="${idto.attach}" width="100" height="100">
+								<button class="btn btn-sm" id="fileDel2" name="fileDel2" type="button">
+									<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
+								</button>
+								</c:if>
+							</td>
+						</tr>
+						</table>
+						<input type="submit" value="수정하기" id="btnUpdate" name="btnUpdate" style="margin-right:10%;">
+						<c:choose>
+						<c:when test="${dto.show == 'y'}">
+						<input type="submit" value="종료처리" id="btnDelete" name="btnDelete" style="margin-right:10px;">
+						</c:when>
+						<c:otherwise>
+						<input type="submit" value="재개처리" id="btnShow" name="btnShow" style="margin-right:10px;">
+						</c:otherwise>
+						</c:choose>
 			</div>
-			<div class="form-group">
-				<label for="title">전시명</label> <input name="title"
-					class="form-control input-sm" id="title" value="${dto.title}">
-			</div>
-			<div class="form-group">
-				<label for="gallery">전시관</label> <input name="gallery"
-					class="form-control input-sm" id="gallery" value="${dto.gallery}">
-			</div>
-			<div class="form-group">
-				<label for="location">전시지역</label> <input name=location
-					class="form-control input-sm" id="location" value="${dto.location}">
-			</div>
-			<div class="form-group">
-				<label for="start_date">전시 시작일</label> <input type="date"
-					name="start_date" class="form-control input-sm" id="start_date"
-					value="${fn:substring(startDate,0,10)}">
-			</div>
-			<div class="form-group">
-				<label for="end_date">전시 마감일</label> <input type="date"
-					name="end_date" class="form-control input-sm" id="end_date"
-					value="${fn:substring(endDate,0,10)}">
-			</div>
-			<div class="form-group">
-				<label for="summary">내용</label>
-				<textarea name="summary" class="form-control input-sm" id="summary"
-					placeholder="내용을 입력해주세요." rows="20">${dto.summary}</textarea>
-			</div>
-				<div class="form-group">
-					<label for="files">포스터(썸네일)</label>
-			<c:if test="${dto.thumnail != '-'}">
-					<div class="sectiondiv">
-						${thumnailName}
-						<img id="thumnailImg" src="${dto.thumnail}" width="100" height="100">
-						</div>
-						<button class="btn btn-sm" name="fileDel" id="fileDel">
-					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
-				</button>
-			</c:if>
-				</div>
-			<div class="form-group">
-				<input type="file" name="file" class="form-control input-" id="file">
-			</div>
-			<c:if test="${dto.product_info != '-'}">
-				<div class="form-group">
-					<label for="file2">전시 정보 이미지</label>
-					<div class="sectiondiv">
-						${product_infoName}
-						<%--       (${dto.filesize / 1024} KB) --%>
-						<img id="pdtInfoImg"src="${dto.product_info}" width="100" height="100">
-					</div>
-						<button class="btn btn-sm" id="fileDel2" name="fileDel2">
-					<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
-				</button>
-				</div>
-			</c:if>
-			<div class="form-group">
-				<input type="file" name="file2" class="form-control input-" id="file2">
-			</div>
-		</form>
-			<div class="form-group" align="right">
-				<button class="btn btn-sm" id="btnUpdate">
-					<span class="glyphicon glyphicon-pencil"></span>&nbsp;수정
-				</button>
-				<button class="btn btn-sm" id="btnDelete">
-					<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
-				</button>
-			</div>
-			<br>
 	</div>
-</section>
-</div>
-<%@ include file="../include/footer.jsp"%>
+	<footer>
+	<%@ include file="../include/footer.jsp"%>
+	</footer>
 </body>
 </html>

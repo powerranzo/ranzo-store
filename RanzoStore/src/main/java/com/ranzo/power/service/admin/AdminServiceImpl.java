@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.controller.admin.AdminController;
 import com.ranzo.power.model.admin.dao.AdminDAO;
@@ -18,9 +19,11 @@ import com.ranzo.power.model.admin.dto.MemberCountDTO;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.member.dao.MemberDAO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.util.DateUtils;
 
 @Service
@@ -29,7 +32,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Inject
 	AdminDAO adminDao;
+	
+	@Inject
+	MemberDAO memberDao;
 
+				
+	@Override
+	public Map<String, Object> getHomeList() {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
+		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));	
+		map.put("qna_newcount", adminDao.countQnaNew());
+		map.put("qna_delcount", adminDao.countQnaDel());
+		
+		return map;
+	}
 	@Override
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
@@ -43,18 +60,13 @@ public class AdminServiceImpl implements AdminService {
 		List<MemberDTO> list=adminDao.getMemberList(map);
 		MemberCountDTO mcount=
 				new MemberCountDTO(adminDao.countTbAll("member_tb"), 
-						adminDao.countMemberToday(DateUtils.getToday()),
-						adminDao.countMemberQuit());
+				adminDao.countMemberToday(DateUtils.getToday()),
+				adminDao.countMemberQuit());
 		map.clear();
 		map.put("mcount", mcount);
 		map.put("list", list);
 		map.put("pager", pager);
 		return map;
-	}
-
-	@Override
-	public MemberDTO getMemberView(String userid) {
-		return adminDao.getMemberView(userid);
 	}
 
 	@Override
@@ -103,7 +115,7 @@ public class AdminServiceImpl implements AdminService {
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
-		List<MemberDTO> list=adminDao.getExbList(map);
+		List<MemberDTO> list=adminDao.getExbList(map); //확인
 		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));
 		map.put("list", list);
@@ -111,31 +123,24 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 
-
+	@Transactional
 	@Override
-	public void insertExb(ExhibitionDTO dto) {
+	public void insertExb(ExhibitionDTO dto, ProductInfoDTO idto) {
 		adminDao.insertExb(dto);
+		adminDao.insertProductInfo(idto);
 	}
-//	@Override
-//	public void insertExb(String startDate, String endDate, 
-//			ExhibitionDTO dto) {
-//		try {
-//			dto.setStart_date(DateFunction.stringToDate(startDate));
-//			dto.setEnd_date(DateFunction.stringToDate(endDate));
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		} 
-//		adminDao.insertExb(dto);
-//	}
 
 	@Override
 	public ExhibitionDTO getExbView(String code) {
-		return adminDao.getExbView(code);
+		return adminDao.getExbView(code); //확인
 	}
 	
+	@Transactional
 	@Override
-	public void updateExb(ExhibitionDTO dto) {
+	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto) {
 		adminDao.updateExb(dto);
+		adminDao.updateProductInfo(idto);
+		
 	}
 	
 	@Override
@@ -148,7 +153,11 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void deleteExb(String code) {
-		adminDao.deleteExb(code);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "exhibition_tb");
+		map.put("condition", "code");
+		map.put("list", code);
+		adminDao.updateShowN(map);
 	}
 	
 	@Override
@@ -240,11 +249,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<PopupDTO> getPopupOn() {
 		List<PopupDTO> list=new ArrayList<PopupDTO>();
-		list=adminDao.getPopupOn();
-		//list.remo 
+		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
-
-
 
 }
