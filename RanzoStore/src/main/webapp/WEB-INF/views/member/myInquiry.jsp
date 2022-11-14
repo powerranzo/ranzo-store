@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>나의 상품 문의</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 
 <style>
 * {box-sizing: content-box;}
@@ -15,7 +15,7 @@
 	margin:0px; 
 }
 .content{
-	margin: 0 80px 0 80px;
+	margin: 20px 80px 0 80px;
 
 }
 section {
@@ -24,7 +24,7 @@ section {
 	text-align: left;
 }
 .orderdiv {
-	padding: 50px 0 0 0;
+	padding:5px;
 	float: left;
 	display: inline-block;
 	min-height: 100%;
@@ -66,7 +66,7 @@ th, td {
 	 <div class="orderdiv">
 		<div class="title">나의 상품 문의</div>
 		<p class="p">해당 게시판의 성격과 다른 글은 사전 동의 없이 담당 게시판으로 이동될 수 있습니다.</p>
-		<hr noshade size="1px" width="820px" color="black">
+		<hr noshade size="2px" width="820px" color="black">
 		<table style="width: 820px;">
 		<tr>
 			<th style="width: 30%;">제목</th>

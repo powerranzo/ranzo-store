@@ -40,10 +40,4 @@ public class ProductInfoDTO {
 		this.content = content;
 	}
 
-	@Override
-	public String toString() {
-		return "ProductInfoDTO [code=" + code + ", attach=" + attach + ", content=" + content + "]";
-	}
-
-	
 }

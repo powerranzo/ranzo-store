@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ranzo.power.controller.admin.AdminController;
 import com.ranzo.power.model.admin.dao.AdminDAO;
@@ -22,7 +21,6 @@ import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
-import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.util.DateUtils;
 
 @Service
@@ -113,24 +111,31 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 
-	@Transactional
+
 	@Override
-	public void insertExb(ExhibitionDTO dto, ProductInfoDTO idto) {
+	public void insertExb(ExhibitionDTO dto) {
 		adminDao.insertExb(dto);
-		adminDao.insertProductInfo(idto);
 	}
+//	@Override
+//	public void insertExb(String startDate, String endDate, 
+//			ExhibitionDTO dto) {
+//		try {
+//			dto.setStart_date(DateFunction.stringToDate(startDate));
+//			dto.setEnd_date(DateFunction.stringToDate(endDate));
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		} 
+//		adminDao.insertExb(dto);
+//	}
 
 	@Override
 	public ExhibitionDTO getExbView(String code) {
 		return adminDao.getExbView(code);
 	}
 	
-	@Transactional
 	@Override
-	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto) {
+	public void updateExb(ExhibitionDTO dto) {
 		adminDao.updateExb(dto);
-		adminDao.updateProductInfo(idto);
-		
 	}
 	
 	@Override
@@ -235,18 +240,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<PopupDTO> getPopupOn() {
 		List<PopupDTO> list=new ArrayList<PopupDTO>();
-		list=adminDao.getPopupOn(DateUtils.getToday());
+		list=adminDao.getPopupOn();
+		//list.remo 
 		return list;
 	}
-
-	@Override
-	public ProductInfoDTO getProductInfoView(String code) {
-		return adminDao.getProductInfoView(code);
-	}
-
-
-
- 
 
 
 

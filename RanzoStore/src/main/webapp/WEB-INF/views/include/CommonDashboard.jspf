@@ -6,7 +6,7 @@
 	  <div class="title"><a href="${path}/member/mypage.do">MY PAGE</a></div>
 		<aside>
 		<div class="title-s">MY SHOPPING</div>
-		<hr noshade size="1px" color="black">
+		<hr noshade size="1px" color="black"><br>
 		<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매목록</a>
 		<p><br>
 		<a class="a1" href="#">위시리스트</a>

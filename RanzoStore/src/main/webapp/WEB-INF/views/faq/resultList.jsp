@@ -29,13 +29,11 @@ function list(page){
 	</tr>
 	</thead>
 <c:forEach var="row" items="${map.list}">
-<c:if test="${row.show=='y'}">
 	<tr>
 		<td>${row.category}</td>
 		<td><a href="${path}/faq/view.do?no=${row.no}">${row.title}</a></td>
 		<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></td>
 	</tr>
-	</c:if>
 </c:forEach>
 	<tr>
 		<td colspan="6" align="center">

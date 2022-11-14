@@ -1,58 +1,143 @@
 @charset "UTF-8";
 
+a:hover {
+	text-decoration: none;
+}
 /* 검색 영역*/
 .sec-search {
 	with: 100%;
-	/* diplay: flex; */
-	color: #424242;
+	height: 50px;
+	padding: 10px 20px;
+	display: flex;
+	/* 메뉴를 양쪽 끝에 정렬 */
+	justify-content: space-between;
+	/* 세로 가운데 정렬 */
+	align-items: center;
+	/* 스크롤 시 고정 */
+	top: 0;
+	position: sticky;
+	background-color: white;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: grey;
+	color: grey;
+	border-top: 1px solid;
 }
 
-.sec-search div .sort {
-	/* flex: none; */
+.sec-search ul {
+	margin-top: 8px;
 }
 
-.sec-search div .filter {
+.sec-search .filter, .sec-search .sort {
+	flex: none;
+	display: none;
+}
+
+.sec-search .filter {
+	width: 100%;
+	height: 40px;
+	margin-top: 100px;
+	margin-left: -20px;
+	padding-top: 10px;
+	padding-left: 10px;
+	position: absolute;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid;
+	border-bottom-color: grey;
+	padding-top: 10px;
+}
+
+.sec-search .filter li {
+	display: inline;
+	padding: 5px 10px;
+	margin: 0 auto;
+	border: 1px solid;
+	border-color: grey;
+	border-radius: 10px;
+	text-align: center;
+	border-radius: 10px;
+	border-color: grey;
+	border: 1px solid;
+	margin: 0 auto;
+}
+
+.sec-search .sort {
+	position: flex;
+	margin-top: 180px;
+	margin-right: 0;
 	margin-left: auto;
 }
 
-.sec-search div ul li {
-	position: relative;
-	margin: 5px
+.sec-search .sort li {
+	margin-right: -65px;
+	padding: 5px 10px;
+	background-color: #f2f2f2;
+	text-align: right;
 }
 
-.selected{
-	color :red;
+/* 선택된 메뉴 강조 */
+.sec-search .selected {
+	color: orange;
 }
 
+.sec-search .filter .selected {
+	border: 1px solid;
+	border-color: orange;
+}
 
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
 	.sec-content {
 		margin: 0 auto;
 	}
-	.sec-search .sort {
-		float: right;
-		width: auto;
+	/* 지역 필터 */
+	.sec-search .filter-dropdown {
+		display: none;
 	}
-	.sec-search ul li {
+	.sec-search .filter {
+		display: block;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		width: auto;
+		height: auto;
+		background-color: white;
+		border-bottom: 0;
+		height: auto;
+	}
+	.sec-search .filter li {
 		display: block;
 		float: left;
-		margin-left: 5px;
+		margin-right: 10px;
 	}
 }
 
 /* PC용 CSS */
 @media all and (min-width:1132px) {
 	.sec-content {
-		max-width: 1300px;
+		max-width: 1400px;
 	}
+	.sec-search .sort-dropdown {
+		display: none;
+	}
+
+	/* 메뉴 좌>우 나열 */
 	.sec-search ul li {
+		display: inline-block;
 		float: left;
 	}
-	.sec-search .filter li {
-		padding: 3px;
-		border: solid 1px;
-		border-color: grey;
-		border-radius: 10px;
+	.sec-search .filter {
+		display: inline-block;
+		align-items: center;
+	}
+	.sec-search .sort {
+		display: block;
+		position: relative;
+		margin: 0;
+		padding: 0;
+	}
+	.sec-search .sort li {
+		margin-right: 5px;
+		background-color: white;
 	}
 }

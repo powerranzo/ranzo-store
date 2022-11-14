@@ -259,7 +259,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//마이페이지 - 나의 후기
+	//마이페이지 - 상품 문의
 	@RequestMapping("myReview.do")
 	public ModelAndView myReview() {
 		List<ReviewDTO> list=memberService.reviewList();

@@ -145,12 +145,19 @@ function daumZipCode() {
 
 </script>
 <style>
- * {
-	 margin: 0;
+* {
+	box-sizing: content-box;
 }
-.infodiv{
-	width: 550px;
-	margin: auto;
+
+form {
+	width: 500px;
+	height: 600px;
+	display: inline;
+	align-items: center;
+	position: absolute;
+	top: 60%;
+	left: 51%;
+	transform: translate(-50%, -50%);
 }
 
 .input-field {
@@ -168,8 +175,7 @@ function daumZipCode() {
 }
 
 label {
-
-	width: 120px;
+	width: 50px;
 	height: 30px;
 	margin-top: 4px;
 }
@@ -177,7 +183,7 @@ label {
 .button {
 	background-color: black;
 	color: white;
-	width: 141px;
+	width: 147px;
 	height: 50px;
 	font-size: 17px;
 	border: none;
@@ -187,8 +193,8 @@ label {
 .button-s {
 	background-color: black;
 	color: white;
-	width: 75px;
-	height: 41px;
+	width: 84px;
+	height: 42px;
 	font-size: 14px;
 	border: none;
 }
@@ -212,13 +218,12 @@ tr{
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<div class="infodiv">
 	<form name="infoForm" method="post">
 		<div class="title">회원정보 수정</div>
 		<br>
 		<table>
 			<tr>
-				<td width="30%"><label>아이디</label></td>
+				<td width="130px"><label>아이디</label></td>
 				<td><input class="input-field" value="${dto.userid}" name="userid" id="userid" readonly="readonly"></td>
 			</tr>
 			<p>
@@ -274,11 +279,5 @@ tr{
 			</tr>
 		</table>
 	</form>
-	</div>
-	<footer>
-<%@ include file="../include/footer.jsp"%>
-</footer>
-	
-	
 </body>
 </html>

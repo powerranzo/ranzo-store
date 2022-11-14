@@ -4,8 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class PopupDTO {
 	public int no;
 	public String title;
@@ -16,13 +14,10 @@ public class PopupDTO {
 	public int pos_height;
 	public String filename;
 	public long filesize;
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date start_date; 
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date end_date;
-//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	public Date reg_date;
 	public String show;

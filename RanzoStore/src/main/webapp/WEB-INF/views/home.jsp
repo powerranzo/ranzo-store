@@ -36,7 +36,7 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<a><img class="simage"
-					src="${path}/resources/images/main_3.jpg"></a>
+					src="${path}/resources/images/main_1.jpg"></a>
 				<div class="text1">국립중앙박물관</div>
 				<div class="image_text">
 					<p style="font-size: 18px; font-weight: bold;">2022.10.25 ~
@@ -111,8 +111,8 @@
 			</div>
 		</div>
 	</div>
-<!-- <footer> -->
+<footer>
 <%@ include file="include/footer.jsp"%>
-<!-- </footer> -->
+</footer>
 </body>
 </html>
