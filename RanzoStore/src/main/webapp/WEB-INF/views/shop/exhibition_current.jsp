@@ -28,7 +28,6 @@ $(function(){
 	
 	$('.filter-dropdown').click(function(){
 		if($('.sort-dropdown').css('display') != 'none'){
-			/* @media all and (min-width:768px) */
 			$('.sort').hide();			
 		}
 		$('.filter-dropdown').text($('.filter').css('display') == "none" ? "닫기 ✕" : "지역 ▾");			
@@ -38,7 +37,6 @@ $(function(){
 	
 	$('.sort-dropdown').click(function(){
 		if($('.filter-dropdown').css('display') != 'none'){
-			/*  @media all and (min-width:1132px) */			
 			$('.filter-dropdown').text("지역 ▾");			
 			$('.filter').hide();
 		}
