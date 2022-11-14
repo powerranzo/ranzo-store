@@ -14,6 +14,28 @@ $(function(){
 	console.log("date:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 	getList();
 	
+
+	$('.filter-dropdown').click(function(){
+		if($('.sort-dropdown').css('display') != 'none'){
+			$('.sort').hide();			
+		}
+		$('.filter-dropdown').text($('.filter').css('display') == "none" ? "닫기 ✕" : "지역 ▾");			
+		$('.filter').slideToggle(500);
+		console.log("filter-토글후"+$('.filter').css('display'));
+	});
+	
+	$('.sort-dropdown').click(function(){
+		if($('.filter-dropdown').css('display') != 'none'){
+			$('.filter-dropdown').text("지역 ▾");			
+			$('.filter').hide();
+		}
+		$('.sort').slideToggle(500);	
+		//$(this).text();
+		console.log("sort-dropdown"+$('.sort-dropdown').css('display'))
+		console.log("sort"+$('.sort').css('display'))
+	});
+
+
 	// 필터,정렬
 	allLoaction = $('.filter li:first');
 	allLoaction.addClass('selected');
