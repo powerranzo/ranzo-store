@@ -192,17 +192,6 @@
 		</div>
 	</section>
 
-
-			<span class="button-reserve"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
-
-			<c:if test="${sessionScope.admin_userid != null }">
-				<!-- 관리자 수정버튼  -->
-				<div>
-					<br>
-					<a href="${path}/shop/product/edit/${exhibition.code}">[편집]</a>
-				</div>
-			</c:if>
-		</section>
 	
 		<section class="sec-detail">
 			<ul class="tab-list"> 
