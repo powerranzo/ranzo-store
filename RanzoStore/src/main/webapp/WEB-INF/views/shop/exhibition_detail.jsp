@@ -145,6 +145,7 @@
 		<%@ include file="../include/menu.jsp" %>
 	</header>
 		
+
 	<section class="sec-content">
 		<section class="sec-prd">
 			<div class="prd-thumnail">
@@ -192,31 +193,18 @@
 		</div>
 	</section>
 
+	<section class="sec-detail">
+		<ul class="tab-list"> 
+			<li><a href="#productInfo">전시상세</a></li>
+			<li><a href="#reserveInfo">예매/취소</a></li>
+			<li><a href="#reviewInfo">관람후기</a></li>
+			<li><a href="#qnaInfo">Q&A</a></li>
+		</ul>
 
-			<span class="button-reserve"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
-
-			<c:if test="${sessionScope.admin_userid != null }">
-				<!-- 관리자 수정버튼  -->
-				<div>
-					<br>
-					<a href="${path}/shop/product/edit/${exhibition.code}">[편집]</a>
-				</div>
-			</c:if>
-		</section>
-	
-		<section class="sec-detail">
-			<ul class="tab-list"> 
-				<li><a href="#productInfo">전시상세</a></li>
-				<li><a href="#reserveInfo">예매/취소</a></li>
-				<li><a href="#reviewInfo">관람후기</a></li>
-				<li><a href="#qnaInfo">Q&A</a></li>
-			</ul>
-	
-			<div class="tab-content" id="productInfo"></div>
-			<div class="tab-content" id="reserveInfo"></div>
-			<div class="tab-content" id="reviewInfo"></div>
-			<div class="tab-content" id="qnaInfo" ></div>
-		</section>
+		<div class="tab-content" id="productInfo"></div>
+		<div class="tab-content" id="reserveInfo"></div>
+		<div class="tab-content" id="reviewInfo"></div>
+		<div class="tab-content" id="qnaInfo" ></div>
 	</section>
 
 	<footer>
