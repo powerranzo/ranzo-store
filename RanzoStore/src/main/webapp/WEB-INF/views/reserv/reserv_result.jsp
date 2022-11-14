@@ -87,6 +87,16 @@ function check(frm){
     $("#payButton").css({"backgroundColor":"#eeeeee","color":"#cccccc"});
    }
 }
+function coupon() {
+	$.ajax({
+		type : "post",
+		url : "${path}/reserv/coupon.do",
+		success : function(result) {
+			$("#result").html(result.coupon);
+		}
+	});
+}
+
 </script>
 </head>
 <body>
@@ -111,7 +121,7 @@ function check(frm){
    <div class="paydiv">
    <table class="table2">
     <tr>
-     <td width="15%">전시명</td>
+     <td>전시명</td>
      <td><h1>${dto.title}<input type="hidden" id="title" name="title" value="${dto.title}"></h1>
      <input type="hidden" id="code" name="code" value="${dto.code}"></td>
     </tr>
@@ -132,25 +142,25 @@ function check(frm){
     <c:if test="${adult>0}">
     <tr>
      <td>성인</td>
-     <td><fmt:formatNumber value="${dto.adult_price}" pattern="#,###" />원</td>
+     <td>18,000원</td>
      <td>${adult}인<input type="hidden" id="adult" name="adult" value="${adult}"></td>
-     <td style="text-align: right;"><strong><fmt:formatNumber value="${adult*dto.adult_price}" pattern="#,###" />원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${adult*18000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
      <c:if test="${teen>0}">
     <tr>
      <td>청소년</td>
-    	<td><fmt:formatNumber value="${dto.teen_price}" pattern="#,###" />원</td>
+     <td>9,000원</td>
      <td>${teen}인<input type="hidden" id="teen" name="teen" value="${teen}"></td>
-     <td style="text-align: right;"><strong><fmt:formatNumber value="${teen*dto.teen_price}" pattern="#,###" />원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${teen*9000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
     <c:if test="${kids>0}">
     <tr>
      <td>유아 및 어린이</td>
-     <td><fmt:formatNumber value="${dto.kids_price}" pattern="#,###" />원</td>
+     <td>6,000원</td>
      <td>${kids}인<input type="hidden" id="kids" name="kids" value="${kids}"></td>
-     <td style="text-align: right;"><strong><fmt:formatNumber value="${kids*dto.kids_price}" pattern="#,###" />원</strong></td>
+     <td style="text-align: right;"><strong><fmt:formatNumber value="${kids*6000}" pattern="#,###" />원</strong></td>
     </tr>
     </c:if>
    </table>
@@ -171,8 +181,8 @@ function check(frm){
       <tr>
        <td style="text-align: left;">총금액/${adult + teen + kids}매
        <input type="hidden" id="quantity" name="quantity" value="${adult + teen + kids}"></td>
-       <td style="text-align: right;"><fmt:formatNumber value="${(adult*dto.adult_price)+(teen*dto.teen_price)+(kids*dto.kids_price)}" pattern="#,###" />원
-       <input type="hidden" id="sub_total" name="sub_total" value="${(adult*dto.adult_price)+(teen*dto.teen_price)+(kids*dto.kids_price)}"></td>
+       <td style="text-align: right;"><fmt:formatNumber value="${(adult*18000)+(teen*9000)+(kids*6000)}" pattern="#,###" />원
+       <input type="hidden" id="sub_total" name="sub_total" value="${(adult*18000)+(teen*9000)+(kids*6000)}"></td>
       </tr>
       <tr>
        <td style="text-align: left;">배송비</td>
@@ -180,7 +190,7 @@ function check(frm){
 			</tr>
       <tr>
        <td style="text-align: left;">최종결제금액</td>
-       <td style="text-align: right;"><h2><fmt:formatNumber value="${(adult*dto.adult_price)+(teen*dto.teen_price)+(kids*dto.kids_price)+2500}" pattern="#,###" />원</h2></td>
+       <td style="text-align: right;"><h2><fmt:formatNumber value="${(adult*18000)+(teen*9000)+(kids*6000)+2500}" pattern="#,###" />원</h2></td>
       </tr>
      </table>
      <br>
@@ -197,7 +207,7 @@ function check(frm){
 	<script>
 		$("#payButton").click(function() {
 			var IMP = window.IMP;
-			var price = ${(adult*dto.adult_price)+(teen*dto.teen_price)+(kids*dto.kids_price)+2500};
+			var price = ${(adult*18000)+(teen*9000)+(kids*6000)+2500};
 			var quantity = ${adult+teen+kids};
 			IMP.init('imp63178535');
 			IMP.request_pay({

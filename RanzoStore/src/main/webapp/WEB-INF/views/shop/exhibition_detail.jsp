@@ -145,25 +145,34 @@
 		<%@ include file="../include/menu.jsp" %>
 	</header>
 		
-	<section class="sec-prd">
-		<div class="prd-heading">
-			<span class="info-title"></span>
-			<span class="prd-title">${exhibition.title}</span>
-			<span class="prd-summary">${exhibition.summary}</span>			 
-			<hr>
-		</div>
-		<div class="prd-thumnail">
-			<img src="${exhibition.thumnail}">
-		</div>
-		<div class="prd-info">
-			<span class="prd-place"><span class="label">장소</span>${exhibition.gallery}</span> 
-			<span class="prd-period"> 
-				<span class="label">기간</span>
-				<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
-				<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
-			</span>
-<%-- 			<span><span class="label">가격</span><fmt:formatNumber value="${exhibition.price}" pattern="#,###" /></span> --%>
-			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
+
+	<section class="sec-content">
+		<section class="sec-prd">
+			<div class="prd-thumnail">
+				<img src="${exhibition.thumnail}">
+			</div>
+			
+			<div class="prd-head">
+				<span class="prd-title">${exhibition.title}</span>
+				<span class="prd-summary">${exhibition.summary}</span>			 
+			</div>
+			
+			<div class="prd-body">
+				<div>				
+					<span class="itemLabel">장소</span>
+					<span class="item">${exhibition.gallery}</span> 
+				</div>
+				<div>
+				<span class="itemLabel">기간</span>
+					<span class="item"> 
+						<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
+						<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
+				</span>
+			 	<span class="itemLabel">가격</span>
+				<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
+				<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
+				<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
+				<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 			
 			<!-- 임시 좋아요 자리 -->
 			<!-- 로그인 해야만 좋아요 가능 -->
@@ -172,7 +181,8 @@
 			좋아요</a>
 			</c:if>
 			<!-- 임시 좋아요 자리 -->
-		</div>
+				</div>
+			</div>
 
 		<div> 
 			<!-- 관리자용 -->

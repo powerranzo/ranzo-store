@@ -26,6 +26,7 @@ public class ExhibitionDTO {
 	private int adult_price;
 	private int teen_price;
 	private int kids_price;
+
 	
 	
 	public int getAdult_price() {
@@ -46,6 +47,7 @@ public class ExhibitionDTO {
 	public void setKids_price(int kids_price) {
 		this.kids_price = kids_price;
 	}
+
 	public String getSearchDate() {
 		return searchDate;
 	}
