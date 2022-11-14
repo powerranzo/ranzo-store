@@ -6,13 +6,47 @@
 <meta charset="UTF-8">
 <title>전시</title>
 <%@ include file="../include/header.jsp" %>	
-<link rel="stylesheet" href="${path}/resources/css/exhibition.css">
+<link rel="stylesheet" href="${path}/resources/css/exhibition.css?=ver1">
 <script type="text/javascript">
+	/*  */
+	$(window).resize(function (){
+		/* dropdown으로 숨겨진 메뉴를 반응형 사이즈에 맞춰 다시 보이게 함 */
+			$('.sort').hide();	
+		var width_size = window.outerWidth;
+		if (width_size >= 768) {
+			$('.filter').show();	
+		}
+		if (width_size >= 1132) {
+			$('.sort').show();	
+		}
+	});
 $(function(){
 
 	date = new Date();
 	console.log("date:"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
 	getList();
+	
+	$('.filter-dropdown').click(function(){
+		if($('.sort-dropdown').css('display') != 'none'){
+			/* @media all and (min-width:768px) */
+			$('.sort').hide();			
+		}
+		$('.filter-dropdown').text($('.filter').css('display') == "none" ? "닫기 ✕" : "지역 ▾");			
+		$('.filter').slideToggle(500);
+		console.log("filter-토글후"+$('.filter').css('display'));
+	});
+	
+	$('.sort-dropdown').click(function(){
+		if($('.filter-dropdown').css('display') != 'none'){
+			$('.filter-dropdown').text("지역 ▾");
+			$('.filter').hide();	
+		}
+		$('.sort').slideToggle(500);	
+		//$(this).text();
+		console.log("sort-dropdown"+$('.sort-dropdown').css('display'));
+		console.log("sort"+$('.sort').css('display'))
+	});
+
 	
 	// 필터,정렬
 	allLoaction = $('.filter li:first');
@@ -35,6 +69,12 @@ $(function(){
 	sortList.click(function(e){
 		sortList.removeClass('selected');
 		$(this).addClass('selected');
+		/* 선택된 정렬방식으로 텍스트 변경 */
+		$('.change').text($(this).text());
+		if($('.sort-dropdown').css('display') != 'none'){
+			/* @media all and (min-width:768px) */
+			$('.sort').hide();			
+		}
 		getList();
 	});
 
@@ -79,10 +119,8 @@ function getList(){
 	
 	<section class="sec-content">
 		<h2>현재전시</h2>
-		<hr>
-		<div class="sec-search">
-
-			<div>		
+		<div class="sec-search">			
+				<span class="filter-dropdown">지역 ▾</span>		
 				<ul class="filter">			
 					<li>전체</li>
 					<li>서울</li>
@@ -93,16 +131,15 @@ function getList(){
 					<li>광주</li>
 					<li>제주</li>
 				</ul>
-			</div>
 
-			<div>
 				<ul class="sort">
 					<li id="rating">별점 높은순</li>
 					<li id="review">리뷰 많은순</li>
-					<li id ="end_date">종료 임박순</li>
 					<li id ="price">가격 낮은순</li>
+					<li id ="end_date">종료 임박순</li>
 				</ul>	
-			</div>
+				<span class="sort-dropdown"> <span class="change">별점 높은순</span> ☰</span> 
+
 		</div>
 
 		<div id="exhibition_list"></div>

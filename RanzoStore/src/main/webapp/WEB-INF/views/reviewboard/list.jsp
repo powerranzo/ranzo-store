@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>REVIEW</title>
+<title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="../include/style.css" rel="stylesheet">
 
@@ -84,56 +85,36 @@ table i{
 </style>
 
 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<!-- <link href="../include/style.css" rel="stylesheet"> -->
+
 <script type="text/javascript">
 function list(page) {
 	location.href="${path}/board/review/list.do?curPage="+page;
 }
 </script>
+
+<style type="text/css">
+td {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
+<h2>Review게시판</h2>
+<br>
 
-<div class="review">
-<h2><a href="${path}/board/review/list.do">REVIEW</a></h2>
-<!-- 검색폼 -->
-<div class="searchdiv">
-<form name="form1" method="post" action="${path}/board/review/list.do">
-	<select name="search_option">
-		<option value="all"
-			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
-		<option value="title"
-			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
-		<option value="subject" 
-			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
-	</select>
-	<input name="keyword" class="reviewkeyword" value="${map.keyword}">
-	<input type="submit" value="조회" id="searchBtn" name="searchBtn">
-	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'" class="btn btn-primary pull-right">글쓰기</button>
-</form>
-</div>
-
-
-
-
-<div class="container">
-
-<div id="tab-1" class="tab-content current">
-<table class="reviewtable">
-<thead>
-	<tr>
-		<th>No.</th>
-		<th>별점</th>
-		<th>전시명</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		<th>조회수</th>
-	</tr>
-</thead>
+<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
+<tr>
+	<th style="background-color: #eeeeee; text-align: center;">No.</th>
+	<th style="background-color: #eeeeee; text-align: center;">별점</th>
+	<th style="background-color: #eeeeee; text-align: center;">전시명</th>
+	<th style="background-color: #eeeeee; text-align: center;">제목</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+	<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+	<th style="background-color: #eeeeee; text-align: center;">조회수</th>
+</tr>
 
 <c:forEach var="row" items="${map.list}">
 <c:choose>
@@ -192,14 +173,28 @@ function list(page) {
 		</td>
 	</tr>
 </table>
-</div>
 
+<br>
+<!-- 검색폼 -->
+<div align="center">
+<form name="form1" method="post" action="${path}/board/review/list.do">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="title"
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
+		<option value="subject" 
+			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
+	</select>
+	<input name="keyword" size="80" value="${map.keyword}">
+	<input type="submit" value="조회" class="btn btn-secondart">
+	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'" class="btn btn-primary pull-right">글쓰기</button>
+</form>
 </div>
-</div>
-
-<footer>
-<%@ include file="../include/footer.jsp"%>
-</footer>
 
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>REVIEW</title>
+<title>Review 게시판</title>
 <%@ include file="../include/header.jsp" %>
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -129,9 +129,9 @@ function listReply(){
 </form>
 <hr>
 <h3>댓글</h3><small>(로그인 후 사용 가능)</small> 
-<div class="table table-striped" style="width: 800px;">
+<div class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
 	 <c:if test="${sessionScope.userid != null }">
-	 	<textarea rows="4" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
+	 	<textarea rows="5" cols="80" id="replytext" placeholder="댓글을 작성하세요"></textarea>
 	 	<button type="button" id="btnReply" class="btn btn-primary">댓글쓰기</button>
 	 </c:if>
 </div>

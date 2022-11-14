@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.member.MemberService;
 
 @Controller
@@ -261,7 +259,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	//마이페이지 - 나의 후기
+	//마이페이지 - 상품 문의
 	@RequestMapping("myReview.do")
 	public ModelAndView myReview() {
 		List<ReviewDTO> list=memberService.reviewList();
@@ -271,35 +269,6 @@ public class MemberController {
 		map.put("list", list); 
 		mav.setViewName("member/myReview");
 		mav.addObject("map", map);
-		return mav;
-	}
-	
-	//마이페이지 - 위시리스트
-	@RequestMapping("wishlist.do")
-	public ModelAndView wishlist(HttpSession session) {
-		String userid = (String) session.getAttribute("userid");
-		List<ExhibitionDTO> list=memberService.wishlist(userid);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("member/wishlist");
-		return mav;
-	}
-	
-	//위시리스트 비우기
-	@ResponseBody
-	@RequestMapping("emptyWish.do")
-	public int emptyWish(String userid) {
-		int result = memberService.emptyWish(userid);
-		return result;
-	}
-	
-	//마이페이지 메인 - 작은 위시리스트
-	@RequestMapping("miniWish.do/{userid}")
-	public ModelAndView miniWish(@PathVariable String userid) {
-		List<ExhibitionDTO> list=memberService.wishlist(userid);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/miniWish");
-		mav.addObject("list", list);
 		return mav;
 	}
 

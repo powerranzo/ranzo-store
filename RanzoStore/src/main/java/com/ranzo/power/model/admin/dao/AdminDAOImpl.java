@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.model.admin.dto.PopupDTO;
-import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
@@ -44,11 +43,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<MemberDTO> getMemberList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getMemberList", map); 
-	}
-	
-	@Override
-	public MemberDTO getMemberView(String userid) {
-		return sqlSession.selectOne("admin.getMemberView", userid);
 	}
 	
 	@Override
@@ -106,11 +100,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void deleteExbFile(Map<String, Object> map) {
 		sqlSession.update("admin.deleteExbFile",map);
-	}
-	
-	@Override
-	public void deleteExb(String code) {
-		sqlSession.update("admin.deleteExb",code);
 	}
 
 	@Override
@@ -191,11 +180,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void insertProductInfo(ProductInfoDTO idto) {
 		sqlSession.insert("admin.insertProductInfo", idto);
-	}
-
-	@Override
-	public ProductInfoDTO getProductInfoView(String code) {
-		return sqlSession.selectOne("admin.getProductInfoView", code);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 현재 전시 리스트 -->
 	<select id="list" resultType="ExhibitionDTO">
-		SELECT code, location, gallery, title, summary, thumnail, start_date, end_date
+		SELECT code, location, gallery, title, summary, thumnail, start_date, end_date, adult_price
 		FROM EXHIBITION_TB
 		<![CDATA[
 		WHERE sysdate <= end_date
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY nvl((select count(*) from review_tb where code=product and show='y'),0) desc
 		</when>
 		<when test="sort == '가격 낮은순'">
-			ORDER BY price desc
+			ORDER BY adult_price
 		</when>
 		<when test="sort == '종료 임박순'">
 			ORDER BY end_date
@@ -44,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 전시 상세 리스트 -->
 	<select id="detail" resultType="ExhibitionDTO">
-		SELECT code, location, gallery, title, summary, thumnail, product_info, start_date, end_date, hit, sales FROM EXHIBITION_TB
+		SELECT code, location, gallery, title, summary, thumnail, adult_price, teen_price, kids_price, start_date, end_date, hit, sales 
+		FROM EXHIBITION_TB
 		WHERE code = #{exhibitionCode}
 	</select>
 	
@@ -85,40 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	 -->
 	
-	<!-- 위시리스트_tb에 row가 있는 지 확인 -->
-	<select id="checkWish" 
-	parameterType="java.util.HashMap" 
-	resultType="int">
-	 select count(*) from WISHLIST_TB
-	 where product = #{product} and userid=#{userid}
-	</select>
 	
-	<!-- 위시리스트_tb에 row 생성 -->
-	<insert id="insertWish">
-		insert into WISHLIST_TB(no, product, userid, heart)
-		values(SEQ_WISHLIST.nextval, #{product}, #{userid}, 0)
-	</insert>
-	
-	<!-- 좋아요 확인 -->
-	<select id="findHeart" 
-	parameterType="java.util.HashMap" 
-	resultType="com.ranzo.power.model.shop.dto.HeartDTO">
-		select * from WISHLIST_TB
-		where product = #{product} and userid=#{userid}
-	</select>
-	
-	<!-- 좋아요 누름 -->
-	<update id="pressHeart" parameterType="java.util.HashMap">
-		update WISHLIST_TB set heart=1, reg_date=sysdate
-		where product = #{product} and userid=#{userid}
-	</update>
-
-	<!-- 좋아요 취소 -->
-	<update id="cancelHeart" parameterType="java.util.HashMap">
-		update WISHLIST_TB set heart=0 
-		where product = #{product} and userid=#{userid}
-	</update>
-		
 </mapper>
 
 
