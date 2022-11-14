@@ -1,1 +1,21 @@
 @charset "UTF-8";
+
+.sec-qna{
+	padding: 10px;
+}
+
+.comment-notice, qnainfo{
+	color: grey;
+	
+}
+
+.qna {
+	padding: 30px;
+	border-bottom: solid 1px grey;
+	font-size: 14px;
+}
+
+.qna-info .title{
+	font-weight: bord;
+	font-size:16px; 
+}
