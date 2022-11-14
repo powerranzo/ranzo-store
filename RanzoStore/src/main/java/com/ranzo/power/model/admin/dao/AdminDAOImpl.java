@@ -9,11 +9,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.model.admin.dto.PopupDTO;
-import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -25,10 +25,6 @@ public class AdminDAOImpl implements AdminDAO {
 	public int countTbAll(String table) {
 		return sqlSession.selectOne("admin.countTbAll", table);
 	}
-//	@Override
-//	public int countMemberAll() {
-//		return sqlSession.selectOne("admin.countMemberAll");
-//	}
 
 	@Override
 	public int countMemberToday(String now) {
@@ -47,11 +43,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<MemberDTO> getMemberList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getMemberList", map); 
-	}
-	
-	@Override
-	public MemberDTO getMemberView(String userid) {
-		return sqlSession.selectOne("admin.getMemberView", userid);
 	}
 	
 	@Override
@@ -75,21 +66,11 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateShowN", map);
 		
 	}
-	
-//	@Override
-//	public void deleteReserv(Map<String, Object> map) {
-//		sqlSession.update("admin.deleteQna", map);
-//	}
 
 	@Override
 	public int countExbIng(String today) {
 		return sqlSession.selectOne("admin.countExbIng", today);
 	}
-
-//	@Override
-//	public int countExbAll() {
-//		return sqlSession.selectOne("admin.countExbAll");
-//	}
 
 	@Override
 	public int countSearchExb(Map<String, Object> map) {
@@ -119,11 +100,6 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void deleteExbFile(Map<String, Object> map) {
 		sqlSession.update("admin.deleteExbFile",map);
-	}
-	
-	@Override
-	public void deleteExb(String code) {
-		sqlSession.update("admin.deleteExb",code);
 	}
 
 	@Override
@@ -199,6 +175,17 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PopupDTO> getPopupOn(String today) {
 		return sqlSession.selectList("admin.getPopupOn", today);
+	}
+
+	@Override
+	public void insertProductInfo(ProductInfoDTO idto) {
+		sqlSession.insert("admin.insertProductInfo", idto);
+	}
+
+	@Override
+	public void updateProductInfo(ProductInfoDTO idto) {
+		sqlSession.update("admin.updateProductInfo", idto);
+		
 	}
 
 }

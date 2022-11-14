@@ -53,7 +53,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h3>PopUp</h3>
@@ -187,7 +186,6 @@
 					onclick="location.href='${path}/admin/popup_write.do'" class="btn btn-default">신규 등록</button>
 				</form>
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

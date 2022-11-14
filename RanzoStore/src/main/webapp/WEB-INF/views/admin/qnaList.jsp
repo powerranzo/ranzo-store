@@ -52,7 +52,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h3>QnA</h3>
@@ -190,7 +189,6 @@
 					처리</button>
 				</form>
 			</div>
-		</section>
 	</div>
 <%@ include file="../include/footer.jsp"%>
 </body>

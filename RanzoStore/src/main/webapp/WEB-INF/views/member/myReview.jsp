@@ -6,15 +6,17 @@
 <meta charset="UTF-8">
 <title>나의 리뷰</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 
 <style>
 * {box-sizing: content-box;}
+
 * {
 	margin:0px; 
 }
 .content{
 	margin: 20px 80px 0 80px;
+
 }
 section {
 	width: 75%;
@@ -32,10 +34,12 @@ section {
 .p {
 	margin: 15px 0 15px 0;
 }
+
 footer{
 	clear : both;
 	bottom: 0;
 }
+
 html, body{
 	height: 100%;
 }
@@ -44,6 +48,7 @@ body {
   flex-direction: column;
   margin: 0;
 }
+
 th, td {
 	border-bottom: 1px solid black;
   padding: 10px;

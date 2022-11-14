@@ -84,7 +84,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<div class="panel panel-default">
@@ -154,7 +153,6 @@
 					</div>
 				</div>
 			</div>
-		</section>
 	</div>
 <%@ include file="../include/footer.jsp"%>
 </body>

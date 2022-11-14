@@ -53,13 +53,13 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h3>예약현황 <button class="btn btn-sm" id="btnApproval">
 							<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
 						</button></h3>
 				<form name="form1" class="form-inline" method="post">
+<<<<<<< HEAD
 <!-- 					<div class="form-group"> -->
 						<table class="adminTable1">
 							<tr>
@@ -80,6 +80,24 @@
 								<td><label for="searchOption1"></label> <select
 									name="searchOption1" class="form-control" id="searchOption1">
 										<option value="r.no">주문번호</option>
+=======
+					<table class="adminTable1">
+						<tr>
+							<th>전체 예약</th>
+							<th>결제 완료 예약</th>
+						</tr>
+						<tr>
+							<td>${reserv.reserv_count_all}개</td>
+							<td>${reserv.reserv_count_pay}개</td>
+						</tr>
+					</table>
+					<table class="adminTable2">
+						<tr>
+							<th id="adminTB2_th">검색옵션</th>
+							<td colspan="2" id="adminTB2_td1">
+								<select	name="searchOption1" id="searchOption1">
+										<option value="r.no">예약번호</option>
+>>>>>>> hyuna1113
 										<option value="r.userid">예매자ID</option>
 										<option value="r.code">전시코드</option>
 										<option value="e.title">전시명</option>
@@ -174,7 +192,12 @@
 									end="${reserv.pager.blockEndPage}">
 									<c:choose>
 										<c:when test="${page == reserv.pager.curPage}">
+<<<<<<< HEAD
 											<li><a href="#" style="text-decoration: underline;">${	page}</a></li>
+=======
+											<li><a href="#"
+												style="text-decoration: underline;">${page}</a></li>
+>>>>>>> hyuna1113
 										</c:when>
 										<c:otherwise>
 											<li><a href="#" onclick="reservList('${page}')">${page}</a></li>
@@ -195,7 +218,6 @@
 					처리</button>
 				</form>
 			</div>
-		</section>
 	</div>
 <%@ include file="../include/footer.jsp"%>
 </body>

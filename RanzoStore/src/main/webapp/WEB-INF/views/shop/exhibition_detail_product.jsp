@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail_review.css">
 </head>
 <body>
-	상품상세
-	<img class="img-prdInfo" src="${productInfo.attach}">	
+	<section class="sec-prdInfo">
+		<img src="${productInfo.attach}">	
+	</section>
 </body>
 </html>
