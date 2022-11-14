@@ -1,11 +1,17 @@
 @charset "UTF-8";
 
-.sec-prdInfo {
-	width: 100%;
+.sec-detail .tab-content {
+	display: none;
 	margin: 0 auto;
+	text-align: center;
+	padding: 10px;
 }
 
-.sec-prdInfo img {
+.sec-detail div .img-prdInfo {
+	width: 100%;
+}
+
+.sec-detail div .img-prdInfo {
 	width: 100%;
 	max-width: 750px;
 }
