@@ -9,6 +9,6 @@
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-
+금방 지울 예정.
 </body>
 </html>
