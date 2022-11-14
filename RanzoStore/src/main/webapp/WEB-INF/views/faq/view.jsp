@@ -18,7 +18,7 @@
 	width:75%;
 	margin: auto;
 }
-.faqtable2 thead{
+.thead{
 	font-weight: bold;
 	border-top: 2px solid #ddd;
 	background-color: #f8f9fa;
@@ -47,14 +47,24 @@ body {
   flex-direction: column;
   margin: 0;
 }
+#btnUpdate, #btnDelete {
+	width: 50px;
+	background-color: black;
+	color : white;
+	padding: 5px;
+	
+}
+h2 a:link{text-decoration: none; color: black;}
+h2 a:visited{text-decoration: none; color: black;}
+h2 a:active{text-decoration: none; color: black;}
 </style>
 <script type="text/javascript">
 function faqlist(){
 	location.href="${path}/faq/list.do";
 }
-/* $(function(){
+$(function(){
 	$("#btnUpdate").click(function(){
-		document.formfaq.action="${path}/faq/update/${dto.no}";
+		document.formfaq.action="${path}/faq/update.do";
 		document.formfaq.submit();
 	});
 	$("#btnDelete").click(function(){
@@ -63,7 +73,7 @@ function faqlist(){
 		document.formfaq.submit();
 	  }
 	});
-}); */
+});
 
 </script>
 </head>
@@ -71,19 +81,26 @@ function faqlist(){
 <%@ include file="../include/menu.jsp"%>
 
 <div class="faq">
-<h2>FAQ</h2>
+<h2><a href="${path}/faq/list.do">FAQ</a></h2>
 
-<form action="" name="formfaq">
-<input type="hidden" name="no" value="${dto.no}">
-<input type="button" value="수정" id="btnUpdate">
-<input type="button" value="삭제" id="btnDelete">
+<form action="" name="formfaq" method="post">
+<div class="btndiv">
+
+</div>
+
 <table class="faqtable2">
-<thead>
- <tr>
+<c:if test="${sessionScope.admin == 'y'}">
+<tr>
+ <td colspan="2" style="text-align: right;">
+ <input type="hidden" name="no" value="${dto.no}">
+<input type="button" value="수정" id="btnUpdate">
+<input type="button" value="삭제" id="btnDelete"></td>
+</tr>
+</c:if>
+ <tr class="thead">
   <td width="15%">${dto.category}</td>
   <td style="text-align: left;">${dto.title}</td>
  </tr>
- </thead>
  <tr>
   <td colspan="2">등록일: <fmt:formatDate value="${dto.reg_date}" pattern="yyyy-MM-dd" /></td>
  </tr>

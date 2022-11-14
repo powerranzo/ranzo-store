@@ -122,7 +122,6 @@ public class ReviewServiceImpl implements ReviewService {
 			// 정규식을 활용한 작성자 마스킹
 			for(int i=0 ; i<list.size(); i++) {
 				String writer = list.get(i).getWriter();
-				// 작성자 id는 앞 2자리를 제외하고 *로 치환
 				writer = writer.replaceAll("(?<=.{2}).", "*");
 				list.get(i).setWriter(writer);
 			}

@@ -113,6 +113,7 @@ form{margin-top:3%;}
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
+		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv">
 				<h2>전시 수정</h2>
@@ -257,6 +258,7 @@ form{margin-top:3%;}
 						</c:otherwise>
 						</c:choose>
 			</div>
+		</section>
 	</div>
 	<footer>
 	<%@ include file="../include/footer.jsp"%>

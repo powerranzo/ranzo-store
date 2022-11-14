@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 <link href="../include/header.jsp" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
 <style type="text/css">
 .qna{
@@ -84,7 +83,6 @@ table i{
 }
 </style>
 
-
 <script type="text/javascript">
 $(function() {
 	$("#btnWrite").click(function() {
@@ -98,31 +96,39 @@ function list(page) {
 }
 </script>
 
-<style type="text/css">
-td {
-	text-align: center;
-}
-</style>
 
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>QnA게시판</h2>
-<br>
 
-<table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
-<tr>
-	<th style="background-color: #eeeeee; text-align: center; width: 10%;">No.</th>
-	<th style="background-color: #eeeeee; text-align: center; width: 40%;">제목</th>
-	<th style="background-color: #eeeeee; text-align: center; width: 20%;">작성자</th>
-	<th style="background-color: #eeeeee; text-align: center; width: 20%;">작성일</th>
-	<th style="background-color: #eeeeee; text-align: center; width: 10%;">조회수</th>
-</tr>
-<c:forEach var="row" items="${map.list}">
-	<c:choose>
-		<c:when test="${row.show == 'y'}">
+<div class="qna">
+<h2><a href="${path}/board/qna/list.do">QNA</a></h2>
+<!-- 검색폼 -->
+<div class="searchdiv">
+<form name="form1" method="post" action="${path}/board/qna/list.do">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	>이름</option>
+		<option value="title" 
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+	</select>
+	<input name="keyword" class="qnakeyword" value="${map.keyword}" placeholder="검색어를 입력하세요.">
+	<input type="submit" value="조회" id="searchBtn" name="searchBtn">
+	<button type="button" id="btnWrite" class="btn btn-primary pull-right">글쓰기</button>
+</form>
+</div>
+
+
+<div class="container">
+
+<div id="tab-1" class="tab-content current">
+<table  class="qnatable">
+	<thead>
 		<tr>
-
 			<th width="10%">No.</th>
 			<th>제목</th>
 			<th width="15%">작성자</th>
@@ -163,7 +169,6 @@ td {
       </c:otherwise>
       </c:choose>   
 	</c:when>
-
 	</c:choose>
 </c:forEach>
 
@@ -200,26 +205,13 @@ td {
 		</td>
 	</tr>
 </table>
-<br>
-
-<!-- 검색폼 -->
-<div align="center">
-<form name="form1" method="post" action="${path}/board/qna/list.do" style="width: 100%;">
-	<select name="search_option">
-		<option value="all"
-			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
-		<option value="name"
-			<c:if test="${map.search_option == 'name'}"> selected </c:if>	>이름</option>
-		<option value="title" 
-			<c:if test="${map.search_option == 'title'}"> selected </c:if>	>제목</option>
-		<option value="content" 
-			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
-	</select>
-	<input name="keyword" size="80" value="${map.keyword}">
-	<input type="submit" value="조회" class="btn btn-secondary">
-	<button type="button" id="btnWrite" class="btn btn-primary pull-right">글쓰기</button>
-</form>
 </div>
 
+</div>
+</div>
+
+<footer>
+<%@ include file="../include/footer.jsp"%>
+</footer>
 </body>
 </html>

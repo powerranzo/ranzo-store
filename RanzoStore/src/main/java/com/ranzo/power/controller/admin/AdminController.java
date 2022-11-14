@@ -29,8 +29,6 @@ import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.admin.AdminService;
 import com.ranzo.power.service.admin.UploadService;
-import com.ranzo.power.service.member.MemberService;
-import com.ranzo.power.service.shop.ExhibitionService;
 import com.ranzo.power.util.DateUtils;
 
 @Controller
@@ -41,19 +39,12 @@ public class AdminController {
 
 	@Inject
 	AdminService adminService;
-	
-	@Inject
-	MemberService memberService;
-	
-	@Inject
-	ExhibitionService exbService;
 
 	@Inject
-	UploadService uploadService; 
+	UploadService uploadService;
 
-	@RequestMapping("/home.do")
-	public String homeList(Model m){
-		m.addAttribute("map", adminService.getHomeList());
+	@GetMapping("/home.do")
+	public String adminHome() {
 		return "admin/adminHome";
 	}
 
@@ -77,7 +68,7 @@ public class AdminController {
 			HttpServletRequest request) {
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) userid = (String)flashmap.get("userid");
-		m.addAttribute("dto", memberService.viewMember(userid));
+		m.addAttribute("dto", adminService.getMemberView(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
 		m.addAttribute("reserv_list", adminService.getMemberReserv(userid)); 
 		return "admin/memberView";
@@ -162,7 +153,7 @@ public class AdminController {
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) code = (String) flashmap.get("code");
 		ExhibitionDTO dto = adminService.getExbView(code);
-		ProductInfoDTO idto = exbService.getProductInfo(code);
+		ProductInfoDTO idto = adminService.getProductInfoView(code);
 		int mark=0;
 		if(idto.getAttach().indexOf(Constants.DIR_EXHIBITION_PI) != -1)
 			mark=1;
@@ -177,7 +168,7 @@ public class AdminController {
 	@RequestMapping("/exb_update.do")
 	public String updateExb(ExhibitionDTO dto, ProductInfoDTO idto, 
 			HttpServletRequest request, MultipartFile file, MultipartFile file2) {
-		ProductInfoDTO dtoOrigin = exbService.getProductInfo(idto.getCode());
+		ProductInfoDTO dtoOrigin = adminService.getProductInfoView(idto.getCode());
 		String thumnail = adminService.getExbView(dto.getCode()).getThumnail();
 		String product_info = dtoOrigin.getAttach(); 
 		
@@ -206,7 +197,7 @@ public class AdminController {
 	public ResponseEntity<String> fileDelete(String code, String fileType
 			, HttpServletRequest request) {
 		ExhibitionDTO dto = adminService.getExbView(code);
-		ProductInfoDTO idto = exbService.getProductInfo(code);
+		ProductInfoDTO idto = adminService.getProductInfoView(code);
 		String fileName = "";
 		if(fileType.equals("thumnail")) {
 			fileName = dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
@@ -366,7 +357,9 @@ public class AdminController {
 
 	@RequestMapping("/popup_show.do")
 	public String popupShow(@RequestParam(defaultValue = "0") int no) {
-		if(no!= 0) adminService.popupShow(no);
+		if(no!= 0) {
+			adminService.popupShow(no);
+		}
 		return "redirect:popup_list.do";
 	}
 

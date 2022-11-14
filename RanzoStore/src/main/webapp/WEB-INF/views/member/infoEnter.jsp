@@ -18,21 +18,36 @@
 }
 .content{
 	margin: 0 80px 0 80px;
+	display: flex;
+	justify-content: space-between;
+	min-height: 100%;
+	flex: 1;
+}
+footer{
+	clear : both;
+	bottom: 0;
+}
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 section {
-	margin-top:6%;
 	width: 75%;
 	float: left;
 	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
-	padding:5px;
+	padding: 50px 0 0 0;
 	float: left;
 	display: inline-block;
-	width: 90%;
-/* 	min-height: 100%;
-	flex: 1; */
+	min-height: 100%;
+	width: 80%;
+	flex: 1;
 }
 .p {
 	margin-bottom: 15px;
@@ -63,18 +78,6 @@ section {
 	border: none;
 	margin: 50px 0 30px 190px;
 }
-footer{
-	clear : both;
-	bottom: 0;
-}
-html, body{
-	height: 100%;
-}
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
-}
 </style>
 </head>
 <body>
@@ -85,11 +88,18 @@ body {
 
 	<section>
 	 <div class="orderdiv">
-
+<!--  
 		<div class="title">개인 정보 수정</div><br>
 		<p class="p">비밀번호 재확인<p></p>
 		회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
 		<hr noshade size="1px" width="820px" color="black">
+-->
+
+		<div class="title">개인 정보 수정</div><br>
+		<p class="p">비밀번호 재확인<p></p>
+		회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
+		<hr noshade size="2px" width="700px" color="black">
+		
 		<div class="check">
 			<table>
 				<tr height="50px">

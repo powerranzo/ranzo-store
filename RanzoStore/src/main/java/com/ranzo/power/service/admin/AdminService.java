@@ -6,13 +6,14 @@ import java.util.Map;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface AdminService {
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage);
-//	public MemberDTO getMemberView(String userid);
+	public MemberDTO getMemberView(String userid);
 	public void deleteMember(String[] userids);
 	public List<QnaDTO> getMemberQna(String userid);
 	public List<ReservDTO> getMemberReserv(String userid);
@@ -35,7 +36,6 @@ public interface AdminService {
 	public void deletePopupFile(int no);
 	public void popupShow(int no);
 	public List<PopupDTO> getPopupOn();
-//	public ProductInfoDTO getProductInfoView(String code);
-	public Map<String, Object> getHomeList();
+	public ProductInfoDTO getProductInfoView(String code);
 	
 }

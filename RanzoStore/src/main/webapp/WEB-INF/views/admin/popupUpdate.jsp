@@ -90,6 +90,7 @@ form {
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
+		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>팝업 수정</h2>
@@ -176,6 +177,7 @@ form {
 					<input id="btnUpdate" name="btnUpdate" type="button" value="수정하기" style="margin-right:10%;">
 					<input id="btnDelete" name="btnDelete" type="button" value="팝업종료" style="margin-right:10px;">
 			</div>
+		</section>
 	</div>
 <%@ include file="../include/footer.jsp"%>
 </body>

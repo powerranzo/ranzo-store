@@ -1,48 +1,41 @@
 @charset "UTF-8";
 *{
-	margin: 0;
-	padding: 0;
+	margin: 0; padding: 0;
 }
 .asidediv{
 	float: left;	
 	padding: 5px;
-	margin-left: 4%;
 	margin-top: 2%;
-	height: 700px;
-}
-aside {
+	height: 600px;
 	float:left;
 	width: 200px;
 	text-align: left;
-
 }
 .title {
 	font-size: 30px;
 	margin-top: 40px;
 	font-weight: bold;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
 }
 .title a:link{text-decoration: none; color: black;}
 .title a:visited{text-decoration: none; color: black;}
 .title a:active{text-decoration: none; color: black;}
-.title-s {
-	font-size: 20px;
-	margin: 30px 0 15px 0;
-}
 .a1 {
 	text-decoration: none;
 	color: gray;
-	font-weight: normal;
 }
 .a1:hover{
 	color: black;
+	text-decoration: none;
 	font-weight: bold;	
 }
-html, body{
-	height: 100%;
+.submenu li{
+	padding: 10px;
+	font-size: 16px;	
 }
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
+.submenu h4{
+	border-bottom: 1px solid #ddd;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
-

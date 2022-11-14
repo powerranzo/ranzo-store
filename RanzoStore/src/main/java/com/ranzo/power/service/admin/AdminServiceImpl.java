@@ -19,7 +19,6 @@ import com.ranzo.power.model.admin.dto.MemberCountDTO;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
-import com.ranzo.power.model.member.dao.MemberDAO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
@@ -32,21 +31,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Inject
 	AdminDAO adminDao;
-	
-	@Inject
-	MemberDAO memberDao;
 
-				
-	@Override
-	public Map<String, Object> getHomeList() {
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
-		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));	
-		map.put("qna_newcount", adminDao.countQnaNew());
-		map.put("qna_delcount", adminDao.countQnaDel());
-		
-		return map;
-	}
 	@Override
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
@@ -60,13 +45,18 @@ public class AdminServiceImpl implements AdminService {
 		List<MemberDTO> list=adminDao.getMemberList(map);
 		MemberCountDTO mcount=
 				new MemberCountDTO(adminDao.countTbAll("member_tb"), 
-				adminDao.countMemberToday(DateUtils.getToday()),
-				adminDao.countMemberQuit());
+						adminDao.countMemberToday(DateUtils.getToday()),
+						adminDao.countMemberQuit());
 		map.clear();
 		map.put("mcount", mcount);
 		map.put("list", list);
 		map.put("pager", pager);
 		return map;
+	}
+
+	@Override
+	public MemberDTO getMemberView(String userid) {
+		return adminDao.getMemberView(userid);
 	}
 
 	@Override
@@ -115,7 +105,7 @@ public class AdminServiceImpl implements AdminService {
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
-		List<MemberDTO> list=adminDao.getExbList(map); //확인
+		List<MemberDTO> list=adminDao.getExbList(map);
 		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));
 		map.put("list", list);
@@ -132,7 +122,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ExhibitionDTO getExbView(String code) {
-		return adminDao.getExbView(code); //확인
+		return adminDao.getExbView(code);
 	}
 	
 	@Transactional
@@ -153,11 +143,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void deleteExb(String code) {
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("value", "exhibition_tb");
-		map.put("condition", "code");
-		map.put("list", code);
-		adminDao.updateShowN(map);
+		adminDao.deleteExb(code);
 	}
 	
 	@Override
@@ -252,5 +238,16 @@ public class AdminServiceImpl implements AdminService {
 		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
+
+	@Override
+	public ProductInfoDTO getProductInfoView(String code) {
+		return adminDao.getProductInfoView(code);
+	}
+
+
+
+ 
+
+
 
 }
