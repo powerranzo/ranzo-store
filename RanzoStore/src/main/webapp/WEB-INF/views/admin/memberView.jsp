@@ -7,19 +7,21 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <title>회원 정보</title>
+<style type="text/css">
+</style>
 <script type="text/javascript">
 	$(function() {
-		$("#btnDelReserv").click(function() {
-			if (confirm('예약목록을 삭제하시겠습니까?')) {
+		$("#btnDelete").click(function() {
+			alertify.confirm("예약 목록을 삭제하시겠습니까?", function() {
 				document.form1.action = "${path}/admin/reserv_delete.do";
 				document.form1.submit();
-			}
+			});
 		});
-		$("#btnDelete").click(function() {
-			if (confirm('게시글을 삭제하시겠습니까?')) {
+		$("#btnDelete2").click(function() {
+			alertify.confirm("게시글을 삭제하시겠습니까?", function() {
 				document.form2.action = "${path}/admin/qna_delete.do";
 				document.form2.submit();
-			}
+			});
 		});
 	});
 	function qnaView(param) {
@@ -34,12 +36,11 @@
 		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
-				<h3>회원관리</h3>
-				<div class="form-group">
-
-					<table class="ordertable">
+				<h2>회원 정보</h2>
+				<div style="margin: 5% 0 50% 0;">
+					<table class="adminTable2" style="width:50%;">
 						<tr>
-							<th>아이디</th>
+							<th id="adminTB2_th" style="width:20%;">아이디</th>
 							<td>${dto.userid}</td>
 						</tr>
 						<tr>
@@ -78,16 +79,10 @@
 							</tr>
 						</c:if>
 					</table>
-				</div>
-				<!-- 				</div> -->
-				<!-- 				<div class="container"> -->
-				<br>
-				<form name="form1" class="form-inline" method="post">
-					<h4>${dto.name}님의최근예약</h4>
-					<!-- 				<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">최근 예약</button></h4> -->
-					<!--   				<div id="demo" class="collapse"> -->
-
-					<table class="ordertable">
+					</div>
+					
+					<h4>${dto.name}님의 최근 예약</h4>
+					<table class="adminTable3">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -109,7 +104,7 @@
 									<td>${reserv.no}</td>
 									<td>${reserv.name}(${reserv.userid})</td>
 									<td>${reserv.title}(${reserv.code})</td>
-									<td>${reserv.adult}/${reserv.teen} / ${reserv.kids}</td>
+									<td>${reserv.adult}/${reserv.teen}/ ${reserv.kids}</td>
 									<td>${reserv.quantity}</td>
 									<td>${reserv.sub_total}</td>
 									<td><fmt:formatDate value="${reserv.res_date}" type="date"
@@ -119,20 +114,13 @@
 							</tbody>
 						</c:forEach>
 					</table>
+				<form name="form1" class="form-inline" method="post">
 					<input type="hidden" name="userid" value="${dto.userid}">
 				</form>
-				<button id="btnDelReserv" type="button" class="btn btn-default">삭제
-					처리</button>
-				<!-- 			</div> -->
-
-				<!-- 			<div class="container"> -->
-				<br>
-				<br>
+				<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete"><br><br><br>
 				<form name="form2" class="form-inline" method="post">
-					<h4>${dto.name}님의최근문의글</h4>
-					<!-- 				<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#qna">최근 문의글</button></h4> -->
-					<!--   				<div id="qna" class="collapse"> -->
-					<table class="ordertable">
+					<h4>${dto.name}님의 최근 문의글</h4>
+					<table class="adminTable3">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -162,15 +150,11 @@
 						</c:forEach>
 					</table>
 					<input type="hidden" name="userid" value="${dto.userid}">
-					<button id="btnDelete" type="button" class="btn btn-default">삭제
-						처리</button>
-
-
-
-				</form>
-			</div>
+					</form>
+					<input type="submit" value="삭제 처리" id="btnDelete2" name="btnDelete2">
+				</div>
 		</section>
 	</div>
-<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

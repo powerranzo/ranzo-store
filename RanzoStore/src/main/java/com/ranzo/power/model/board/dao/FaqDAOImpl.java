@@ -59,4 +59,16 @@ public class FaqDAOImpl implements FaqDAO {
 		
 	}
 
+	@Override
+	public void update(FaqDTO dto) {
+		sqlSession.update("faq.update", dto);
+		
+	}
+
+	@Override
+	public void delete(int no) {
+		sqlSession.update("faq.delete",no);
+		
+	}
+
 }

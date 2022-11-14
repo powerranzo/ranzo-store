@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QNA 게시판</title>
+<title>QNA</title>
 <%@ include file="../include/header.jsp" %>
 
 <!-- include libraries(jQuery, bootstrap) -->
@@ -54,13 +54,13 @@ $(function() {
 		<tr>
 			<th>제목</th>
 			<td>
-				<input name="title" id="title" size="80" value="re: 문의 내용 답변드립니다  ${dto.title}">
+				<input name="title" id="title" size="80" value="re: 문의 내용 답변드립니다  ">
 			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="content" id="content" rows="2" cols="80" placeholder="답변 내용을 입력하세요">${dto.content}</textarea>		
+				<textarea name="content" id="content" rows="2" cols="80" placeholder="답변 내용을 입력하세요">${dto.content}<br><hr>답변:<br></textarea>		
 			</td>
 		</tr>
 	</table>

@@ -27,6 +27,47 @@
 	function btn4() {
 		location.href = "${path}/reserv/detail/testcode06";
 	}
+	
+	<!-- Channel Plugin Scripts -->
+	  (function() {
+	    var w = window;
+	    if (w.ChannelIO) {
+	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+	    }
+	    var ch = function() {
+	      ch.c(arguments);
+	    };
+	    ch.q = [];
+	    ch.c = function(args) {
+	      ch.q.push(args);
+	    };
+	    w.ChannelIO = ch;
+	    function l() {
+	      if (w.ChannelIOInitialized) {
+	        return;
+	      }
+	      w.ChannelIOInitialized = true;
+	      var s = document.createElement('script');
+	      s.type = 'text/javascript';
+	      s.async = true;
+	      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+	      s.charset = 'UTF-8';
+	      var x = document.getElementsByTagName('script')[0];
+	      x.parentNode.insertBefore(s, x);
+	    }
+	    if (document.readyState === 'complete') {
+	      l();
+	    } else if (window.attachEvent) {
+	      window.attachEvent('onload', l);
+	    } else {
+	      window.addEventListener('DOMContentLoaded', l, false);
+	      window.addEventListener('load', l, false);
+	    }
+	  })();
+	  ChannelIO('boot', {
+	    "pluginKey": "ff637098-0b73-4a5a-8415-bbfa61cc9534"
+	  });
+	<!-- End Channel Plugin -->
 </script>
 </head>
 <body>
@@ -36,7 +77,7 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<a><img class="simage"
-					src="${path}/resources/images/main_1.jpg"></a>
+					src="${path}/resources/images/main_3.jpg"></a>
 				<div class="text1">국립중앙박물관</div>
 				<div class="image_text">
 					<p style="font-size: 18px; font-weight: bold;">2022.10.25 ~
@@ -104,15 +145,15 @@
 			<a href="${path}/shop/exhibition/detail/testcode31"><img src="${path}/resources/images/20220825-43301_1.jpg" id="r1"></a>
 			</div>
 			<div class="reco1">
-			<a href="${path}/shop/exhibition/detail/testcode02"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
+			<a href="${path}/shop/exhibition/detail/testcode11"><img src="${path}/resources/images/d49b047b-0422-45a9-952a-946828669f40.jpg" id="r2"></a>
 			</div>
 			<div class="reco1">
 			<a href="${path}/shop/exhibition/detail/testcode26"><img src="https://ticketimage.interpark.com/Play/image/large/22/22004804_p.gif" id="r3"></a>
 			</div>
 		</div>
 	</div>
-<footer>
+<!-- <footer> -->
 <%@ include file="include/footer.jsp"%>
-</footer>
+<!-- </footer> -->
 </body>
 </html>

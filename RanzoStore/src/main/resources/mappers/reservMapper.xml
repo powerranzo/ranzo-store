@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  INSERT INTO RESERV_ITEM_TB(no, userid, code, res_date, adult, teen, kids, quantity, sub_total)
  VALUES (seq_reserv_no.nextval, #{userid}, #{code}, #{res_date},#{adult},#{teen},#{kids},#{quantity},#{sub_total}) 
  </insert>
+ <select id="detail" resultType="ExhibitionDTO">
+ 		select * from exhibition_tb
+ 		where code= #{exhibitionCode}
+ </select>
  <select id="orderlist" resultType="ReservDTO">
  select *
 			from (
