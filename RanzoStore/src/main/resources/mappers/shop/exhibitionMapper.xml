@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 좋아요 누름 -->
 	<update id="pressHeart" parameterType="java.util.HashMap">
-		update WISHLIST_TB set heart=1 
+		update WISHLIST_TB set heart=1, reg_date=sysdate
 		where product = #{product} and userid=#{userid}
 	</update>
 
