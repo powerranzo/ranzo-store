@@ -51,7 +51,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>예약현황
@@ -194,7 +193,6 @@
 					</form>
 					<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete">
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

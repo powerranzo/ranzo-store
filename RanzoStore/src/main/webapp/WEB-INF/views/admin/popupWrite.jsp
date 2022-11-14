@@ -69,7 +69,6 @@ form {
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>팝업 등록</h2>
@@ -141,7 +140,6 @@ form {
 				<input id="btnWrite" name="btnWrite" type="button" value="등록하기" style="margin-right:10%;">
 					
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

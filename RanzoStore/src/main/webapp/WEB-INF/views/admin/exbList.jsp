@@ -7,8 +7,6 @@
 <title>전시 목록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
-<style type="text/css">
-</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
@@ -53,7 +51,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 	<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>전시현황</h2>
@@ -189,7 +186,6 @@
 				<input type="submit" value="종료 처리" id="btnDelete" name="btnDelete">
 				<input type="submit" value="신규 등록" id="btnWrite" name="btnWrite">
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

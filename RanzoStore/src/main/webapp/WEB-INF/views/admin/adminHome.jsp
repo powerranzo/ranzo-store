@@ -8,104 +8,68 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>   
 <style>
-/* html, body { */
-/* 	height: 100%; */
-/* } */
-
-/* body { */
-/* 	display: flex; */
-/* 	flex-direction: column; */
-/* 	margin: 0; */
-/* } */
-.tableSet{margin-bottom: 10%; display:block; }
-/* .adminTable1{width:45%; margin:0 2% 0 2%;} */
-@media screen and (max-width: 900px) {
-	.adminTable1{width:100% !important;}
+.adminTable1 {margin:0; width:40%;}
+.adminTable1 td{
+	border-top: 1px solid #e4e4e4;
+	border-collapse: separate;	
 }
- html, body { 
- 	height: 100%; 
-} 
-
-body { 
- 	display: flex;
- 	flex-direction: column;
-	margin: 0;
- } 
-.tableSet{margin-bottom: 10%; display:block}
-.adminTable1{margin:0 5% 0 0;}
-/* .adminTable3{width:100%; margin-left:5%;} */
+.recentOrder, .recentWish {
+	display: inline-block;
+/* 	width: 100%; */
+/* 	height: 100px; */
+	margin: 20px;
+}
+.a2 {
+	text-decoration: none;
+	color: gray;
+	font-size: 20px;
+}
+.a2:hover{
+	color: black;
+	text-decoration: none;
+	font-weight: bold;	
+}
+/* h4{font-weight: bold; display: block;} */
 </style>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv">
-			<div class="tableSet">
-				<h4>전시현황</h4>
-				<table class="adminTable1" id="" style="width:20%; margin-right:10%;">
+				<div class="recentOrder">
+			<a class="a2" href="/power/reserv/list.do/kim">전시현황 ></a>
+			</div>
+				<table class="adminTable1">
 					<tr>
 						<th>전체 전시</th>
 						<th>진행 중인 전시</th>
+						<th>지난 전시</th>
 					</tr>
 					<tr>
+						<td>${map.exb_count_all}개</td>
 						<td>${map.exb_count_all}개</td>
 						<td>${map.exb_count_ing}개</td>
 					</tr>
 				</table>
-				<h4>오늘의 할일</h4>
-				<table class="adminTable1" id="" style="width:20%;">
+				
+				<div class="recentOrder">
+				<a class="a2" href="/power/reserv/list.do/kim">예약현황 ></a>
+				</div>
+				<table class="adminTable1">
 					<tr>
-						<th>신규 문의글</th>
-						<th>신규 예약</th>
+						<th>전체 예약</th>
+						<th>오늘 예약</th>
+						<th>결제 완료 예약</th>
 					</tr>
 					<tr>
+						<td>${map.exb_count_all}개</td>
 						<td>${map.exb_count_all}개</td>
 						<td>${map.exb_count_ing}개</td>
 					</tr>
 				</table>
-			</div>
-			<div class="tableSet">
-			<table class="adminTable3">
-			<tr>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
-			</table>
-			</div>
-			<div class="tableSet">
-				<table class="adminTable1" id="">
-					<tr>
-						<th>전체 전시</th>
-						<th>진행 중인 전시</th>
-					</tr>
-					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
-					</tr>
-				</table>
-				<table class="adminTable1" id="">
-					<tr>
-						<th>전체 전시</th>
-						<th>진행 중인 전시</th>
-					</tr>
-					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
-					</tr>
-				</table>
-			</div>
-			</div>
-		</section>
-	</div>
+		</div>
+		</div>
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>

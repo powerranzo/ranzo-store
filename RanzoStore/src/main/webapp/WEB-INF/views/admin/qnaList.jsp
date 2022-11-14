@@ -54,7 +54,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>QnA</h2>
@@ -187,7 +186,6 @@
 				</form>
 				<input type="submit" id="btnDelete" value="삭제 처리">
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>
