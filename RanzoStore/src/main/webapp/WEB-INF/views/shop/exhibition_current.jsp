@@ -38,8 +38,9 @@ $(function(){
 	
 	$('.sort-dropdown').click(function(){
 		if($('.filter-dropdown').css('display') != 'none'){
-			/*  @media all and (min-width:1132px) */
-			$('.filter').hide();	
+			/*  @media all and (min-width:1132px) */			
+			$('.filter-dropdown').text("지역 ▾");			
+			$('.filter').hide();
 		}
 		$('.sort').slideToggle(500);	
 		//$(this).text();
@@ -72,7 +73,6 @@ $(function(){
 		/* 선택된 정렬방식으로 텍스트 변경 */
 		$('.change').text($(this).text());
 		if($('.sort-dropdown').css('display') != 'none'){
-			/* @media all and (min-width:768px) */
 			$('.sort').hide();			
 		}
 		getList();
