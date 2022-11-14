@@ -53,14 +53,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  INSERT INTO FAQ_TB (no, title, content, category)
 	VALUES (seq_faq.nextval, #{title}, #{content},#{category})
  </insert>
- 
- <update id="update">
- update faq_tb set category=#{category}, title=#{title}, content=#{content} where no=#{no}
- </update>
- 
- <update id="delete">
- update faq_tb set show = 'n' where no=#{no}
- </update>
 </mapper>
 
 

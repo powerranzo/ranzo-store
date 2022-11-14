@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 
 public interface MemberService {
 	public boolean loginCheck(MemberDTO dto, HttpSession session);
@@ -26,6 +25,4 @@ public interface MemberService {
 	public void kakaoLogout(String access_Token);
 	public List<QnaDTO> qnaList();
 	public List<ReviewDTO> reviewList();
-	public List<ExhibitionDTO> wishlist(String userid);
-	public int emptyWish(String userid);
 }

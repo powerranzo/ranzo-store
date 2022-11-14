@@ -6,16 +6,16 @@
 <meta charset="UTF-8">
 <title>나의 리뷰</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/include/CommonDashboard.css">
 
 <style>
 * {box-sizing: content-box;}
+
 * {
 	margin:0px; 
 }
 .content{
-
-	margin: 0px 80px 0 80px;
+	margin: 20px 80px 0 80px;
 
 }
 section {
@@ -24,7 +24,7 @@ section {
 	text-align: left;
 }
 .orderdiv {
-	padding: 50px 0 0 0;
+	padding:5px;
 	float: left;
 	display: inline-block;
 	min-height: 100%;
@@ -34,10 +34,12 @@ section {
 .p {
 	margin: 15px 0 15px 0;
 }
+
 footer{
 	clear : both;
 	bottom: 0;
 }
+
 html, body{
 	height: 100%;
 }
@@ -46,6 +48,7 @@ body {
   flex-direction: column;
   margin: 0;
 }
+
 th, td {
 	border-bottom: 1px solid black;
   padding: 10px;
@@ -63,7 +66,7 @@ th, td {
 	 <div class="orderdiv">
 		<div class="title">나의 리뷰</div>
 		<p class="p">해당 게시판의 성격과 다른 글은 사전 동의 없이 담당 게시판으로 이동될 수 있습니다.</p>
-		<hr noshade size="1px" width="820px" color="black">
+		<hr noshade size="2px" width="820px" color="black">
 		<table style="width: 820px;">
 		<tr>
 			<th style="width: 30%;">전시명</th>

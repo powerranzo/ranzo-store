@@ -46,16 +46,4 @@ public class FaqServiceImpl implements FaqService {
 		
 	}
 
-	@Override
-	public void update(FaqDTO dto) {
-		faqDao.update(dto);
-		
-	}
-
-	@Override
-	public void delete(int no) {
-		faqDao.delete(no);
-		
-	}
-
 }

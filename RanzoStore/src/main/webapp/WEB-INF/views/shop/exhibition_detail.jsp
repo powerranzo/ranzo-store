@@ -32,7 +32,6 @@
 		getReserveInfo();
 		getReviewInfo();
 		getQnaInfo();
-		findHeart(); 
 	});
 	
 	// 전시상세
@@ -95,48 +94,7 @@
 			}
 		});
 	}
-
-	
-  // 좋아요 체크 되어있는 지 확인
-	function findHeart() {				
-	   
-	  // 로그인 했을 때만 좋아요 가능
-		<c:if test="${sessionScope.userid != null}">
-		// 좋아요가 있는지 확인한 값을 heartval에 저장
-  	var heartval = ${dto.heart}
-  
-		// heartval이 1이면 좋아요가 이미 되있는것이므로 꽉 찬 하트를 출력하는 코드
- 	 if(heartval>0) {
-			$("#heart").prop("src", "${pageContext.request.contextPath}/resources/images/favorite2.png");
-		} else {
-			$("#heart").prop("src", "${pageContext.request.contextPath}/resources/images/favorite1.png");
-		}
- 	</c:if>
-	}  
-
-	// 좋아요 버튼을 클릭 시 실행되는 코드
-	function clickHeart() {
 		
-	// 로그인 했을 때만 좋아요 가능
-	<c:if test="${sessionScope.userid != null}">
-		
-	$.ajax({
-		url :"${path}/shop/exhibition/heart.do",
-		type :"GET",
-		dataType : "json",
-		data : {"exhibitionCode": "${exhibition.code}", "userid": "${sessionScope.userid}"},
-		success : function(data){
-  				if(data==1) { // 좋아요 누름
-					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite2.png");
-				} else { // 좋아요 취소
-					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite1.png");
-				}  
-			}
-	   });
-	</c:if>
-	}  
-	
-
 </script>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail.css">
 </head>
@@ -144,7 +102,6 @@
 	<header>
 		<%@ include file="../include/menu.jsp" %>
 	</header>
-		
 	<section class="sec-content">
 		<section class="sec-prd">
 			<div class="prd-thumnail">
@@ -167,30 +124,13 @@
 						<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
 						<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 				</span>
-		 	<span class="itemLabel">가격</span>
-			<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
-			<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
-			<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
-			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
-			
-			<!-- 임시 좋아요 자리 -->
-			<!-- 로그인 해야만 좋아요 가능 -->
-			<c:if test="${sessionScope.userid != null }">
-			<a onclick="clickHeart()"><img id="heart" src="${pageContext.request.contextPath}/resources/images/favorite1.png">
-			좋아요</a>
-			</c:if>
-			<!-- 임시 좋아요 자리 -->
-		</div>
-
-		<div> 
-			<!-- 관리자용 -->
-			<c:if test="${sessionScope.admin_userid != null }">
-				<br>
-				<a href="${path}/shop/product/edit/${exhibition.code}">[편집]</a>
-			</c:if>
-		</div>
-	</section>
-
+				</div>
+		 		<span class="itemLabel">가격</span>
+				<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
+				<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
+				<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
+				
+			</div>
 
 			<span class="button-reserve"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 
@@ -221,7 +161,6 @@
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>
-
 
 </body>
 </html>
