@@ -57,10 +57,22 @@ section {
 	display: inline-block;
 	width: 350px;
 }
+
+
+@media screen and (max-width: 800px) {
+	/* .content{
+		display: block;
+		
+	} */
+	.profile{
+		width: 100%;
+
+
 .recentWish {
 	margin: 20px 10px 10px 30px;
 	display: inline-block;
 	width: 350px;
+
 }
 </style>
 <script type="text/javascript">
