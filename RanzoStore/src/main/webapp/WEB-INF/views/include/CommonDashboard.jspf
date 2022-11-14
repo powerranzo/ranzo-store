@@ -2,21 +2,78 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<style>
+*{
+	margin: 0; padding: 0;
+}
+.asidediv{
+	float: left;	
+	padding: 5px;
+	margin-top: 2%;
+	margin-left: 6%;
+	height: 700px;
+	float:left;
+	width: 200px;
+	text-align: left;
+}
+.title {
+	font-size: 30px;
+	margin-top: 40px;
+	font-weight: bold;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+}
+.title a:link{text-decoration: none; color: black;}
+.title a:visited{text-decoration: none; color: black;}
+.title a:active{text-decoration: none; color: black;}
+.a1 {
+	text-decoration: none;
+	color: gray;
+}
+.a1:hover{
+	color: black;
+	text-decoration: none;
+	font-weight: bold;	
+}
+.submenu li{
+	padding: 10px;
+	font-size: 16px;	
+}
+.submenu h4{
+	border-bottom: 1px solid #ddd;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+@media screen and (max-width: 800px) {
+	.asidediv{
+		width: 100%;
+		text-align: center;
+		font-size: 20px;
+		height: auto;
+	}
+	.content{
+		margin: 0;
+	}
+}
+
+
+</style>
 	<div class="asidediv">
 	  <div class="title"><a href="${path}/member/mypage.do">MY PAGE</a></div>
-		<aside>
-		<div class="title-s">MY SHOPPING</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매목록</a>
-		<p><br>
-		<a class="a1" href="#">위시리스트</a>
-		<p><br>
-		<a class="a1" href="${path}/member/myReview.do">고객리뷰</a>
-		<p><br>
-		<a class="a1" href="${path}/member/myInquiry.do">상품문의</a>
-		<p><br>
-		<div class="title-s">MY INFO</div>
-		<hr noshade size="1px" color="black"><br>
-		<a class="a1" href="${path}/member/infoEnter.do">개인정보 변경/탈퇴</a>
-	</aside>
-</div>
+	  <div class="submenu">
+	   <h4>MY SHOPPING</h4>
+	   <ul> 
+	    <li><a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매 목록</a></li>
+	    <li><a class="a1" href="${path}/member/wishlist.do">위시리스트</a></li>
+	    <li><a class="a1" href="${path}/member/myReview.do">나의 리뷰</a></li>
+	    <li><a class="a1" href="${path}/member/myInquiry.do">나의 상품 문의</a></li>
+	   </ul>
+	  </div>
+	  <div class="submenu">
+	   <h4>MY INFO</h4>
+	  	<ul>
+	  	 <li><a class="a1" href="${path}/member/infoEnter.do">개인정보 변경/탈퇴</a></li>
+	  	</ul>
+	  </div>	
+	</div>
+

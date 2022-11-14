@@ -11,7 +11,8 @@
 .ranzo{
 	margin: auto;
 	width: 80%;
-
+	min-height: 100%;
+	flex: 1;
 }
 .ranzo h2{
 	font-size: 80px;
@@ -28,8 +29,20 @@
 	opacity: 0.5;
 }
 .ranzo2 {
-	padding: 20px 50px;
+	padding: 20px;
 	margin: auto;
+}
+footer{
+	clear : both;
+	bottom: 0;
+}
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 </style>
 </head>

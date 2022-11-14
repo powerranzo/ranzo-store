@@ -50,7 +50,7 @@ public class ReservController {
 		@RequestMapping("detail/{exhibitionCode}")
 		public ModelAndView detail2(@PathVariable String exhibitionCode, ModelAndView mav) {
 			mav.setViewName("/reserv/reserv");
-			mav.addObject("dto", exhibitionService.detailProduct(exhibitionCode));
+			mav.addObject("dto", exhibitionService.detailreserv(exhibitionCode));
 			return mav;
 		}
 	
@@ -71,7 +71,7 @@ public class ReservController {
 		model.addAttribute("teen", teen);
 		model.addAttribute("kids", kids);
 		model.addAttribute("firstorder", firstorder);
-		model.addAttribute("dto", exhibitionService.detailProduct(code));	
+		model.addAttribute("dto", exhibitionService.detailreserv(code));	
 		return "/reserv/reserv_result";
 	}
 	//주문내역 추가

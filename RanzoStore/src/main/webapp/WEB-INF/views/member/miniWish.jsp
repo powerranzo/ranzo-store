@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>miniWish</title>
+<%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/resources/css/exhibition_list.css">
+</head>
+<body>
+<div class="sec-exhibition">
+	<ul class="shop-list">
+		<c:forEach var="dto" items="${list}" varStatus="status" begin="0" end="3">
+			<li>
+				<a href="${path}/shop/exhibition/detail/${dto.code}">
+					<div class="prd-imgbox">
+						<img class="prd-img" src="${dto.thumnail}">
+					</div>
+				</a>
+			</li>
+		</c:forEach>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.ranzo.power.service.shop;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ranzo.power.controller.board.ReviewController;
 import com.ranzo.power.model.shop.dao.ExhibitionDAO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
+import com.ranzo.power.model.shop.dto.HeartDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 @Service
@@ -81,5 +84,34 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	@Override
 	public int searchDateCount(String searchDate) {
 		return exhibitionDAO.searchDateCount(searchDate);
+	}
+
+	@Override
+	public HeartDTO findHeart(String exhibitionCode, String userid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("product", exhibitionCode);
+		map.put("userid", userid);
+		return exhibitionDAO.findHeart(map);	
+	}
+
+	@Override
+	public int clickHeart(String exhibitionCode, String userid) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("product", exhibitionCode);
+		map.put("userid", userid);
+		HeartDTO heart = exhibitionDAO.findHeart(map);
+		if(heart.getHeart()==1) {
+			exhibitionDAO.cancelHeart(heart);
+			return 0;
+		} else {
+			exhibitionDAO.pressHeart(heart);
+			return 1;
+		}
+	}
+
+	@Override
+	public Object detailreserv(String exhibitionCode) {
+		return exhibitionDAO.detailreserv(exhibitionCode);
+
 	}
 }
