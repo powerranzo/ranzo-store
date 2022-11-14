@@ -10,26 +10,24 @@
 
 </head>
 <body>
-	<section class="sec-qna">
-		<h2>Q&A <span id="count">(${map.count})</span></h2>
-		<hr>
-		<p class='comment-notice'>게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.</p>
-		
-		<ul>
-			<c:forEach var="qna" items="${map.qnaInfo}">   
-				<li class="qna">
-					<div>
-						<span id='bno'>${qna.bno}</span> | 
-						<span id='writer'>${qna.writer}</span> | 
-						<span id='date'>${qna.reg_date}</span>
-					</div>
-					<div class='title'>${qna.title}</div>			
-					<div class='content'>${qna.content}</div>
+	<h1>Q&A <span id="review-count">(${map.count})</span></h1>
+	<hr>
+	게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
 	
-				</li>
-		</c:forEach>
+	<ul>
+		<c:forEach var="qna" items="${map.qnaInfo}">   
+			<li>
+				<div>
+					<span id='rvw-bno'>${qna.bno}</span> | 
+					<span id='rvw-writer'>작성자 :${qna.writer}</span> | 
+					<span id='rvw-date'>작성일:${qna.reg_date}</span>
+				</div>
+				<div class='rvw-subject'>${qna.title}</div>			
+				<div class='rvw-content'>${qna.content}</div>
+
+			</li>
+	</c:forEach>
 	</ul>
-	</section>
 	
 </body>
 </html>
