@@ -52,6 +52,7 @@ section {
 	width: 35%;
 	height: 300px;
 	margin: 20px;
+	vertical-align: top;
 }
 .a2 {
 	text-decoration: none;
@@ -75,6 +76,7 @@ section {
 		width: 100%;
 		height: 300px;
 		margin: 20px;
+		
 	}
 }
 
