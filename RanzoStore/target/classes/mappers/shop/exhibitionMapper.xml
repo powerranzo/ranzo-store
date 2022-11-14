@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY nvl((select count(*) from review_tb where code=product and show='y'),0) desc
 		</when>
 		<when test="sort == '가격 낮은순'">
-			ORDER BY adult_price desc
+			ORDER BY adult_price
 		</when>
 		<when test="sort == '종료 임박순'">
 			ORDER BY end_date

@@ -69,9 +69,12 @@ $(function(){
 	sortList.click(function(e){
 		sortList.removeClass('selected');
 		$(this).addClass('selected');
-		/* 선탣괸 정렬방식으로 텍스트 변경 */
+		/* 선택된 정렬방식으로 텍스트 변경 */
 		$('.change').text($(this).text());
-		$('.sort').hide();			
+		if($('.sort-dropdown').css('display') != 'none'){
+			/* @media all and (min-width:768px) */
+			$('.sort').hide();			
+		}
 		getList();
 	});
 
