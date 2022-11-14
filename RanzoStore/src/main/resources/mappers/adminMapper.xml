@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 전시 검색 개수 -->
 	<select id="countSearchExb" resultType="int">
 		SELECT COUNT(*) FROM exhibition_tb
-		<include refid="Exb" />
+		<include refid="exb" />
 	</select>
 	
 	<!-- 전시 검색 목록 -->

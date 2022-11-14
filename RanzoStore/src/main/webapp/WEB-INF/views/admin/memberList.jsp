@@ -28,10 +28,8 @@
 	function optionSelect(num) {
 		var selected = "";
 		var option = ''.concat('#searchOption', num);
-		if (num == 1)
-			selected = '${searchOp.searchOption1}';
-		else if (num == 2)
-			selected = '${searchOp.searchOption2}';
+		if (num == 1) selected = '${searchOp.searchOption1}';
+		else if (num == 2) selected = '${searchOp.searchOption2}';
 		else {
 			selected = '${searchOp.orderOption}';
 			option = '#orderOption';

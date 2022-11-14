@@ -7,6 +7,8 @@
 <title>전시 목록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
+<style type="text/css">
+</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);

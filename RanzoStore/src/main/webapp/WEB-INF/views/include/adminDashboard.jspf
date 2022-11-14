@@ -4,9 +4,6 @@
  <style>
  * {box-sizing: content-box;}
  
- @media screen and (max-width: 900px) { 
-	.asidediv {width:100% !important;}
-}
 aside {
 	float:left;
 	margin-left:5%;
@@ -17,15 +14,13 @@ aside {
 	float: left;
 	width:20%;
 	padding: 5px;
-	margin-left: 5%;
-	margin-right: 0;
+	margin-left: 3%;
+	margin-right: 2%;
 }
 
-#adminULul {list-style:none;}
-#adminULul li{list-style-type:none; float: left; margin-left:30%;}
 .title {
-	font-size: 30px;
-/* 	margin-top: 40px; */
+	font-size:30px;
+	margin-top: 40px;
 	font-weight: bold;
 }
 .title a:link{text-decoration: none; color: black;}
@@ -34,6 +29,17 @@ aside {
 .title-s {
 	font-size: 20px;
 	margin: 25px 0 3% 0;
+}
+.a1 {
+	font-size:15px;
+	padding: 10px 0 10px 0;
+	text-decoration: none;
+	color: gray;
+	font-weight: normal;
+}
+.a1:hover{
+	color: black;
+	font-weight: bold;	
 }
 </style>
 <c:set var="path" value="${pageContext.request.contextPath}" /> 

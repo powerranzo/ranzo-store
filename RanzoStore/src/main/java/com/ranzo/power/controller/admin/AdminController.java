@@ -49,7 +49,7 @@ public class AdminController {
 	ExhibitionService exbService;
 
 	@Inject
-	UploadService uploadService;
+	UploadService uploadService; 
 
 	@RequestMapping("/home.do")
 	public String homeList(Model m){
@@ -366,9 +366,7 @@ public class AdminController {
 
 	@RequestMapping("/popup_show.do")
 	public String popupShow(@RequestParam(defaultValue = "0") int no) {
-		if(no!= 0) {
-			adminService.popupShow(no);
-		}
+		if(no!= 0) adminService.popupShow(no);
 		return "redirect:popup_list.do";
 	}
 
