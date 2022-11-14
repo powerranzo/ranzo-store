@@ -155,34 +155,43 @@
 						</c:forEach>
 					</table>
 
-					<div class="row" align="center">
-						<div class="col-sm-12">
-							<ul class="pagination pagination">
-								<c:if test="${qna.pager.curPage > 1}">
-									<li><a href="#" onclick="qnaList('1')">첫 페이지</a></li>
-								</c:if>
-								<c:if test="${qna.pager.curBlock > 1}">
-									<li><a href="#" onclick="qnaList('${qna.pager.prevPage}')">이전</a></li>
-								</c:if>
-								<c:forEach var="page" begin="${qna.pager.blockStartPage}" end="${qna.pager.blockEndPage}">
-									<c:choose>
-										<c:when test="${page == qna.pager.curPage}">
-											<li><a href="#" style="text-decoration: underline;">${page}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="#" onclick="qnaList('${page}')">${page}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:if test="${qna.pager.curBlock < qna.pager.totBlock}">
-									<li><a href="#" onclick="qnaList('${qna.pager.nextPage}')">다음</a></li>
-								</c:if>
-								<c:if test="${qna.pager.curPage < qna.pager.totPage}">
-									<li><a href="#" onclick="qnaList('${qna.pager.totPage}')">마지막 페이지</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
+				<div class="row" align="center" id="paging">
+				<div class="col-sm-12">
+					<ul class="pagination pagination">
+						<c:if test="${qna.pager.curBlock > 1}">
+							<a href="#" onclick="qnaList('1')">
+							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
+							</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${qna.pager.curBlock > 1}">
+							<a href="#" onclick="qnaList('${qna.pager.prevPage}')"> <i
+								class="fa-solid fa-less-than"></i></a>
+						</c:if>
+						<c:forEach var="page" begin="${qna.pager.blockStartPage}"
+							end="${qna.pager.blockEndPage}">
+							<c:choose>
+								<c:when test="${page == qna.pager.curPage}">
+									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<span id="numstyle">${page}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="qnaList('${page}')"><span
+										style="color: gray;">${page}</span></a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${qna.pager.curBlock < qna.pager.totBlock}">
+							<a href="#" onclick="qnaList('${qna.pager.nextPage}')">
+							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
+						</c:if>
+						<c:if test="${qna.pager.curPage < qna.pager.totPage}">&nbsp;
+						<a href="#" onclick="qnaList('${qna.pager.totPage}')">
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
+						</a>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 				</form>
 				<input type="submit" id="btnDelete" value="삭제 처리">
 			</div>

@@ -296,15 +296,18 @@ public class AdminController {
 	public String writePopup(PopupDTO dto, String start_time, 
 			String end_time, HttpServletRequest request, 
 			MultipartFile file) throws ParseException {
-		String img_src = "";
+		logger.info("POPUPDTO_"+dto.toString());
+		String img_src = dto.getImg_src();
 		if(!file.isEmpty()) { 
 			logger.info("multipartfile:"+file.getOriginalFilename());
 			Map<String,Object> fileInfo = uploadService.uploadFile(file, request, Constants.DIR_POPUP);
 			img_src = (String)fileInfo.get("fileUrl");
-			dto.setImg_src(img_src);
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
+		}else {
+			dto.setFilename("-");
 		}
+		dto.setImg_src(img_src);
 		dto.setStart_date(DateUtils.stringToDate(DateUtils.dateToString(
 				dto.getStart_date())+" "+start_time, "yyyy-MM-dd HH:mm"));
 		dto.setEnd_date(DateUtils.stringToDate(DateUtils.dateToString(

@@ -82,7 +82,7 @@ ul{margin-left:0; padding:0;}
 	<h4>EXHIBITION</h4>
 	<ul>
 		<li><a class="a1" href="${path}/admin/exb_list.do">전시 목록</a></li>
-		<li><a class="a1" href="${path}/admin/exb_write.do">전시 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+		<li><a class="a1" href="${path}/admin/exb_write.do">전시 등록</a></li>
 	</ul>
 	<h4>RESERVATION</h4>
 	<ul>
@@ -90,12 +90,12 @@ ul{margin-left:0; padding:0;}
 	</ul>
 	<h4>FAQ</h4>
 	<ul>
-		<li><a class="a1" href="${path}/faq/write.do">FAQ 작성&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+		<li><a class="a1" href="${path}/faq/write.do">FAQ 작성</a></li>
 	</ul>
 	<h4>POPUP</h4>
 	<ul>
 		<li><a class="a1" href="${path}/admin/popup_list.do">팝업 목록</a></li>
-		<li><a class="a1" href="${path}/admin/popup_write.do">팝업 등록&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
+		<li><a class="a1" href="${path}/admin/popup_write.do">팝업 등록</a></li>
 	</ul>
 	</div>
 	</div>
