@@ -90,7 +90,7 @@ function listReply(){
 			<th colspan="2" style="background-color: #eeeeee; text-align: center;">Review 보기</th>
 		</tr>
 		<tr>
-			<th width="15%">별점</th>
+			<th>별점</th>
 			<td>
 				<c:forEach begin="1" end="${dto.rating}" step="1">
 					<span class="glyphicon glyphicon-star"></span>
@@ -98,15 +98,15 @@ function listReply(){
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">전시코드</th>
+			<th>전시코드</th>
 			<td>${dto.product}</td>
 		</tr>
 		<tr>
-			<th width="15%">제목</th>
+			<th>제목</th>
 			<td>${dto.subject}</td>
 		</tr>
 		<tr>
-			<th width="15%">내용</th>
+			<th>내용</th>
 			<td>
 				<div style="height: 300px;" >
 					${dto.content}

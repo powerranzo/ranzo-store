@@ -60,19 +60,19 @@ $(function(){ //페이지가 뜨자마자 실행
  		<th colspan="2" style="background-color: #eeeeee; text-align: center;">문의 내역 보기</th>
  	</tr>
  	<tr>
- 		<th width="15%">제목</th>
+ 		<th>제목</th>
  		<td>${dto.title}</td>
  	</tr>
  	<tr>
- 		<th width="15%">글 번호</th>
+ 		<th>글 번호</th>
  		<td>${dto.bno}</td>
  	</tr>
  	<tr>
- 		<th width="15%">조회수</th>
+ 		<th>조회수</th>
  		<td>${dto.viewcnt}</td>
  	</tr>
 	 <tr>
- 		<th width="15%">내용</th>
+ 		<th>내용</th>
  		<td>
  			<div style="height: 200px;">	
 				${dto.content}

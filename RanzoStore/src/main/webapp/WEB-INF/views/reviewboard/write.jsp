@@ -36,27 +36,14 @@ $(function() {
 		 }
 	});
 });
+</script> 
+
+<script>
 $(function(){
 	$("#btnSave").click(function(){
-		var product = $("#product").val();
-		var subject = $("#subject").val();
-		var content = $("#content").val();
-		if(product ==""){
-			alert("전시를 선택하세요.");
-			return;
-		}
-		if(subject ==""){
-			alert("제목을 입력하세요.");
-			return;
-		}
-		if(content ==""){
-			alert("내용을 입력하세요.");
-			return;
-		}
 		document.form1.submit();
 	});
 });
-
 </script>
 
 </head>
@@ -82,19 +69,19 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">전시코드</th>
+			<th>전시코드</th>
 			<td>				
 			<input id="product" name="product" value="${dto.product}" placeholder="전시코드를 입력하세요">
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">제목</th>
+			<th>제목</th>
 			<td>
 			<input id="subject" name="subject" value="${dto.subject}" size="70" placeholder="제목을 입력하세요">
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">내용</th>
+			<th>내용</th>
 			<td>
 				<textarea id="content" name="content" rows="2" cols="80" placeholder="내용을 입력하세요">${dto.content}</textarea>
 			</td>
