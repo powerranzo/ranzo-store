@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ranzo.power.model.admin.dto.PopupDTO;
-import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
@@ -22,110 +21,138 @@ public class AdminDAOImpl implements AdminDAO {
 	@Inject
 	SqlSession sqlSession;
 	
+	//테이블의 전체 레코드 개수
 	@Override
 	public int countTbAll(String table) {
 		return sqlSession.selectOne("admin.countTbAll", table);
 	}
+	
+	//테이블의 show 컬럼을 n으로 변경
+	@Override
+	public void updateShowN(Map<String, Object> map) {
+		sqlSession.update("admin.updateShowN", map);
+	}
 
+
+	//신규 가입 회원 수
 	@Override
 	public int countMemberToday(String now) {
 		return sqlSession.selectOne("admin.countMemberToday", now);
 	}
 
+	//탈퇴 회원 수
 	@Override
 	public int countMemberQuit() {
 		return sqlSession.selectOne("admin.countMemberQuit");
 	}
 	
+	//검색 대상 회원 수
 	@Override
 	public int countSearchMember(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchMember", map);
 	}
+	
+	//검색 회원 목록
 	@Override
 	public List<MemberDTO> getMemberList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getMemberList", map); 
 	}
 	
+	//회원이 작성한 최근 QnA 목록
 	@Override
 	public List<QnaDTO> getMemberQna(String userid) {
 		return sqlSession.selectList("admin.getMemberQna", userid);
 	}
 	
+	//회원의 최근 예약 목록
 	@Override
 	public List<ReservDTO> getMemberReserv(String userid) {
 		return sqlSession.selectList("admin.getMemberReserv", userid);
 	}
 	
+	//선택한 회원 탈퇴
 	@Override
 	public void deleteMember(Map<String, Object> map) {
 		sqlSession.update("admin.deleteMember", map);
 
 	}
 	
-	@Override
-	public void updateShowN(Map<String, Object> map) {
-		sqlSession.update("admin.updateShowN", map);
-		
-	}
-
+	//진행 중인 전시 개수
 	@Override
 	public int countExbIng(String today) {
 		return sqlSession.selectOne("admin.countExbIng", today);
 	}
 
+	//검색 전시 개수
 	@Override
 	public int countSearchExb(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchExb", map);
 	}
 
+	//검색 전시 목록
 	@Override
 	public List<MemberDTO> getExbList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getExbList", map);
 	}
 
+	//전시 등록
 	@Override
 	public void insertExb(ExhibitionDTO dto) {
 		sqlSession.insert("admin.insertExb", dto);
 	}
 
+	//전시 상세(수정페이지)
 	@Override
 	public ExhibitionDTO getExbView(String code) {
 		return sqlSession.selectOne("admin.getExbView", code);
 	}
 	
+	//전시 수정
 	@Override
 	public void updateExb(ExhibitionDTO dto) {
 		sqlSession.update("admin.updateExb",dto);
 	}
 
+	//전시 파일 정보 삭제
 	@Override
 	public void deleteExbFile(Map<String, Object> map) {
 		sqlSession.update("admin.deleteExbFile",map);
 	}
-
+	
+	//오늘 예약 개수
 	@Override
-	public int countSearchReserv(Map<String, Object> map) {
-		return sqlSession.selectOne("admin.countSearchReserv", map);
+	public int countRsvToday(String today) {
+		return sqlSession.selectOne("admin.countRsvToday", today);
+	}
+
+	//결제된 예약 개수
+	@Override
+	public int countRsvPaid() {
+		return sqlSession.selectOne("admin.countRsvPaid");
 	}
 	
+	//검색 예약 개수
 	@Override
-	public int countReservPay() {
-		return sqlSession.selectOne("admin.countReservPay");
+	public int countSearchRsv(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.countSearchRsv", map);
 	}
 
+	//검색 예약 목록
 	@Override
 	public List<ReservDTO> getReservList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getReservList", map);
 	}
 	
+	//신규 QnA 개수
 	@Override
 	public int countQnaNew() {
 		return sqlSession.selectOne("admin.countQnaNew");
 	}
 	
+	//삭제된 QnA 개수
 	@Override
-	public int countQnaDel() {
-		return sqlSession.selectOne("admin.countQnaDel");
+	public int countQnaToday(String today) {
+		return sqlSession.selectOne("admin.countQnaToday", today);
 	}
 	
 	@Override

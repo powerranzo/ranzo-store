@@ -42,7 +42,7 @@
 	margin-top:5%;
 }
 .profile {
-	width: 80%;
+	width: 77%;
 	height: 30%;
 	background-color: #ecedf2;
 	display: flex;
@@ -54,8 +54,10 @@
 }
 .myreview, .myinfo {
 	padding: 30px;
+	margin-left:0;
 	font-size: 22px;
 }
+.myinfo {padding-left:0;margin-left:0;}
 .adminTable1 {margin:0; width:100%;}
 .adminTable1 td{
 	border-top: 1px solid #e4e4e4;
@@ -79,7 +81,6 @@
 	font-weight: bold;	
 }
 hr{margin-top:0;}
-/* h4{font-weight: bold; display: block;} */
 </style>
 </head>
 <body>
@@ -95,16 +96,16 @@ hr{margin-top:0;}
 			</div>
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
-			<a class="a2" href="${path}/member/myReview.do">나의 후기</a>
+			<a class="a2" href="${path}/admin/exb_write.do">전시 등록</a>
 			</div>
 			<div class="myinfo">
-			<img src="${path}/resources/images/user_icon.png" height="20">
-			<a class="a2" href="${path}/member/infoEnter.do">회원 정보</a>
+			<span class="glyphicon glyphicon-check" style="height:20; vertical-align:middle;"></span>
+			<a class="a2" href="${path}/admin/qna_list.do">신규 QNA [ ${map.qna_new} 개 ]</a>
 			</div>
 		</div>
 		<div class="profile2">
 		<div class="recentOrder">
-			<a class="a2" href="${path}/reserv/list.do/${sessionScope.userid}">전시 현황</a>
+			<a class="a2" href="${path}/admin/exb_list.do">전시 현황</a>
  			<hr noshade size="1px" color="black"> 
  			<div id="resultList">
  			<table class="adminTable1">
@@ -114,15 +115,15 @@ hr{margin-top:0;}
 						<th>지난 전시</th>
 					</tr>
 					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
+						<td>${map.exb_all}개</td>
+						<td>${map.exb_ing}개</td>
+						<td>${map.exb_all - map.exb_ing}개</td>
 					</tr>
 				</table>
  			</div>
 		</div>
 		<div class="recentWish">
-			<a class="a2" href="${path}/member/wishlist.do">예약 현황</a>
+			<a class="a2" href="${path}/admin/reserv_list.do">예약 현황</a>
  			<hr noshade size="1px" color="black"> 
  		<div id="miniWish">
  		<table class="adminTable1">
@@ -132,47 +133,9 @@ hr{margin-top:0;}
 						<th>결제 완료 예약</th>
 					</tr>
 					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
-					</tr>
-				</table>
- 		</div>
-		</div>
-		</div>
-		<div class="profile2">
-		<div class="recentOrder">
-			<a class="a2" href="${path}/reserv/list.do/${sessionScope.userid}">전시 현황</a>
- 			<hr noshade size="1px" color="black"> 
- 			<div id="resultList">
- 			<table class="adminTable1">
-					<tr>
-						<th>전체 전시</th>
-						<th>진행 중인 전시</th>
-						<th>지난 전시</th>
-					</tr>
-					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
-					</tr>
-				</table>
- 			</div>
-		</div>
-		<div class="recentWish">
-			<a class="a2" href="${path}/member/wishlist.do">예약 현황</a>
- 			<hr noshade size="1px" color="black"> 
- 		<div id="miniWish">
- 		<table class="adminTable1">
-					<tr>
-						<th>전체 예약</th>
-						<th>오늘 예약</th>
-						<th>결제 완료 예약</th>
-					</tr>
-					<tr>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_all}개</td>
-						<td>${map.exb_count_ing}개</td>
+						<td>${map.rsv_all}개</td>
+						<td>${map.rsv_todqy}개</td>
+						<td>${map.rsv_paid}개</td>
 					</tr>
 				</table>
  		</div>

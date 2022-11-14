@@ -77,7 +77,7 @@ ul{margin-left:0; padding:0;}
 	<h4>MEMBER</h4>
 	<ul>
 		<li><a class="a1" href="${path}/admin/member_list.do">회원 목록</a></li>
-		<li><a class="a1" href="${path}/admin/qna_list.do">QnA</a></li>
+		<li><a class="a1" href="${path}/admin/qna_list.do">QnA 목록</a></li>
 	</ul>
 	<h4>EXHIBITION</h4>
 	<ul>

@@ -57,15 +57,16 @@
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>QnA</h2>
+				<p><span style="color: #fa5041;">제목</span>을 클릭하면 게시글을 볼 수 있습니다.</p>
 				<form name="form1" class="form-inline" method="post">
 					<table class="adminTable1">
 						<tr>
 							<th>신규 문의글</th>
-							<th>삭제된 글</th>
+							<th>오늘 문의글</th>
 						</tr>
 						<tr>
-							<td>${qna.qna_newcount}개</td>
-							<td>${qna.qna_delcount}개</td>
+							<td>${qna.qna_new}개</td>
+							<td>${qna.qna_today}개</td>
 						</tr>
 					</table>
 					<table class="adminTable2">
@@ -98,10 +99,10 @@
 							<th>예약일</th>
 							<td colspan="2">
 							<input type="date" id="startDate" name="startDate" 
-									value="${ qna.searchOp.startDate}">
+									value="${qna.searchOp.startDate}">
 							<span style="float:left; padding:7px;">~</span>
 							<input type="date" id="endDate" name="endDate"
-									value="${ qna.searchOp.endDate}">
+									value="${qna.searchOp.endDate}">
 							</td>
 						</tr>
 						<tr>
@@ -136,7 +137,7 @@
 								<tr>
 									<td><input name="qna_bno" type="checkbox" value="${qna.bno}"></td>
 									<td>${qna.bno}</td>
-									<td>${qna.title}</td>
+									<td><a href="#" onclick="location.href='${path}/board/qna/view.do?bno=${qna.bno}'">${qna.title}</a></td>
 									<td><a href="#" onclick="memberView('${qna.writer}')">${qna.name}(${qna.writer})</a></td>
 									<td><fmt:formatDate value="${qna.reg_date}" type="date"
 											pattern="yyyy-MM-dd" /></td>
@@ -146,7 +147,7 @@
 											<c:otherwise>
 												<button class="btn btn-sm" type="button" id="btnReply"
 													onclick='location.href="${path}/board/qna/reply_write.do?bno=${qna.bno}"'>
-													<span class="glyphicon glyphicon-pencil"></span>&nbsp;답글</button>
+													<span class="glyphicon glyphicon-pencil"></span>&nbsp;답변하기</button>
 											</c:otherwise>
 										</c:choose>
 									</td>

@@ -60,7 +60,7 @@ function memberView(param) {
 		document.form1.action = getContextPath()+'/admin/qna_list.do?curPage=' + param;
 		document.form1.submit();
 	}
-	
+
 //popupList.jsp
 	function popupList(param) {
 		document.form1.action = getContextPath()+'/admin/popup_list.do?curPage=' + param;

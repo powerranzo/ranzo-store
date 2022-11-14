@@ -32,12 +32,13 @@ public interface AdminDAO {
 		public void updateExb(ExhibitionDTO dto);
 		public void deleteExbFile(Map<String, Object> map);
 		//RESERVATION
-		public int countSearchReserv(Map<String, Object> map);
+		public int countRsvToday(String today);
+		public int countRsvPaid();
+		public int countSearchRsv(Map<String, Object> map);
 		public List<ReservDTO> getReservList(Map<String, Object> map);
-		public int countReservPay();
 		//QNA
 		public int countQnaNew();
-		public int countQnaDel();
+		public int countQnaToday(String today);
 		public int countSearchQna(Map<String, Object> map);
 		public List<QnaDTO> getQnaList(Map<String, Object> map);
 		//POPUP
