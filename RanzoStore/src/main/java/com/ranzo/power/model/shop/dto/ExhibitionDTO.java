@@ -27,25 +27,6 @@ public class ExhibitionDTO {
 	private int teen_price;
 	private int kids_price;
 	
-	public int getAdult_price() {
-		return adult_price;
-	}
-	public void setAdult_price(int adult_price) {
-		this.adult_price = adult_price;
-	}
-	public int getTeen_price() {
-		return teen_price;
-	}
-	public void setTeen_price(int teen_price) {
-		this.teen_price = teen_price;
-	}
-	public int getKids_price() {
-		return kids_price;
-	}
-	public void setKids_price(int kids_price) {
-		this.kids_price = kids_price;
-	}
-
 	public String getSearchDate() {
 		return searchDate;
 	}
