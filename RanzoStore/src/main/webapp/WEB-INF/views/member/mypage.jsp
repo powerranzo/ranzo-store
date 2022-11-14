@@ -81,14 +81,13 @@ section {
 }
 
 @media screen and (max-width: 800px) {
-	.content{
+	/* .content{
 		display: block;
 		
-	}
+	} */
 	.profile{
 		width: 100%;
-		
-	}
+
 }
 </style>
 <script type="text/javascript">
