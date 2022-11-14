@@ -8,18 +8,18 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style>
-html, body {
-	height: 100%;
-}
+/* html, body { */
+/* 	height: 100%; */
+/* } */
 
-body {
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-}
+/* body { */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+/* 	margin: 0; */
+/* } */
 .tableSet{margin-bottom: 10%; display:block; }
-.adminTable1{width:45%; margin:0 2% 0 2%;}
-.adminTable3{width:100%; margin-left:5%;}
+/* .adminTable1{width:45%; margin:0 2% 0 2%;} */
+/* .adminTable3{width:100%; margin-left:5%;} */
 </style>
 </head>
 <body>
@@ -29,6 +29,7 @@ body {
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv">
 			<div class="tableSet">
+				<h4>전시 현황</h4>
 				<table class="adminTable1" id="">
 					<tr>
 						<th>전체 전시</th>
@@ -41,7 +42,7 @@ body {
 				</table>
 				<table class="adminTable1" id="">
 					<tr>
-						<th>전체 전시</th>
+						<th></th>
 						<th>진행 중인 전시</th>
 					</tr>
 					<tr>

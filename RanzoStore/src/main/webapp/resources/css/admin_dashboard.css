@@ -138,3 +138,4 @@ section {
 
 .sectiondiv a:hover{ font-weight: bold;}
 .sectiondiv a:visited, .sectiondiv a:link, .sectiondiv a:active{ text-decoration: none; color: black;}
+.content a:visited, .sectiondiv a:link, .sectiondiv a:active{ text-decoration: none; color: black;}

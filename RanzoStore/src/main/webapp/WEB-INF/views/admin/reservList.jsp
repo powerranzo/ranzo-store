@@ -173,7 +173,7 @@
 									<c:choose>
 										<c:when test="${page == reserv.pager.curPage}">
 											<li><a href="#"
-												style="text-decoration: underline; color: red;">${page}</a></li>
+												style="text-decoration: underline;">${page}</a></li>
 										</c:when>
 										<c:otherwise>
 											<li><a href="#" onclick="reservList('${page}')">${page}</a></li>
