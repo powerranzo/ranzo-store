@@ -115,25 +115,29 @@
 	}  
 
 	// 좋아요 버튼을 클릭 시 실행되는 코드
-	function clickHeart() {
-		
-	// 로그인 했을 때만 좋아요 가능
-	<c:if test="${sessionScope.userid != null}">
-		
-	$.ajax({
-		url :"${path}/shop/exhibition/heart.do",
-		type :"GET",
-		dataType : "json",
-		data : {"exhibitionCode": "${exhibition.code}", "userid": "${sessionScope.userid}"},
-		success : function(data){
-  				if(data==1) { // 좋아요 누름
-					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite2.png");
-				} else { // 좋아요 취소
-					$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite1.png");
-				}  
+	function clickHeart() {		
+		// 로그인 했을 때만 좋아요 가능
+		if(${sessionScope.userid != null}) {		
+			$.ajax({
+				url :"${path}/shop/exhibition/heart.do",
+				type :"GET",
+				dataType : "json",
+				data : {"exhibitionCode": "${exhibition.code}", "userid": "${sessionScope.userid}"},
+				success : function(data){
+		  				if(data==1) { // 좋아요 누름
+							$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite2.png");
+						} else { // 좋아요 취소
+							$("#heart").prop("src","${pageContext.request.contextPath}/resources/images/favorite1.png");
+						}  
+					}
+			   });
+		} else {
+			var result = confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?")
+			if(result) {
+				console.log("로그인으로");
+				location.href="${path}/member/login.do";
 			}
-	   });
-	</c:if>
+		}
 	}  
 	
 

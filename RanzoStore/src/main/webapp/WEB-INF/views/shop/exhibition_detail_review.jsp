@@ -21,10 +21,10 @@ $(function(){
 		
 		<ul>
 			<c:forEach var="review" items="${map.reviewInfo}">   
-				<li class='review'>
-					<div class='review-info'>
-						<span class='bno'>${review.bno}</span> | 
-						<span class='rating'>
+				<li class="review">
+					<div class="review-info">
+						<span class="bno">${review.bno}</span> | 
+						<span class="rating">
 							<c:choose>
 								<c:when test="${review.rating eq 5}">★★★★★</c:when>							
 								<c:when test="${review.rating eq 4}">★★★★☆</c:when>							
@@ -34,13 +34,13 @@ $(function(){
 								<c:when test="${review.rating eq 0}">☆☆☆☆☆</c:when>
 							</c:choose>
 						</span> | 
-						<span class='writer'>${review.writer}</span> | 					
-						<span class='date'>
+						<span class="writer">${review.writer}</span> | 					
+						<span class="date">
 							<fmt:formatDate value="${review.reg_date}" pattern="yyyy-MM-dd" />
 						</span>
 					</div>
-					<div class='title'>${review.subject}</div>
-					<div class='content'>${review.content}</div>
+					<div class="title">${review.subject}</div>
+					<div class="content">${review.content}</div>
 				</li>
 		</c:forEach>
 		</ul>
