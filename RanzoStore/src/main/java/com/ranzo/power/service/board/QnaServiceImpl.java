@@ -73,9 +73,11 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	// 답글 작성
+	@Transactional
 	@Override
 	public void create_reply(QnaDTO dto) throws Exception {
 		qnaDao.create_reply(dto);
+		qnaDao.update_state(dto.getBno());
 	}
 
 	// 답글 순서 조정
