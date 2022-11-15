@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head><!-- 다시업로드! -->
 <meta charset="UTF-8">
 <title>관리자페이지</title>
 <%@ include file="../include/header.jsp"%>
