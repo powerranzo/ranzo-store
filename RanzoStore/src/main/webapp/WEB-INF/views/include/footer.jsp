@@ -12,7 +12,11 @@
 	padding: 30px 100px;
 	font-size: 14px;
 }
-
+@media screen and (max-width: 800px) {
+	#footer{
+		display: none;
+	}
+}
 
 </style>
 </head>
