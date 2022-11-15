@@ -23,6 +23,7 @@ $(function() {
 		height : 200
 	});
 });
+
 </script>
 
 <script>
@@ -34,6 +35,17 @@ $(function(){
 	});
 	
 	$("#btnSave").click(function(){
+		var title = $("#title").val();
+		var content = $("#content").val();
+
+		if(title ==""){
+			alert("제목을 입력하세요.");
+			return;
+		}
+		if(content ==""){
+			alert("내용을 입력하세요.");
+			return;
+		}
 		document.form1.submit();
 	});
 });
@@ -44,7 +56,7 @@ $(function(){
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<div align="center">
+<div align="center" style="margin-top: 30px; margin-bottom: 30px;">
 
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do" enctype="multipart/form-data">
 	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
@@ -79,5 +91,7 @@ $(function(){
 	</div>
 </form>
 </div>
+
+
 </body>
 </html>
