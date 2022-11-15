@@ -66,11 +66,7 @@ public class AdminController {
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) searchOp = (SearchDTO)flashmap.get("searchOp");
 		Map<String,Object> map = adminService.getMemberList(searchOp, curPage);
-		m.addAttribute("searchOp", searchOp);
-		m.addAttribute("mcount", map.get("mcount"));
-		m.addAttribute("list", map.get("list"));
-		m.addAttribute("pager", map.get("pager"));
-		map.clear();
+		m.addAttribute("m", map);
 		return "admin/memberList";
 	}
 
