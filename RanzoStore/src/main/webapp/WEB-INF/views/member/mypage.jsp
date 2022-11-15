@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 <style type="text/css">
 *{
 	margin: 0;
@@ -32,14 +31,19 @@ section {
 	width: 80%;
 }
 .profile {
-	margin-top: 30px;
-	width: 80%;
+	margin: 8% 0 0 8%;
+	width: 77%;
 	height: 30%;
-	background-color: rgb(230, 230, 230);
+	background-color: #ecedf2;
 	display: flex;
 	justify-content: space-between;
 	padding: 50px;
 }
+
+.profile2 {
+	margin: 1% 0 0 8%;
+}
+
 .welcome {
 	font-size: 30px;
 }
@@ -69,7 +73,7 @@ section {
 	.profile{
 		display: block;	
 		height: 400px;
-		background-color: rgb(230, 230, 230);
+		background-color: #ecedf2;
 	}
 	.recentOrder, .recentWish {
 		display: block;
@@ -79,7 +83,7 @@ section {
 		
 	}
 }
-
+hr{margin-top:0;}
 @media screen and (max-width: 800px) {
 	.content{
 		display: block;
@@ -142,13 +146,13 @@ function miniWish(){
 		<div class="recentOrder">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
 			<a class="a2" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a>
- 			<hr noshade size="1px" color="black"> 
+ 			<hr noshade size="1px" color="#ecedf2"> 
  			<div id="resultList"></div>
 		</div>
 		<div class="recentWish">
 			<img src="${path}/resources/images/favorite1.png" height="25">
 			<a class="a2" href="${path}/member/wishlist.do">최근 찜한 상품 ></a>
- 			<hr noshade size="1px" color="black"> 
+ 			<hr noshade size="1px" color="#ecedf2"> 
  		<div id="miniWish"></div>
 		</div>
 		</div>
