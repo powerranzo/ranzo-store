@@ -60,7 +60,7 @@ function memberView(param) {
 		document.form1.action = getContextPath()+'/admin/qna_list.do?curPage=' + param;
 		document.form1.submit();
 	}
-	
+
 //popupList.jsp
 	function popupList(param) {
 		document.form1.action = getContextPath()+'/admin/popup_list.do?curPage=' + param;
@@ -109,7 +109,7 @@ $(function() {
 	function popCheck() {
 		var title=document.getElementById('title').value;
 		var start_date=document.getElementById('start_date').value;
-		var end_date=document.getElementById('start_date').value;
+		var end_date=document.getElementById('end_date').value;
 		var file=document.getElementById('file').value;
 		var img_src=document.getElementById('img_src').value;
 		if (title == "") {
