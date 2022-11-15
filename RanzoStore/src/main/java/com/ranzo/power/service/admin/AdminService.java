@@ -13,7 +13,7 @@ import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface AdminService {
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage);
-	public MemberDTO getMemberView(String userid);
+//	public MemberDTO getMemberView(String userid);
 	public void deleteMember(String[] userids);
 	public List<QnaDTO> getMemberQna(String userid);
 	public List<ReservDTO> getMemberReserv(String userid);
@@ -36,6 +36,7 @@ public interface AdminService {
 	public void deletePopupFile(int no);
 	public void popupShow(int no);
 	public List<PopupDTO> getPopupOn();
-	public ProductInfoDTO getProductInfoView(String code);
+//	public ProductInfoDTO getProductInfoView(String code);
+	public Map<String, Object> getHomeList();
 	
 }

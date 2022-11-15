@@ -90,6 +90,7 @@ section {
 		
 	}
 }
+#footer{bottom:0; margin-top:120px;}
 </style>
 <script type="text/javascript">
 $(function(){

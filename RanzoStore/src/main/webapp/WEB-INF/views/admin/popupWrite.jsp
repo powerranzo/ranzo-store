@@ -32,12 +32,10 @@ form {
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-			alertify.confirm("등록하시겠습니까?", function() {
 				if (popCheck()) {
 					document.form1.action = '${path}/admin/popup_write.do';
 					document.form1.submit();
 				}
-			});
 		});
 		$("#btnResetFile").click(function(){
 			$("#file").val('');
@@ -69,7 +67,6 @@ form {
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>팝업 등록</h2>
@@ -141,7 +138,6 @@ form {
 				<input id="btnWrite" name="btnWrite" type="button" value="등록하기" style="margin-right:10%;">
 					
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

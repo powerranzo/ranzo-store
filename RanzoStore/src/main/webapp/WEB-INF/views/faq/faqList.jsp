@@ -71,10 +71,12 @@ ul.tabs li.current{
 }
 .faqtable thead{
 	background-color: #f8f9fa;
+	border-top: 2px solid #e4e4e4;
 	color: gray;
 }
 .faqtable th, .faqtable td{
 	padding: 10px;
+	border-bottom: 1px solid #f8f9fa;
 }
 #searchBtn{
 	width: 90px;

@@ -10,61 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
 <style type="text/css">
-.content{
-	display: flex;
-	justify-content: space-between;
-}
-.faq{
-	margin: auto;
-	width: 80%;
-	margin-top: 10px;
-}
-.faqtable3{
-	width: 90%;
-	margin: auto;
-}
-.faqtable3 td {
-	padding: 5px;
-	text-align: left;
-}
-#title{
-	width: 50%;
-}
-#insertBtn{
-	width: 80px;
-	padding: 5px;
-	background-color: black;
-	color: white;
-	margin-right: 280px;
-}
-footer{
-	clear : both;
-	bottom: 0;
 
-.adminTable3 input {
-	float: left;
-}
-
-.adminTable3 {
-	width: 90%;
-}
-
-#adminTB2_th {
-	width: 20%;
-
-}
-form {
-	margin-top: 3%;
-}
-#content {
-	width:30% !important;
-	height:30% !important;
-}
-
-h3 a:link{text-decoration: none; color: black;}
-h3 a:visited{text-decoration: none; color: black;}
-h3 a:active{text-decoration: none; color: black;}
-
+.adminTable3 input {float: left;}
+.adminTable3 {width: 90%;}
+#adminTB2_th {width: 20%;}
+form {margin-top: 3%;}
 #category, #title {float:left; width:90%;}
 
 </style>
@@ -74,8 +24,7 @@ h3 a:active{text-decoration: none; color: black;}
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-				if (faqCheck()) 
-					document.form1.submit();
+				if (faqCheck()) document.form1.submit();
 		});
 	});	
 </script>
