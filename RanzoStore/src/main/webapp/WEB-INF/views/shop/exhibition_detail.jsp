@@ -96,6 +96,25 @@
 		});
 	}
 
+	// 트위터 공유
+	function shareTwitter() {
+		var sendText = $(".prd-title").text();
+		var sendUrl = $(location).attr('href'); // 전달할 현재 URL
+		window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+	}
+	
+	// 페이스북 공유	
+	function shareFacebook() {
+		var sendUrl = $(location).attr('href') // 전달할 현재 URL
+		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+	}
+	
+	//링크 공유
+	function shareClipboard(){
+		var sendUrl = $(location).attr('href') // 전달할 현재 URL
+		document.execCommand('Copy');
+	}
+
 	
   // 좋아요 체크 되어있는 지 확인
 	function findHeart() {				
@@ -116,8 +135,10 @@
 
 	// 좋아요 버튼을 클릭 시 실행되는 코드
 	function clickHeart() {		
+		var userid = "<%=(String)session.getAttribute("userid")%>";
+		console.info("userid"+userid);
 		// 로그인 했을 때만 좋아요 가능
-		if(${sessionScope.userid != null}) {		
+		if(userid != "null") {		
 			$.ajax({
 				url :"${path}/shop/exhibition/heart.do",
 				type :"GET",
@@ -182,6 +203,16 @@
 				</div>
 				</div> <!-- end prd-body -->
 				<div class="buttons">
+					<i class="fa fa-share-nodes"></i>
+					<a href="javascript:shareTwitter();">
+						<i class="fa fa-twitter" aria-hidden="true"></i>
+					</a>
+					<a href="javascript:shareFacebook();">
+						<i class="fa fa-facebook" aria-hidden="true"></i>
+					</a>
+					<a href="javascript:shareClipboard();">
+						<i class="fa fa-link" aria-hidden="true"></i>
+					</a>
 					<a class="btn-wish" onclick="clickHeart()"><img id="heart" alt="찜" src="${pageContext.request.contextPath}/resources/images/favorite1.png"></a>
 					<a class="btn-reserve" href="${path}/reserv/detail/${exhibition.code}">예매하기</a>
 				</div>
