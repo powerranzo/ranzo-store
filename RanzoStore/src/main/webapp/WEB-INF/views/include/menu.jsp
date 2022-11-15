@@ -23,7 +23,7 @@
 			document.searchform.action = "${path}/shop/exhibition/search.do";
 			document.searchform.submit();
 		});
-	
+	 
 	}); 
  	function datesearch(){
  		document.dateform.action = "${path}/shop/exhibition/searchDate.do";
