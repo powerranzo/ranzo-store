@@ -150,10 +150,6 @@ hr{margin-top:0;}
 		</section>
 		</div>
 		</div>
-		<form id="form1" name="form1" method="post">
-		<input type="hidden" name="searchOption2" value="ing">
-		<input type="hidden" name="searchOption2" value="ing">
-		</form>
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>
