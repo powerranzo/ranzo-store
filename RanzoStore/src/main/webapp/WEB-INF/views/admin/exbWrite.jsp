@@ -63,7 +63,6 @@ form{margin-top:3%;}
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>전시 등록</h2>
@@ -163,7 +162,6 @@ form{margin-top:3%;}
 				<input type="submit" value="등록하기" id="btnWrite" name="btnWrite" style="margin-right:10%;">
 				<br>
 			</div>
-		</section>
 	</div>
 
 	<footer>

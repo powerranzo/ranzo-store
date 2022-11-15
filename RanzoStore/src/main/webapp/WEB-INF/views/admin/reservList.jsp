@@ -7,6 +7,12 @@
 <title>예약 목록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
+<style type="text/css">
+@media screen and (max-width: 900px) {
+	
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
@@ -51,7 +57,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>예약현황
@@ -78,7 +83,7 @@
 							<th id="adminTB2_th">검색옵션</th>
 							<td colspan="2" id="adminTB2_td1">
 								<select	name="searchOption1" id="searchOption1">
-										<option value="r.no">주문번호</option>
+										<option value="r.no">예약번호</option>
 										<option value="r.userid">예매자ID</option>
 										<option value="r.code">전시코드</option>
 										<option value="e.title">전시명</option>
@@ -160,44 +165,48 @@
 						</c:forEach>
 					</table>
 
-					<div class="row" align="center">
-						<div class="col-sm-12">
-							<ul class="pagination pagination">
-								<c:if test="${reserv.pager.curPage > 1}">
-									<li><a href="#" onclick="reservList('1')">첫 페이지</a></li>
-								</c:if>
-								<c:if test="${reserv.pager.curBlock > 1}">
-									<li><a href="#"
-										onclick="reservList('${reserv.pager.prevPage}')">이전</a></li>
-								</c:if>
-								<c:forEach var="page" begin="${reserv.pager.blockStartPage}"
-									end="${reserv.pager.blockEndPage}">
-									<c:choose>
-										<c:when test="${page == reserv.pager.curPage}">
-											<li><a href="#"
-												style="text-decoration: underline; color: red;">${page}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="#" onclick="reservList('${page}')">${page}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:if test="${reserv.pager.curBlock < reserv.pager.totBlock}">
-									<li><a href="#"
-										onclick="reservList('${reserv.pager.nextPage}')">다음</a></li>
-								</c:if>
-								<c:if test="${reserv.pager.curPage < reserv.pager.totPage}">
-									<li><a href="#"
-										onclick="reservList('${reserv.pager.totPage}')">마지막 페이지</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
-					</form>
-					<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete">
+				<div class="row" align="center" id="paging">
+				<div class="col-sm-12">
+					<ul class="pagination pagination">
+						<c:if test="${reserv.pager.curBlock > 1}">
+							<a href="#" onclick="reservList('1')">
+							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
+							</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${reserv.pager.curBlock > 1}">
+							<a href="#" onclick="reservList('${reserv.pager.prevPage}')"> <i
+								class="fa-solid fa-less-than"></i></a>
+						</c:if>
+						<c:forEach var="page" begin="${reserv.pager.blockStartPage}"
+							end="${reserv.pager.blockEndPage}">
+							<c:choose>
+								<c:when test="${page == reserv.pager.curPage}">
+									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<span id="numstyle">${page}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="reservList('${page}')">
+									<span style="color: gray;">${page}</span></a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${reserv.pager.curBlock < reserv.pager.totBlock}">
+							<a href="#" onclick="reservList('${reserv.pager.nextPage}')">
+							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
+						</c:if>
+						<c:if test="${reserv.pager.curPage < reserv.pager.totPage}">&nbsp;
+						<a href="#" onclick="reservList('${reserv.pager.totPage}')">
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
+						</a>
+						</c:if>
+					</ul>
+				</div>
 			</div>
-		</section>
+		</form>
+			<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete">
+		</div>
 	</div>
-	<%@ include file="../include/footer.jsp"%>
+
+		<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
