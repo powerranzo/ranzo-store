@@ -64,10 +64,12 @@
 					<table class="adminTable1">
 						<tr>
 							<th>전체 예약</th>
+							<th>오늘 예약</th>
 							<th>결제 완료 예약</th>
 						</tr>
 						<tr>
 							<td>${reserv.reserv_count_all}개</td>
+							<td>${reserv.reserv_today}개</td>
 							<td>${reserv.reserv_count_pay}개</td>
 						</tr>
 					</table>
