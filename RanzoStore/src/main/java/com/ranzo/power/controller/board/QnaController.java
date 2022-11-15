@@ -200,9 +200,10 @@ public class QnaController {
 		int count = qnaService.countArticle(code);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("qnaInfo", qnaInfo); // map에 자료 저장
-		map.put("count", count); //레코드 개수 파일
-		mav.addObject("map", map); // 보낼 데이터		
+		map.put("code", code); 
+		map.put("qnaInfo", qnaInfo); 
+		map.put("count", count); 
+		mav.addObject("map", map); 	
 		mav.setViewName("shop/exhibition_detail_qna");
 		logger.info("### qnController/getQnaInfo/qnaInfo {}. " + qnaInfo);
 		logger.info("### qnController/getQnaInfo/mav {}. " + mav);

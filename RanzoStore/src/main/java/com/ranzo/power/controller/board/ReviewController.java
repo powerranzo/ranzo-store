@@ -54,11 +54,26 @@ public class ReviewController {
 		return mav;
 	}
 
-	@RequestMapping("write.do")
-	public String write() {
-		return "reviewboard/write";
+	@RequestMapping(value ={"write.do", "write.do/{exhibitionCode}"})
+	public ModelAndView write(@PathVariable(required=false) String exhibitionCode) {
+		logger.info("###write.do/{code}/code="+exhibitionCode);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("exhibitionCode", exhibitionCode);
+		mav.setViewName("reviewboard/write");
+		logger.info("###write.do/{code}/mav="+mav);
+		return mav; 
 	}
-
+/*
+	@RequestMapping("write.do/{code}")
+	public ModelAndView write(@PathVariable String code) {
+		logger.info("###write.do/{code}="+code);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("exhibitionCode", code);
+		mav.setViewName("reviewboard/write");
+		logger.info("###write.do/{code}/mav="+mav);
+		return mav; 
+	}
+*/
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute ReviewDTO dto, HttpSession session) throws Exception {
 		// 세션처리
@@ -129,9 +144,10 @@ public class ReviewController {
 		logger.info("### getReviewInfo/count = " + count);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("reviewInfo", reviewInfo); // map에 자료 저장
-		map.put("count", count); //레코드 개수 파일
-		map.put("avgRating", avgRating); //레코드 개수 파일
+		map.put("code", code); 
+		map.put("reviewInfo", reviewInfo); 
+		map.put("count", count);
+		map.put("avgRating", avgRating); 
 		mav.addObject("map", map); // 보낼 데이터
 		
 		mav.setViewName("shop/exhibition_detail_review");

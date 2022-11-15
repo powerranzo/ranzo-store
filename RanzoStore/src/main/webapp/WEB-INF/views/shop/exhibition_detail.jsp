@@ -103,7 +103,7 @@
 	  // 로그인 했을 때만 좋아요 가능
 		<c:if test="${sessionScope.userid != null}">
 		// 좋아요가 있는지 확인한 값을 heartval에 저장
-  	var heartval = ${dto.heart}
+  		var heartval = ${dto.heart}
   
 		// heartval이 1이면 좋아요가 이미 되있는것이므로 꽉 찬 하트를 출력하는 코드
  	 if(heartval>0) {
