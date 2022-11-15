@@ -88,8 +88,8 @@ i{
 	margin:5px;
 	display: inline-block; 
 	width: 170px; 
-	height: 250px;
-	padding: 10px;
+	height: 280px;
+	padding: 5px;
 }
 .reviewdiv img{
 	border-radius: 10px;
@@ -170,7 +170,8 @@ function list(page) {
 				</c:forEach></td>
 		</tr>
   <tr>
-   <td colspan="2"><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
+   <td colspan="2"><a href="${path}/board/review/view.do?bno=${row.bno}">
+   		<span style="font-size: 13px;">${row.subject}</span></a>
 				<c:if test="${row.cnt > 0}">
 					<span style="color: red;">(${row.cnt})</span>
 				</c:if>
@@ -179,7 +180,7 @@ function list(page) {
   <tr>
    <td><span style="color: gray;">
    <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/></span></td>
-   <td style="text-align: right; font-size: 12px;">| 조회수:${row.viewcnt}</td> 
+   <td style="text-align: right; font-size: 12px;" width="60%">| 조회수:${row.viewcnt}</td> 
   </tr>
  
  </table>
