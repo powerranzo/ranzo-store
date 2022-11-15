@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ranzo.power.model.admin.dto.PopupDTO;
-import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
@@ -39,6 +38,12 @@ public interface AdminDAO {
 		//QNA
 		public int countQnaNew();
 		public int countQnaToday(String today);
+		public int countSearchReserv(Map<String, Object> map);
+		public List<ReservDTO> getReservList(Map<String, Object> map);
+		public int countReservPay();
+		//QNA
+		public int countQnaNew();
+		public int countQnaDel();
 		public int countSearchQna(Map<String, Object> map);
 		public List<QnaDTO> getQnaList(Map<String, Object> map);
 		//POPUP
@@ -53,4 +58,6 @@ public interface AdminDAO {
 		public void insertProductInfo(ProductInfoDTO idto);
 //		public ProductInfoDTO getProductInfoView(String code);
 		public void updateProductInfo(ProductInfoDTO idto);
+
 }
+

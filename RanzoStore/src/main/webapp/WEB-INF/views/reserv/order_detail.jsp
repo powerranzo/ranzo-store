@@ -25,22 +25,21 @@ li{
 }
 .content{
 	margin: 0 80px 0 80px;
-	display: flex;
-	justify-content: space-between;
 }
 section {
+	margin-top:6%;
 	width: 75%;
 	float: left;
-	margin-left: 30px;
+	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
-	padding:50px 0 0 0;
+	padding:5px;
 	float: left;
 	display: inline-block;
-	min-height: 100%;
-	width: 80%;
-	flex: 1;
+	width: 90%;
+/* 	min-height: 100%;
+	flex: 1; */
 }
 .orderdetail{
 	padding: 10px;
@@ -69,14 +68,7 @@ section {
 	font-size: 13px;
 	margin: 10px 0 0 0;
 }
-@media screen and (max-width: 800px) {
-	.content{
-		display: block;
-	}
-	.orderdiv {
-		width:800px;
-	}
-}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -99,9 +91,8 @@ $(function(){
 <section>
 <div class="orderdiv">
 <form action="${path}/reserv/addr_edit/${dto.no}" method="post" name="order">
-<div class="title">예매 상세정보</div>
+<h2>예매확인/취소</h2>
 
-<hr noshade size="2px" width="820px" color="black">
 <table class="orderdetail">
 <thead>
 <tr>

@@ -18,42 +18,27 @@
 }
 .content{
 	margin: 0 80px 0 80px;
-	display: flex;
-	justify-content: space-between;
-	min-height: 100%;
-	flex: 1;
-}
-footer{
-	clear : both;
-	bottom: 0;
-}
-html, body{
-	height: 100%;
-}
-body {
-	display: flex;
-  flex-direction: column;
-  margin: 0;
 }
 section {
+	margin-top:6%;
 	width: 75%;
 	float: left;
 	margin-left: 50px;
 	text-align: left;
 }
 .orderdiv {
-	padding: 50px 0 0 0;
+	padding:5px;
 	float: left;
 	display: inline-block;
-	min-height: 100%;
-	width: 80%;
-	flex: 1;
+	width: 90%;
+/* 	min-height: 100%;
+	flex: 1; */
 }
 .p {
 	margin-bottom: 15px;
 }
 .check {
-	margin: 50px 0 0 165px;
+	margin: 30px 0 0 165px;
 }
 
 .input-field {
@@ -76,13 +61,20 @@ section {
 	height: 50px;
 	font-size: 17px;
 	border: none;
-	margin: 30px 0 30px 190px;
+	margin: 50px 0 30px 190px;
 }
-
-tr {
-	height: 50px;
+footer{
+	clear : both;
+	bottom: 0;
 }
-
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
+}
 </style>
 </head>
 <body>
@@ -96,13 +88,14 @@ tr {
 		<div class="title">개인 정보 수정</div><br>
 		<p class="p">비밀번호 재확인<p></p>
 		회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
+		<hr noshade size="1px" width="820px" color="black">
 		<div class="check">
 			<table>
-				<tr>
+				<tr height="50px">
 					<td width="70px">아이디</td>
 					<td><input class="input-field" value="${sessionScope.userid}" name="userid" id="userid" readonly="readonly"></td>
 				</tr>
-				<tr>
+				<tr height="50px">
 					<td>비밀번호</td>
 					<td><input class="input-field" type="password" name="passwd" id="passwd"
 					placeholder="비밀번호를 입력해주세요.">
@@ -111,6 +104,7 @@ tr {
 			</table>
 		</div>
 		<p style="margin: 50px 0 30px 0">
+		<hr noshade size="1px" width="820px" color="black">
 		<button id="btnCheck">확인</button>
 		</div>
 	</section>

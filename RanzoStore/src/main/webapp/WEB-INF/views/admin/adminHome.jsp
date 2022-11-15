@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head><!-- 다시업로드! -->
+<head>
 <meta charset="UTF-8">
 <title>관리자페이지</title>
 <%@ include file="../include/header.jsp"%>
@@ -82,17 +82,12 @@
 }
 hr{margin-top:0;}
 </style>
-<script type="text/javascript">
-
-
-</script>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class="sectiondiv">
-				
 		<section>
 		<div class="profile">
 			<div class="welcome">
@@ -150,10 +145,6 @@ hr{margin-top:0;}
 		</section>
 		</div>
 		</div>
-		<form id="form1" name="form1" method="post">
-		<input type="hidden" name="searchOption2" value="ing">
-		<input type="hidden" name="searchOption2" value="ing">
-		</form>
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>

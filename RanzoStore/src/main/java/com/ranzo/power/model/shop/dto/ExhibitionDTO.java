@@ -26,7 +26,7 @@ public class ExhibitionDTO {
 	private int adult_price;
 	private int teen_price;
 	private int kids_price;
-	
+
 	public String getSearchDate() {
 		return searchDate;
 	}

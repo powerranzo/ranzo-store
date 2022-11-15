@@ -18,40 +18,42 @@
 		optionSelect(1);
 		optionSelect(2);
 		optionSelect(3);
-
-		$("#btnDelete").click(function() {
-			alertify.confirm("삭제하시겠습니까?", function() {
+		
+		$("#btnDelReserv").click(function() {
+			if (confirm('삭제 처리하시겠습니까?')) {
 				document.form1.action = "${path}/admin/reserv_delete.do";
 				document.form1.submit();
-			});
+			}
 		});
 		$("#btnSearch").click(function() {
 			document.form1.action = "${path}/admin/reserv_list.do";
 			document.form1.submit();
 		});
-		$("#btnApproval").click(function() {
-			location.href = "https://classic-admin.iamport.kr/payments";
-		});
 	});
 	function optionSelect(num) {
+		
 		var selected = "";
 		var option = ''.concat('#searchOption', num);
-		if (num == 1)
-			selected = '${reserv.searchOp.searchOption1}';
-		else if (num == 2)
+		if (num == 1) {
+			selected = '${reserv.searchOp.searchOption1}'; 
+		} else if (num == 2) {
 			selected = '${reserv.searchOp.searchOption2}';
-		else {
-			selected = '${reserv.searchOp.orderOption}';
+		} else {
+			selected = '${reserv.searchOp.orderOption}'; 
 			option = '#orderOption';
 		}
 		console.log(option);
+		console.log(selected);
 		var length = $(option).children().length;
+		console.log(length);
 		for (i = 1; i <= length; i++) {
 			var val = $(option + ' option:eq(' + i + ')').val();
 			if (selected == val)
-				$(option + ' option:eq(' + i + ')').prop("selected", "selected");
+				$(option + ' option:eq(' + i + ')')
+						.prop("selected", "selected");
 		}
 	}
+
 </script>
 </head>
 <body>
@@ -59,12 +61,9 @@
 	<div class="content">
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
-				<h2>예약현황
-					<button class="btn btn-sm" id="btnApproval">
-						<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
-					</button>
-				</h2>
-				<p><span style="color: #fa5041;">예매자</span>를 클릭하면 회원의 정보를 확인할 수 있습니다.</p>
+				<h3>예약현황 <button class="btn btn-sm" id="btnApproval">
+							<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
+						</button></h3>
 				<form name="form1" class="form-inline" method="post">
 					<table class="adminTable1">
 						<tr>
@@ -89,76 +88,75 @@
 										<option value="e.title">전시명</option>
 										<option value="all">전체</option>
 								</select>
-								<div id="" class="input-group" style="width:65%;">
-									<input type="text" name="searchKeyword"
-										value="${ reserv.searchOp.searchKeyword}">
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th>분류</th>
-							<td colspan="2">
-							<select name="searchOption2" id="searchOption2">
-									<option value="pay_y">결제완료</option>
-									<option value="pay_n">결제 전</option>
-									<option value="all">전체</option>
-							</select>
-							</td>
-						</tr>
-						<tr>
-							<th>예약일</th>
-							<td colspan="2">
-							<input type="date" id="startDate" name="startDate" 
-								value="${ reserv.searchOp.startDate}">
-							<span style="float:left; padding:7px;">~</span>
-								<input type="date" id="endDate" name="endDate"
-								value="${ reserv.searchOp.endDate}">
-							</td>
-						</tr>
-						<tr>
-							<th>정렬기준</th>
-							<td><select name="orderOption" id="orderOption">
-									<option value="r.reg_date">최근순</option>
-									<option value="r.no">예약순</option>
-									<option value="r.quantity">예매수량순</option>
-									<option value="e.title">전시명순</option>
-							</select>
-							</td>
-							<td><input type="button" value="검색" id="btnSearch" 	name="btnSearch"></td>
-						</tr>
-					</table>
+									<div class="input-group">
+										<input type="text" class="form-control" name="searchKeyword"
+											value="${ reserv.searchOp.searchKeyword}">
+									</div></td>
+							</tr>
+							<tr>
+						<th>분류</th>
+						<td><label for="searchOption2"></label> <select
+							name="searchOption2" class="form-control" id="searchOption2">
+								<option value="pay_y">결제완료</option>
+								<option value="pay_n">결제 전</option>
+								<option value="all">전체</option>
+						</select></td>
+					</tr>
+							<tr>
+								<th>예약일</th>
+								<td><input type="date" id="startDate" name="startDate"
+									value="${ reserv.searchOp.startDate}">&nbsp;&nbsp;~&nbsp;&nbsp;
+									<input type="date" id="endDate" name="endDate"
+									value="${ reserv.searchOp.endDate}"></td>
+							</tr>
+							<tr>
+								<th>정렬기준</th>
+								<td><select name="orderOption" class="form-control"
+									id="orderOption">
+										<option value="r.res_date">최근순</option>
+										<option value="r.no">과거순</option>
+										<option value="r.quantity">예매수량순</option>
+										<option value="e.title">전시명순</option>
+								</select>
+								</td>
+							</tr>
+						</table>
+						<br>
+						<div class="sectiondiv" align="center">
+						<button class="btn btn-default" type="button" id="btnSearch">
+							검색 <i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
 
-					<table class="adminTable3">
+					<table class="ordertable">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>예약번호</th>
 								<th>예매자</th>
-								<th style="width: 25%;">전시명(전시코드)</th>
+								<th style="width:30%;">전시명(전시코드)</th>
 								<th>성인/청소년/어린이</th>
 								<th>총 수량</th>
 								<th>총가격</th>
-								<th>배송지역</th>
-								<th>관람일</th>
 								<th>구매일</th>
+								<th>배송지역</th>
 								<th>결제상태</th>
 							</tr>
 						</thead>
 						<c:forEach var="reserv" varStatus="loop" items="${reserv.reserv_list}">
 							<tbody>
 								<tr>
-									<td><input name="reserv_no" type="checkbox" value="${reserv.no}"></td>
+									<td><input name="reserv_no" type="checkbox"
+										value="${reserv.no}"></td>
 									<td>${reserv.no}</td>
 									<td><a href="#" onclick="memberView('${reserv.userid}')">${reserv.r_name}(${reserv.userid})</a></td>
 									<td>${reserv.title}(${reserv.code})</td>
-									<td>${reserv.adult}/${reserv.teen}/${reserv.kids}</td>
+									<td>${reserv.adult}/${reserv.teen} / ${reserv.kids}</td>
 									<td>${reserv.quantity}</td>
 									<td>${reserv.sub_total}</td>
-									<td>${reserv.addr1}</td>
 									<td><fmt:formatDate value="${reserv.res_date}" type="date"
 											pattern="yyyy-MM-dd" /></td>
-									<td><fmt:formatDate value="${reserv.reg_date}" type="date"
-											pattern="yyyy-MM-dd" /></td>
+									<td>${reserv.addr1}</td>
 									<td>${reserv.pay == 'y' ? '완료' : '미납'}</td>
 								</tr>
 							</tbody>
@@ -206,7 +204,7 @@
 			<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete">
 		</div>
 	</div>
-
-		<%@ include file="../include/footer.jsp"%>
+	
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

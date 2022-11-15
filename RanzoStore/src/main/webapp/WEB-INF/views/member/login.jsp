@@ -7,7 +7,6 @@
 <title>로그인</title>
 <%@ include file="../include/header.jsp" %>
 <script>
-
 //일반 로그인
  	$(function() {
  		
@@ -35,7 +34,6 @@
 	console.log('message');
 	alert("로그인에 실패하였습니다.");
 </c:if>
-
 <c:if test="${message == 'nologin' }">
 	console.log('message');
 	alert("로그인 후 이용가능합니다.");
@@ -75,7 +73,6 @@ body {
 	padding: 0 10px;
 	margin: 30px 0 10px 0;
 }
-
 .input-field2 {
 	width: 300px;
 	height: 40px;
@@ -83,7 +80,6 @@ body {
 	padding: 0 10px;
 	margin-bottom: 35px;
 }
-
 .button {
 	background-color: black;
 	color: white;
@@ -93,7 +89,6 @@ body {
 	border: none;
 	margin: 5px 0 5px 0;
 }
-
 .kakao{
 	background-color: #FEE500;
 	color: black;
@@ -103,18 +98,15 @@ body {
 	border: none;
 	margin-top: 5px;
 }
-
 .title {
 	font-size: 30px;
 	margin: 40px 0 15px 0;
 }
-
 .a{
 	text-decoration: none;
 	color: black;
 	font-weight: normal; 
 }
-
 </style>
 </head>
 <body>
@@ -137,7 +129,6 @@ body {
 		<p>
 			<button type="button" class="kakao" id="btnKakao" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c25de70aa517d0143d2b73595c73dc86&redirect_uri=http://localhost/power/member/kakaoLogin'">
 			kakao로 로그인하기</button>
-			
 	 </div>
 	</form>
 <footer>

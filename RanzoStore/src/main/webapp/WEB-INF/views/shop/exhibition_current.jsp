@@ -38,13 +38,12 @@ $(function(){
 	
 	$('.sort-dropdown').click(function(){
 		if($('.filter-dropdown').css('display') != 'none'){
-			/*  @media all and (min-width:1132px) */			
-			$('.filter-dropdown').text("지역 ▾");			
-			$('.filter').hide();
+			$('.filter-dropdown').text("지역 ▾");
+			$('.filter').hide();	
 		}
 		$('.sort').slideToggle(500);	
 		//$(this).text();
-		console.log("sort-dropdown"+$('.sort-dropdown').css('display'))
+		console.log("sort-dropdown"+$('.sort-dropdown').css('display'));
 		console.log("sort"+$('.sort').css('display'))
 	});
 
@@ -73,6 +72,7 @@ $(function(){
 		/* 선택된 정렬방식으로 텍스트 변경 */
 		$('.change').text($(this).text());
 		if($('.sort-dropdown').css('display') != 'none'){
+			/* @media all and (min-width:768px) */
 			$('.sort').hide();			
 		}
 		getList();
@@ -138,7 +138,7 @@ function getList(){
 					<li id ="price">가격 낮은순</li>
 					<li id ="end_date">종료 임박순</li>
 				</ul>	
-				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
+				<span class="sort-dropdown"> <span class="change">별점 높은순</span> ☰</span> 
 
 		</div>
 

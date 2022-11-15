@@ -41,16 +41,15 @@ public class AdminController {
 
 	@Inject
 	AdminService adminService;
-
+	
 	@Inject
 	MemberService memberService;
-
+	
 	@Inject
 	ExhibitionService exbService;
 
 	@Inject
 	UploadService uploadService; 
-
 
 	@RequestMapping("/home.do")
 	public String homeList(Model m){
@@ -423,4 +422,6 @@ public class AdminController {
 		List<PopupDTO> list = adminService.getPopupOn();
 		return list;
 	}
+
 }
+

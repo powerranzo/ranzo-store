@@ -58,6 +58,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.getMemberList", map); 
 	}
 	
+
 	//회원이 작성한 최근 QnA 목록
 	@Override
 	public List<QnaDTO> getMemberQna(String userid) {

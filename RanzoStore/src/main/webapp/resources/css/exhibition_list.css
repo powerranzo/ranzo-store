@@ -57,6 +57,7 @@
 	border-radius: 20px;
 	object-fit: cover;
 }
+
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
 	.sec-exhibition {

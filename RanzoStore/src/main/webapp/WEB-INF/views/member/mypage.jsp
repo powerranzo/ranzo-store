@@ -15,12 +15,10 @@
 }
 .content{
 	margin: 0 80px 0 80px;
-	display: flex;
-	justify-content: space-between;
 }
 section {
 	margin-top:3%;
-	width: 90%;
+	width: 75%;
 	float: left;
 	margin-left: 50px;
 	text-align: left;
@@ -29,73 +27,58 @@ section {
 	padding:5px;
 	float: left;
 	display: inline-block;
-	width: 80%;
+	width: 100%;
+	min-height: 100%;
+	flex: 1;
 }
 .profile {
-	margin-top: 30px;
-	width: 80%;
-	height: 30%;
+	width: 90%;
+	height: 200px;
 	background-color: rgb(230, 230, 230);
-	display: flex;
-	justify-content: space-between;
-	padding: 50px;
 }
 .welcome {
 	font-size: 30px;
-}
-.myreview, .myinfo {
-	padding: 30px;
-	font-size: 22px;
-}
-.recentOrder, .recentWish {
+	margin-top: 40px;
+	padding: 20px 70px 70px 70px;
 	display: inline-block;
-	width: 35%;
-	height: 300px;
-	margin: 20px;
-	vertical-align: top;
+	width: 400px;
 }
-.a2 {
-	text-decoration: none;
-	color: gray;
-	font-size: 20px;
+.myreview {
+	font-size: 22px;
+	display: inline-block;
 }
-.a2:hover{
-	color: black;
-	text-decoration: none;
-	font-weight: bold;	
+.myinfo{
+	font-size: 22px;
+	display: inline-block;
+	margin-left: 60px;
+}
+.recentOrder {
+	margin: 20px 20px 10px 20px;
+	display: inline-block;
+	width: 350px;
 }
 
-@media screen and (max-width: 1100px) {
-	.profile{
-		display: block;	
-		height: 400px;
-		background-color: rgb(230, 230, 230);
-	}
-	.recentOrder, .recentWish {
-		display: block;
-		width: 100%;
-		height: 300px;
-		margin: 20px;
-		
-	}
-}
 
 @media screen and (max-width: 800px) {
-	.content{
+	/* .content{
 		display: block;
 		
-	}
+	} */
 	.profile{
 		width: 100%;
-		
-	}
+
+
+.recentWish {
+	margin: 20px 10px 10px 30px;
+	display: inline-block;
+	width: 350px;
+
 }
 #footer{bottom:0; margin-top:120px;}
 </style>
 <script type="text/javascript">
 $(function(){
 	orderlist();
-	miniWish();
 });
 function orderlist(){
 	$.ajax({
@@ -105,16 +88,7 @@ function orderlist(){
 			$("#resultList").html(result);
 		}
 	});
-}
-
-function miniWish(){
-	$.ajax({
-		url :"${path}/member/miniWish.do/${sessionScope.userid}",
-		type :"POST",
-		success: function(result){
-			$("#miniWish").html(result);
-		}
-	});
+	
 }
 </script>
 
@@ -122,41 +96,42 @@ function miniWish(){
 </head>
 <body>
 <%@ include file="../include/menu.jsp"%>
-	<div class="content">
-		<%@ include file="../include/CommonDashboard.jspf"%>
-		<section>
-		<div class="profile">
+<div class="content">
+<%@ include file="../include/CommonDashboard.jspf" %>
+<section>
+ <div class="orderdiv">
+		<article class="profile">
 			<div class="welcome">
-			<strong>${sessionScope.name}</strong>님 <p>안녕하세요.
+			<strong>${sessionScope.name}</strong>님 <p>
+			안녕하세요.
 			</div>
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
-			<a class="a2" href="${path}/member/myReview.do">나의 후기</a>
+			<a class="a1" href="${path}/member/myReview.do">나의 후기</a>
 			</div>
 			<div class="myinfo">
 			<img src="${path}/resources/images/user_icon.png" height="20">
-			<a class="a2" href="${path}/member/infoEnter.do">회원 정보</a>
+			<a class="a1" href="${path}/member/infoEnter.do">회원 정보</a>
 			</div>
-		</div>
-		<div class="profile2">
-		<div class="recentOrder">
+		</article>
+		<article class="recentOrder">
+			<div class="title-s">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
-			<a class="a2" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a>
+			<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a></div>
  			<hr noshade size="1px" color="black"> 
  			<div id="resultList"></div>
-		</div>
-		<div class="recentWish">
+		</article>
+		<article class="recentWish">
+			<div class="title-s">
 			<img src="${path}/resources/images/favorite1.png" height="25">
-			<a class="a2" href="${path}/member/wishlist.do">최근 찜한 상품 ></a>
+			<a class="a1" href="#">최근 찜한 상품 ></a></div>
  			<hr noshade size="1px" color="black"> 
- 		<div id="miniWish"></div>
-		</div>
-		</div>
-		</section>
-	</div>
-
-
-	<footer>
+ 			<div>아직</div>
+		</article>
+	 </div>
+	</section>
+</div>
+<footer>
 <%@ include file="../include/footer.jsp" %>
 </footer>
 </body>

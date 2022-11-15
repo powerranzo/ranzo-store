@@ -51,7 +51,19 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 	
-	//회원 목록
+
+	@Override
+	public Map<String, Object> getHomeList() {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
+		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));	
+		map.put("qna_newcount", adminDao.countQnaNew());
+		map.put("qna_delcount", adminDao.countQnaDel());
+		
+		return map;
+	}
+  
+  //회원 목록
 	@Override
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
@@ -73,6 +85,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("pager", pager);
 		return map;
 	}
+
 
 	//회원 정보 내 QnA 목록
 	@Override
@@ -283,3 +296,4 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 }
+

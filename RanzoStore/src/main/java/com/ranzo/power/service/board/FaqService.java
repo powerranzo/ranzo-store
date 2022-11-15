@@ -11,7 +11,5 @@ public interface FaqService {
 	public int resultCount(String data);
 	public FaqDTO view(int no);
 	public void insert(FaqDTO dto);
-	public void update(FaqDTO dto);
-	public void delete(int no);
 
 }

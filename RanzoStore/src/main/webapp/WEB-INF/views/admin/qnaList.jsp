@@ -7,8 +7,6 @@
 <title>QnA</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
-<style type="text/css">
-</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
@@ -16,10 +14,10 @@
 		optionSelect(3);
 		
 		$("#btnDelete").click(function() {
-			alertify.confirm("삭제하시겠습니까?", function() {
+			if(confirm('삭제하시겠습니까?')){
 				document.form1.action = "${path}/admin/qna_delete.do";
 				document.form1.submit();
-			});
+			}
 		});
 		$("#btnSearch").click(function() {
 			document.form1.action = "${path}/admin/qna_list.do";
@@ -120,12 +118,12 @@
 						</tr>
 					</table>
 
-					<table class="adminTable3">
+					<table class="ordertable">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>글번호</th>
-								<th style="width: 30%;">제목</th>
+								<th style="width:30%;">제목</th>
 								<th>작성자</th>
 								<th>작성일자</th>
 								<th>조회수</th>
@@ -135,12 +133,12 @@
 						<c:forEach var="qna" varStatus="loop" items="${qna.qna_list}">
 							<tbody>
 								<tr>
-									<td><input name="qna_bno" type="checkbox" value="${qna.bno}"></td>
+									<td><input name="qna_bno" type="checkbox"
+										value="${qna.bno}"></td>
 									<td>${qna.bno}</td>
 									<td><a href="#" onclick="location.href='${path}/board/qna/view.do?bno=${qna.bno}'">${qna.title}</a></td>
 									<td><a href="#" onclick="memberView('${qna.writer}')">${qna.name}(${qna.writer})</a></td>
-									<td><fmt:formatDate value="${qna.reg_date}" type="date"
-											pattern="yyyy-MM-dd" /></td>
+									<td><fmt:formatDate value="${qna.reg_date}" type="date" pattern="yyyy-MM-dd" /></td>
 									<td>${qna.viewcnt}</td>
 									<td><c:choose>
 											<c:when test="${qna.reply_state == 'y'}">완료</c:when>
@@ -155,7 +153,7 @@
 							</tbody>
 						</c:forEach>
 					</table>
-
+          
 				<div class="row" align="center" id="paging">
 				<div class="col-sm-12">
 					<ul class="pagination pagination">
@@ -193,10 +191,11 @@
 					</ul>
 				</div>
 			</div>
+					<button id="btnDelete" type="button" class="btn btn-default">삭제
+					처리</button>
 				</form>
-				<input type="submit" id="btnDelete" value="삭제 처리">
 			</div>
 	</div>
-	<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

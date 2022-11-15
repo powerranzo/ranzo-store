@@ -6,7 +6,6 @@ import java.util.Map;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
 import com.ranzo.power.model.board.dto.QnaDTO;
-import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.reserv.dto.ReservDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
