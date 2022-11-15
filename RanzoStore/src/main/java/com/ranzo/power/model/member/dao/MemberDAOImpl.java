@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -102,16 +101,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<ReviewDTO> reviewList() {
 		return sqlSession.selectList("member.reviewList");
-	}
-
-	@Override
-	public List<ExhibitionDTO> wishlist(String userid) {
-		return sqlSession.selectList("member.wishlist", userid);
-	}
-
-	@Override
-	public int emptyWish(String userid) {
-		return sqlSession.update("member.emptyWish", userid);
 	}
 
 }

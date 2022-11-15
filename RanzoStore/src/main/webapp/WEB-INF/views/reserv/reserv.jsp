@@ -183,8 +183,8 @@
 							value="${dto.start_date}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
 							value="${dto.end_date}" pattern="yyyy-MM-dd" /></li>
 					<li><strong>관람등급</strong> 전체관람가</li>
-					<li><strong>이용요금</strong><br> 성인 ${dto.adult_price}원<br> 초중고 학생
-						${dto.teen_price}원<br> 유아 ${dto.kids_price}원</li>
+					<li><strong>이용요금</strong><br> 성인 18,000원 <br> 초중고 학생
+						9,000원 <br> 유아 6,000원</li>
 				</ul>
 			</div>
 

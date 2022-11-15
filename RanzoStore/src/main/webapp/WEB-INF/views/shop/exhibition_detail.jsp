@@ -167,11 +167,11 @@
 						<fmt:formatDate value="${exhibition.start_date}" pattern="yyyy-MM-dd" /> ~ 
 						<fmt:formatDate value="${exhibition.end_date}" pattern="yyyy-MM-dd" />
 				</span>
-		 	<span class="itemLabel">가격</span>
-			<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
-			<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
-			<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
-			<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
+			 	<span class="itemLabel">가격</span>
+				<span class="item">성인<fmt:formatNumber value="${exhibition.adult_price}" pattern="#,###" /></span>
+				<span class="item">청소년<fmt:formatNumber value="${exhibition.teen_price}" pattern="#,###" /></span>
+				<span class="item">어린이<fmt:formatNumber value="${exhibition.kids_price}" pattern="#,###" /></span>
+				<span class="button"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
 			
 			<!-- 임시 좋아요 자리 -->
 			<!-- 로그인 해야만 좋아요 가능 -->
@@ -180,7 +180,8 @@
 			좋아요</a>
 			</c:if>
 			<!-- 임시 좋아요 자리 -->
-		</div>
+				</div>
+			</div>
 
 		<div> 
 			<!-- 관리자용 -->
@@ -191,17 +192,6 @@
 		</div>
 	</section>
 
-
-			<span class="button-reserve"><a href="${path}/reserv/detail/${exhibition.code}">예매하기</a></span>
-
-			<c:if test="${sessionScope.admin_userid != null }">
-				<!-- 관리자 수정버튼  -->
-				<div>
-					<br>
-					<a href="${path}/shop/product/edit/${exhibition.code}">[편집]</a>
-				</div>
-			</c:if>
-		</section>
 	
 		<section class="sec-detail">
 			<ul class="tab-list"> 

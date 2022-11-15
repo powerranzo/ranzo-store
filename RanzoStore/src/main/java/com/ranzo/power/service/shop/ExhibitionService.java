@@ -3,7 +3,6 @@ package com.ranzo.power.service.shop;
 import java.util.List;
 
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
-import com.ranzo.power.model.shop.dto.HeartDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 
 public interface ExhibitionService {
@@ -20,10 +19,4 @@ public interface ExhibitionService {
 	int searchCount(String keyword);
 	List<ExhibitionDTO> searchdate(String searchDate);
 	int searchDateCount(String searchDate);
-
-	public HeartDTO findHeart(String exhibitionCode, String userid);
-	public int clickHeart(String exhibitionCode, String userid);
-
-	Object detailreserv(String exhibitionCode);
-
 }

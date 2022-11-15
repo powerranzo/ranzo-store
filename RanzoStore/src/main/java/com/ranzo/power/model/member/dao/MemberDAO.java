@@ -7,7 +7,6 @@ import java.util.Map;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 
 public interface MemberDAO {
 	public boolean loginCheck(MemberDTO dto);
@@ -25,6 +24,4 @@ public interface MemberDAO {
 	public MemberDTO findkakao(HashMap<String, Object> userInfo);
 	public List<QnaDTO> qnaList();
 	public List<ReviewDTO> reviewList();
-	public List<ExhibitionDTO> wishlist(String userid);
-	public int emptyWish(String userid);
 }
