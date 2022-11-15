@@ -83,12 +83,8 @@
 hr{margin-top:0;}
 </style>
 <script type="text/javascript">
-function homeList(n){
-	if(n==1){
-		document.form1.action='${path}/admin/exb_list.do';
-		document.form1.submit();
-	}
-}
+
+
 </script>
 </head>
 <body>

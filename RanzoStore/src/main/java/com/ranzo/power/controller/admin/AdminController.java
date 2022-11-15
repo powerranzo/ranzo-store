@@ -120,7 +120,6 @@ public class AdminController {
 	}
 
 	//전시 목록
-	@ResponseBody
 	@RequestMapping("/exb_list.do")
 	public String exbList(SearchDTO searchOp, 
 			@RequestParam(defaultValue = "1") int curPage, 
