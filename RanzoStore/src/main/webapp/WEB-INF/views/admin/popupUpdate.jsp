@@ -90,7 +90,6 @@ form {
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>팝업 수정</h2>
@@ -141,7 +140,15 @@ form {
 						</tr>
 						<tr>
 							<th>이미지 URL</th>
-							<td><input name="img_src" id="img_src">
+							<td>
+								<c:choose>
+								<c:when test="${dto.filesize > 0}">
+								<input name="img_src" id="img_src">
+								</c:when>
+								<c:otherwise>
+								<input name="img_src" id="img_src" value="${dto.img_src}">
+								</c:otherwise>
+								</c:choose>
 								<div>
 									<img id="urlImage" style="width: 50%; height: 50%">
 								</div>
@@ -177,7 +184,6 @@ form {
 					<input id="btnUpdate" name="btnUpdate" type="button" value="수정하기" style="margin-right:10%;">
 					<input id="btnDelete" name="btnDelete" type="button" value="팝업종료" style="margin-right:10px;">
 			</div>
-		</section>
 	</div>
 <%@ include file="../include/footer.jsp"%>
 </body>

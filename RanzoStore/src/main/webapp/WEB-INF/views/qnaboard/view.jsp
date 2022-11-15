@@ -51,8 +51,8 @@ $(function(){ //페이지가 뜨자마자 실행
 
 </head>
 <body>
-<div align="center">
 <%@ include file="../include/menu.jsp" %>
+<div align="center" style="margin-top: 30px; margin-bottom: 30px;">
 
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do" enctype="multipart/form-data">
  <table  class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
@@ -60,19 +60,19 @@ $(function(){ //페이지가 뜨자마자 실행
  		<th colspan="2" style="background-color: #eeeeee; text-align: center;">문의 내역 보기</th>
  	</tr>
  	<tr>
- 		<th>제목</th>
+ 		<th width="15%">제목</th>
  		<td>${dto.title}</td>
  	</tr>
  	<tr>
- 		<th>글 번호</th>
+ 		<th width="15%">글 번호</th>
  		<td>${dto.bno}</td>
  	</tr>
  	<tr>
- 		<th>조회수</th>
+ 		<th width="15%">조회수</th>
  		<td>${dto.viewcnt}</td>
  	</tr>
 	 <tr>
- 		<th>내용</th>
+ 		<th width="15%">내용</th>
  		<td>
  			<div style="height: 200px;">	
 				${dto.content}

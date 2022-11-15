@@ -46,6 +46,7 @@
 * {
 	margin: 0;
 }
+#footer{bottom:0; margin-top:120px;}
 footer{
 	clear : both;
 	bottom: 0;

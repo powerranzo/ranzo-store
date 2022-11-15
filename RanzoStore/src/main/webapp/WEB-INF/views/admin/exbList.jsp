@@ -51,7 +51,6 @@
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-		<section>
 	<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>전시현황</h2>
@@ -153,41 +152,48 @@
 							</tbody>
 						</c:forEach>
 					</table>
-					<div class="row" align="center">
-						<div class="col-sm-12">
-							<ul class="pagination pagination">
-								<c:if test="${exb.pager.curPage > 1}">
-									<li><a href="#" onclick="exbList('1')">첫 페이지</a></li>
-								</c:if>
-								<c:if test="${exb.pager.curBlock > 1}">
-									<li><a href="#" onclick="exbList('${exb.pager.prevPage}')">이전</a></li>
-								</c:if>
-								<c:forEach var="page" begin="${exb.pager.blockStartPage}"
-									end="${exb.pager.blockEndPage}">
-									<c:choose>
-										<c:when test="${page == exb.pager.curPage}">
-											<li><a href="#" style="text-decoration: underline;">${	page}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="#" onclick="exbList('${page}')">${page}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:if test="${exb.pager.curBlock < exb.pager.totBlock}">
-									<li><a href="#" onclick="exbList('${exb.pager.nextPage}')">다음</a></li>
-								</c:if>
-								<c:if test="${exb.pager.curPage < exb.pager.totPage}">
-									<li><a href="#" onclick="exbList('${exb.pager.totPage}')">마지막
-											페이지</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
+					
+				<div class="row" align="center" id="paging">
+				<div class="col-sm-12">
+					<ul class="pagination pagination">
+						<c:if test="${exb.pager.curBlock > 1}">
+							<a href="#" onclick="exbList('1')">
+							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
+							</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${exb.pager.curBlock > 1}">
+							<a href="#" onclick="exbList('${exb.pager.prevPage}')"> <i
+								class="fa-solid fa-less-than"></i></a>
+						</c:if>
+						<c:forEach var="page" begin="${exb.pager.blockStartPage}"
+							end="${exb.pager.blockEndPage}">
+							<c:choose>
+								<c:when test="${page == exb.pager.curPage}">
+									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<span id="numstyle">${page}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="exbList('${page}')"><span
+										style="color: gray;">${page}</span></a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${exb.pager.curBlock < exb.pager.totBlock}">
+							<a href="#" onclick="exbList('${exb.pager.nextPage}')">
+							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
+						</c:if>
+						<c:if test="${exb.pager.curPage < exb.pager.totPage}">&nbsp;
+						<a href="#" onclick="exbList('${exb.pager.totPage}')">
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
+						</a>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 				</form>
 				<input type="submit" value="종료 처리" id="btnDelete" name="btnDelete">
 				<input type="submit" value="신규 등록" id="btnWrite" name="btnWrite">
 			</div>
-		</section>
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>

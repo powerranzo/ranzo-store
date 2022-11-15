@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          from (
              select rownum as rn, A.*
              from (
-                     select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, m.name, r.reg_date, r.viewcnt, r.show
+                     select r.bno, r.rating, r.product, e.title,e.thumnail, r.subject, r.content, r.writer, m.name, r.reg_date, r.viewcnt, r.show
                      ,(select count(*) from review_reply_tb where bno=r.bno) cnt
                      from review_tb r, member_tb m, exhibition_tb e
                      <choose>
