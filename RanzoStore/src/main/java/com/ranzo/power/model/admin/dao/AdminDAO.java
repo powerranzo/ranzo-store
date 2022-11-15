@@ -53,4 +53,5 @@ public interface AdminDAO {
 		public void insertProductInfo(ProductInfoDTO idto);
 //		public ProductInfoDTO getProductInfoView(String code);
 		public void updateProductInfo(ProductInfoDTO idto);
+		public void showExb(String code);
 }

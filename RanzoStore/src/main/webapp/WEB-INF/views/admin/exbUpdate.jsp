@@ -26,26 +26,50 @@ form{margin-top:3%;}
 </style>
 <script type="text/javascript">
 	$(function() {
+		if("${dto.show=='n'}") $("#btnDelete").hide();
+		else $("#btnShow").hide();
+		
 		$("#content").summernote({
 			height : 300
 		});
 		$("#btnUpdate").click(function() {
-				if(exbCheck()){
+				if(exbCheck2()){
 					document.form1.action = "${path}/admin/exb_update.do";
 					document.form1.submit();
 				}
 		});
 		$("#btnDelete").click(function() {
+			$.ajax({
+				type : "post",
+				url : "${path}/admin/exb_delete.do",
+			//	async : false,
+				data : {"code" : "${dto.code}"},
+				success : function() {
+						alertify.confirm("종료되었습니다.", function() {
+							$("#btnShow").show();
+							$("#btnDelete").hide();
+					});
+				}
+			})
+			
 			alertify.confirm("종료하시겠습니까?", function() {
 				document.form1.action = "${path}/admin/exb_delete.do";
 				document.form1.submit();
 			});
 		});
 		$("#btnShow").click(function() {
-			alertify.confirm("재개하시겠습니까?", function() {
-				document.form1.action = "${path}/admin/exb_show.do";
-				document.form1.submit();
-			});
+			$.ajax({
+				type : "post",
+				url : "${path}/admin/exb_show.do",
+				async : false,
+				data : {"code" : "${dto.code}"},
+				success : function() {
+						alertify.confirm("재개되었습니다.", function() {
+							$("#btnDelete").show();
+							$("#btnShow").hide();
+					});
+				}
+			})
 		});
 		$("#fileDel").click(function() {
 			console.log('fileDel clicked');
@@ -70,14 +94,15 @@ form{margin-top:3%;}
 				success : function(result) {
 					if (result == 'deleted') {
 						if (param == "thumnail"){
-							$("#thumnailImg").remove();
-							$("#fileDel").remove();
+							$("#thumnailImg").attr('src', null);
+							$("#thumnailImg").hide();
+							$("#fileDel").hide();
 						}
 						if (param == "product_info"){
-							$("#pdtInfoImg").remove();
-							$("#fileDel2").remove();
+							$("#pdtInfoImg").attr('src', null);
+							$("#pdtInfoImg").hide();
+							$("#fileDel2").hide();
 						}
-						alertify.alert('삭제되었습니다.');
 					}
 				}
 			})
@@ -179,6 +204,22 @@ form{margin-top:3%;}
 							</td>
 						</tr>
 						<tr>
+							<th>포스터 URL</th>
+							<td>
+							<c:choose>
+							<c:when test="${dto.thumnail == '-' || mark1 == 1}">
+								<input type="text" name="thumnail" id="thumnail">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="thumnail" id="thumnail" value="${dto.thumnail}">
+							</c:otherwise>
+							</c:choose>
+							<div>
+								<img id="urlImage1" style="width: 50%; height: 50%">
+							</div>
+							</td>
+						</tr>
+						<tr>
 							<th>전시 정보 이미지(10MB)</th>
 							<td>
 								<input type="file" name="file2"	id="file2" onchange="fileSize(this, 'filesize2')">
@@ -192,7 +233,7 @@ form{margin-top:3%;}
 							<th>전시 정보 URL</th>
 							<td>
 							<c:choose>
-							<c:when test="${idto.attach == '-' || mark == 1}">
+							<c:when test="${idto.attach == '-' || mark2 == 1}">
 								<input type="text" name="attach" id="attach">
 							</c:when>
 							<c:otherwise>
@@ -200,7 +241,7 @@ form{margin-top:3%;}
 							</c:otherwise>
 							</c:choose>
 							<div>
-								<img id="urlImage" style="width: 50%; height: 50%">
+								<img id="urlImage2" style="width: 50%; height: 50%">
 							</div>
 							</td>
 						</tr>
@@ -227,9 +268,8 @@ form{margin-top:3%;}
 						<tr>
 							<th id="adminTB2_th">현재 포스터</th>
 							<td>
-								<c:if test="${dto.thumnail != '-'}">
-								${thumnailName} 
 								<img id="thumnailImg" src="${dto.thumnail}" width="100" height="100">
+								<c:if test="${mark1 == 1}">
 								<button class="btn btn-sm" name="fileDel" id="fileDel" type="button">
 									<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
 								</button>
@@ -237,9 +277,8 @@ form{margin-top:3%;}
 							</td>
 							<th>현재 전시정보</th>
 							<td>
-								<c:if test="${idto.attach != '-'}">
-								${product_infoName} 
 								<img id="pdtInfoImg" src="${idto.attach}" width="100" height="100">
+								<c:if test="${mark2 == 1}">
 								<button class="btn btn-sm" id="fileDel2" name="fileDel2" type="button">
 									<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
 								</button>
@@ -248,14 +287,8 @@ form{margin-top:3%;}
 						</tr>
 						</table>
 						<input type="submit" value="수정하기" id="btnUpdate" name="btnUpdate" style="margin-right:10%;">
-						<c:choose>
-						<c:when test="${dto.show == 'y'}">
 						<input type="submit" value="종료처리" id="btnDelete" name="btnDelete" style="margin-right:10px;">
-						</c:when>
-						<c:otherwise>
 						<input type="submit" value="재개처리" id="btnShow" name="btnShow" style="margin-right:10px;">
-						</c:otherwise>
-						</c:choose>
 			</div>
 	</div>
 	<footer>

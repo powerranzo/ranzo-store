@@ -168,14 +168,18 @@ public class AdminServiceImpl implements AdminService {
 
 	//전시 종료
 	@Override
-	public void deleteExb(String code) {
+	public void deleteExb(String[] code) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("value", "exhibition_tb");
 		map.put("condition", "code");
 		map.put("list", code);
 		adminDao.updateShowN(map);
 	}
-	
+	//전시 재개
+	@Override
+	public void showExb(String code) {
+		adminDao.showExb(code);
+	}
 	//예약 목록
 	@Override
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage) {
@@ -281,5 +285,6 @@ public class AdminServiceImpl implements AdminService {
 		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
+
 
 }

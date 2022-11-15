@@ -28,7 +28,7 @@ form{margin-top:3%;}
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-				if(exbCheck()){
+				if(exbCheck1()){
 					document.form1.action = "${path}/admin/exb_write.do";
 					document.form1.submit();
 				}
@@ -124,6 +124,15 @@ form{margin-top:3%;}
 							</td>
 						</tr>
 						<tr>
+							<th>포스터 URL</th>
+							<td>
+								<input type="text" name="thumnail" id="thumnail">
+								<div>
+									<img id="urlImage1" style="width: 50%; height: 50%">
+								</div>
+							</td>
+						</tr>
+						<tr>
 							<th>전시 정보 이미지(10MB)</th>
 							<td>
 								<input type="file" name="file2"	id="file2" onchange="fileSize(this, 'filesize2')">
@@ -138,7 +147,7 @@ form{margin-top:3%;}
 							<td>
 								<input type="text" name="attach" id="attach">
 								<div>
-									<img id="urlImage" style="width: 50%; height: 50%">
+									<img id="urlImage2" style="width: 50%; height: 50%">
 								</div>
 							</td>
 						</tr>

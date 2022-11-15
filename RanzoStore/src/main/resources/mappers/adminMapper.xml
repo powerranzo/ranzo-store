@@ -253,6 +253,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		END;
 	</update>
+	
+	<!-- 전시 재개 -->
+	<update id="showExb">
+		UPDATE exhibition_tb SET show='y'
+		WHERE code=#{code}
+	</update>
 
 	<!-- 결제 예약 개수 -->
 	<select id="countRsvPaid" resultType="int">

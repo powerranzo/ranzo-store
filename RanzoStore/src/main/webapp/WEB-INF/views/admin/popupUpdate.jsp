@@ -30,12 +30,10 @@ form {
 <script type="text/javascript">
 	$(function() {
 		$("#btnUpdate").click(function() {
-			alertify.confirm("수정하시겠습니까?", function() {
-				if(popCheck()){
+				if(popCheck2()){
 				document.form1.action = '${path}/admin/popup_update.do';
 				document.form1.submit();
 				}
-			});
 		});
 		$("#btnDelete").click(function(){
 			alertify.confirm("종료하시겠습니까?", function() {
@@ -55,7 +53,9 @@ form {
 					data: {"no":"${dto.no}"},
 					success: function(result){
 						if(result=='deleted'){
-							$("#fileImage").remove();
+							$("#fileImage").attr('src', null);
+							$("#fileImage").hide();
+							$("#fileDel").hide();
 						}
 					}
 				})
@@ -142,7 +142,7 @@ form {
 							<th>이미지 URL</th>
 							<td>
 								<c:choose>
-								<c:when test="${dto.filesize > 0}">
+								<c:when test="${dto.filesize > 0 || dto.img_src == '-'}">
 								<input name="img_src" id="img_src">
 								</c:when>
 								<c:otherwise>
@@ -172,7 +172,6 @@ form {
 							<td><c:if test="${dto.filesize > 0}">
 									<img id="fileImage" src="${dto.img_src}" width="100"
 										height="100">
-								${dto.filename} 
 								<button class="btn btn-sm" name="fileDel" id="fileDel"
 										type="button">
 										<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제

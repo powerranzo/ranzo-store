@@ -23,46 +23,24 @@ import com.ranzo.power.util.UploadFileUtils;
 @Service
 public class UploadServiceImpl implements UploadService {
 
-	@Override
-	public void uploadCKEditor(HttpServletRequest request, 
-			HttpServletResponse response, @RequestParam MultipartFile upload) throws Exception {
-		System.out.println("uploadCKEditor() 호출");
-		UUID uid = UUID.randomUUID();
-		OutputStream out = null;
-		PrintWriter printWriter = null;
-		String fileName=uid+"_"+upload.getOriginalFilename();
-		byte[] bytes=upload.getBytes();
-		String uploadPath=MediaUtils.getServerUploadPath(request);
-		out=new FileOutputStream(new File(uploadPath+fileName));
-		out.write(bytes);
-		printWriter=response.getWriter();
-		String fileUrl=MediaUtils.getFileUrlPath(request)+fileName;
-		printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-		printWriter.flush();
-		try {
-			if (out != null) {
-				out.close();
-			}
-			if (printWriter != null) {
-				printWriter.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	@Override
-	public Map<String,Object> uploadFile(MultipartFile file, HttpServletRequest request, String dirName) {
+	public Map<String,Object> uploadFile(MultipartFile file, 
+			HttpServletRequest request, String dirName) {
+		
 		UUID uid=UUID.randomUUID();
 		String savedName="";
+		
 		if(file.getOriginalFilename().indexOf("_")!=-1) 
 			savedName=uid.toString()+"_"+file.getOriginalFilename().replace("_", "");
 		else
 			savedName=uid.toString()+"_"+file.getOriginalFilename();
+		
 		String uploadPath=MediaUtils.getServerUploadPath(request);
-		if(dirName==null) dirName="";
 		UploadFileUtils.makeDir(uploadPath, dirName);
 		File target=new File(uploadPath+dirName, savedName);
+		
 		try {
 			FileCopyUtils.copy(file.getBytes(), target);
 		} catch (IOException e) {

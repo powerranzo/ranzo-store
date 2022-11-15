@@ -119,6 +119,12 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.deleteExbFile",map);
 	}
 	
+	//전시 재개
+	@Override
+	public void showExb(String code) {
+		sqlSession.update("admin.showExb", code);
+	}
+	
 	//오늘 예약 개수
 	@Override
 	public int countRsvToday(String today) {
@@ -215,5 +221,6 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateProductInfo", idto);
 		
 	}
+
 
 }

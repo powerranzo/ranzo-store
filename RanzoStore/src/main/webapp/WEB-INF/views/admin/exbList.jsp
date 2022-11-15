@@ -124,21 +124,23 @@
 								<th>#</th>
 								<th>No</th>
 								<th>전시코드</th>
+								<th style="width:5%;">포스터</th>
 								<th style="width:30%;">전시명</th>
-								<th>지역</th>
-								<th>전시관</th>
+								<th style="width:5%;">지역</th>
+								<th style="width:10%;">전시관</th>
 								<th style="width:10%;">전시기간</th>
 								<th style="width:5%;">조회수</th>
 								<th style="width:5%;">판매량</th>
-								<th>상태</th>
+								<th style="width:10%;">상태</th>
 							</tr>
 						</thead>
 						<c:forEach var="dto" varStatus="loop" items="${exb.list}">
 							<tbody>
 								<tr>
-									<td><input name="codes" type="checkbox" value="${dto.code}"></td>
+									<td><input name="code" type="checkbox" value="${dto.code}"></td>
 									<td>${dto.rn}</td>
 									<td>${dto.code}</td>
+									<td><img src="${dto.thumnail}" width="50"></td>
 									<td><a href="#" onclick="exbUpdate('${dto.code}')">${dto.title}</a></td>
 									<td>${dto.location}</td>
 									<td>${dto.gallery}</td>
