@@ -38,7 +38,8 @@ $(function() {
 });
 $(function(){
 	$("#btnSave").click(function(){
-		var product = $("#product").val();
+		var product = $("#product").prop('tagName')=="INPUT" ? $("#product").val() : $("#product").text();
+		console.log("속성"+$("#product").prop('tagName')=="INPUT" ? $("#product").val() : $("#product").text());
 		var subject = $("#subject").val();
 		var content = $("#content").val();
 		if(product ==""){
@@ -83,8 +84,16 @@ $(function(){
 		</tr>
 		<tr>
 			<th width="15%">전시코드</th>
-			<td>				
-			<input id="product" name="product" value="${dto.product}" placeholder="전시코드를 입력하세요">
+			<td>
+				<c:choose>
+					<c:when test="${not empty exhibitionCode}">
+						<p id="product">${exhibitionCode}</p>
+					</c:when>
+					<c:otherwise>
+						<input id="product" name="product" value="${dto.product}" placeholder="전시코드를 입력하세요">					
+					</c:otherwise>
+				</c:choose>				
+			
 			</td>
 		</tr>
 		<tr>
