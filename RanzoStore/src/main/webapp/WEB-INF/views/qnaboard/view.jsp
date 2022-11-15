@@ -51,8 +51,8 @@ $(function(){ //페이지가 뜨자마자 실행
 
 </head>
 <body>
-<div align="center">
 <%@ include file="../include/menu.jsp" %>
+<div align="center" style="margin-top: 30px; margin-bottom: 30px;">
 
 <form id="form1" name="form1" method="post" action="${path}/board/qna/insert.do" enctype="multipart/form-data">
  <table  class="table table-striped" style="width: 800px; border: 1px solid #dddddd">

@@ -50,7 +50,7 @@ table {
 
 img {
 	/* img 태그의 간격을 없애기 위해 */
-	vertical-align: topl
+	vertical-align: top;
 }
 
 a {

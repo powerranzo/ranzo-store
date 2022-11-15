@@ -23,7 +23,7 @@
 			document.searchform.action = "${path}/shop/exhibition/search.do";
 			document.searchform.submit();
 		});
-	
+	 
 	}); 
 </script>
 <c:set var="path" value="${pageContext.request.contextPath}" />

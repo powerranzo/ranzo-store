@@ -49,10 +49,12 @@ h2 a:active{text-decoration: none; color: black;}
 }
 .qnatable thead{
 	background-color: #f8f9fa;
+	border-top: 2px solid #e4e4e4;
 	color: gray;
 }
 .qnatable th, .qnatable td{
 	padding: 10px;
+	border-bottom: 1px solid #f8f9fa;
 }
 #searchBtn{
 	width: 90px;
@@ -122,7 +124,6 @@ td {
 	<c:choose>
 		<c:when test="${row.show == 'y'}">
 		<tr>
-
 			<th width="10%">No.</th>
 			<th>제목</th>
 			<th width="15%">작성자</th>

@@ -81,8 +81,8 @@ function listReply(){
 </script>
 </head>
 <body>
-<div align="center">
 <%@ include file="../include/menu.jsp" %>
+<div align="center" style="margin-top: 30px; margin-bottom: 30px;">
 
 <form id="form1" name="form1" method="post" action="${path}/board/review/insert.do">
 	<table class="table table-striped" style="width: 800px; border: 1px solid #dddddd">
@@ -138,5 +138,8 @@ function listReply(){
 <!-- 댓글 목록 -->
 <div id="listReply"></div>
 </div>
+	<footer>
+<%@ include file="../include/footer.jsp" %>
+</footer>
 </body>
 </html>

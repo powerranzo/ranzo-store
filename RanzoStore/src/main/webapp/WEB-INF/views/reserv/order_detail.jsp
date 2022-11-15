@@ -1,15 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>예매상세정보</title>
-<%@ include file="../include/header.jsp" %>
+<script src="${path}/include/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
+<link rel="stylesheet" href="${path}/resources/css/menu_style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a72ff6c63d.js" crossorigin="anonymous"></script>
 <style type="text/css">
 * {
 	margin:0px; 
+}
+li{
+	list-style: none;
 }
 .content{
 	margin: 0 80px 0 80px;
@@ -88,7 +100,7 @@ $(function(){
 </tr>
 </thead>
 <tr>
- <td rowspan="7" width="30%"><img src="${dto.thumnail}" width="300px"> </td>
+ <td rowspan="7" width="30%"><img src="${dto.thumnail}" width="250px"></td>
  <td class="tdstyle" width="20%">예매자</td>
  <td>${dto.name}</td>
 </tr>

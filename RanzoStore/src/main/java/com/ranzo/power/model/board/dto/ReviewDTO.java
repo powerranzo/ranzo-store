@@ -16,7 +16,19 @@ public class ReviewDTO {
 	private int rating; //별점
 	private int thumb; //좋아요
 	private int cnt; //댓글 개수
+	private String thumnail;
 	
+	
+	
+	public String getThumnail() {
+		return thumnail;
+	}
+	public void setThumnail(String thumnail) {
+		this.thumnail = thumnail;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getBno() {
 		return bno;
 	}

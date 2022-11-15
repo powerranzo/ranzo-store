@@ -24,7 +24,7 @@ h2 a:active{text-decoration: none; color: black;}
 .searchdiv {
 	background-color: #ecedf2;
 	height: 100px;
-	width: 75%;
+	width: 880px;
 	text-align: center;
 	margin: auto;
 	margin-bottom: 20px;
@@ -79,6 +79,41 @@ body {
 	color: white;
 	padding: 8px 12px 8px 12px;
 }
+
+i{
+	color: silver;
+}
+.reviewdiv{
+	text-align: center;	
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	margin:5px;
+	display: inline-block; 
+	width: 170px; 
+	height: 250px;
+	padding: 10px;
+}
+.reviewdiv img{
+	border-radius: 10px;
+}
+.stardiv{
+	color: orange;
+	font-size: 18px;
+}
+.pagediv{
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.reviewtb{
+	width: 100%;
+}
+.reviewtb td{
+	padding: 2px;
+}
+
 table i{
 	color: silver;
 }
@@ -105,6 +140,33 @@ td {
 <h2>Review게시판</h2>
 <br>
 
+<div class="review">
+<h2><a href="${path}/board/review/list.do">REVIEW</a></h2>
+<!-- 검색폼 -->
+<div class="searchdiv">
+<form name="form1" method="post" action="${path}/board/review/list.do">
+	<select name="search_option">
+		<option value="all"
+			<c:if test="${map.search_option == 'all'}"> selected </c:if>	>전체 검색</option>
+		<option value="title"
+			<c:if test="${map.search_option == 'title'}"> selected </c:if>  >전시명</option>
+		<option value="subject" 
+			<c:if test="${map.search_option == 'subject'}"> selected </c:if>	>제목</option>
+		<option value="content" 
+			<c:if test="${map.search_option == 'content'}"> selected </c:if>	>내용</option>
+		<option value="name"
+			<c:if test="${map.search_option == 'name'}"> selected </c:if>	 >이름</option>
+	</select>
+	<input name="keyword" class="reviewkeyword" value="${map.keyword}">
+	<input type="submit" value="조회" id="searchBtn" name="searchBtn">
+	<button type="button" id="btnWrite" onclick="location.href='${path}/board/review/write.do'" class="btn btn-primary pull-right">글쓰기</button>
+</form>
+</div>
+
+
+<div class="container">
+
+<div id="tab-1" class="tab-content current">
 <table class="table table-striped" style="width: 100%; text-align: center; border: 1px solid #dddddd">
 <tr>
 	<th style="background-color: #eeeeee; text-align: center;">No.</th>
@@ -116,30 +178,44 @@ td {
 	<th style="background-color: #eeeeee; text-align: center;">조회수</th>
 </tr>
 
+
 <c:forEach var="row" items="${map.list}">
 <c:choose>
 	<c:when test="${row.show == 'y'}">
+<div class="reviewdiv">
+ <table class="reviewtb">
+  
 		<tr>
-			<td>${row.bno}</td>
-			<td>
-				<c:forEach begin="1" end="${row.rating}" step="1">
-					<span class="glyphicon glyphicon-star"></span>
-				</c:forEach>
-			</td>
-			<td><a href="${path}/shop/exhibition/detail/${row.product}">${row.title}</a></td>
-			<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
+   <td colspan="2">${row.name}(${row.writer})</td>
+  </tr>
+  <tr>
+   <td colspan="2"><img src="${row.thumnail}" width="80px"></td>
+  </tr>
+   <tr>
+   <td colspan="2" class="stardiv"><c:forEach begin="1" end="${row.rating}" step="1">
+				<span class="glyphicon glyphicon-star"></span>
+				</c:forEach></td>
+		</tr>
+  <tr>
+   <td colspan="2"><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
 				<c:if test="${row.cnt > 0}">
 					<span style="color: red;">(${row.cnt})</span>
 				</c:if>
 			</td>
-			<td>${row.name}(${row.writer})</td>
-			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-			<td>${row.viewcnt}</td>
-		</tr>
-	</c:when>
+  </tr>
+  <tr>
+   <td><span style="color: gray;">
+   <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/></span></td>
+   <td style="text-align: right; font-size: 12px;">| 조회수:${row.viewcnt}</td> 
+  </tr>
+ 
+ </table>
+</div>
+</c:when>
 </c:choose>
 </c:forEach>
 
+<div class="pagediv">
 <tr>
 		<td colspan="6" align="center">
 			<c:if test="${map.pager.curBlock > 1}">
@@ -170,6 +246,8 @@ td {
 				&nbsp;<a href="#" 
 				onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
 			</c:if>
+</div>
+</div>
 		</td>
 	</tr>
 </table>
