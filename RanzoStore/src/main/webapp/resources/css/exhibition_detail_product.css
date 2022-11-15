@@ -2,10 +2,14 @@
 
 .sec-prdInfo {
 	width: 100%;
-	margin: 0 auto;
 }
 
-.sec-prdInfo img {
+.sec-prdInfo .img-box {
+	display: flex;
+	justify-content: center;
+}
+
+.sec-prdInfo .img-box img {
 	width: 100%;
-	max-width: 750px;
+	max-width: 700px;
 }

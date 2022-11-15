@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-.sec-review{
+.sec-qna{
 	padding: 10px;
 }
 
-.comment-notice, review-info{
+.comment-notice, qna-info{
 	color: grey;
 	
 }

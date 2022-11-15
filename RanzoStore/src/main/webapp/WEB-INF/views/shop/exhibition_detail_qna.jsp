@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="${path}/resources/css/exhibition_detail_qna.css">
-
 </head>
 <body>
 	<section class="sec-qna">
@@ -18,7 +17,7 @@
 		<ul>
 			<c:forEach var="qna" items="${map.qnaInfo}">   
 				<li class="qna">
-					<div>
+					<div class="qna-info">
 						<span id='bno'>${qna.bno}</span> | 
 						<span id='writer'>${qna.writer}</span> | 
 						<span id='date'>${qna.reg_date}</span>
