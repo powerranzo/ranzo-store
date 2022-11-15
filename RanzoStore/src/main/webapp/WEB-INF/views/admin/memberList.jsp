@@ -60,9 +60,9 @@
 						<th>탈퇴 회원수</th>
 					</tr>
 					<tr>
-						<td>${mcount.member_all}명</td>
-						<td>${mcount.member_today}명</td>
-						<td>${mcount.member_quit}명</td>
+						<td>${m.cnt.member_all}명</td>
+						<td>${m.cnt.member_today}명</td>
+						<td>${m.cnt.member_quit}명</td>
 					</tr>
 				</table>
 				<table class="adminTable2">
@@ -77,15 +77,15 @@
 						</select>
 							<div id="" style="width: 65%;" class="input-group">
 								<input type="text" name="searchKeyword"
-									value="${searchOp.searchKeyword}">
+									value="${m.searchOp.searchKeyword}">
 							</div></td>
 					</tr>
 					<tr>
 						<th>가입일</th>
 						<td colspan="2"><input type="date" id="startDate"
-							name="startDate" value="${searchOp.startDate}"> <span
+							name="startDate" value="${m.searchOp.startDate}"> <span
 							style="float: left; padding: 7px;">~</span> <input type="date"
-							id="endDate" name="endDate" value="${searchOp.endDate}"></td>
+							id="endDate" name="endDate" value="${m.searchOp.endDate}"></td>
 					</tr>
 					<tr>
 						<th>분류</th>
@@ -125,7 +125,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="dto" varStatus="loop" items="${list}">
+						<c:forEach var="dto" varStatus="loop" items="${m.list}">
 							<tr>
 								<td><input name="userids" type="checkbox"
 									value="${dto.userid}"></td>
@@ -151,19 +151,19 @@
 			<div class="row" align="center" id="paging">
 				<div class="col-sm-12">
 					<ul class="pagination pagination">
-						<c:if test="${pager.curBlock > 1}">
+						<c:if test="${m.pager.curBlock > 1}">
 							<a href="#" onclick="memberList('1')">
 							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
 							</a>&nbsp;&nbsp;
 						</c:if>
-						<c:if test="${pager.curBlock > 1}">
-							<a href="#" onclick="memberList('${pager.prevPage}')"> <i
+						<c:if test="${m.pager.curBlock > 1}">
+							<a href="#" onclick="memberList('${m.pager.prevPage}')"> <i
 								class="fa-solid fa-less-than"></i></a>
 						</c:if>
-						<c:forEach var="page" begin="${pager.blockStartPage}"
-							end="${pager.blockEndPage}">
+						<c:forEach var="page" begin="${m.pager.blockStartPage}"
+							end="${m.pager.blockEndPage}">
 							<c:choose>
-								<c:when test="${page == pager.curPage}">
+								<c:when test="${page == m.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
 									<span id="numstyle">${page}</span>&nbsp;
 								</c:when>
@@ -173,12 +173,12 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<c:if test="${pager.curBlock < pager.totBlock}">
-							<a href="#" onclick="memberList('${pager.nextPage}')">
+						<c:if test="${m.pager.curBlock < m.pager.totBlock}">
+							<a href="#" onclick="memberList('${m.pager.nextPage}')">
 							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
 						</c:if>
-						<c:if test="${pager.curPage < pager.totPage}">&nbsp;
-						<a href="#" onclick="memberList('${pager.totPage}')">
+						<c:if test="${m.pager.curPage < m.pager.totPage}">&nbsp;
+						<a href="#" onclick="memberList('${m.pager.totPage}')">
 						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
 						</a>
 						</c:if>

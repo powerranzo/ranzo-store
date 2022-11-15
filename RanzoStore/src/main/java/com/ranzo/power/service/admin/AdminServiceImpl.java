@@ -189,7 +189,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("end", pager.getPageEnd());
 		List<ReservDTO> list=adminDao.getReservList(map);
 		map.put("reserv_count_all", adminDao.countTbAll("reserv_item_tb"));
-//		map.put("reserv_count_pay", adminDao.countReservPaid());
+		map.put("reserv_count_pay", adminDao.countRsvPaid());
 		map.put("reserv_list", list);
 		map.put("pager", pager);
 		return map;

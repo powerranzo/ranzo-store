@@ -57,7 +57,7 @@ public class AdminController {
 		m.addAttribute("map", adminService.getHomeList());
 		return "admin/adminHome";
 	}
-
+  
 	//회원 목록
 	@RequestMapping("/member_list.do")
 	public String memberList(SearchDTO searchOp, Model m,
@@ -66,11 +66,7 @@ public class AdminController {
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) searchOp = (SearchDTO)flashmap.get("searchOp");
 		Map<String,Object> map = adminService.getMemberList(searchOp, curPage);
-		m.addAttribute("searchOp", searchOp);
-		m.addAttribute("mcount", map.get("mcount"));
-		m.addAttribute("list", map.get("list"));
-		m.addAttribute("pager", map.get("pager"));
-		map.clear();
+		m.addAttribute("m", map);
 		return "admin/memberList";
 	}
 
@@ -120,7 +116,6 @@ public class AdminController {
 	}
 
 	//전시 목록
-	@ResponseBody
 	@RequestMapping("/exb_list.do")
 	public String exbList(SearchDTO searchOp, 
 			@RequestParam(defaultValue = "1") int curPage, 

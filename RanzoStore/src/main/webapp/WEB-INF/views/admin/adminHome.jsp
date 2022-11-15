@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head><!-- 다시업로드! -->
 <meta charset="UTF-8">
 <title>관리자페이지</title>
 <%@ include file="../include/header.jsp"%>
@@ -83,12 +83,8 @@
 hr{margin-top:0;}
 </style>
 <script type="text/javascript">
-function homeList(n){
-	if(n==1){
-		document.form1.action='${path}/admin/exb_list.do';
-		document.form1.submit();
-	}
-}
+
+
 </script>
 </head>
 <body>
@@ -154,10 +150,6 @@ function homeList(n){
 		</section>
 		</div>
 		</div>
-		<form id="form1" name="form1" method="post">
-		<input type="hidden" name="searchOption2" value="ing">
-		<input type="hidden" name="searchOption2" value="ing">
-		</form>
 	<footer>
 		<%@ include file="../include/footer.jsp"%>
 	</footer>

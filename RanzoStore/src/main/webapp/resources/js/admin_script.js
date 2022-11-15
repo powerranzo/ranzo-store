@@ -6,6 +6,28 @@ function getContextPath(){
 	var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 	return contextPath;
 }
+//adminHome.jsp
+function homeList(n){
+	var url = getContextPath()+"/admin/exb_list.do";
+	var val = "";
+	if(n==1)
+		val ="?SearchOption2=ing";
+	if(n==2)
+		val="?SearchOption2=end";
+	if(n==3){
+		var date = new Date();
+		var today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+		url = getContextPath()+"/admin/reserv_list.do";
+		val = "?startDate="+today+"&endDate="+today;
+	}
+	if(n==4){
+		url = getContextPath()+"/admin/reserv_list.do";
+		val = "?searchOption2=pay_y";
+	}
+		location.href=url+val;
+		console.log(url+val);
+}
+
 //memberList.jsp
 	function memberList(param) {
 		document.form1.action = getContextPath()+"/admin/member_list.do?curPage=" + param;

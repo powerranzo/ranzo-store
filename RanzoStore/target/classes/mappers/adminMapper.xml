@@ -218,7 +218,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getExbView" resultType="ExhibitionDTO">
 		SELECT
 		e.code, location, gallery, title, summary, thumnail, 
-		product_info, start_date, end_date, hit, sales, show,
+		attach, start_date, end_date, hit, sales, show,
 		adult_price, teen_price, kids_price, p.attach, p.content
 		FROM exhibition_tb e, product_info_tb p
 		WHERE e.code=#{code} AND e.code=p.code
@@ -343,7 +343,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE reply_state='n'
 	</select>
 
-	<!-- 삭제된 QnA 개수 -->
+	<!-- 오늘 QnA 개수 -->
 	<select id="countQnaToday" resultType="int">
 		SELECT COUNT(*) FROM qna_tb
 		WHERE reg_date=#{today}
