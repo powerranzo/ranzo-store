@@ -23,7 +23,7 @@ h2 a:active{text-decoration: none; color: black;}
 .searchdiv {
 	background-color: #ecedf2;
 	height: 100px;
-	width: 75%;
+	width: 880px;
 	text-align: center;
 	margin: auto;
 	margin-bottom: 20px;
@@ -72,6 +72,45 @@ body {
   flex-direction: column;
   margin: 0;
 }
+#numstyle{
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	padding: 8px 12px 8px 12px;
+}
+i{
+	color: silver;
+}
+.reviewdiv{
+	text-align: center;	
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	margin:5px;
+	display: inline-block; 
+	width: 170px; 
+	height: 250px;
+	padding: 10px;
+}
+.reviewdiv img{
+	border-radius: 10px;
+}
+.stardiv{
+	color: orange;
+	font-size: 18px;
+}
+.pagediv{
+	width: 300px;
+	margin: auto;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+.reviewtb{
+	width: 100%;
+}
+.reviewtb td{
+	padding: 2px;
+}
 </style>
 
 
@@ -113,52 +152,48 @@ function list(page) {
 <div class="container">
 
 <div id="tab-1" class="tab-content current">
-<table class="reviewtable">
-<thead>
-	<tr>
-		<th>No.</th>
-		<th>별점</th>
-		<th>전시명</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>작성일</th>
-		<th>조회수</th>
-	</tr>
-</thead>
-
 <c:forEach var="row" items="${map.list}">
 <c:choose>
 	<c:when test="${row.show == 'y'}">
+<div class="reviewdiv">
+ <table class="reviewtb">
+  
 		<tr>
-			<td>${row.bno}</td>
-			<td>
-				<c:forEach begin="1" end="${row.rating}" step="1">
-					<span class="glyphicon glyphicon-star"></span>
-				</c:forEach>
-			</td>
-			<td><a href="${path}/shop/exhibition/detail/${row.product}">${row.title}</a></td>
-			<td><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
+   <td colspan="2">${row.name}(${row.writer})</td>
+  </tr>
+  <tr>
+   <td colspan="2"><img src="${row.thumnail}" width="80px"></td>
+  </tr>
+   <tr>
+   <td colspan="2" class="stardiv"><c:forEach begin="1" end="${row.rating}" step="1">
+				<span class="glyphicon glyphicon-star"></span>
+				</c:forEach></td>
+		</tr>
+  <tr>
+   <td colspan="2"><a href="${path}/board/review/view.do?bno=${row.bno}">${row.subject}</a>
 				<c:if test="${row.cnt > 0}">
 					<span style="color: red;">(${row.cnt})</span>
 				</c:if>
 			</td>
-			<td>${row.name}(${row.writer})</td>
-			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-			<td>${row.viewcnt}</td>
-		</tr>
-	</c:when>
+  </tr>
+  <tr>
+   <td><span style="color: gray;">
+   <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/></span></td>
+   <td style="text-align: right; font-size: 12px;">| 조회수:${row.viewcnt}</td> 
+  </tr>
+ 
+ </table>
+</div>
+</c:when>
 </c:choose>
 </c:forEach>
-
-<!-- 페이지 네비게이션 출력 -->
-	<tr>
-		<td colspan="7" align="center">
+<div class="pagediv">
 			<c:if test="${map.pager.curBlock > 1}">
-				<a href="#" onclick="list('1')">[처음]</a>
+				<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curBlock > 1}">
 				<a href="#" onclick="list('${map.pager.prevPage}')">
-				[이전]</a>
+				<i class="fa-solid fa-less-than"></i></a>
 			</c:if>
 			<c:forEach var="num" 
 				begin="${map.pager.blockBegin}"
@@ -166,24 +201,23 @@ function list(page) {
 				<c:choose>
 					<c:when test="${num == map.pager.curPage}">
 					<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-						<span style="color:red;">${num}</span>
+						<span id="numstyle">${num}</span>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="list('${num}')">${num}</a>
+						<a href="#" onclick="list('${num}')"><span style="color:gray;">${num}</span></a>&nbsp;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
 				<a href="#" 
-				onclick="list('${map.pager.nextPage}')">[다음]</a>
+				onclick="list('${map.pager.nextPage}')"><i class="fa-solid fa-greater-than"></i></a>&nbsp;
 			</c:if>
 			<c:if test="${map.pager.curPage < map.pager.totPage}">
-				<a href="#" 
-				onclick="list('${map.pager.totPage}')">[끝]</a>
+				&nbsp;<a href="#" 
+				onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
 			</c:if>
-		</td>
-	</tr>
-</table>
+
+</div>
 </div>
 
 </div>

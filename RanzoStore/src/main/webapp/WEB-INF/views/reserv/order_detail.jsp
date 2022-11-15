@@ -20,6 +20,9 @@
 * {
 	margin:0px; 
 }
+li{
+	list-style: none;
+}
 .content{
 	margin: 0 80px 0 80px;
 	display: flex;
