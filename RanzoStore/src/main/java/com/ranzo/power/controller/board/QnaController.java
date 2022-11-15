@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,9 +62,13 @@ public class QnaController {
 		return mav;		
 	}
 	
-	@RequestMapping("write.do")
-	public String write() {
-		return "qnaboard/write";
+	@RequestMapping(value ={"write.do", "write.do/{exhibitionCode}"})
+	public ModelAndView write(@PathVariable(required=false) String exhibitionCode) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("exhibitionCode", exhibitionCode);
+		mav.setViewName("qnaboard/write");
+		logger.info("###write.do/{code}/mav="+mav);
+		return mav; 
 	}
 
 	@RequestMapping("insert.do")

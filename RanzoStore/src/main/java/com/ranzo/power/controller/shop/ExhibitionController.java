@@ -90,12 +90,6 @@ public class ExhibitionController {
 	// 예매/취소 안내
 	@RequestMapping("getReserveInfo")
 	public ModelAndView getReserveInfo(String code, ModelAndView mav) throws Exception {
-		logger.info("### reserveInfo/code = " + code);
-
-		// String reserveInfo = exhibitionService.getReserveInfo(code);
-		// logger.info("### getReserveInfo/reviewList {}. = " + reserveInfo);
-
-		// mav.addObject("reserveInfo", reserveInfo); // 보낼 데이터
 		mav.setViewName("shop/exhibition_detail_reserve");
 		logger.info("### getReserveInfo/mav/" + mav);
 		return mav;

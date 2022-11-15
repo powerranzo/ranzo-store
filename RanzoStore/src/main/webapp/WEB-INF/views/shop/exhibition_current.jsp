@@ -138,7 +138,7 @@ function getList(){
 					<li id ="price">가격 낮은순</li>
 					<li id ="end_date">종료 임박순</li>
 				</ul>	
-				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
+				<span class="sort-dropdown"> <span class="change">별점 높은순</span> ☰</span> 
 
 		</div>
 

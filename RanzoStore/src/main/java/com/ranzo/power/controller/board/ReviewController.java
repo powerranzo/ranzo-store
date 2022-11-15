@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.ReviewDTO;
+import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.ReviewService;
 
@@ -56,24 +57,13 @@ public class ReviewController {
 
 	@RequestMapping(value ={"write.do", "write.do/{exhibitionCode}"})
 	public ModelAndView write(@PathVariable(required=false) String exhibitionCode) {
-		logger.info("###write.do/{code}/code="+exhibitionCode);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exhibitionCode", exhibitionCode);
 		mav.setViewName("reviewboard/write");
 		logger.info("###write.do/{code}/mav="+mav);
 		return mav; 
 	}
-/*
-	@RequestMapping("write.do/{code}")
-	public ModelAndView write(@PathVariable String code) {
-		logger.info("###write.do/{code}="+code);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exhibitionCode", code);
-		mav.setViewName("reviewboard/write");
-		logger.info("###write.do/{code}/mav="+mav);
-		return mav; 
-	}
-*/
+
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute ReviewDTO dto, HttpSession session) throws Exception {
 		// 세션처리
