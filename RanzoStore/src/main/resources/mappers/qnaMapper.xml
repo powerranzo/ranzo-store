@@ -89,8 +89,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 답변 작성 -->
 	<insert id="insert_reply">
-		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth) values
-	  (seq_qna.nextval, #{title}, #{content}, #{writer}, #{bno}, #{re_order}+1, #{re_depth}+1)
+		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth, reply_state) values
+	  (seq_qna.nextval, #{title}, #{content}, #{writer}, #{bno}, #{re_order}+1, #{re_depth}+1, 'y')
 	</insert>
 
 	<select id="countArticleExhibition" resultType="int">
