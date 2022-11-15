@@ -189,7 +189,13 @@ public class QnaController {
 		qnaService.update_reply(dto);
 		//레코드 저장
 		qnaService.create_reply(dto);
-		return "redirect:/board/qna/list.do";	
+		//관리자 확인
+		String admin = (String)session.getAttribute("admin");
+		if(admin.equals("y")) {
+			return "redirect:/admin/qna_list.do";
+		}else {
+			return "redirect:/board/qna/list.do";	
+		}
 	}
 	
 	@RequestMapping("getQnaInfo")
