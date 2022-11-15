@@ -134,10 +134,6 @@
 	 </ul>
 	</nav>
 	
-	
-	
-	
-
 <div class="searchHeader">
 
 <!-- 키워드검색 -->
