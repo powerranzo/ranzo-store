@@ -57,7 +57,7 @@ public class AdminController {
 		m.addAttribute("map", adminService.getHomeList());
 		return "admin/adminHome";
 	}
-
+  
 	//회원 목록
 	@RequestMapping("/member_list.do")
 	public String memberList(SearchDTO searchOp, Model m,
