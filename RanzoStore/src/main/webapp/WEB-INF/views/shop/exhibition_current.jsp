@@ -8,18 +8,18 @@
 <%@ include file="../include/header.jsp" %>	
 <link rel="stylesheet" href="${path}/resources/css/exhibition.css?=ver1">
 <script type="text/javascript">
-	/*  */
-	$(window).resize(function (){
-		/* dropdown으로 숨겨진 메뉴를 반응형 사이즈에 맞춰 다시 보이게 함 */
-			$('.sort').hide();	
-		var width_size = window.outerWidth;
-		if (width_size >= 768) {
-			$('.filter').show();	
-		}
-		if (width_size >= 1132) {
-			$('.sort').show();	
-		}
-	});
+$(window).resize(function (){
+	/* dropdown으로 숨겨진 메뉴를 반응형 사이즈에 맞춰 다시 보이게 함 */
+		$('.sort').hide();	
+	var width_size = window.outerWidth;
+	if (width_size >= 768) {
+		$('.filter').show();	
+	}
+	if (width_size >= 1132) {
+		$('.sort').show();	
+	}
+});
+	
 $(function(){
 
 	date = new Date();
@@ -138,7 +138,7 @@ function getList(){
 					<li id ="price">가격 낮은순</li>
 					<li id ="end_date">종료 임박순</li>
 				</ul>	
-				<span class="sort-dropdown"> <span class="change">정렬</span> ☰</span> 
+				<span class="sort-dropdown"> <span class="change">별점 높은순</span> ☰</span> 
 
 		</div>
 

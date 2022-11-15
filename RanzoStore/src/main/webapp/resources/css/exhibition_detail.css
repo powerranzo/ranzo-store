@@ -6,14 +6,19 @@
 
 .sec-prd {
 	display: grid;
-	grid-template-areas: 'head head' 'thumnail body';
+	grid-template-areas: 'head head' 'thumnail body' 'thumnail btn';
 	grid-template-columns: 2fr 3fr;
+	grid-template-rows: auto auto 50px;
 	gap: 10px;
-	display: grid;
 }
 
 .prd-thumnail {
 	grid-area: thumnail;
+}
+
+.prd-thumnail img {
+	width: 100%;
+	height: auto;
 }
 
 .prd-head {
@@ -24,30 +29,57 @@
 	font-size: 26px;
 	text-align: center;
 }
-.button-reserve{
-	background-color: orange;
-	color: #f2f2f2;
-}
+
 /* 전시 정보  */
 .prd-body {
-	padding-top:10px;
+	grid-area: body;
+	padding-top: 10px;
 	font-size: 14px;
 }
 
 .itemLabel {
-	padding-right:10px;
+	padding-right: 10px;
 	width: 50px;
-	font-weight: bold;
 	color: orange;
+	vertical-align: top;
+	font-weight: bold;
 }
 
-
-.prd-thumnail img {
-	width: 100%;
-	height: auto;
+.item {
+	display: inline-block;
 }
 
+.buttons {
+	grid-area : btn;
+	display: flex;
+	justify-content: flex-end;
+	height: 50px;
+}
 
+.btn-wish {
+	margin-right:10px;	
+}
+
+.btn-reserve {
+	height:50px;
+	width:100%;
+	max-width:300px;
+	text-align: center;
+	text-decoration: none;
+	padding-top:13px;
+	background-color: orange;
+	color: #f2f2f2;
+	font-size: 20px;
+	font-weight: bold;	
+}
+.btn-reserve:hover {
+	text-decoration: none;
+	color:#f2f2f2;
+	opacity: 0.8;
+}
+
+.btn-reserve a{
+	}
 
 /* 상세정보 탭 */
 .sec-detail {
@@ -97,9 +129,9 @@
 /* 태블릿용 CSS */
 @media all and (min-width:768px) {
 	.sec-prd {
-		grid-template-areas: 'thumnail head' 'thumnail body';
+		grid-template-areas: 'thumnail head' 'thumnail body' 'thumnail btn';
 		grid-template-columns: minmax(auto, 300px);
-		grid-template-rows: 60px auto;
+		grid-template-rows: 60px auto 50px;
 	}
 	.prd-head {
 		text-align: left;
