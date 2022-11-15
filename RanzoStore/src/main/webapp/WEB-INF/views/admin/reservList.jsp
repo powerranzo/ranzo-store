@@ -7,6 +7,12 @@
 <title>예약 목록</title>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/adminHeader.jspf"%>
+<style type="text/css">
+@media screen and (max-width: 900px) {
+	
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		optionSelect(1);
@@ -59,35 +65,15 @@
 							<span class="glyphicon glyphicon-check"></span>&nbsp;예약 처리
 						</button></h3>
 				<form name="form1" class="form-inline" method="post">
-<<<<<<< HEAD
-<!-- 					<div class="form-group"> -->
-						<table class="adminTable1">
-							<tr>
-								<th>전체 예약</th>
-								<th>결제 완료 예약</th>
-								<th></th>
-							</tr>
-							<tr>
-								<td>${ reserv.reserv_count_all}개</td>
-								<td>${ reserv.reserv_count_pay}개</td>
-								<td>
-								<td>
-							</tr>
-						</table>
-						<table class="adminTable2">
-							<tr>
-								<th>검색옵션
-								<td><label for="searchOption1"></label> <select
-									name="searchOption1" class="form-control" id="searchOption1">
-										<option value="r.no">주문번호</option>
-=======
 					<table class="adminTable1">
 						<tr>
 							<th>전체 예약</th>
+							<th>오늘 예약</th>
 							<th>결제 완료 예약</th>
 						</tr>
 						<tr>
 							<td>${reserv.reserv_count_all}개</td>
+							<td>${reserv.reserv_today}개</td>
 							<td>${reserv.reserv_count_pay}개</td>
 						</tr>
 					</table>
@@ -97,7 +83,6 @@
 							<td colspan="2" id="adminTB2_td1">
 								<select	name="searchOption1" id="searchOption1">
 										<option value="r.no">예약번호</option>
->>>>>>> hyuna1113
 										<option value="r.userid">예매자ID</option>
 										<option value="r.code">전시코드</option>
 										<option value="e.title">전시명</option>
@@ -142,7 +127,6 @@
 							검색 <i class="glyphicon glyphicon-search"></i>
 						</button>
 					</div>
-<!-- 					</div> -->
 
 					<table class="ordertable">
 						<thead>
@@ -178,47 +162,49 @@
 							</tbody>
 						</c:forEach>
 					</table>
-				
-					<div class="row" align="center">
-						<div class="col-sm-12">
-							<ul class="pagination pagination">
-								<c:if test="${reserv.pager.curPage > 1}">
-									<li><a href="#" onclick="reservList('1')">첫 페이지</a></li>
-								</c:if>
-								<c:if test="${reserv.pager.curBlock > 1}">
-									<li><a href="#" onclick="reservList('${reserv.pager.prevPage}')">이전</a></li>
-								</c:if>
-								<c:forEach var="page" begin="${reserv.pager.blockStartPage}"
-									end="${reserv.pager.blockEndPage}">
-									<c:choose>
-										<c:when test="${page == reserv.pager.curPage}">
-<<<<<<< HEAD
-											<li><a href="#" style="text-decoration: underline;">${	page}</a></li>
-=======
-											<li><a href="#"
-												style="text-decoration: underline;">${page}</a></li>
->>>>>>> hyuna1113
-										</c:when>
-										<c:otherwise>
-											<li><a href="#" onclick="reservList('${page}')">${page}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:if test="${reserv.pager.curBlock < reserv.pager.totBlock}">
-									<li><a href="#" onclick="reservList('${reserv.pager.nextPage}')">다음</a></li>
-								</c:if>
-								<c:if test="${reserv.pager.curPage < reserv.pager.totPage}">
-									<li><a href="#" onclick="reservList('${reserv.pager.totPage}')">마지막
-											페이지</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
-					<button id="btnDelReserv" type="button" class="btn btn-default">삭제
-					처리</button>
-				</form>
+
+				<div class="row" align="center" id="paging">
+				<div class="col-sm-12">
+					<ul class="pagination pagination">
+						<c:if test="${reserv.pager.curBlock > 1}">
+							<a href="#" onclick="reservList('1')">
+							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
+							</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${reserv.pager.curBlock > 1}">
+							<a href="#" onclick="reservList('${reserv.pager.prevPage}')"> <i
+								class="fa-solid fa-less-than"></i></a>
+						</c:if>
+						<c:forEach var="page" begin="${reserv.pager.blockStartPage}"
+							end="${reserv.pager.blockEndPage}">
+							<c:choose>
+								<c:when test="${page == reserv.pager.curPage}">
+									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<span id="numstyle">${page}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="reservList('${page}')">
+									<span style="color: gray;">${page}</span></a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${reserv.pager.curBlock < reserv.pager.totBlock}">
+							<a href="#" onclick="reservList('${reserv.pager.nextPage}')">
+							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
+						</c:if>
+						<c:if test="${reserv.pager.curPage < reserv.pager.totPage}">&nbsp;
+						<a href="#" onclick="reservList('${reserv.pager.totPage}')">
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
+						</a>
+						</c:if>
+					</ul>
+				</div>
 			</div>
+		</form>
+			<input type="submit" value="삭제 처리" id="btnDelete" name="btnDelete">
+		</div>
 	</div>
+	
 <%@ include file="../include/footer.jsp"%>
 </body>
 </html>

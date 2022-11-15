@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<style>
-*{
-	margin: 0; padding: 0;
+	pageEncoding="UTF-8"%> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+  <style>
+ * {box-sizing: content-box;}
+ 
+aside {
+	float:left;
+	margin-left:5%;
+	margin-top:4%;
+	width: 25%;
 }
 .asidediv{
 	float: left;	
@@ -16,6 +20,7 @@
 	width: 200px;
 	text-align: left;
 }
+
 .title {
 	font-size: 30px;
 	margin-top: 40px;
@@ -26,18 +31,25 @@
 .title a:link{text-decoration: none; color: black;}
 .title a:visited{text-decoration: none; color: black;}
 .title a:active{text-decoration: none; color: black;}
+/* .title-s {
+	font-size: 20px;
+	margin: 25px 0 3% 0;
+} */
 .a1 {
 	text-decoration: none;
 	color: gray;
+	
 }
 .a1:hover{
 	color: black;
 	text-decoration: none;
 	font-weight: bold;	
 }
+ul{margin-left:0; padding:0;}
 .submenu li{
-	padding: 10px;
-	font-size: 16px;	
+	padding: 3px;
+	font-size: 16px;
+	text-align:right;	
 }
 .submenu h4{
 	border-bottom: 1px solid #ddd;
@@ -51,28 +63,39 @@
 		font-size: 20px;
 		height: auto;
 	}
-	.content{
-		margin: 0;
-	}
+	.content{margin: 0;}
+	
+	.asidediv {text-align:center;}
+	.submenu li{text-align:center;}
 }
-
-
 </style>
+<c:set var="path" value="${pageContext.request.contextPath}" /> 
+		
 	<div class="asidediv">
-	  <div class="title"><a href="${path}/member/mypage.do">MY PAGE</a></div>
-	  <div class="submenu">
-	   <h4>MY SHOPPING</h4>
-	   <ul> 
-	    <li><a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">티켓예매 목록</a></li>
-	    <li><a class="a1" href="${path}/member/wishlist.do">위시리스트</a></li>
-	    <li><a class="a1" href="${path}/member/myReview.do">나의 리뷰</a></li>
-	    <li><a class="a1" href="${path}/member/myInquiry.do">나의 상품 문의</a></li>
-	   </ul>
-	  </div>
-	  <div class="submenu">
-	   <h4>MY INFO</h4>
-	  	<ul>
-	  	 <li><a class="a1" href="${path}/member/infoEnter.do">개인정보 변경/탈퇴</a></li>
-	  	</ul>
-	  </div>	
+	<div class="title"><a href="${path}/admin/home.do">ADMIN PAGE</a></div>
+	<div class="submenu">
+	<h4>MEMBER</h4>
+	<ul>
+		<li><a class="a1" href="${path}/admin/member_list.do">회원 목록</a></li>
+		<li><a class="a1" href="${path}/admin/qna_list.do">QnA 목록</a></li>
+	</ul>
+	<h4>EXHIBITION</h4>
+	<ul>
+		<li><a class="a1" href="${path}/admin/exb_list.do">전시 목록</a></li>
+		<li><a class="a1" href="${path}/admin/exb_write.do">전시 등록</a></li>
+	</ul>
+	<h4>RESERVATION</h4>
+	<ul>
+		<li><a class="a1" href="${path}/admin/reserv_list.do">예약 목록</a></li>
+	</ul>
+	<h4>FAQ</h4>
+	<ul>
+		<li><a class="a1" href="${path}/faq/write.do">FAQ 등록</a></li>
+	</ul>
+	<h4>POPUP</h4>
+	<ul>
+		<li><a class="a1" href="${path}/admin/popup_list.do">팝업 목록</a></li>
+		<li><a class="a1" href="${path}/admin/popup_write.do">팝업 등록</a></li>
+	</ul>
+	</div>
 	</div>

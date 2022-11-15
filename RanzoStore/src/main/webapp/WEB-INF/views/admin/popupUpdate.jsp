@@ -140,7 +140,15 @@ form {
 						</tr>
 						<tr>
 							<th>이미지 URL</th>
-							<td><input name="img_src" id="img_src">
+							<td>
+								<c:choose>
+								<c:when test="${dto.filesize > 0}">
+								<input name="img_src" id="img_src">
+								</c:when>
+								<c:otherwise>
+								<input name="img_src" id="img_src" value="${dto.img_src}">
+								</c:otherwise>
+								</c:choose>
 								<div>
 									<img id="urlImage" style="width: 50%; height: 50%">
 								</div>

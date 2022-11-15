@@ -31,6 +31,13 @@ public interface AdminDAO {
 		public void updateExb(ExhibitionDTO dto);
 		public void deleteExbFile(Map<String, Object> map);
 		//RESERVATION
+		public int countRsvToday(String today);
+		public int countRsvPaid();
+		public int countSearchRsv(Map<String, Object> map);
+		public List<ReservDTO> getReservList(Map<String, Object> map);
+		//QNA
+		public int countQnaNew();
+		public int countQnaToday(String today);
 		public int countSearchReserv(Map<String, Object> map);
 		public List<ReservDTO> getReservList(Map<String, Object> map);
 		public int countReservPay();
@@ -51,4 +58,6 @@ public interface AdminDAO {
 		public void insertProductInfo(ProductInfoDTO idto);
 //		public ProductInfoDTO getProductInfoView(String code);
 		public void updateProductInfo(ProductInfoDTO idto);
+
 }
+

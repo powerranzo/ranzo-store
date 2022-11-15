@@ -7,7 +7,6 @@
 <title>로그인</title>
 <%@ include file="../include/header.jsp" %>
 <script>
-
 //일반 로그인
  	$(function() {
  		
@@ -35,7 +34,6 @@
 	console.log('message');
 	alert("로그인에 실패하였습니다.");
 </c:if>
-
 <c:if test="${message == 'nologin' }">
 	console.log('message');
 	alert("로그인 후 이용가능합니다.");
@@ -44,27 +42,30 @@
 </script>
 <style>
 * {
-	box-sizing: content-box;
+	margin: 0;
 }
-
-/* #loginForm {
-	width: 500px;
-	height: 600px;
-	display: inline;
-	align-items: center;
-	position: absolute;
-	top: 62%;
-	left: 55%;
-	transform: translate(-50%, -50%);
-} */
+#footer{bottom:0; margin-top:120px;}
+footer{
+	clear : both;
+	bottom: 0;
+}
+html, body{
+	height: 100%;
+}
+body {
+	display: flex;
+  flex-direction: column;
+  margin: 0;
+}
 .logindiv{
 	width: 500px;
 	height: 600px;
 	margin: auto;
 	align-items: center;
 	text-align: center;
+	min-height: 100%;
+	flex: 1;
 }
-
 .input-field1 {
 	width: 300px;
 	height: 40px;
@@ -72,7 +73,6 @@
 	padding: 0 10px;
 	margin: 30px 0 10px 0;
 }
-
 .input-field2 {
 	width: 300px;
 	height: 40px;
@@ -80,7 +80,6 @@
 	padding: 0 10px;
 	margin-bottom: 35px;
 }
-
 .button {
 	background-color: black;
 	color: white;
@@ -90,7 +89,6 @@
 	border: none;
 	margin: 5px 0 5px 0;
 }
-
 .kakao{
 	background-color: #FEE500;
 	color: black;
@@ -100,18 +98,15 @@
 	border: none;
 	margin-top: 5px;
 }
-
 .title {
 	font-size: 30px;
 	margin: 40px 0 15px 0;
 }
-
 .a{
 	text-decoration: none;
 	color: black;
 	font-weight: normal; 
 }
-
 </style>
 </head>
 <body>

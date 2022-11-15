@@ -150,40 +150,48 @@
 							</tbody>
 						</c:forEach>
 					</table>
-				
-					<div class="row" align="center">
-						<div class="col-sm-12">
-							<ul class="pagination pagination">
-								<c:if test="${pop.pager.curPage > 1}">
-									<li><a href="#" onclick="popupList('1')">첫 페이지</a></li>
-								</c:if>
-								<c:if test="${pop.pager.curBlock > 1}">
-									<li><a href="#" onclick="popupList('${pop.pager.prevPage}')">이전</a></li>
-								</c:if>
-								<c:forEach var="page" begin="${pop.pager.blockStartPage}"
-									end="${pop.pager.blockEndPage}">
-									<c:choose>
-										<c:when test="${page == pop.pager.curPage}">
-											<li><a href="#" style="text-decoration: underline;">${page}</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="#" onclick="popupList('${page}')">${page}</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:if test="${pop.pager.curBlock < pop.pager.totBlock}">
-									<li><a href="#" onclick="popupList('${pop.pager.nextPage}')">다음</a></li>
-								</c:if>
-								<c:if test="${pop.pager.curPage < pop.pager.totPage}">
-									<li><a href="#" onclick="popupList('${pop.pager.totPage}')">마지막
-											페이지</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
+
+				<div class="row" align="center" id="paging">
+				<div class="col-sm-12">
+					<ul class="pagination pagination">
+						<c:if test="${pop.pager.curBlock > 1}">
+							<a href="#" onclick="popupList('1')">
+							<i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i>
+							</a>&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${pop.pager.curBlock > 1}">
+							<a href="#" onclick="popupList('${pop.pager.prevPage}')"> <i
+								class="fa-solid fa-less-than"></i></a>
+						</c:if>
+						<c:forEach var="page" begin="${pop.pager.blockStartPage}"
+							end="${pop.pager.blockEndPage}">
+							<c:choose>
+								<c:when test="${page == pop.pager.curPage}">
+									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<span id="numstyle">${page}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="popupList('${page}')"><span
+										style="color: gray;">${page}</span></a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${pop.pager.curBlock < pop.pager.totBlock}">
+							<a href="#" onclick="popupList('${pop.pager.nextPage}')">
+							<i class="fa-solid fa-greater-than"></i></a>&nbsp;
+						</c:if>
+						<c:if test="${pop.pager.curPage < pop.pager.totPage}">&nbsp;
+						<a href="#" onclick="popupList('${pop.pager.totPage}')">
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
+						</a>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 					<button id="btnDel" type="button" class="btn btn-default">종료 처리</button>
 					<button id="btnWrite" type="button" 
 					onclick="location.href='${path}/admin/popup_write.do'" class="btn btn-default">신규 등록</button>
+
 				</form>
 			</div>
 	</div>

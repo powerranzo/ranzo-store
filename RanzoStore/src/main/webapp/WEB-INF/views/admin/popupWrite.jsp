@@ -20,24 +20,16 @@
 			height : 300
 		});
 		$("#btnWrite").click(function() {
-			if (confirm('등록하시겠습니까?')) {
 				if (popCheck()) {
 					document.form1.action = '${path}/admin/popup_write.do';
 					document.form1.submit();
 				}
-			}
 		});
-
-// 		$("#img_src").change(function() {
-// 			console.log($("#img_src").val());
-// 			if ($("#img_src").val() == "") {
-// 				$("#urlImage").hide();
-// 			} else {
-// 				$("#urlImage").show();
-// 				$("#urlImage").attr('src', $("#img_src").val());
-// 			}
-// 		});
+		$("#btnResetFile").click(function(){
+			$("#file").val('');
+		});
 	});	
+  
 	function fileSize(target) {
 		const file = target.files[0];
 		const maxsize = 2000 * 1024;

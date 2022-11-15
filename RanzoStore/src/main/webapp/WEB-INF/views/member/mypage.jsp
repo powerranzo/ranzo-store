@@ -74,6 +74,7 @@ section {
 	width: 350px;
 
 }
+#footer{bottom:0; margin-top:120px;}
 </style>
 <script type="text/javascript">
 $(function(){
