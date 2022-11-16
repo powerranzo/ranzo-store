@@ -32,7 +32,5 @@ public class MemberCountDTO {
 		this.member_today = member_today;
 		this.member_quit = member_quit;
 	}
-	public MemberCountDTO() {
-	}
 	
 }
