@@ -186,9 +186,8 @@ public class AdminController {
 			HttpServletRequest request, MultipartFile file1, MultipartFile file2) {
 		
 		ProductInfoDTO dtoOrigin = exbService.getProductInfo(idto.getCode());
-		//기존 포스터 정보
+		//기존 포스터, 전시 정보
 		String thumnail = adminService.getExbView(dto.getCode()).getThumnail();
-		//기존 전시 정보
 		String product_info = dtoOrigin.getAttach();
 
 		boolean file = !file1.isEmpty() ? true : false; 
