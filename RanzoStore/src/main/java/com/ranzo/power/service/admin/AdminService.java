@@ -18,7 +18,7 @@ public interface AdminService {
 	public List<QnaDTO> getMemberQna(String userid);
 	public List<ReservDTO> getMemberReserv(String userid);
 	//QNA
-	public void deleteQna(int[] qna_bno);
+	public void deleteQna(int[] bno);
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage);
 	//전시
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage);
@@ -29,7 +29,7 @@ public interface AdminService {
 	public void showExb(String[] code);
 	//예약
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
-	public void deleteReserv(String[] reserv_no);
+	public void deleteReserv(String[] no);
 	//팝업
 	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage);
 	public void insertPopup(PopupDTO dto);

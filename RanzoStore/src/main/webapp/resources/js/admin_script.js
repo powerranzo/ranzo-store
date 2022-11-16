@@ -93,6 +93,19 @@ function memberView(param) {
 		document.form1.action = getContextPath()+'/admin/reserv_list.do?curPage=' + param;
 		document.form1.submit();
 	}
+	
+	function rsvDel(param) {
+		alertify.confirm("삭제하시겠습니까?", function() {
+		document.form1.action = getContextPath()+'/admin/reserv_delete.do?no=' + param;
+		document.form1.submit();
+		});
+	}
+	function rsvShow(param) {
+		alertify.confirm("복구하시겠습니까?", function() {
+			document.form1.action = getContextPath()+'/admin/reserv_show.do?no=' + param;
+			document.form1.submit();
+		});
+	}
 //qnaList.jsp
 	function qnaList(param) {
 		document.form1.action = getContextPath()+'/admin/qna_list.do?curPage=' + param;

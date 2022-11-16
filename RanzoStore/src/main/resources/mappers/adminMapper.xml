@@ -113,11 +113,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT R.*, rownum as rn FROM (
 			SELECT no, r.userid,
 			e.code, r.res_date, r.adult, r.teen, r.kids, r.quantity,
-			r.sub_total, r.pay, m.name, e.title
+			r.sub_total, r.pay, m.name, e.title, r.reg_date
 			FROM reserv_item_tb r, member_tb m, exhibition_tb e
 			WHERE r.userid=m.userid 
 			AND r.code=e.code AND r.userid=#{userid}
-			ORDER BY r.res_date desc
+			ORDER BY r.reg_date desc
 		) R
 		) WHERE <![CDATA[rn <= 6]]>
 	</select>
@@ -326,7 +326,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</otherwise>
 			</choose>
 			AND (
-			r.reg_date BETWEEN to_date(#{searchOp.startDate}, 'yyyy-mm-dd') AND 
+			r.res_date BETWEEN to_date(#{searchOp.startDate}, 'yyyy-mm-dd') AND 
 			TO_DATE(#{searchOp.endDate}, 'yyyy-mm-dd')+1
 			)
 			<choose>

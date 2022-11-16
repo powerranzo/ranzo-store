@@ -61,11 +61,11 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int curPage, 
 			HttpServletRequest request) {
 		//검색 옵션 유지
-			Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-			if(flashmap!= null) { 
-				searchOp = (SearchDTO)flashmap.get("searchOp");
-				curPage = (int)flashmap.get("curPage");
-			}
+		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!= null) { 
+			searchOp = (SearchDTO)flashmap.get("searchOp");
+			curPage = (int)flashmap.get("curPage");
+		}
 		Map<String,Object> map = adminService.getMemberList(searchOp, curPage);
 		m.addAttribute("m", map);
 		return "admin/memberList";
@@ -75,9 +75,9 @@ public class AdminController {
 	@RequestMapping("/member_view.do")
 	public String viewMember(
 			String userid, Model m, HttpServletRequest request) {
-//		//
-//		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-//		if(flashmap!= null) userid = (String)flashmap.get("userid");
+		//		//
+		//		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+		//		if(flashmap!= null) userid = (String)flashmap.get("userid");
 		m.addAttribute("dto", memberService.viewMember(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
 		m.addAttribute("reserv_list", adminService.getMemberReserv(userid)); 
@@ -95,30 +95,12 @@ public class AdminController {
 		return "redirect:member_list.do";
 	}
 
-	//회원 예약 삭제
-	@RequestMapping("/reserv_delete.do")
-	public String deleteReserv(String[] reserv_no, String userid, 
-			@RequestParam(defaultValue = "1") int curPage,
-			SearchDTO searchOp, RedirectAttributes rttr) {
-		adminService.deleteReserv(reserv_no);
-		if(userid!= null) {
-			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
-			rttr.addFlashAttribute("userid", userid);
-			return "redirect:member_view.do";
-		}else {
-			//예약 목록에서 호출한 경우 - 검색옵션 전달
-			rttr.addFlashAttribute("searchOp", searchOp);
-			rttr.addFlashAttribute("curPage", curPage);
-			return "redirect:reserv_list.do";
-		}
-	}
-
 	//회원 문의글 삭제
 	@RequestMapping("/qna_delete.do")
-	public String deleteQna(int[] qna_bno, SearchDTO searchOp, 
+	public String deleteQna(int[] bno, SearchDTO searchOp, 
 			@RequestParam(defaultValue = "1") int curPage, 
 			String userid, RedirectAttributes rttr) {
-		adminService.deleteQna(qna_bno);
+		adminService.deleteQna(bno);
 		if(userid!= null) {
 			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
 			rttr.addFlashAttribute("userid", userid);
@@ -162,14 +144,14 @@ public class AdminController {
 		String product_info = "-";
 		//포스터를 파일로 등록한 경우
 		if(!file1.isEmpty()) {
-			logger.info("multipartfile:"+file1.getOriginalFilename());
+			//logger.info("multipartfile:"+file1.getOriginalFilename());
 			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2( 
 					file1, request, Constants.DIR_EXHIBITION_TN);
 			thumnail = (String)fileInfo.get("fileUrl");
 		}
 		//전시 정보를 파일로 등록한 경우
 		if(!file2.isEmpty()) {
-			logger.info("multipartfile:"+file2.getOriginalFilename());
+			//logger.info("multipartfile:"+file2.getOriginalFilename());
 			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2(
 					file2, request, Constants.DIR_EXHIBITION_PI);
 			product_info = (String)fileInfo.get("fileUrl");
@@ -291,7 +273,7 @@ public class AdminController {
 		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:/admin/exb_list.do";
 	}
-	
+
 	//전시 재개(목록)
 	@RequestMapping("/exbs_show.do")
 	public String showExb(String[] code, SearchDTO searchOp,
@@ -322,9 +304,9 @@ public class AdminController {
 
 	//예약 목록
 	@RequestMapping("/reserv_list.do")
-	public String reservList(SearchDTO searchOp, 
-			@RequestParam(defaultValue = "1") int curPage, Model m
-			,HttpServletRequest request) {
+	public String reservList(SearchDTO searchOp, Model m,
+			@RequestParam(defaultValue = "1") int curPage,
+			HttpServletRequest request) {
 		//검색 옵션 유지
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) {
@@ -334,6 +316,24 @@ public class AdminController {
 		Map<String,Object> map = adminService.getReservList(searchOp, curPage);
 		m.addAttribute("reserv", map);
 		return "admin/reservList";
+	}
+
+	//회원 예약 삭제
+	@RequestMapping("/reserv_delete.do")
+	public String deleteReserv(String[] no, String userid, 
+			@RequestParam(defaultValue = "1") int curPage,
+			SearchDTO searchOp, RedirectAttributes rttr) {
+		adminService.deleteReserv(no);
+		if(userid!= null) {
+			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
+			rttr.addFlashAttribute("userid", userid);
+			return "redirect:member_view.do";
+		}else {
+			//예약 목록에서 호출한 경우 - 검색옵션 전달
+			rttr.addFlashAttribute("searchOp", searchOp);
+			rttr.addFlashAttribute("curPage", curPage);
+			return "redirect:reserv_list.do";
+		}
 	}
 
 	//QnA 목록
@@ -347,6 +347,7 @@ public class AdminController {
 			searchOp = (SearchDTO)flashmap.get("searchOp");
 			curPage = (int)flashmap.get("curPage");
 		}
+		//리스트 전달
 		Map<String,Object> map = adminService.getQnaList(searchOp, curPage);
 		m.addAttribute("qna", map);
 		return "admin/qnaList"; 
@@ -354,10 +355,16 @@ public class AdminController {
 
 	//팝업 목록
 	@RequestMapping("/popup_list.do")
-	public String popupList(SearchDTO searchOp,
-			@RequestParam(defaultValue  =  "1") int curPage, Model m) {
+	public String popupList(SearchDTO searchOp,Model m,
+			@RequestParam(defaultValue  =  "1") int curPage, 
+			HttpServletRequest request) {
+		//검색옵션 유지
+		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!= null) {
+			searchOp = (SearchDTO)flashmap.get("searchOp");
+			curPage = (int)flashmap.get("curPage");
+		}
 		Map<String,Object> map = adminService.getPopupList(searchOp, curPage);
-		logger.info("popup_map:"+map);
 		m.addAttribute("pop", map);
 		return "admin/popupList"; 
 	}
@@ -376,7 +383,10 @@ public class AdminController {
 
 	//팝업 수정페이지
 	@RequestMapping("/popup_view.do")
-	public String viewPopup(int no, Model m, HttpServletRequest request) {
+	public String viewPopup(
+			@RequestParam(defaultValue = "0") int no, 
+			Model m, HttpServletRequest request) {
+		//검색옵션 유지
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) no = (int)flashmap.get("no");
 		PopupDTO dto = adminService.getPopupView(no);
@@ -401,7 +411,7 @@ public class AdminController {
 		String img_src = dto.getImg_src();
 		//첨부파일인 경우
 		if(!file.isEmpty()) { 
-			logger.info("multipartfile:"+file.getOriginalFilename());
+			//logger.info("multipartfile:"+file.getOriginalFilename());
 			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2(file, request, Constants.DIR_POPUP);
 			img_src = (String)fileInfo.get("fileUrl");
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
@@ -494,8 +504,13 @@ public class AdminController {
 
 	//팝업 재개
 	@RequestMapping("/popup_show.do")
-	public String popupShow(@RequestParam(defaultValue = "0") int[] no) {
+	public String popupShow(int[] no, SearchDTO searchOp, 
+			@RequestParam(defaultValue  =  "1") int curPage,
+			RedirectAttributes rttr) {
 		adminService.popupShow(no);
+		rttr.addFlashAttribute("no", no);
+		rttr.addFlashAttribute("searchOp", searchOp);
+		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:popup_list.do";
 	}
 

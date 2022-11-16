@@ -162,7 +162,7 @@
 						<c:forEach var="reserv" varStatus="loop" items="${reserv.reserv_list}">
 							<tbody>
 								<tr>
-									<td><input name="reserv_no" type="checkbox" value="${reserv.no}"></td>
+									<td><input name="no" type="checkbox" value="${reserv.no}"></td>
 									<td>${reserv.no}</td>
 									<td><a href="#" onclick="memberView('${reserv.userid}')">${reserv.r_name}(${reserv.userid})</a></td>
 									<td>${reserv.title}(${reserv.code})</td>
@@ -174,6 +174,7 @@
 											pattern="yyyy-MM-dd" /></td>
 									<td><fmt:formatDate value="${reserv.reg_date}" type="date"
 											pattern="yyyy-MM-dd" /></td>
+									<td>${reserv.pay == 'y' ? '완료' : '결제 전'}</td>
 									<td><c:choose>
 											<c:when test="${reserv.show =='y'}">
 												<button class="btn btn-sm" type="button" id=""
@@ -181,15 +182,9 @@
 													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;삭제
 												</button>
 											</c:when>
-											<c:otherwise>
-												<button class="btn btn-sm" type="button" id=""
-													onclick="rsvShow'${reserv.no}')">
-													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;복구
-												</button>
-											</c:otherwise>
+											<c:otherwise>삭제</c:otherwise>
 										</c:choose>
 									</td>
-									<td>${reserv.show == 'y' ? '예약' : '삭제'}</td>
 								</tr>
 							</tbody>
 						</c:forEach>

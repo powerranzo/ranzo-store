@@ -96,23 +96,13 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.deleteMember(map);
 	}
 
-	//예약 목록 삭제
-	@Override
-	public void deleteReserv(String[] reserv_no) {
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("value", "reserv_item_tb");
-		map.put("condition", "no");
-		map.put("list", reserv_no);
-		adminDao.updateShowN(map);
-	}
-	
 	//Qna 목록 삭제
 	@Override
-	public void deleteQna(int[] qna_bno) {
+	public void deleteQna(int[] bno) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("value", "qna_tb");
 		map.put("condition", "bno");
-		map.put("list", qna_bno);
+		map.put("list", bno);
 		adminDao.updateShowN(map);
 
 	}
@@ -195,8 +185,9 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
 		//검색옵션 처리
-		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("r.res_date");
+		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		logger.info("RESERVELIST_ORDEROPTION:" + searchOp.getOrderOption());
 		map.put("searchOp", searchOp);
 		//페이징 처리
 		AdminPager pager=new AdminPager(adminDao.countSearchRsv(map), curPage);
@@ -212,6 +203,16 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 
+	//예약 목록 삭제
+	@Override
+	public void deleteReserv(String[] no) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "reserv_item_tb");
+		map.put("condition", "no");
+		map.put("list", no);
+		adminDao.updateShowN(map);
+	}
+	
 	//Qna 목록
 	@Override
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage) {
@@ -303,4 +304,5 @@ public class AdminServiceImpl implements AdminService {
 		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
+
 }
