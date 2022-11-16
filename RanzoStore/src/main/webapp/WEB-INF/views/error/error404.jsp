@@ -8,11 +8,12 @@
 <meta charset="UTF-8">
 <title>Ranzo Store</title>
 <style type="text/css">
-#errorPage{width:100%; margin-top:8%;}
+#errorPage{
+width:100%; margin:auto;}
 h1{
-margin-left:50%;
-text-align: center; 
-display: inline-block; 
+margin-left:40%;
+padding:5px;
+display:inline;
 background-color: #ffb6e3;
 }
 </style>

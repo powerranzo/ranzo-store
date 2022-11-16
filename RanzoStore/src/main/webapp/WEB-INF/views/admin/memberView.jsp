@@ -8,6 +8,7 @@
 <%@ include file="../include/adminHeader.jspf"%>
 <title>회원 정보</title>
 <style type="text/css">
+#wrapper{min-height: 300px;}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -37,7 +38,7 @@
 			<%@ include file="../include/adminDashboard.jspf"%>
 			<div class=sectiondiv>
 				<h2>회원 정보</h2>
-				<div style="margin: 5% 0 50% 0;">
+				<div style="margin: 5% 0 45% 0;">
 					<table class="adminTable2" style="width:50%;">
 						<tr>
 							<th id="adminTB2_th" style="width:20%;">아이디</th>
@@ -80,7 +81,7 @@
 						</c:if>
 					</table>
 					</div>
-					
+					<div id="wrapper">
 					<h4>${dto.name}님의 최근 예약</h4>
 					<table class="adminTable3">
 						<thead>
@@ -114,6 +115,7 @@
 							</tbody>
 						</c:forEach>
 					</table>
+					</div>
 				<form name="form1" class="form-inline" method="post">
 					<input type="hidden" name="userid" value="${dto.userid}">
 				</form>

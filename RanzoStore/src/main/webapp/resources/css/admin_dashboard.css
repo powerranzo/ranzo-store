@@ -38,7 +38,7 @@ body {
 	display: inline-block;
 	flex: 1;
 }
-
+th{vertical-align: center;}
 .adminTable3{
 	width: 100%;
 	text-align: center;
@@ -54,6 +54,7 @@ body {
 .adminTable3 th, td{ padding: 10px; text-align:center; vertical-align: middle;}
 .adminTableDiv{width:100%;}
 .adminTable1{
+	vertical-align: middle;
 	border: 2px solid #e4e4e4;
 	float:left;
 	padding: 10px;
@@ -67,9 +68,13 @@ body {
 	background-color: #f8f9fa;
 	color: #7b7e83;
 }
-.adminTable1 td{	border-bottom: 1px solid #e4e4e4;}
-.adminTable1 th, td{ padding: 10px; text-align:center;}
+.adminTable1 td{border-bottom: 1px solid #e4e4e4;}
+.adminTable1 th, td{ 
+	padding: 10px; 
+	text-align:center;
+}
 .adminTable2{
+	table-layout: fixed;
 	border: 2px solid #e4e4e4;
 	width: 60%;
 	float:left;
@@ -78,6 +83,8 @@ body {
 /* 	border-collapse: collapse; */
 }
 .adminTable2 th {
+	padding: 10px; 
+	min-height:20px !important;
 	border-top: 1px solid #e4e4e4;
 	background-color: #f8f9fa;
 	text-align: center;
