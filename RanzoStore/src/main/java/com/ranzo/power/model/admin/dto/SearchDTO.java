@@ -39,14 +39,8 @@ public class SearchDTO {
 	public String getsearchOption2() {
 		return searchOption2;
 	}
-	public void setsearchOption2(String searchOption3) {
-		this.searchOption3 = searchOption3;
-	}
-	public String getsearchOption3() {
-		return searchOption2;
-	}
-	public void setsearchOption3(String searchOption3) {
-		this.searchOption3 = searchOption3;
+	public void setsearchOption2(String searchOption2) {
+		this.searchOption2 = searchOption2;
 	}
 	public String getOrderOption() {
 		return orderOption;
@@ -65,7 +59,7 @@ public class SearchDTO {
 	public SearchDTO() {
 		this.searchOption1 = "all";
 		this.searchOption2 = "all";
-		this.searchOption3 = "all";
+		this.setSearchOption3("all");
 		this.startDate="2000-01-01";
 		this.endDate=DateUtils.getToday();
 		this.searchKeyword ="";
@@ -76,9 +70,15 @@ public class SearchDTO {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.searchOption2 = searchOption2;
-		this.searchOption3 = searchOption3;
+		this.setSearchOption3(searchOption3);
 		this.searchKeyword = searchKeyword;
 		this.orderOption = orderOption;
+	}
+	public String getSearchOption3() {
+		return searchOption3;
+	}
+	public void setSearchOption3(String searchOption3) {
+		this.searchOption3 = searchOption3;
 	}
 	
 }

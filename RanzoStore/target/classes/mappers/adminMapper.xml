@@ -336,6 +336,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test='searchOp.searchOption2.equals("pay_n")'>
 			AND pay='n'
 			</when>
+			</choose>
+			
+			<choose>
 			<when test='searchOp.searchOption3.equals("show_y")'>
 			AND r.show='y'
 			</when>

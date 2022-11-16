@@ -195,7 +195,6 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
 		//검색옵션 처리
-		if(searchOp.getsearchOption3()==null) searchOp.setsearchOption3("show_y");
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("r.res_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
 		map.put("searchOp", searchOp);
