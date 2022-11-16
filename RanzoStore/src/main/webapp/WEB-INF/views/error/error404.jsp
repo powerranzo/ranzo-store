@@ -20,7 +20,7 @@ background-color: #ffb6e3;
 <body>
 <div id="errorPage">
 <img src="<%=application.getContextPath()+"/resources/images/powerranzo.png" %>">
-<h1 align="center">Oops! We can't find that page.</h1>
+<h1 align="center">Oops! We can't find that page(404)</h1>
 </div>
 </body>
 </html>
