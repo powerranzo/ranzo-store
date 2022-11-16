@@ -289,7 +289,12 @@ form{margin-top:3%;}
 						<input type="submit" value="수정하기" id="btnUpdate" name="btnUpdate" style="margin-right:10%;">
 						<input type="submit" value="종료처리" id="btnDelete" name="btnDelete" style="margin-right:10px;">
 						<input type="submit" value="재개처리" id="btnShow" name="btnShow" style="margin-right:10px;">
+<<<<<<< Updated upstream
 			</div>
+=======
+						<input type="submit" value="목록으로" id="btnList" name="btnList" onclick="location.href='${path}/admin/exb_list.do'" style="margin-right:10%;">
+		</div>
+>>>>>>> Stashed changes
 	</div>
 	<footer>
 	<%@ include file="../include/footer.jsp"%>
