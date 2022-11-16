@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
-import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.QnaService;
 
