@@ -6,6 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="admin">
 
 	<!-- 공통 -->
+	
+	<!-- 종료/삭제 -->
 	<update id="updateShowN">
 		UPDATE ${value} SET show='n' WHERE
 		<foreach collection="list" item="list" separator="or" index="index">
@@ -13,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</update>
 	
+	<!-- 복구/재개 -->
 	<update id="updateShowY">
 		UPDATE ${value} SET show='y' WHERE
 		<foreach collection="list" item="list" separator="or" index="index">
@@ -20,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</update>
 
+	<!-- 테이블의 전체 레코드 개수 -->
 	<select id="countTbAll" resultType="int">
 		SELECT COUNT(*) FROM ${value}
 	</select>
@@ -67,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<include refid="member_2" />
 	</select>
 	
+	<!-- 위의 회원 검색 목록 sql에 삽입 -->
 	<sql id="member_1">
 		<choose>
 		<when test="searchOp.searchOption1 != 'all'">
@@ -81,7 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND join_date BETWEEN to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 			AND to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
 	</sql>
-		
+	
+	<!-- 위의 회원 검색 목록 sql에 삽입 -->
 	<sql id="member_2">
 		<choose>
 		<when test='searchOp.searchOption2.equals("user")'>
@@ -102,6 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			q.viewcnt, q.reply_state, q.show
 			FROM qna_tb q, member_tb m
 			WHERE q.writer=#{userid} AND m.userid=#{userid}
+			AND q.show='y'
 			ORDER BY q.reg_date desc
 		) Q
 		) WHERE <![CDATA[rn <= 6]]>
@@ -117,6 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM reserv_item_tb r, member_tb m, exhibition_tb e
 			WHERE r.userid=m.userid 
 			AND r.code=e.code AND r.userid=#{userid}
+			AND r.show='y'
 			ORDER BY r.reg_date desc
 		) R
 		) WHERE <![CDATA[rn <= 6]]>
@@ -131,7 +139,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</update>
 
-	
 	<!-- 진행중인 전시 개수 -->
 	<select id="countExbIng" resultType="int">
 		SELECT COUNT(
@@ -174,6 +181,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
+	<!-- 위의 전시 검색 목록 sql에 삽입 -->
 	<sql id="exb">
 		<choose>
 		<when test="searchOp.searchOption1 != 'all'">
@@ -261,12 +269,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		END;
 	</update>
 	
-	<!-- 전시 재개 -->
-	<update id="showExb">
-		UPDATE exhibition_tb SET show='y'
-		WHERE code=#{code}
-	</update>
-
 	<!-- 결제 예약 개수 -->
 	<select id="countRsvPaid" resultType="int">
 		SELECT COUNT(*) 
@@ -310,6 +312,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 
+	<!-- 위의 예약 검색 목록 sql에 삽입 -->
 	<sql id="reserv">
 		WHERE r.code=e.code
 			<choose>
@@ -347,7 +350,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			</choose>
 	</sql>
-	
 	
 	<!-- 신규 QnA 개수 -->
 	<select id="countQnaNew" resultType="int">
@@ -471,6 +473,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 	
+	<!-- 위의 팝업 검색 목록 sql에 삽입 -->
 	<sql id="popup">
 		<choose>
 		<when test="searchOp.searchOption1 != 'all'">
@@ -532,11 +535,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		img_height=#{img_height}, pos_width=#{pos_width}, pos_height=#{pos_height},
 		filename=#{filename}, filesize=#{filesize}, start_date=#{start_date}, end_date=#{end_date}
 		WHERE no=#{no}
-	</update>
-
-	<!-- 팝업 재개 -->
-	<update id="popupShow">
-		UPDATE popup_tb SET show='y' WHERE no=#{no}
 	</update>
 
 	<!-- 노출중인 팝업 -->

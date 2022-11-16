@@ -73,44 +73,28 @@ public class AdminController {
 
 	//회원 정보
 	@RequestMapping("/member_view.do")
-	public String viewMember(
-			String userid, Model m, HttpServletRequest request) {
-		//		//
-		//		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-		//		if(flashmap!= null) userid = (String)flashmap.get("userid");
+	public String viewMember(String userid, Model m, 
+			HttpServletRequest request) {
+		//리다이렉트로 userid 전달받은 경우
+		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!= null) userid = (String)flashmap.get("userid");
+		//회원의 정보, 문의글, 예약 리스트 전달
 		m.addAttribute("dto", memberService.viewMember(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
 		m.addAttribute("reserv_list", adminService.getMemberReserv(userid)); 
 		return "admin/memberView";
 	}
 
-	//회원 탈퇴
+	//회원 탈퇴(목록)
 	@RequestMapping("/member_delete.do")
 	public String deleteMember(String[] userids, 
 			@RequestParam(defaultValue = "1") int curPage, 
 			SearchDTO searchOp, RedirectAttributes rttr) {
 		adminService.deleteMember(userids);
+		//검색옵션 전달
 		rttr.addFlashAttribute("searchOp", searchOp);
 		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:member_list.do";
-	}
-
-	//회원 문의글 삭제
-	@RequestMapping("/qna_delete.do")
-	public String deleteQna(int[] bno, SearchDTO searchOp, 
-			@RequestParam(defaultValue = "1") int curPage, 
-			String userid, RedirectAttributes rttr) {
-		adminService.deleteQna(bno);
-		if(userid!= null) {
-			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
-			rttr.addFlashAttribute("userid", userid);
-			return "redirect:member_view.do";
-		}else {
-			//QnA 목록에서 호출한 경우 - 검색옵션 전달
-			rttr.addFlashAttribute("searchOp", searchOp);
-			rttr.addFlashAttribute("curPage", curPage);
-			return "redirect:qna_list.do";
-		}
 	}
 
 	//전시 목록
@@ -124,12 +108,13 @@ public class AdminController {
 			searchOp = (SearchDTO)flashmap.get("searchOp");
 			curPage = (int)flashmap.get("curPage");
 		}
+		//리스트 전달
 		Map<String,Object> map = adminService.getExbList(searchOp, curPage);
 		m.addAttribute("exb", map);
 		return "admin/exbList";
 	}
 
-	//전시 등록 페이지
+	//전시 등록 페이지 이동
 	@GetMapping("/exb_write.do")
 	public String writeExb() {
 		return "admin/exbWrite";
@@ -188,16 +173,17 @@ public class AdminController {
 
 	//전시 수정
 	@RequestMapping("/exb_update.do")
-	public String updateExb(ExhibitionDTO dto, ProductInfoDTO idto, 
-			HttpServletRequest request, MultipartFile file1, MultipartFile file2) {
+	public String updateExb(ExhibitionDTO dto, 
+			ProductInfoDTO idto, HttpServletRequest request, 
+			MultipartFile file1, MultipartFile file2) {
 
-		ProductInfoDTO dtoOrigin = exbService.getProductInfo(idto.getCode());
 		//기존 포스터, 전시 정보
+		ProductInfoDTO dtoOrigin = exbService.getProductInfo(idto.getCode());
 		String thumnail = adminService.getExbView(dto.getCode()).getThumnail();
 		String product_info = dtoOrigin.getAttach();
 
 		boolean file = !file1.isEmpty() ? true : false; 
-		boolean url = !(dto.getThumnail() == null || "".equals(dto.getThumnail())) 
+		boolean url = !(dto.getThumnail() == null || "".equals(dto.getThumnail()))
 				? true : false; 
 
 		//전시 포스터
@@ -219,7 +205,7 @@ public class AdminController {
 		file = !file2.isEmpty() ? true : false; 
 		url = !(idto.getAttach() == null || "".equals(idto.getAttach())) ? true : false;
 
-		//전시 정보(attach)
+		//전시 정보
 		//첨부 파일 있는 경우
 		if(file || url) {
 			//기존 파일 삭제
@@ -227,12 +213,10 @@ public class AdminController {
 			UploadFileUtils.deleteServerFile(
 					product_info, request, Constants.DIR_EXHIBITION_PI);
 
-			if(file)
-				//첨부 파일인 경우 새로운 파일 등록
+			if(file) //첨부 파일인 경우 새로운 파일 등록
 				product_info = (String)UploadFileUtils.uploadFile2(
 						file2, request, Constants.DIR_EXHIBITION_PI).get("fileUrl");
-			else if(url)
-				//url인 경우 등록한 url 저장
+			else if(url) //url인 경우 등록한 url 저장
 				product_info = idto.getAttach();
 		}
 		//최종 이미지 경로 저장
@@ -242,23 +226,29 @@ public class AdminController {
 		return "redirect:exb_list.do";
 	}
 
-	//전시 첨부파일 삭제
+	//전시 첨부파일 삭제(수정 페이지)
 	@RequestMapping("exb_file_delete.do")
 	public ResponseEntity<String> fileDelete(String code, 
 			String fileType, HttpServletRequest request) {
+		//기존 정보
 		ExhibitionDTO dto = adminService.getExbView(code);
 		ProductInfoDTO idto = exbService.getProductInfo(code);
 		String fileName = "";
+		//포스터인 경우
 		if(fileType.equals("thumnail")) {
+			//기존 파일 삭제
 			fileName = dto.getThumnail().substring(dto.getThumnail().lastIndexOf("/")+1);
 			UploadFileUtils.deleteServerFile(
 					fileName, request, Constants.DIR_EXHIBITION_TN);
 		}
+		//전시정보인 경우
 		else if(fileType.equals("product_info")) {
+			//기존 파일 삭제
 			fileName = idto.getAttach().substring(idto.getAttach().lastIndexOf("/")+1);
 			UploadFileUtils.deleteServerFile(
 					fileName, request, Constants.DIR_EXHIBITION_PI);
 		}
+		//파일 정보 삭제
 		adminService.deleteExbFile(code, fileType);
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	} 
@@ -269,6 +259,7 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int curPage, 
 			RedirectAttributes rttr) {
 		adminService.deleteExb(code);
+		//검색옵션 전달
 		rttr.addFlashAttribute("searchOp", searchOp);
 		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:/admin/exb_list.do";
@@ -280,6 +271,7 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int curPage,
 			RedirectAttributes rttr) { 
 		adminService.showExb(code);
+		//검색옵션 전달
 		rttr.addFlashAttribute("searchOp", searchOp);
 		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:/admin/exb_list.do";
@@ -293,7 +285,7 @@ public class AdminController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	//전시 재개
+	//전시 재개(상세페이지)
 	@ResponseBody
 	@RequestMapping("/exb_show.do")
 	public ResponseEntity<String> showExb(String[] code) {
@@ -313,6 +305,7 @@ public class AdminController {
 			searchOp = (SearchDTO)flashmap.get("searchOp");
 			curPage = (int)flashmap.get("curPage");
 		}
+		//리스트 전달
 		Map<String,Object> map = adminService.getReservList(searchOp, curPage);
 		m.addAttribute("reserv", map);
 		return "admin/reservList";
@@ -323,6 +316,7 @@ public class AdminController {
 	public String deleteReserv(String[] no, String userid, 
 			@RequestParam(defaultValue = "1") int curPage,
 			SearchDTO searchOp, RedirectAttributes rttr) {
+		logger.info("### reserv_delete.do userid:" + userid + "//no" + no);
 		adminService.deleteReserv(no);
 		if(userid!= null) {
 			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
@@ -353,6 +347,24 @@ public class AdminController {
 		return "admin/qnaList"; 
 	}
 
+	//회원 QnA 삭제
+	@RequestMapping("/qna_delete.do")
+	public String deleteQna(int[] bno, SearchDTO searchOp, 
+			@RequestParam(defaultValue = "1") int curPage, 
+			String userid, RedirectAttributes rttr) {
+		adminService.deleteQna(bno);
+		if(userid!= null) {
+			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
+			rttr.addFlashAttribute("userid", userid);
+			return "redirect:member_view.do";
+		}else {
+			//QnA 목록에서 호출한 경우 - 검색옵션 전달
+			rttr.addFlashAttribute("searchOp", searchOp);
+			rttr.addFlashAttribute("curPage", curPage);
+			return "redirect:qna_list.do";
+		}
+	}
+	
 	//팝업 목록
 	@RequestMapping("/popup_list.do")
 	public String popupList(SearchDTO searchOp,Model m,
@@ -412,11 +424,12 @@ public class AdminController {
 		//첨부파일인 경우
 		if(!file.isEmpty()) { 
 			//logger.info("multipartfile:"+file.getOriginalFilename());
-			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2(file, request, Constants.DIR_POPUP);
+			Map<String,Object> fileInfo = 
+					UploadFileUtils.uploadFile2(file, request, Constants.DIR_POPUP);
 			img_src = (String)fileInfo.get("fileUrl");
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
-			//URL인 경우
+		//URL인 경우
 		}else {
 			dto.setFilename("-");
 		}
@@ -461,7 +474,8 @@ public class AdminController {
 		String img_src = "";
 
 		boolean typeFile = !file.isEmpty() ? true : false; 
-		boolean typeUrl = !(dto.getImg_src() == null || "".equals(dto.getImg_src())) ? true : false;
+		boolean typeUrl = !(dto.getImg_src() == null || "".equals(dto.getImg_src())) 
+				? true : false;
 
 		//새로운 이미지가 등록된 경우
 		if(typeFile || typeUrl) {
@@ -508,15 +522,17 @@ public class AdminController {
 			@RequestParam(defaultValue  =  "1") int curPage,
 			RedirectAttributes rttr) {
 		adminService.popupShow(no);
+		//검색 옵션 전달
 		rttr.addFlashAttribute("no", no);
 		rttr.addFlashAttribute("searchOp", searchOp);
 		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:popup_list.do";
 	}
 
-	//팝업 페이지로 전달
+	//팝업 페이지
 	@RequestMapping("/popup_img.do")
 	public String popupView(Model m, PopupDTO dto) {
+		//팝업 정보 전달
 		m.addAttribute("dto", adminService.getPopupView(dto.getNo()));
 		return "admin/popup";
 	}

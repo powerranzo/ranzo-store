@@ -42,7 +42,6 @@ public class AdminServiceImpl implements AdminService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("exb_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_ing", adminDao.countExbIng(DateUtils.getToday()));	
-//		map.put("exb_count_past", adminDao.countExbIng(DateUtils.getToday()));	
 		map.put("rsv_all", adminDao.countTbAll("reserv_item_tb"));
 		map.put("rsv_todqy", adminDao.countRsvToday(DateUtils.getToday()));
 		map.put("rsv_paid", adminDao.countRsvPaid());
@@ -96,17 +95,6 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.deleteMember(map);
 	}
 
-	//Qna 목록 삭제
-	@Override
-	public void deleteQna(int[] bno) {
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("value", "qna_tb");
-		map.put("condition", "bno");
-		map.put("list", bno);
-		adminDao.updateShowN(map);
-
-	}
-
 	//전시 목록
 	@Override
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage) {
@@ -150,15 +138,6 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateProductInfo(idto);
 	}
 	
-	//전시 종료시 파일 정보 초기화
-	@Override
-	public void deleteExbFile(String code, String fileType) {
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("code", code);
-		map.put("fileType", fileType);
-		adminDao.deleteExbFile(map);
-	}
-
 	//전시 종료
 	@Override
 	public void deleteExb(String[] code) {
@@ -169,10 +148,18 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateShowN(map);
 	}
 	
+	//전시 종료시 파일 정보 초기화
+	@Override
+	public void deleteExbFile(String code, String fileType) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("fileType", fileType);
+		adminDao.deleteExbFile(map);
+	}
+	
 	//전시 재개
 	@Override
 	public void showExb(String[] code) {
-//		adminDao.showExb(code);
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("value", "exhibition_tb");
 		map.put("condition", "code");
@@ -213,7 +200,7 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateShowN(map);
 	}
 	
-	//Qna 목록
+	//QnA 목록
 	@Override
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
@@ -234,6 +221,17 @@ public class AdminServiceImpl implements AdminService {
 		return map;
 	}
 	
+	//QnA 목록 삭제
+	@Override
+	public void deleteQna(int[] bno) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "qna_tb");
+		map.put("condition", "bno");
+		map.put("list", bno);
+		adminDao.updateShowN(map);
+
+	}
+	
 	//팝업 목록
 	@Override
 	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage) {
@@ -252,12 +250,6 @@ public class AdminServiceImpl implements AdminService {
 		map.put("pager", pager);
 		return map;
 	}
-
-	//팝업 상세 정보(수정페이지)
-	@Override
-	public PopupDTO getPopupView(int no) {
-		return adminDao.getPopupView(no);
-	}
 	
 	//팝업 등록
 	@Override
@@ -265,18 +257,18 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.insertPopup(dto);
 	}
 
+	//팝업 상세 정보(수정페이지)
+	@Override
+	public PopupDTO getPopupView(int no) {
+		return adminDao.getPopupView(no);
+	}
+
 	//팝업 수정
 	@Override
 	public void updatePopup(PopupDTO dto) {
 		adminDao.updatePopup(dto);
 	}
-	
-	//팝업 파일정보 초기화
-	@Override
-	public void deletePopupFile(int no) {
-		adminDao.deletePopupFile(no);
-	}
-	
+
 	//팝업 종료
 	@Override
 	public void deletePopup(int[] no) {
@@ -287,6 +279,12 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateShowN(map);
 	}
 
+	//팝업 파일정보 초기화
+	@Override
+	public void deletePopupFile(int no) {
+		adminDao.deletePopupFile(no);
+	}
+	
 	//팝업 재개
 	@Override
 	public void popupShow(int[] no) {
