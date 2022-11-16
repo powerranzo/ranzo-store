@@ -115,6 +115,17 @@ th{vertical-align: center;}
 	color: white;
 	border-radius: 5px;
 }
+#btnList {
+	float:left;
+	margin-top:20px;
+	margin-bottom:30px;
+	padding:7px;
+	width: 70px;
+	height:20px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
 #btnSearch {
 	float:right;
 	padding:7px;
