@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
 $(function() {
-	$("#content").summernote({
+	$("#content").summernote({ 
 		width : 600,
 		height : 200,
 		
