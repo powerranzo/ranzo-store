@@ -92,7 +92,7 @@ public class QnaController {
 				e.printStackTrace();
 			}
 		} else {
-			fileName="(null)";
+			fileName="-";
 		}
 		dto.setFileName(fileName);
 		
