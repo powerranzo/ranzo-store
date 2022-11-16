@@ -12,6 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${condition}=#{list}
 		</foreach>
 	</update>
+	
+	<update id="updateShowY">
+		UPDATE ${value} SET show='y' WHERE
+		<foreach collection="list" item="list" separator="or" index="index">
+		${condition}=#{list}
+		</foreach>
+	</update>
 
 	<select id="countTbAll" resultType="int">
 		SELECT COUNT(*) FROM ${value}

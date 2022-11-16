@@ -294,9 +294,9 @@ public class AdminController {
 	
 	//전시 재개(목록)
 	@RequestMapping("/exbs_show.do")
-	public String deleteExb(String code, SearchDTO searchOp,
+	public String showExb(String[] code, SearchDTO searchOp,
 			@RequestParam(defaultValue = "1") int curPage,
-			RedirectAttributes rttr) {
+			RedirectAttributes rttr) { 
 		adminService.showExb(code);
 		rttr.addFlashAttribute("searchOp", searchOp);
 		rttr.addFlashAttribute("curPage", curPage);
@@ -314,9 +314,9 @@ public class AdminController {
 	//전시 재개
 	@ResponseBody
 	@RequestMapping("/exb_show.do")
-	public ResponseEntity<String> showExb(String code) {
+	public ResponseEntity<String> showExb(String[] code) {
 		adminService.showExb(code);
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK); 
 	}
 
 
@@ -494,8 +494,8 @@ public class AdminController {
 
 	//팝업 재개
 	@RequestMapping("/popup_show.do")
-	public String popupShow(@RequestParam(defaultValue = "0") int no) {
-		if(no!= 0) adminService.popupShow(no);
+	public String popupShow(@RequestParam(defaultValue = "0") int[] no) {
+		adminService.popupShow(no);
 		return "redirect:popup_list.do";
 	}
 

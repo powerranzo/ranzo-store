@@ -26,7 +26,7 @@ public interface AdminService {
 	public ExhibitionDTO getExbView(String code);
 	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto);
 	public void deleteExbFile(String code, String fileType);
-	public void showExb(String code);
+	public void showExb(String[] code);
 	//예약
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage);
 	public void deleteReserv(String[] reserv_no);
@@ -38,7 +38,7 @@ public interface AdminService {
 	public PopupDTO getPopupView(int no);
 	public void deletePopup(int[] pop_no);
 	public void deletePopupFile(int no);
-	public void popupShow(int no);
+	public void popupShow(int[] no);
 	public List<PopupDTO> getPopupOn();
 	public Map<String, Object> getHomeList();
 	

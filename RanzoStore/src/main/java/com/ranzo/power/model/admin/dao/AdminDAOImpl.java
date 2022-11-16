@@ -33,6 +33,13 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateShowN", map);
 	}
 
+	//테이블의 show 컬럼을 y로 변경
+	@Override
+	public void updateShowY(Map<String, Object> map) {
+		sqlSession.update("admin.updateShowY", map);
+		
+	}
+
 
 	//신규 가입 회원 수
 	@Override
@@ -221,6 +228,5 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateProductInfo", idto);
 		
 	}
-
 
 }

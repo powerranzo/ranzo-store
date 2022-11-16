@@ -15,6 +15,7 @@ public interface AdminDAO {
 		//COMMON
 		public int countTbAll(String table);
 		public void updateShowN(Map<String, Object> map);	
+		public void updateShowY(Map<String, Object> map);
 		//MEMBER
 		public int countMemberToday(String now);
 		public int countMemberQuit();

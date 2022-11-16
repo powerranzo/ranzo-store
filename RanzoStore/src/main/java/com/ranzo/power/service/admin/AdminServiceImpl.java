@@ -181,8 +181,13 @@ public class AdminServiceImpl implements AdminService {
 	
 	//전시 재개
 	@Override
-	public void showExb(String code) {
-		adminDao.showExb(code);
+	public void showExb(String[] code) {
+//		adminDao.showExb(code);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "exhibition_tb");
+		map.put("condition", "code");
+		map.put("list", code); 
+		adminDao.updateShowY(map);
 	}
 	
 	//예약 목록
@@ -284,8 +289,12 @@ public class AdminServiceImpl implements AdminService {
 
 	//팝업 재개
 	@Override
-	public void popupShow(int no) {
-		adminDao.popupShow(no);
+	public void popupShow(int[] no) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("value", "popup_tb");
+		map.put("condition", "no");
+		map.put("list", no);
+		adminDao.updateShowY(map);
 	}
 
 	//노출 중인 팝업
