@@ -7,6 +7,7 @@ public class SearchDTO {
 	private String startDate;
 	private String endDate;
 	private String searchOption2;
+	private String searchOption3;
 	private String searchKeyword;
 	private String orderOption;
 	
@@ -38,8 +39,14 @@ public class SearchDTO {
 	public String getsearchOption2() {
 		return searchOption2;
 	}
-	public void setsearchOption2(String searchOption2) {
-		this.searchOption2 = searchOption2;
+	public void setsearchOption2(String searchOption3) {
+		this.searchOption3 = searchOption3;
+	}
+	public String getsearchOption3() {
+		return searchOption2;
+	}
+	public void setsearchOption3(String searchOption3) {
+		this.searchOption3 = searchOption3;
 	}
 	public String getOrderOption() {
 		return orderOption;
@@ -53,21 +60,23 @@ public class SearchDTO {
 	public String toString() {
 		return "SearchDTO [searchOption1=" + searchOption1 + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", searchOption2=" + searchOption2 + ", searchKeyword=" + searchKeyword + ", orderOption="
-				+ orderOption + "]";
+				+ searchOption2 + ", searchKeyword=" + orderOption + "]";
 	}
 	public SearchDTO() {
 		this.searchOption1 = "all";
 		this.searchOption2 = "all";
+		this.searchOption3 = "all";
 		this.startDate="2000-01-01";
 		this.endDate=DateUtils.getToday();
 		this.searchKeyword ="";
 	}
-	public SearchDTO(String searchOption1, String startDate, String endDate, String searchOption2, String searchKeyword,
-			String orderOption) {
+	public SearchDTO(String searchOption1, String startDate, String endDate, String searchOption2, 
+			String searchOption3, String searchKeyword, String orderOption) {
 		this.searchOption1 = searchOption1;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.searchOption2 = searchOption2;
+		this.searchOption3 = searchOption3;
 		this.searchKeyword = searchKeyword;
 		this.orderOption = orderOption;
 	}

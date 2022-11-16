@@ -174,6 +174,7 @@
 								<c:when test="${page == qna.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
 									<span id="numstyle">${page}</span>&nbsp;
+									<input type="hidden" name="curPage" value="${page}">
 								</c:when>
 								<c:otherwise>
 									<a href="#" onclick="qnaList('${page}')"><span

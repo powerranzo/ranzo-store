@@ -171,14 +171,14 @@
 													onclick="exbView('${dto.code}')">
 													<span class="glyphicon glyphicon-check"></span>&nbsp;수정
 												</button>
-												<button class="btn btn-sm" type="button" id="delBtn">
-<%-- 													onclick="exbDel('${dto.code}')"> --%>
+												<button class="btn btn-sm" type="button" id=""
+													onclick="exbDel('${dto.code}')">
 													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn btn-sm" type="button" id="showBtn">
-<%-- 													onclick="exbShow('${dto.code}')"> --%>
+												<button class="btn btn-sm" type="button" id=""
+													onclick="exbShow('${dto.code}')">
 													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;재개
 												</button>
 											</c:otherwise>
@@ -198,8 +198,8 @@
 							</a>&nbsp;&nbsp;
 						</c:if>
 						<c:if test="${exb.pager.curBlock > 1}">
-							<a href="#" onclick="exbList('${exb.pager.prevPage}')"> <i
-								class="fa-solid fa-less-than"></i></a>
+							<a href="#" onclick="exbList('${exb.pager.prevPage}')"> 
+							<i class="fa-solid fa-less-than"></i></a>
 						</c:if>
 						<c:forEach var="page" begin="${exb.pager.blockStartPage}"
 							end="${exb.pager.blockEndPage}">
@@ -207,6 +207,7 @@
 								<c:when test="${page == exb.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
 									<span id="numstyle">${page}</span>&nbsp;
+									<input type="hidden" name="curPage" value="${page}">
 								</c:when>
 								<c:otherwise>
 									<a href="#" onclick="exbList('${page}')"><span
@@ -220,8 +221,7 @@
 						</c:if>
 						<c:if test="${exb.pager.curPage < exb.pager.totPage}">&nbsp;
 						<a href="#" onclick="exbList('${exb.pager.totPage}')">
-						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i>
-						</a>
+						<i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
 						</c:if>
 					</ul>
 				</div>

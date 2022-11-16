@@ -170,6 +170,7 @@ form{margin-top:3%;}
 							<c:choose>
 								<c:when test="${page == pop.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+									<input type="hidden" name="curPage" value="${page}">
 									<span id="numstyle">${page}</span>&nbsp;
 								</c:when>
 								<c:otherwise>

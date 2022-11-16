@@ -28,10 +28,10 @@
 	function optionSelect(num) {
 		var selected = "";
 		var option = ''.concat('#searchOption', num);
-		if (num == 1) selected = '${searchOp.searchOption1}';
-		else if (num == 2) selected = '${searchOp.searchOption2}';
+		if (num == 1) selected = '${m.searchOp.searchOption1}';
+		else if (num == 2) selected = '${m.searchOp.searchOption2}';
 		else {
-			selected = '${searchOp.orderOption}';
+			selected = '${m.searchOp.orderOption}';
 			option = '#orderOption';
 		}
 		var length = $(option).children().length;
@@ -166,6 +166,7 @@
 								<c:when test="${page == m.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
 									<span id="numstyle">${page}</span>&nbsp;
+									<input type="hidden" name="curPage" value="${page}">
 								</c:when>
 								<c:otherwise>
 									<a href="#" onclick="memberList('${page}')"><span

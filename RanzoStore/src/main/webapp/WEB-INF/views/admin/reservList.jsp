@@ -18,6 +18,7 @@
 		optionSelect(1);
 		optionSelect(2);
 		optionSelect(3);
+		optionSelect(4);
 
 		$("#btnDelete").click(function() {
 			alertify.confirm("삭제하시겠습니까?", function() {
@@ -40,6 +41,8 @@
 			selected = '${reserv.searchOp.searchOption1}';
 		else if (num == 2)
 			selected = '${reserv.searchOp.searchOption2}';
+		else if (num == 3)
+			selected = '${reserv.searchOp.searchOption3}';
 		else {
 			selected = '${reserv.searchOp.orderOption}';
 			option = '#orderOption';
@@ -73,14 +76,14 @@
 							<th>결제 완료 예약</th>
 						</tr>
 						<tr>
-							<td>${reserv.reserv_count_all}개</td>
+							<td>${reserv.reserv_all}개</td>
 							<td>${reserv.reserv_today}개</td>
-							<td>${reserv.reserv_count_pay}개</td>
+							<td>${reserv.reserv_pay}개</td>
 						</tr>
 					</table>
 					<table class="adminTable2">
 						<tr>
-							<th id="adminTB2_th">검색옵션</th>
+							<th id="adminTB2_th">검색 옵션</th>
 							<td colspan="2" id="adminTB2_td1">
 								<select	name="searchOption1" id="searchOption1">
 										<option value="r.no">예약번호</option>
@@ -96,11 +99,22 @@
 							</td>
 						</tr>
 						<tr>
-							<th>분류</th>
+							<th>결제 분류</th>
 							<td colspan="2">
 							<select name="searchOption2" id="searchOption2">
 									<option value="pay_y">결제완료</option>
 									<option value="pay_n">결제 전</option>
+									<option value="all">전체</option>
+							</select>
+							</td>
+						</tr>
+						<tr>
+						<tr>
+							<th>삭제 분류</th>
+							<td colspan="2">
+							<select name="searchOption3" id="searchOption3">
+									<option value="show_y">진행</option>
+									<option value="show_n">삭제</option>
 									<option value="all">전체</option>
 							</select>
 							</td>
@@ -133,15 +147,16 @@
 							<tr>
 								<th>#</th>
 								<th>예약번호</th>
-								<th>예매자</th>
-								<th style="width: 25%;">전시명(전시코드)</th>
-								<th>성인/청소년/어린이</th>
-								<th>총 수량</th>
-								<th>총가격</th>
-								<th>배송지역</th>
-								<th>관람일</th>
-								<th>구매일</th>
-								<th>결제상태</th>
+								<th style="width:10%;">예매자</th>
+								<th style="width:20;">전시명(전시코드)</th>
+								<th style="width:50px;">성인/청소년/어린이</th>
+								<th style="width:6%;">총 수량</th>
+								<th style="width:6%;">총가격</th>
+								<th style="width:8%;">배송지역</th>
+								<th style="width:10%;">관람일</th>
+								<th style="width:10%;">구매일</th>
+								<th style="width:5%;">결제</th>
+								<th style="width:5%;">상태</th>
 							</tr>
 						</thead>
 						<c:forEach var="reserv" varStatus="loop" items="${reserv.reserv_list}">
@@ -159,7 +174,22 @@
 											pattern="yyyy-MM-dd" /></td>
 									<td><fmt:formatDate value="${reserv.reg_date}" type="date"
 											pattern="yyyy-MM-dd" /></td>
-									<td>${reserv.pay == 'y' ? '완료' : '미납'}</td>
+									<td><c:choose>
+											<c:when test="${reserv.show =='y'}">
+												<button class="btn btn-sm" type="button" id=""
+													onclick="rsvDel('${reserv.no}')">
+													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;삭제
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn btn-sm" type="button" id=""
+													onclick="rsvShow'${reserv.no}')">
+													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;복구
+												</button>
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td>${reserv.show == 'y' ? '예약' : '삭제'}</td>
 								</tr>
 							</tbody>
 						</c:forEach>
@@ -183,6 +213,7 @@
 								<c:when test="${page == reserv.pager.curPage}">
 									<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
 									<span id="numstyle">${page}</span>&nbsp;
+									<input type="hidden" name="curPage" value="${page}">
 								</c:when>
 								<c:otherwise>
 									<a href="#" onclick="reservList('${page}')">

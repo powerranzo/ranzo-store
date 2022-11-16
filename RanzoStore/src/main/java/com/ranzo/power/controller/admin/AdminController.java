@@ -61,8 +61,11 @@ public class AdminController {
 			@RequestParam(defaultValue = "1") int curPage, 
 			HttpServletRequest request) {
 		//검색 옵션 유지
-		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-		if(flashmap!= null) searchOp = (SearchDTO)flashmap.get("searchOp");
+			Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+			if(flashmap!= null) { 
+				searchOp = (SearchDTO)flashmap.get("searchOp");
+				curPage = (int)flashmap.get("curPage");
+			}
 		Map<String,Object> map = adminService.getMemberList(searchOp, curPage);
 		m.addAttribute("m", map);
 		return "admin/memberList";
@@ -72,9 +75,9 @@ public class AdminController {
 	@RequestMapping("/member_view.do")
 	public String viewMember(
 			String userid, Model m, HttpServletRequest request) {
-		//검색 옵션 유지
-		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-		if(flashmap!= null) userid = (String)flashmap.get("userid");
+//		//
+//		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+//		if(flashmap!= null) userid = (String)flashmap.get("userid");
 		m.addAttribute("dto", memberService.viewMember(userid));
 		m.addAttribute("qna_list", adminService.getMemberQna(userid)); 
 		m.addAttribute("reserv_list", adminService.getMemberReserv(userid)); 
@@ -84,34 +87,48 @@ public class AdminController {
 	//회원 탈퇴
 	@RequestMapping("/member_delete.do")
 	public String deleteMember(String[] userids, 
+			@RequestParam(defaultValue = "1") int curPage, 
 			SearchDTO searchOp, RedirectAttributes rttr) {
 		adminService.deleteMember(userids);
 		rttr.addFlashAttribute("searchOp", searchOp);
+		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:member_list.do";
 	}
 
 	//회원 예약 삭제
 	@RequestMapping("/reserv_delete.do")
-	public String deleteReserv(String[] reserv_no, 
-			String userid, RedirectAttributes rttr) {
+	public String deleteReserv(String[] reserv_no, String userid, 
+			@RequestParam(defaultValue = "1") int curPage,
+			SearchDTO searchOp, RedirectAttributes rttr) {
 		adminService.deleteReserv(reserv_no);
 		if(userid!= null) {
+			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
 			rttr.addFlashAttribute("userid", userid);
 			return "redirect:member_view.do";
-		}else
+		}else {
+			//예약 목록에서 호출한 경우 - 검색옵션 전달
+			rttr.addFlashAttribute("searchOp", searchOp);
+			rttr.addFlashAttribute("curPage", curPage);
 			return "redirect:reserv_list.do";
+		}
 	}
 
 	//회원 문의글 삭제
 	@RequestMapping("/qna_delete.do")
-	public String deleteQna(int[] qna_bno, 
+	public String deleteQna(int[] qna_bno, SearchDTO searchOp, 
+			@RequestParam(defaultValue = "1") int curPage, 
 			String userid, RedirectAttributes rttr) {
 		adminService.deleteQna(qna_bno);
 		if(userid!= null) {
+			//회원 상세 페이지에서 호출한 경우 - 아이디 전달
 			rttr.addFlashAttribute("userid", userid);
 			return "redirect:member_view.do";
-		}else
+		}else {
+			//QnA 목록에서 호출한 경우 - 검색옵션 전달
+			rttr.addFlashAttribute("searchOp", searchOp);
+			rttr.addFlashAttribute("curPage", curPage);
 			return "redirect:qna_list.do";
+		}
 	}
 
 	//전시 목록
@@ -119,9 +136,12 @@ public class AdminController {
 	public String exbList(SearchDTO searchOp, 
 			@RequestParam(defaultValue = "1") int curPage, 
 			Model m, HttpServletRequest request) {
-		logger.info("exbList_SearchOp:"+searchOp);
+		//검색옵션 유지
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-		if(flashmap!= null) searchOp = (SearchDTO)flashmap.get("searchOp");
+		if(flashmap!= null) {
+			searchOp = (SearchDTO)flashmap.get("searchOp");
+			curPage = (int)flashmap.get("curPage");
+		}
 		Map<String,Object> map = adminService.getExbList(searchOp, curPage);
 		m.addAttribute("exb", map);
 		return "admin/exbList";
@@ -264,18 +284,22 @@ public class AdminController {
 	//전시 종료(목록)
 	@RequestMapping("/exbs_delete.do")
 	public String deleteExb(String[] code, SearchDTO searchOp,
+			@RequestParam(defaultValue = "1") int curPage, 
 			RedirectAttributes rttr) {
 		adminService.deleteExb(code);
 		rttr.addFlashAttribute("searchOp", searchOp);
+		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:/admin/exb_list.do";
 	}
 	
 	//전시 재개(목록)
 	@RequestMapping("/exbs_show.do")
 	public String deleteExb(String code, SearchDTO searchOp,
+			@RequestParam(defaultValue = "1") int curPage,
 			RedirectAttributes rttr) {
 		adminService.showExb(code);
 		rttr.addFlashAttribute("searchOp", searchOp);
+		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:/admin/exb_list.do";
 	}
 
@@ -301,9 +325,12 @@ public class AdminController {
 	public String reservList(SearchDTO searchOp, 
 			@RequestParam(defaultValue = "1") int curPage, Model m
 			,HttpServletRequest request) {
+		//검색 옵션 유지
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
-		if(flashmap!= null) 
+		if(flashmap!= null) {
 			searchOp = (SearchDTO)flashmap.get("searchOp");
+			curPage = (int)flashmap.get("curPage");
+		}
 		Map<String,Object> map = adminService.getReservList(searchOp, curPage);
 		m.addAttribute("reserv", map);
 		return "admin/reservList";
@@ -312,9 +339,15 @@ public class AdminController {
 	//QnA 목록
 	@RequestMapping("/qna_list.do")
 	public String qnaList(SearchDTO searchOp, Model m,
-			@RequestParam(defaultValue  =  "1") int curPage) {
+			@RequestParam(defaultValue  =  "1") int curPage,
+			HttpServletRequest request) {
+		//검색옵션 유지
+		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
+		if(flashmap!= null) {
+			searchOp = (SearchDTO)flashmap.get("searchOp");
+			curPage = (int)flashmap.get("curPage");
+		}
 		Map<String,Object> map = adminService.getQnaList(searchOp, curPage);
-		logger.info("qna_map:"+map);
 		m.addAttribute("qna", map);
 		return "admin/qnaList"; 
 	}
@@ -331,10 +364,13 @@ public class AdminController {
 
 	//팝업 종료
 	@RequestMapping("/popup_delete.do")
-	public String deletePopup(int[] no, RedirectAttributes rttr) {
-		logger.info("int no:" + no);
+	public String deletePopup(int[] no, SearchDTO searchOp, 
+			@RequestParam(defaultValue  =  "1") int curPage,
+			RedirectAttributes rttr) {
 		adminService.deletePopup(no);
 		rttr.addFlashAttribute("no", no);
+		rttr.addFlashAttribute("searchOp", searchOp);
+		rttr.addFlashAttribute("curPage", curPage);
 		return "redirect:popup_list.do";
 	}
 

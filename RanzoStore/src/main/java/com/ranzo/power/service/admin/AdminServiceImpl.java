@@ -55,19 +55,20 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Map<String,Object> getMemberList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
-		map.put("searchOp", searchOp);
-		AdminPager pager = new AdminPager(adminDao.countSearchMember(map), curPage);
+		//검색옵션 처리
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("join_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("searchOp", searchOp);
+		//페이징 처리
+		AdminPager pager = new AdminPager(adminDao.countSearchMember(map), curPage);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
+		//리스트 전달
 		List<MemberDTO> list=adminDao.getMemberList(map);
 		MemberCountDTO mcount=
 				new MemberCountDTO(adminDao.countTbAll("member_tb"), 
 				adminDao.countMemberToday(DateUtils.getToday()),
 				adminDao.countMemberQuit());
-		map.clear();
-		map.put("searchOp", searchOp);
 		map.put("cnt", mcount);
 		map.put("list", list);
 		map.put("pager", pager);
@@ -120,12 +121,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
-		map.put("searchOp", searchOp);
-		AdminPager pager=new AdminPager(adminDao.countSearchExb(map), curPage);
+		//검색옵션 처리
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("end_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("searchOp", searchOp);
+		//페이징 처리
+		AdminPager pager=new AdminPager(adminDao.countSearchExb(map), curPage);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
+		//리스트 전달
 		List<MemberDTO> list=adminDao.getExbList(map); //확인
 		map.put("exb_count_all", adminDao.countTbAll("exhibition_tb"));
 		map.put("exb_count_ing", adminDao.countExbIng(DateUtils.getToday()));
@@ -154,7 +158,6 @@ public class AdminServiceImpl implements AdminService {
 	public void updateExb(ExhibitionDTO dto, ProductInfoDTO idto) {
 		adminDao.updateExb(dto);
 		adminDao.updateProductInfo(idto);
-		
 	}
 	
 	//전시 종료시 파일 정보 초기화
@@ -175,25 +178,31 @@ public class AdminServiceImpl implements AdminService {
 		map.put("list", code);
 		adminDao.updateShowN(map);
 	}
+	
 	//전시 재개
 	@Override
 	public void showExb(String code) {
 		adminDao.showExb(code);
 	}
+	
 	//예약 목록
 	@Override
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
-		map.put("searchOp", searchOp);
-		logger.info("admin_countsearchreserv:"+adminDao.countSearchRsv(map));
-		AdminPager pager=new AdminPager(adminDao.countSearchRsv(map), curPage);
+		//검색옵션 처리
+		if(searchOp.getsearchOption3()==null) searchOp.setsearchOption3("show_y");
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("r.res_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("searchOp", searchOp);
+		//페이징 처리
+		AdminPager pager=new AdminPager(adminDao.countSearchRsv(map), curPage);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
+		//예약 리스트 전달
 		List<ReservDTO> list=adminDao.getReservList(map);
-		map.put("reserv_count_all", adminDao.countTbAll("reserv_item_tb"));
-		map.put("reserv_count_pay", adminDao.countRsvPaid());
+		map.put("reserv_all", adminDao.countTbAll("reserv_item_tb"));
+		map.put("reserv_pay", adminDao.countRsvPaid());
+		map.put("reserv_today", adminDao.countRsvToday(DateUtils.getToday()));
 		map.put("reserv_list", list);
 		map.put("pager", pager);
 		return map;
@@ -203,17 +212,19 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage) {
 		Map<String,Object> map=new HashMap<>();
-		map.put("searchOp", searchOp);
-		AdminPager pager=new AdminPager(adminDao.countSearchQna(map), curPage);
+		//검색옵션 처리
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("searchOp", searchOp);
+		//페이징 처리
+		AdminPager pager=new AdminPager(adminDao.countSearchQna(map), curPage);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
+		//리스트 전달
 		List<QnaDTO> list=adminDao.getQnaList(map);
 		map.put("qna_new", adminDao.countQnaNew());
 		map.put("qna_today", adminDao.countQnaToday(DateUtils.getToday()));
 		map.put("qna_list", list);
-		logger.info("qna_list:"+list);
 		map.put("pager", pager);
 		return map;
 	}
@@ -221,16 +232,16 @@ public class AdminServiceImpl implements AdminService {
 	//팝업 목록
 	@Override
 	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage) {
-		
 		Map<String,Object> map=new HashMap<>();
-		map.put("searchOp", searchOp);
-		AdminPager pager=new AdminPager(adminDao.countSearchPopup(map), curPage);
-		
+		//검색옵션 처리
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
 		searchOp.setSearchKeyword(searchOp.getSearchKeyword().trim());
+		map.put("searchOp", searchOp);
+		//페이징 처리
+		AdminPager pager=new AdminPager(adminDao.countSearchPopup(map), curPage);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
-		
+		//리스트 전달
 		List<PopupDTO> list=adminDao.getPopupList(map);
 		map.put("popup_list", list);
 		map.put("pager", pager);
@@ -275,7 +286,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void popupShow(int no) {
 		adminDao.popupShow(no);
-		
 	}
 
 	//노출 중인 팝업
@@ -285,6 +295,4 @@ public class AdminServiceImpl implements AdminService {
 		list=adminDao.getPopupOn(DateUtils.getToday());
 		return list;
 	}
-
-
 }
