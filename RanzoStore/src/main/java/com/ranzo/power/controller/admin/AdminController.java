@@ -48,6 +48,7 @@ public class AdminController {
 	@Inject
 	ExhibitionService exbService;
 
+	//관리자 홈
 	@RequestMapping("/home.do")
 	public String homeList(Model m){
 		m.addAttribute("map", adminService.getHomeList());
@@ -139,18 +140,21 @@ public class AdminController {
 			MultipartFile file1, MultipartFile file2) {
 		String thumnail = "-";
 		String product_info = "-";
+		//포스터를 파일로 등록한 경우
 		if(!file1.isEmpty()) {
 			logger.info("multipartfile:"+file1.getOriginalFilename());
 			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2( 
 					file1, request, Constants.DIR_EXHIBITION_TN);
 			thumnail = (String)fileInfo.get("fileUrl");
 		}
+		//전시 정보를 파일로 등록한 경우
 		if(!file2.isEmpty()) {
 			logger.info("multipartfile:"+file2.getOriginalFilename());
 			Map<String,Object> fileInfo = UploadFileUtils.uploadFile2(
 					file2, request, Constants.DIR_EXHIBITION_PI);
 			product_info = (String)fileInfo.get("fileUrl");
 		}
+		//결과 저장
 		idto.setAttach(product_info);
 		dto.setThumnail(thumnail);
 		adminService.insertExb(dto, idto);
@@ -166,7 +170,7 @@ public class AdminController {
 		if(flashmap!= null) code = (String) flashmap.get("code");
 		ExhibitionDTO dto = adminService.getExbView(code);
 		ProductInfoDTO idto = exbService.getProductInfo(code);
-		
+		//파일로 저장한 경우 url이 나타나지 않도록 하기 위한 표시
 		int mark1 = 0; 
 		int mark2 = 0;
 		mark1 = (dto.getThumnail().indexOf(Constants.DIR_EXHIBITION_TN) != -1) ? 1: 0;
@@ -184,14 +188,15 @@ public class AdminController {
 	@RequestMapping("/exb_update.do")
 	public String updateExb(ExhibitionDTO dto, ProductInfoDTO idto, 
 			HttpServletRequest request, MultipartFile file1, MultipartFile file2) {
-		
+
 		ProductInfoDTO dtoOrigin = exbService.getProductInfo(idto.getCode());
 		//기존 포스터, 전시 정보
 		String thumnail = adminService.getExbView(dto.getCode()).getThumnail();
 		String product_info = dtoOrigin.getAttach();
 
 		boolean file = !file1.isEmpty() ? true : false; 
-		boolean url = !(dto.getThumnail() == null || "".equals(dto.getThumnail())) ? true : false; 
+		boolean url = !(dto.getThumnail() == null || "".equals(dto.getThumnail())) 
+				? true : false; 
 
 		//전시 포스터
 		//첨부파일 또는 url이 있는 경우
@@ -260,30 +265,36 @@ public class AdminController {
 	@RequestMapping("/exbs_delete.do")
 	public String deleteExb(String[] code, SearchDTO searchOp,
 			RedirectAttributes rttr) {
-		logger.info("## exbs_delete.do 호출, code:" + code);
-			adminService.deleteExb(code);
+		adminService.deleteExb(code);
 		rttr.addFlashAttribute("searchOp", searchOp);
 		return "redirect:/admin/exb_list.do";
 	}
 	
+	//전시 재개(목록)
+	@RequestMapping("/exbs_show.do")
+	public String deleteExb(String code, SearchDTO searchOp,
+			RedirectAttributes rttr) {
+		adminService.showExb(code);
+		rttr.addFlashAttribute("searchOp", searchOp);
+		return "redirect:/admin/exb_list.do";
+	}
+
 	//전시 종료(상세 페이지)
 	@ResponseBody
 	@RequestMapping("/exb_delete.do")
 	public ResponseEntity<String> deleteExb(String[] code) {
-			adminService.deleteExb(code);
+		adminService.deleteExb(code);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	//전시 재개
 	@ResponseBody
 	@RequestMapping("/exb_show.do")
-	public ResponseEntity<String> showExb(String code, RedirectAttributes rttr) {
-//		rttr.addFlashAttribute("code", code);
+	public ResponseEntity<String> showExb(String code) {
 		adminService.showExb(code);
 		return new ResponseEntity<String>(HttpStatus.OK);
-//		return "redirect:/admin/exb_view.do";
 	}
-	
+
 
 	//예약 목록
 	@RequestMapping("/reserv_list.do")
@@ -294,7 +305,6 @@ public class AdminController {
 		if(flashmap!= null) 
 			searchOp = (SearchDTO)flashmap.get("searchOp");
 		Map<String,Object> map = adminService.getReservList(searchOp, curPage);
-		logger.info("reserv map:" + map);
 		m.addAttribute("reserv", map);
 		return "admin/reservList";
 	}
@@ -403,17 +413,17 @@ public class AdminController {
 
 		PopupDTO dtoOrigin = adminService.getPopupView(dto.getNo());
 		String img_src = "";
-		
+
 		boolean typeFile = !file.isEmpty() ? true : false; 
 		boolean typeUrl = !(dto.getImg_src() == null || "".equals(dto.getImg_src())) ? true : false;
-		
+
 		//새로운 이미지가 등록된 경우
 		if(typeFile || typeUrl) {
 			//기존 파일 삭제
 			img_src = dtoOrigin.getImg_src();
 			String fileName = img_src.substring(img_src.lastIndexOf("/")+1);
 			UploadFileUtils.deleteServerFile(fileName, request, Constants.DIR_POPUP);
-			
+
 			//첨부파일로 등록된 경우
 			if(typeFile) {
 				//새로운 파일 등록
@@ -424,12 +434,12 @@ public class AdminController {
 				dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 				dto.setFilesize((long)fileInfo.get("fileSize"));
 				dto.setImg_src(img_src);
-				
-			//url로 등록된 경우
+
+				//url로 등록된 경우
 			}else if(typeUrl) {
 				dto.setFilename("-");
 			}
-		//이미지 변경 없는 경우
+			//이미지 변경 없는 경우
 		}else {
 			//기존 정보 저장
 			dto.setImg_src(dtoOrigin.getImg_src());

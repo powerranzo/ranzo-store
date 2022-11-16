@@ -27,6 +27,22 @@
 			document.form1.submit();
 		});
 	});
+	
+	$("#delBtn").click(function() {
+		console.log('btnDel clicked');
+		$.ajax({
+			type : "post",
+			url : "${path}/admin/exb_delete.do",
+			data : {"code" : "${dto.code}"},
+			success : function() {
+					alertify.confirm("종료되었습니다.", function() {
+						$("#showBtn").show();
+						$("#delBtn").hide();
+				});
+			}
+		})
+	});
+	
 	function optionSelect(num) {
 		var selected = "";
 		var option = ''.concat('#searchOption', num);
@@ -131,7 +147,7 @@
 								<th style="width:10%;">전시기간</th>
 								<th style="width:5%;">조회수</th>
 								<th style="width:5%;">판매량</th>
-								<th style="width:10%;">상태</th>
+								<th style="width:10%;">처리</th>
 							</tr>
 						</thead>
 						<c:forEach var="dto" varStatus="loop" items="${exb.list}">
@@ -149,7 +165,25 @@
 									</td>
 									<td>${dto.hit}</td>
 									<td>${dto.sales}</td>
-									<td>${dto.show == 'y' ? '진행': '종료'}</td>
+									<td><c:choose>
+											<c:when test="${dto.show =='y'}">
+												<button class="btn btn-sm" type="button" id=""
+													onclick="exbView('${dto.code}')">
+													<span class="glyphicon glyphicon-check"></span>&nbsp;수정
+												</button>
+												<button class="btn btn-sm" type="button" id="delBtn">
+<%-- 													onclick="exbDel('${dto.code}')"> --%>
+													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;종료
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn btn-sm" type="button" id="showBtn">
+<%-- 													onclick="exbShow('${dto.code}')"> --%>
+													<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;재개
+												</button>
+											</c:otherwise>
+										</c:choose>
+									</td>
 								</tr>
 							</tbody>
 						</c:forEach>
@@ -192,7 +226,7 @@
 					</ul>
 				</div>
 			</div>
-				</form>
+		</form>
 				<input type="submit" value="종료 처리" id="btnDelete" name="btnDelete">
 				<input type="submit" value="신규 등록" id="btnWrite" name="btnWrite">
 			</div>

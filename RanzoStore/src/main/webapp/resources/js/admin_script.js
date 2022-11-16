@@ -62,7 +62,6 @@ function memberView(param) {
 		form.setAttribute('name', 'form2');
 		form.setAttribute('method', 'post');
 		form.setAttribute('action', getContextPath()+'/admin/exb_view.do');
-		// 	document.charset="utf-8";
 		var hidden = document.createElement('input');
 		hidden.setAttribute('type', 'hidden');
 		hidden.setAttribute('name', 'code');
@@ -70,6 +69,23 @@ function memberView(param) {
 		form.appendChild(hidden);
 		document.body.appendChild(form);
 		form.submit();
+	}
+	function exbView(param) {
+		document.form1.action = getContextPath()+'/admin/exb_view.do?code=' + param;
+		document.form1.submit();
+	}
+	 
+	function exbDel(param) {
+		alertify.confirm("종료하시겠습니까?", function() {
+		document.form1.action = getContextPath()+'/admin/exbs_delete.do?code=' + param;
+		document.form1.submit();
+		});
+	}
+	function exbShow(param) {
+		alertify.confirm("재개하시겠습니까?", function() {
+			document.form1.action = getContextPath()+'/admin/exbs_show.do?code=' + param;
+			document.form1.submit();
+		});
 	}
 
 //reservList.jsp

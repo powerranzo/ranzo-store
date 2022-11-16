@@ -26,8 +26,16 @@ form{margin-top:3%;}
 </style>
 <script type="text/javascript">
 	$(function() {
-		if("${dto.show=='n'}") $("#btnDelete").hide();
-		else $("#btnShow").hide();
+		var check="${dto.show}";
+		console.log(check=='y');
+		if(check=='n') {
+			$("#btnShow").show();
+			$("#btnDelete").hide();
+		}
+		else if(check=='y') {
+			$("#btnDelete").show();
+			$("#btnShow").hide();
+		}
 		
 		$("#content").summernote({
 			height : 300
@@ -42,7 +50,6 @@ form{margin-top:3%;}
 			$.ajax({
 				type : "post",
 				url : "${path}/admin/exb_delete.do",
-			//	async : false,
 				data : {"code" : "${dto.code}"},
 				success : function() {
 						alertify.confirm("종료되었습니다.", function() {
@@ -51,11 +58,6 @@ form{margin-top:3%;}
 					});
 				}
 			})
-			
-			alertify.confirm("종료하시겠습니까?", function() {
-				document.form1.action = "${path}/admin/exb_delete.do";
-				document.form1.submit();
-			});
 		});
 		$("#btnShow").click(function() {
 			$.ajax({
@@ -290,7 +292,7 @@ form{margin-top:3%;}
 						<input type="submit" value="종료처리" id="btnDelete" name="btnDelete" style="margin-right:10px;">
 						<input type="submit" value="재개처리" id="btnShow" name="btnShow" style="margin-right:10px;">
 						<input type="submit" value="목록으로" id="btnList" name="btnList" onclick="location.href='${path}/admin/exb_list.do'" style="margin-right:10%;">
-		</div>
+			</div>
 	</div>
 	<footer>
 	<%@ include file="../include/footer.jsp"%>
