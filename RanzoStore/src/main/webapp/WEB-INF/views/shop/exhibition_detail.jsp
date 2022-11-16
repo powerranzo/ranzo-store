@@ -7,17 +7,7 @@
 <title>전시</title>
 <%@ include file="../include/header.jsp"%>
 <script type="text/javascript">
-	$(function(){
-		
-		// 모달
-		$(".share-modal-btn").click(function(){
-    		$(".share-modal").fadeIn();
-  		});
-  
-		$(".share-modal_content").click(function(){
-			$(".share-modal").fadeOut();
-		});
-		
+	$(function(){		
 		// 상세 판넬
 		tabList = $('.tab-list li');
 		tabContent = $('.tab-content');
