@@ -8,6 +8,16 @@
 <%@ include file="../include/header.jsp"%>
 <script type="text/javascript">
 	$(function(){
+		
+		// 모달
+		$(".share-modal-btn").click(function(){
+    		$(".share-modal").fadeIn();
+  		});
+  
+		$(".share-modal_content").click(function(){
+			$(".share-modal").fadeOut();
+		});
+		
 		// 상세 판넬
 		tabList = $('.tab-list li');
 		tabContent = $('.tab-content');
@@ -110,10 +120,7 @@
 	}
 	
 	//링크 공유
-	function shareClipboard(){
-		var sendUrl = $(location).attr('href') // 전달할 현재 URL
-		document.execCommand('Copy');
-	}
+
 
 	
   // 좋아요 체크 되어있는 지 확인
@@ -171,7 +178,7 @@
 	</header>
 		
 	<section class="sec-content">
-		<section class="sec-prd">
+		<article class="sec-prd">
 			<div class="prd-thumnail">
 				<img src="${exhibition.thumnail}">
 			</div>
@@ -202,17 +209,18 @@
 					</span>
 				</div>
 				</div> <!-- end prd-body -->
+				
 				<div class="buttons">
-					<i class="fa fa-share-nodes"></i>
-					<a href="javascript:shareTwitter();">
-						<i class="fa fa-twitter" aria-hidden="true"></i>
-					</a>
-					<a href="javascript:shareFacebook();">
-						<i class="fa fa-facebook" aria-hidden="true"></i>
-					</a>
-					<a href="javascript:shareClipboard();">
-						<i class="fa fa-link" aria-hidden="true"></i>
-					</a>
+					<span class="shareTweeter">
+						<a href="javascript:shareTwitter();">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</span>
+					<span  class="shareFacebook">
+						<a class="shareFacebook" href="javascript:shareFacebook();">
+							<i class="fa fa-facebook" aria-hidden="true"></i>
+						</a>
+					</span>
 					<a class="btn-wish" onclick="clickHeart()"><img id="heart" alt="찜" src="${pageContext.request.contextPath}/resources/images/favorite1.png"></a>
 					<a class="btn-reserve" href="${path}/reserv/detail/${exhibition.code}">예매하기</a>
 				</div>
@@ -223,9 +231,9 @@
 						<a href="${path}/shop/product/edit/${exhibition.code}">[편집]</a>
 					</div>
 				</c:if>
-		</section>
+		</article>
 	
-		<section class="sec-detail">
+		<article class="sec-detail">
 			<ul class="tab-list"> 
 				<li><a href="#productInfo">전시상세</a></li>
 				<li><a href="#reserveInfo">예매/취소</a></li>
@@ -237,7 +245,7 @@
 			<div class="tab-content" id="reserveInfo"></div>
 			<div class="tab-content" id="reviewInfo"></div>
 			<div class="tab-content" id="qnaInfo" ></div>
-		</section>
+		</article>
 	</section>
 
 	<footer>

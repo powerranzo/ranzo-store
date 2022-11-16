@@ -50,36 +50,40 @@
 }
 
 .buttons {
-	grid-area : btn;
+	grid-area: btn;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	height: 50px;
 }
-
-.btn-wish {
-	margin-right:10px;	
+.buttons a i{
+	font-size: 30px;
+}
+.shareTweeter, .shareFacebook{
+	min-width: 40px;
+	height:40px;
+	text-align: center;	
 }
 
 .btn-reserve {
-	height:50px;
-	width:100%;
-	max-width:300px;
+	height: 50px;
+	width: 100%;
+	max-width: 300px;
 	text-align: center;
 	text-decoration: none;
-	padding-top:13px;
+	padding-top: 13px;
 	background-color: orange;
 	color: #f2f2f2;
-	font-size: 20px;
-	font-weight: bold;	
+	font-weight: bold;
+	font-size: 20px;	
 }
+
 .btn-reserve:hover {
 	text-decoration: none;
-	color:#f2f2f2;
+	color: #f2f2f2;
 	opacity: 0.8;
 }
 
-.btn-reserve a{
-	}
 
 /* 상세정보 탭 */
 .sec-detail {
