@@ -1,1 +1,1 @@
-# ranzo-store
+# ®ranzo-store
