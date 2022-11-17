@@ -124,6 +124,12 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.insertProductInfo(idto);
 	}
 
+	//전시코드 체크
+	@Override
+	public int codeCheck(String code) {
+		return adminDao.codeCheck(code);
+	}
+	
 	//전시 상세 정보(수정페이지)
 	@Override
 	public ExhibitionDTO getExbView(String code) {

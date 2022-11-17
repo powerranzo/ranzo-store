@@ -69,6 +69,24 @@ form {
 		$("#file"+param).val("");
 		$("#filesize"+param).html("0 KB");
 	}
+	
+	//코드 중복체크
+	function codeCheck() {
+		console.log('전시코드 체크');
+		var code = $("#code").val();
+		
+		$.ajax({
+			url : "${path}/admin/code_check.do",
+			type : "post",
+			data : {"code" : code},
+			success : function(data) {
+				if(data == 1)
+					alertify.alert('사용 중인 코드입니다.');
+				else if(data == 0)
+					alertify.alert('사용 가능한 코드입니다.');
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -82,7 +100,11 @@ form {
 	<table class="adminTable3">
 			<tr>
 			<th id="adminTB2_th">전시코드</th>
-			<td><input name="code" id="code" placeholder=""></td>
+			<td><input name="code" id="code" placeholder="">
+				<button class="btn btn-sm" type="button" onclick="codeCheck()">
+				<span class="glyphicon glyphicon-ok"></span>&nbsp;중복확인
+				</button>
+			</td>
 			</tr>
 			<tr>
 			<th>전시명</th>

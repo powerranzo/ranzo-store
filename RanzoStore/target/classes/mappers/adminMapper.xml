@@ -212,6 +212,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1
 			)
 		</sql>
+		
+	<!-- 전시 코드 중복 체크 -->
+	<select id="codeCheck" resultType="int">
+		SELECT COUNT(*) FROM exhibition_tb
+		WHERE code = #{code}
+	</select>
 	
 	<!-- 전시 추가 -->
 	<insert id="insertExb">

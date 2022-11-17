@@ -101,6 +101,12 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.getExbList", map);
 	}
 
+	//전시 코드 체크
+	@Override
+	public int codeCheck(String code) {
+		return sqlSession.selectOne("admin.codeCheck", code);
+	}
+	
 	//전시 등록
 	@Override
 	public void insertExb(ExhibitionDTO dto) {

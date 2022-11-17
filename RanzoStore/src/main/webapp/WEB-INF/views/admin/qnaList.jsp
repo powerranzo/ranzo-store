@@ -128,7 +128,7 @@
 		<c:forEach var="qna" varStatus="loop" items="${qna.qna_list}">
 		<tbody>
 			<tr>
-			<td><input name="qna_bno" type="checkbox" value="${qna.bno}"></td>
+			<td><input name="bno" type="checkbox" value="${qna.bno}"></td>
 			<td>${qna.bno}</td>
 			<td><a href="#" onclick="location.href='${path}/board/qna/view.do?bno=${qna.bno}'">${qna.title}</a></td>
 			<td><a href="#" onclick="memberView('${qna.writer}')">${qna.name}(${qna.writer})</a></td>

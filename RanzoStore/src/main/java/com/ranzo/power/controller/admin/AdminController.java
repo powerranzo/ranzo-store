@@ -25,6 +25,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.ranzo.power.common.Constants;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
+import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.admin.AdminService;
@@ -120,6 +121,13 @@ public class AdminController {
 		return "admin/exbWrite";
 	}
 
+	//코드 체크
+	@RequestMapping("code_check.do")
+	@ResponseBody
+	public int codeCheck(String code) {
+		return adminService.codeCheck(code);
+	}
+	
 	//전시 등록
 	@PostMapping("/exb_write.do")
 	public String writeExb(ExhibitionDTO dto, 

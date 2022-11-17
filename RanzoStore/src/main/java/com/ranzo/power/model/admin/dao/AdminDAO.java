@@ -25,6 +25,7 @@ public interface AdminDAO {
 		public List<ReservDTO> getMemberReserv(String userid); //회원의 최근 예약 목록
 		public void deleteMember(Map<String,Object> map); //회원 탈퇴(목록)
 		//전시
+		public int codeCheck(String code); //코드 중복 체크
 		public int countExbIng(String today); //진행 중인 전시 개수
 		public int countSearchExb(Map<String, Object> map); //검색 대상 전시 수
 		public List<MemberDTO> getExbList(Map<String, Object> map); //검색 전시 목록

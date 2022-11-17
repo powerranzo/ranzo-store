@@ -20,6 +20,7 @@ public interface AdminService {
 	public List<ReservDTO> getMemberReserv(String userid); //회원 정보 내 예약 목록
 	public void deleteMember(String[] userids); //회원 탈퇴
 	//전시
+	public int codeCheck(String code);
 	public Map<String, Object> getExbList(SearchDTO searchOp, int curPage); //전시 목록
 	public void insertExb(ExhibitionDTO dto, ProductInfoDTO idto); //전시 등록
 	public ExhibitionDTO getExbView(String code); //전시 상세 정보(수정페이지)
@@ -42,5 +43,4 @@ public interface AdminService {
 	public void deletePopupFile(int no); //팝업 파일정보 초기화
 	public void popupShow(int[] no); //팝업 재개
 	public List<PopupDTO> getPopupOn(); //노출 중인 팝업
-	
 }
