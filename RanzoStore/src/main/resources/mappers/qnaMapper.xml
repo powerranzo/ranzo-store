@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select rownum as rn, A.*
 					from (
 						select q.bno, q.title, q.writer, m.name, q.reg_date, q.viewcnt, q.re_depth, q.show
+						,q.ref
 						from qna_tb q, member_tb m 
 							<choose>
 								<when test="search_option != 'all' ">
