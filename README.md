@@ -17,12 +17,12 @@
 
 ### 💻개발 환경
 
-・ Frontend : HTML5, CSS3, JS(ES6)
-・ Backend : Java8, Spring5.2.22, JSP, Jquery, JSON, Ajax, Mybatis
-・ DB : Oracle 11g XE
-・ Web-Server : Apache Tomcat 9.0
-・ IDE & Collaboration : STS3, Git
-・ deployment : AWS EC2
+- Frontend : HTML5, CSS3, JS(ES6)
+- Backend : Java8, Spring5.2.22, JSP, Jquery, JSON, Ajax, Mybatis
+- DB : Oracle 11g XE
+- Web-Server : Apache Tomcat 9.0
+- IDE & Collaboration : STS3, Git
+- deployment : AWS EC2
 
 ### 💻ERD
 
