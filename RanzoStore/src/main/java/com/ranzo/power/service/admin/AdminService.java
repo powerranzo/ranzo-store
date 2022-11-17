@@ -32,7 +32,7 @@ public interface AdminService {
 	public Map<String, Object> getReservList(SearchDTO searchOp, int curPage); //예약 목록
 	public void deleteReserv(String[] no); //예약 목록 삭제
 	//QNA
-	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage); //QnA 목록
+	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage, String admin); //QnA 목록
 	public void deleteQna(int[] bno); //QnA 목록 삭제
 	//팝업
 	public Map<String, Object> getPopupList(SearchDTO searchOp, int curPage); //팝업 목록

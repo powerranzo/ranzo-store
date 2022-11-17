@@ -39,21 +39,60 @@ form {
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+		var check="${dto.show}"; //console.log(check=='y');
+		if(check=='n') {
+			$("#btnShow").show();
+			$("#btnDelete").hide();
+		}
+		else if(check=='y') {
+			$("#btnDelete").show();
+			$("#btnShow").hide();
+		}
+		
 		$("#btnUpdate").click(function() {
 				if(popCheck2()){
 				document.form1.action = '${path}/admin/popup_update.do';
 				document.form1.submit();
 				}
 		});
-		$("#btnDelete").click(function(){
-			alertify.confirm("종료하시겠습니까?", function() {
-				document.form1.action = '${path}/admin/popup_delete.do';
-				document.form1.submit();
-			});
-		});
+// 		$("#btnDelete").click(function(){
+// 			alertify.confirm("종료하시겠습니까?", function() {
+// 				document.form1.action = '${path}/admin/popup_delete.do';
+// 				document.form1.submit();
+// 			});
+// 		});
 		$("#btnResetFile").click(function(){
 			$("#file").val('');
 		});
+		
+		$("#btnDelete").click(function() {
+			$.ajax({
+				type : "post",
+				url : "${path}/admin/popup_delete.do",
+				data : {"no" : "${dto.no}"},
+				success : function() {
+					alertify.confirm("종료되었습니다.", function() {
+					$("#btnShow").show();
+					$("#btnDelete").hide();
+				});
+			}
+		})
+	});
+		$("#btnShow").click(function() {
+			$.ajax({
+				type : "post",
+				url : "${path}/admin/popup_show.do",
+				async : false,
+				data : {"no" : "${dto.no}"},
+				success : function() {
+					alertify.confirm("재개되었습니다.", function() {
+					$("#btnDelete").show();
+					$("#btnShow").hide();
+				});
+			}
+		})
+	});
 		$("#fileDel").click(function(){
 			alertify.confirm("삭제하시겠습니까?", function() {
 				$.ajax({
@@ -167,8 +206,9 @@ form {
 		<table class="adminTable3" id="tb3">
 			<tr>
 			<th id="adminTB2_th">현재 이미지</th>
-			<td><c:if test="${dto.filesize > 0}">
+			<td>
 				<img id="fileImage" src="${dto.img_src}" width="100" height="100">
+				<c:if test="${dto.filesize > 0}">
 				<button class="btn btn-sm" name="fileDel" id="fileDel" type="button">
 				<span class="glyphicon glyphicon-remove"></span>&nbsp;삭제
 				</button>
@@ -178,8 +218,10 @@ form {
 		</table>
 		</form>
 
-		<input id="btnUpdate" name="btnUpdate" type="button" value="수정하기" style="margin-right:10%;">
-		<input id="btnDelete" name="btnDelete" type="button" value="팝업종료" style="margin-right:10px;">
+		<input id="btnUpdate" value="수정하기" name="btnUpdate" type="button" style="margin-right:10%;">
+		<input id="btnDelete" value="팝업종료" name="btnDelete" type="button" style="margin-right:10px;">
+		<input type="submit" value="재개처리" id="btnShow" name="btnShow" style="margin-right:10px;">
+		<input type="submit" value="목록으로" id="btnList" name="btnList" onclick="location.href='${path}/admin/popup_list.do'" style="margin-right:10%;">
 </div>
 </div>
 <%@ include file="../include/footer.jsp"%>

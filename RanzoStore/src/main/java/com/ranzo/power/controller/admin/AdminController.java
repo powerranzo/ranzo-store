@@ -52,7 +52,7 @@ public class AdminController {
 
 	@Inject
 	ExhibitionService exbService;
-	
+
 	@Inject
 	QnaService qnaService;
 
@@ -134,7 +134,7 @@ public class AdminController {
 	public int codeCheck(String code) {
 		return adminService.codeCheck(code);
 	}
-	
+
 	//전시 등록
 	@PostMapping("/exb_write.do")
 	public String writeExb(ExhibitionDTO dto, 
@@ -349,15 +349,20 @@ public class AdminController {
 	@RequestMapping("/qna_list.do")
 	public String qnaList(SearchDTO searchOp, Model m,
 			@RequestParam(defaultValue  =  "1") int curPage,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		//검색옵션 유지
 		Map<String,?> flashmap = RequestContextUtils.getInputFlashMap(request);
 		if(flashmap!= null) {
 			searchOp = (SearchDTO)flashmap.get("searchOp");
 			curPage = (int)flashmap.get("curPage");
 		}
+		//관리자 확인
+		String admin="";
+		if(((String)session.getAttribute("admin")).equals("y")) 
+			admin=(String)session.getAttribute("userid");
+
 		//리스트 전달
-		Map<String,Object> map = adminService.getQnaList(searchOp, curPage);
+		Map<String,Object> map = adminService.getQnaList(searchOp, curPage, admin);
 		m.addAttribute("qna", map);
 		return "admin/qnaList"; 
 	}
@@ -379,7 +384,7 @@ public class AdminController {
 			return "redirect:qna_list.do";
 		}
 	}
-	
+
 	//팝업 목록
 	@RequestMapping("/popup_list.do")
 	public String popupList(SearchDTO searchOp,Model m,
@@ -444,7 +449,7 @@ public class AdminController {
 			img_src = (String)fileInfo.get("fileUrl");
 			dto.setFilename(img_src.substring(img_src.lastIndexOf("_")+1));
 			dto.setFilesize((long)fileInfo.get("fileSize"));
-		//URL인 경우
+			//URL인 경우
 		}else {
 			dto.setFilename("-");
 		}

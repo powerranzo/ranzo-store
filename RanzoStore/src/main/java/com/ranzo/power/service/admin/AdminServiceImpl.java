@@ -208,7 +208,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//QnA 목록
 	@Override
-	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage) {
+	public Map<String, Object> getQnaList(SearchDTO searchOp, int curPage, String admin) {
 		Map<String,Object> map=new HashMap<>();
 		//검색옵션 처리
 		if(searchOp.getOrderOption()==null) searchOp.setOrderOption("reg_date");
@@ -216,6 +216,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("searchOp", searchOp);
 		//페이징 처리
 		AdminPager pager=new AdminPager(adminDao.countSearchQna(map), curPage);
+		map.put("admin", admin);
 		map.put("start", pager.getPageBegin());
 		map.put("end", pager.getPageEnd());
 		//리스트 전달

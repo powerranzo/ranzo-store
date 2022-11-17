@@ -423,7 +423,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 			</otherwise>
 			</choose>
-				
+			AND q.writer NOT IN(#{admin})
 			AND (q.reg_date BETWEEN to_date(#{searchOp.startDate}, 'yyyy-mm-dd')
 			AND to_date(#{searchOp.endDate}, 'yyyy-mm-dd')+1)
 			AND q.show='y'

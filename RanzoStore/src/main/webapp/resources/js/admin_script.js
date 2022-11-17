@@ -241,7 +241,7 @@ $(function() {
 		}
 		return true;
 	}
-	
+	-
 	function exbCheck1(){
 	console.log('호출됨');
 		var code=document.getElementById('code').value;
