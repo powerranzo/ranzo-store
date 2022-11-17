@@ -15,7 +15,7 @@
 .review{
 	margin: auto;
 	width: 80%;
-	margin-top: 10px;
+	margin-top: 10px; 
 }
 h2 a:link{text-decoration: none; color: black;}
 h2 a:visited{text-decoration: none; color: black;}
