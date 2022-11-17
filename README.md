@@ -1,1 +1,3 @@
-# ®ranzo-store
+# ✨ranzo-store
+------------
+란조
