@@ -146,30 +146,30 @@ function list(page) {
 	<c:choose>
 	<c:when test="${sessionScope.admin == 'y' || sessionScope.userid == row.writer}">
 		<tr>
-	         <td>${row.bno}</td>      
-	         <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
-	         <td>${row.name}(${row.writer})</td>
-	         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-	         <td style="text-align: center;">${row.viewcnt}</td>
-	      </tr>
+			<td>${row.bno}</td>
+			<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+			<td>${row.name}(${row.writer})</td>
+			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+			<td style="text-align: center;">${row.viewcnt}</td>
+		</tr>
 	</c:when>
 	<c:when test="${sessionScope.userid == requestScope.pre_writer && requestScope.pre_bno == row.ref}">
 		<tr>
-	         <td>${row.bno}</td>      
-	         <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
-	         <td>${row.name}(${row.writer})</td>
-	         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-	         <td style="text-align: center;">${row.viewcnt}</td>
+			<td>${row.bno}</td>      
+			<td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+			<td>${row.name}(${row.writer})</td>
+			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+			<td style="text-align: center;">${row.viewcnt}</td>
 	      </tr>
 	</c:when>
 	<c:otherwise>
 		<tr>
-         <td>${row.bno}</td>      
-         <td>${row.title}</td>
-         <td>${row.name}(${row.writer})</td>
-         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-         <td style="text-align: center;">${row.viewcnt}</td>
-      	</tr>
+			<td>${row.bno}</td>      
+			<td>${row.title}</td>
+			<td>${row.name}(${row.writer})</td>
+			<td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+			<td style="text-align: center;">${row.viewcnt}</td>
+		</tr>
 	</c:otherwise>
 	</c:choose>
 	<c:set var="pre_bno" value="${row.ref}" scope="request" />
@@ -177,38 +177,38 @@ function list(page) {
 	</c:if><!-- show = 'y' -->
 </c:forEach>
 
-	<tr>
-		<td colspan="6" align="center">
-			<c:if test="${map.pager.curBlock > 1}">
-				<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
-			</c:if>
-			<c:if test="${map.pager.curBlock > 1}">
-				<a href="#" onclick="list('${map.pager.prevPage}')">
-				<i class="fa-solid fa-less-than"></i></a>
-			</c:if>
-			<c:forEach var="num" 
-				begin="${map.pager.blockBegin}"
-				end="${map.pager.blockEnd}">
-				<c:choose>
-					<c:when test="${num == map.pager.curPage}">
-					<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-						<span id="numstyle">${num}</span>&nbsp;
-					</c:when>
-					<c:otherwise>
-						<a href="#" onclick="list('${num}')"><span style="color:gray;">${num}</span></a>&nbsp;
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
-				<a href="#" 
-				onclick="list('${map.pager.nextPage}')"><i class="fa-solid fa-greater-than"></i></a>&nbsp;
-			</c:if>
-			<c:if test="${map.pager.curPage < map.pager.totPage}">
-				&nbsp;<a href="#" 
-				onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
-			</c:if>
-		</td>
-	</tr>
+		<tr>
+			<td colspan="6" align="center">
+				<c:if test="${map.pager.curBlock > 1}">
+					<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
+				</c:if>
+				<c:if test="${map.pager.curBlock > 1}">
+					<a href="#" onclick="list('${map.pager.prevPage}')">
+					<i class="fa-solid fa-less-than"></i></a>
+				</c:if>
+				<c:forEach var="num" 
+					begin="${map.pager.blockBegin}"
+					end="${map.pager.blockEnd}">
+					<c:choose>
+						<c:when test="${num == map.pager.curPage}">
+						<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+							<span id="numstyle">${num}</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="list('${num}')"><span style="color:gray;">${num}</span></a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${map.pager.curBlock < map.pager.totBlock}">
+					<a href="#" 
+					onclick="list('${map.pager.nextPage}')"><i class="fa-solid fa-greater-than"></i></a>&nbsp;
+				</c:if>
+				<c:if test="${map.pager.curPage < map.pager.totPage}">
+					&nbsp;<a href="#" 
+					onclick="list('${map.pager.totPage}')"><i class="fa-solid fa-greater-than"></i><i class="fa-solid fa-greater-than"></i></a>
+				</c:if>
+			</td>
+		</tr>
 </table>
 </div>
 

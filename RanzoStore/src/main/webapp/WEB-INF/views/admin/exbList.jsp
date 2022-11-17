@@ -158,8 +158,8 @@
 						<td><a href="#" onclick="exbUpdate('${dto.code}')">${dto.title}</a></td>
 						<td>${dto.location}</td>
 						<td>${dto.gallery}</td>
-						<td><fmt:formatDate value="${dto.start_date}" type="date" pattern="yyyy-MM-dd" />  <fmt:formatDate
-							value="${dto.end_date}" type="date" pattern="yyyy-MM-dd" />
+						<td><fmt:formatDate value="${dto.start_date}" type="date" pattern="yyyy-MM-dd" />  
+							<fmt:formatDate value="${dto.end_date}" type="date" pattern="yyyy-MM-dd" />
 						</td>
 						<td>${dto.hit}</td>
 						<td>${dto.sales}</td>

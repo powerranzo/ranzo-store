@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,10 +27,12 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.ranzo.power.common.Constants;
 import com.ranzo.power.model.admin.dto.PopupDTO;
 import com.ranzo.power.model.admin.dto.SearchDTO;
+import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
 import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.model.shop.dto.ProductInfoDTO;
 import com.ranzo.power.service.admin.AdminService;
+import com.ranzo.power.service.board.QnaService;
 import com.ranzo.power.service.member.MemberService;
 import com.ranzo.power.service.shop.ExhibitionService;
 import com.ranzo.power.util.DateUtils;
@@ -48,6 +52,9 @@ public class AdminController {
 
 	@Inject
 	ExhibitionService exbService;
+	
+	@Inject
+	QnaService qnaService;
 
 	//관리자 홈
 	@RequestMapping("/home.do")
