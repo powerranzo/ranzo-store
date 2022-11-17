@@ -99,7 +99,7 @@ function listReply(){
 		</tr>
 		<tr>
 			<th width="15%">전시명</th>
-			<td>${dto.title}</td>
+			<td><a href="${path}/shop/exhibition/detail/${dto.product}">${dto.title}</a></td>
 		</tr>
 		<tr>
 			<th width="15%">제목</th>
