@@ -14,12 +14,17 @@
   
   
 ## ✔프로젝트 기술 소개
-  
-프로젝트에 사용된 언어와 기술, ERD와 개발환경 등을 소개합니다.
-  
-### 사용 언어
 
-+ Java 8
-+ JavaScript ES 6
-+ HTML5
-+ CSS3
+### 💻개발 환경
+
+・ Frontend : HTML5, CSS3, JS(ES6)
+・ Backend : Java8, Spring5.2.22, JSP, Jquery, JSON, Ajax, Mybatis
+・ DB : Oracle 11g XE
+・ Web-Server : Apache Tomcat 9.0
+・ IDE & Collaboration : STS3, Git
+・ deployment : AWS EC2
+
+### 💻ERD
+
+![RanzoStore_ERD](https://user-images.githubusercontent.com/106068296/202441935-6b1f612e-2136-4d97-8d89-2c4582560fc7.png)
+
