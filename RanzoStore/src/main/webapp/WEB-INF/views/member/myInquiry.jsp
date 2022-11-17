@@ -81,7 +81,7 @@ table i{
 </style>
 <script type="text/javascript">
 function list(page){
-	location.href="${path}/reserv/list.do/${sessionScope.userid}?curPage="+page;
+	location.href="${path}/member/myInquiry.do?curPage="+page;
 } 
 </script>
 </head>
@@ -103,7 +103,6 @@ function list(page){
 			<th style="width: 10%; text-align: center;">조회수</th>
 		</tr>
 		<c:forEach var="row" items="${map.list}">
-		<c:if test="${row.writer == userid}">
 			<c:choose>
 				<c:when test="${row.show == 'y'}">
 				<tr>
@@ -114,7 +113,6 @@ function list(page){
 				</tr>
 				</c:when>
 			</c:choose>
-		</c:if>
 		</c:forEach>
 		<tr>
 		<td colspan="6" align="center">
@@ -148,7 +146,7 @@ function list(page){
 			</c:if>
 		</td>
 	</tr>
-		</table>
+		</table><br>
 		</div>
 	</section>
 

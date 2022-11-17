@@ -6,6 +6,7 @@ function getContextPath(){
 	var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 	return contextPath;
 }
+
 //adminHome.jsp
 function homeList(n){
 	var url = getContextPath()+"/admin/exb_list.do";
@@ -33,9 +34,9 @@ function homeList(n){
 		document.form1.action = getContextPath()+"/admin/member_list.do?curPage=" + param;
 		document.form1.submit();
 	}
-function memberView(param) {
-	console.log('memberView() 호출');
-	console.log(param);
+	function memberView(param) {
+		console.log('memberView() 호출');
+		console.log(param);
 		let frm = document.createElement('form');
 		frm.setAttribute('name', 'form2');
 		frm.setAttribute('method', 'post');
@@ -93,6 +94,14 @@ function memberView(param) {
 		document.form1.action = getContextPath()+'/admin/reserv_list.do?curPage=' + param;
 		document.form1.submit();
 	}
+	
+	function rsvDel(param) {
+		alertify.confirm("삭제하시겠습니까?", function() {
+		document.form1.action = getContextPath()+'/admin/reserv_delete.do?no=' + param;
+		document.form1.submit();
+		});
+	}
+	
 //qnaList.jsp
 	function qnaList(param) {
 		document.form1.action = getContextPath()+'/admin/qna_list.do?curPage=' + param;
@@ -123,6 +132,7 @@ function memberView(param) {
 		});
 	}
 
+// URL 이미지 미리보기
 $(function() {
 		$("#img_src").change(function() {
 			//console.log($("#img_src").val());

@@ -25,12 +25,7 @@
 	text-align: center;
 	color: #fff;
 	font-size: 14px;
-	display: block; 
-/* 	span { */
-/* 	line-height: 35px; */
-/* 	vertical-align: bottom; */
-/* 	opacity: 0.8; */
-/* 	} */
+	display: block;
 }
 
 .popImg {
@@ -59,7 +54,7 @@ $(function(){
 	</div>
 	<div class="checkDiv">
 		<button id="btnClose" class="btnClose" type="button">
-			<span>오늘 하루 보지 않기 X</span>
+		<span>오늘 하루 보지 않기 X</span>
 		</button>
 	</div>
 </body>

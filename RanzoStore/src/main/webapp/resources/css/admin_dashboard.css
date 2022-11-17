@@ -1,163 +1,234 @@
 @charset "UTF-8";
 
-* {box-sizing: content-box;}
-@media screen and (max-width: 900px) {
-	.sectiondiv {width:100% !important; margin-top:10% !important;}
-	.asidediv {width:100% !important; margin:0 !important;}
-	.adminTable1 {width:100% !important;}
-	.adminTable2 {width:100% !important;}
-	.adminTable3 {width:100% !important;}
-	.content {font-size: 2.5vw !important;}
-	#footer{bottom:0; margin-top:200px;}
+* {
+	box-sizing: content-box;
 }
-#footer{
+
+@media screen and (max-width: 900px) {
+	.sectiondiv {
+		width: 100% !important;
+		margin-top: 10% !important;
+	}
+	.asidediv {
+		width: 100% !important;
+		margin: 0 !important;
+	}
+	.adminTable1 {
+		width: 100% !important;
+	}
+	.adminTable2 {
+		width: 100% !important;
+	}
+	.adminTable3 {
+		width: 100% !important;
+	}
+	.content {
+		font-size: 2.5vw !important;
+	}
+	#footer {
+		bottom: 0;
+		margin-top: 200px;
+	}
+}
+
+#footer {
 	bottom: 0 !important;
 }
-html,body {
-    margin:0;
-    padding:0;
-    min-height:100% !important;
+
+html, body {
+	margin: 0;
+	padding: 0;
+	min-height: 100% !important;
 }
+
 body {
 	display: flex;
- 	flex-direction: column;
-	bottom:0;
+	flex-direction: column;
+	bottom: 0;
 }
-
 
 /* adminHome.jsp */
-.content{
+.content {
 	margin: 20px 80px 0 80px;
-	bottom:0;
-	min-height:1000px;
+	bottom: 0;
+	min-height: 1000px;
 }
+
 .sectiondiv {
-	float:right;
-	width:70%;
+	float: right;
+	width: 70%;
 	margin: 6% 2% 5% 0;
 	display: inline-block;
 	flex: 1;
 }
-th{vertical-align: center;}
-.adminTable3{
+
+th {
+	vertical-align: center;
+}
+
+.adminTable3 {
 	width: 100%;
 	text-align: center;
 	border: 2px solid #e4e4e4;
-/* 	border-collapse: collapse; */
+	/* 	border-collapse: collapse; */
 }
+
 .adminTable3 th {
 	border-top: 2px solid #e4e4e4;
 	background-color: #f8f9fa;
 	color: #7b7e83;
 }
-.adminTable3 td{	border-bottom: 1px solid #e4e4e4;}
-.adminTable3 th, td{ padding: 10px; text-align:center; vertical-align: middle;}
-.adminTableDiv{width:100%;}
-.adminTable1{
+
+.adminTable3 td {
+	border-bottom: 1px solid #e4e4e4;
+}
+
+.adminTable3 th, td {
+	padding: 10px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.adminTableDiv {
+	width: 100%;
+}
+
+.adminTable1 {
 	vertical-align: middle;
 	border: 2px solid #e4e4e4;
-	float:left;
+	float: left;
 	padding: 10px;
 	width: 60%;
 	margin: 2% 0 3% 0;
 	text-align: center;
-/* 	border-collapse: collapse; */
+	/* 	border-collapse: collapse; */
 }
+
 .adminTable1 th {
 	border-top: 2px solid #e4e4e4;
 	background-color: #f8f9fa;
 	color: #7b7e83;
 }
-.adminTable1 td{border-bottom: 1px solid #e4e4e4;}
-.adminTable1 th, td{ 
-	padding: 10px; 
-	text-align:center;
+
+.adminTable1 td {
+	border-bottom: 1px solid #e4e4e4;
 }
-.adminTable2{
+
+.adminTable1 th, td {
+	padding: 10px;
+	text-align: center;
+}
+
+.adminTable2 {
 	table-layout: fixed;
 	border: 2px solid #e4e4e4;
 	width: 60%;
-	float:left;
-	padding: 10px; 
+	float: left;
+	padding: 10px;
 	margin: 0 0 3% 0;
-/* 	border-collapse: collapse; */
+	/* 	border-collapse: collapse; */
 }
+
 .adminTable2 th {
-	padding: 10px; 
-	min-height:20px !important;
+	padding: 10px;
+	min-height: 20px !important;
 	border-top: 1px solid #e4e4e4;
 	background-color: #f8f9fa;
 	text-align: center;
 	color: #7b7e83;
 }
-.adminTable2 td{	border-bottom: 1px solid #e4e4e4; text-align: left;}
-.adminTable2 th, td{ height:inherit; text-align:center;}
-#adminTB2_th{
-	width:15%;
+
+.adminTable2 td {
+	border-bottom: 1px solid #e4e4e4;
+	text-align: left;
 }
-#adminTB2_td1{
-	width:80%;
+
+.adminTable2 th, td {
+	height: inherit;
+	text-align: center;
 }
-#adminTB2_search{
-	width:80%;
+
+#adminTB2_th {
+	width: 15%;
 }
-#startDate, #endDate, #searchOption2, #orderOption{
+
+#adminTB2_td1 {
+	width: 80%;
+}
+
+#adminTB2_search {
+	width: 80%;
+}
+
+#startDate, #endDate, #searchOption2, #orderOption {
 	width: 40%;
 }
+
 #btnDelete, #btnWrite, #btnUpdate, #btnDelete2, #btnShow {
-	float:right;
-	margin-top:20px;
-	margin-bottom:30px;
-	padding:7px;
+	float: right;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	padding: 7px;
 	width: 70px;
-	height:20px;
+	height: 20px;
 	background-color: black;
 	color: white;
 	border-radius: 5px;
 }
+
 #btnList {
-	float:left;
-	margin-top:20px;
-	margin-bottom:30px;
-	padding:7px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	padding: 7px;
 	width: 70px;
-	height:20px;
+	height: 20px;
 	background-color: black;
 	color: white;
 	border-radius: 5px;
 }
+
 #btnSearch {
-	float:right;
-	padding:7px;
+	margin-right: 6px;
+	float: right;
+	padding: 7px;
 	width: 70px;
-	height:20px;
+	height: 20px;
 	background-color: black;
 	color: white;
 	border-radius: 5px;
 }
-	
-.sectiondiv input{
-	float:left;
-	width:70%;
-	padding: 8px;
-	border: 1px solid #e4e4e4;
-}
-.sectiondiv select{
-	width:30%;
+
+.sectiondiv input {
+	float: left;
+	width: 70%;
 	padding: 8px;
 	border: 1px solid #e4e4e4;
 }
 
-.sectiondiv a:hover{ font-weight: bold;}
-.sectiondiv a:visited, .sectiondiv a:link, .sectiondiv a:active{ text-decoration: none; color: black;}
+.sectiondiv select {
+	width: 30%;
+	padding: 8px;
+	border: 1px solid #e4e4e4;
+}
+
+.sectiondiv a:hover {
+	font-weight: bold;
+}
+
+.sectiondiv a:visited, .sectiondiv a:link, .sectiondiv a:active {
+	text-decoration: none;
+	color: black;
+}
 
 /*페이징 디자인*/
-#numstyle{
+#numstyle {
 	border-radius: 50%;
 	background-color: black;
 	color: white;
 	padding: 8px 12px 8px 12px;
 }
-#paging i{
-   color: silver;
+
+#paging i {
+	color: silver;
 }

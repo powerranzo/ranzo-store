@@ -36,6 +36,7 @@ public class ReservDTO {
 	private String strDate; //시작날짜
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private String endDate; //끝날짜
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private Date reg_date;
 	
 	private int adult_price;
