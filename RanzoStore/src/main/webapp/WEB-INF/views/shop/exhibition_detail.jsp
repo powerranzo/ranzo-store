@@ -105,7 +105,7 @@
 	
 	// 페이스북 공유	
 	function shareFacebook() {
-		var sendUrl = $(location).attr('href') // 전달할 현재 URL
+		var sendUrl = $(location).attr('href').text(); // 전달할 현재 URL
 		window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 	
