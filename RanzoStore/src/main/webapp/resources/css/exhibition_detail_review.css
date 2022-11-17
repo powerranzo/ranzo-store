@@ -1,12 +1,35 @@
 @charset "UTF-8";
 
-.sec-review{
+strong{
+	font-weight: bold;
+	color:orange;	
+}
+
+.sec-review {
 	padding: 10px;
 }
 
-.comment-notice, review-info{
+.comment-notice, review-info {
 	color: grey;
-	
+}
+
+.list-header{
+	display: flex;
+	justify-content: space-between;	
+}
+.list-header span{
+	vertical-align: bottom;	
+}
+
+.list-header a {
+		padding:5px;
+		border: 1px solid;
+		border-color: grey;
+		border-radius:5px;
+		color: grey;
+}
+.list-header a:hover {
+		text-decoration: none;
 }
 
 .review {
@@ -15,7 +38,17 @@
 	font-size: 14px;
 }
 
-.title{
+.rating {
+	color: oragnge;
+}
+
+.title {
 	font-weight: bord;
-	font-size:16px; 
+	font-size: 16px;
+}
+
+@media all and (min-width:768px) {
+	.review-commnet{
+
+	}
 }

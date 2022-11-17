@@ -2,25 +2,24 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head><!-- 다시업로드! -->
 <meta charset="UTF-8">
 <title>관리자페이지</title>
 <%@ include file="../include/header.jsp"%>
-<%@ include file="../include/adminHeader.jspf"%>   
+<%@ include file="../include/adminHeader.jspf"%>
 <style>
 @media screen and (max-width: 800px) {
-	.content{
+	.content {
 		display: block;
-		
 	}
-	.profile{
+	.profile {
 		width: 100%;
-		
 	}
 }
+
 @media screen and (max-width: 1100px) {
-	.profile{
-		display: block;	
+	.profile {
+		display: block;
 		height: 400px;
 	}
 	.recentOrder, .recentWish {
@@ -36,11 +35,13 @@
 	float: left;
 	text-align: left;
 }
+
 .sectiondiv {
 	float: left;
-	margin-left:5%;
-	margin-top:5%;
+	margin-left: 5%;
+	margin-top: 5%;
 }
+
 .profile {
 	width: 77%;
 	height: 30%;
@@ -49,59 +50,69 @@
 	justify-content: space-between;
 	padding: 50px;
 }
+
 .welcome {
 	font-size: 30px;
 }
+
 .myreview, .myinfo {
 	padding: 30px;
-	margin-left:0;
+	margin-left: 0;
 	font-size: 22px;
 }
-.myinfo {padding-left:0;margin-left:0;}
-.adminTable1 {margin:0; width:100%;}
-.adminTable1 td{
-	border-top: 1px solid #e4e4e4;
-	border-collapse: separate;	
+
+.myinfo {
+	padding-left: 0;
+	margin-left: 0;
 }
+
+.adminTable1 {
+	margin: 0;
+	width: 100%;
+}
+
+.adminTable1 td {
+	border-top: 1px solid #e4e4e4;
+	border-collapse: separate;
+}
+
 .recentOrder, .recentWish {
 	display: inline-block;
- 	width: 40%; 
-/* 	height: 100px; */
+	width: 40%;
+	/* 	height: 100px; */
 	margin: 20px;
 	margin-top: 3%;
 }
+
 .a2 {
 	color: gray !important;
-	margin-bottom:0;
+	margin-bottom: 0;
 	font-size: 20px;
 }
-.a2:hover{
+
+.a2:hover {
 	color: black !important;
 	text-decoration: none;
-	font-weight: bold;	
+	font-weight: bold;
 }
-hr{margin-top:0;}
+
+hr {
+	margin-top: 0;
+}
 </style>
-<script type="text/javascript">
-function homeList(n){
-	if(n==1){
-		document.form1.action='${path}/admin/exb_list.do';
-		document.form1.submit();
-	}
-}
-</script>
 </head>
 <body>
 	<%@ include file="../include/menu.jsp"%>
 	<div class="content">
-			<%@ include file="../include/adminDashboard.jspf"%>
-			<div class="sectiondiv">
+	<%@ include file="../include/adminDashboard.jspf"%>
+	
+		<div class="sectiondiv">
 				
 		<section>
 		<div class="profile">
 			<div class="welcome">
-			<strong>TODAY</strong> <p>리포트
-			</div>
+			<strong>TODAY</strong> <p>리포트</p>
+			</div> 
 			<div class="myreview">
 			<img src="${path}/resources/images/pencil_icon.png" height="20">
 			<a class="a2" href="${path}/admin/exb_write.do">전시 등록</a>
@@ -154,12 +165,8 @@ function homeList(n){
 		</section>
 		</div>
 		</div>
-		<form id="form1" name="form1" method="post">
-		<input type="hidden" name="searchOption2" value="ing">
-		<input type="hidden" name="searchOption2" value="ing">
-		</form>
 	<footer>
-		<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../include/footer.jsp"%>
 	</footer>
 </body>
 </html>
