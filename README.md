@@ -31,7 +31,7 @@ power ranzo 파워레인조
 - Backend : Java8, Spring5.2.22, JSP, Jquery, JSON, Ajax, Mybatis
 - DB : Oracle 11g XE
 - WAS : Apache Tomcat 9.0
-- IDE: STS3
+- IDE : STS3
 - Version Management : Git, Github
 - deployment : AWS EC2
 
