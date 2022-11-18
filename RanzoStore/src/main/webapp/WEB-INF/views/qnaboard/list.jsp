@@ -140,44 +140,44 @@ function list(page) {
 	</thead>
 	
 <c:forEach var="row" items="${map.list}">
-
-			<c:choose>
-      <c:when test="${row.show == 'y'}">   
-      <c:choose>
-      <c:when test="${sessionScope.userid == row.writer || sessionScope.admin == 'y'}">
-      <tr>
-         <td>${row.bno}</td>      
-         <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
-         <td>${row.name}(${row.writer})</td>
-         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-         <td style="text-align: center;">${row.viewcnt}</td>
-      </tr>
-      </c:when>
-      <c:otherwise>
-      <tr>
-         <td>${row.bno}</td>
-         <c:choose>
-         <c:when test="${row.writer=='admin'}">
-         <%-- 	<c:when test="${sessionScope.userid == row.writer || sessionScope.admin == 'y' || row.writer=='admin'}">  --%>
-           <td>${row.title}</td>
-         <%--  <c:when test="${row.writer=='admin'}">
-          <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td> --%>
-          </c:when>
-          <c:otherwise>          
-            <td>비밀글입니다.</td>
-          </c:otherwise>
-         </c:choose>
-         <td>${row.name}(${row.writer})</td>
-         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
-         <td style="text-align: center;">${row.viewcnt}</td>
-      </tr>
-      </c:otherwise>
-      </c:choose>   
+<%-- 	<c:out value="${requestScope.pre_bno}" /> --%>
+<%-- 	<c:out value="${requestScope.pre_writer}" /> --%>
+	<c:if test="${row.show == 'y'}">
+	<c:choose>
+	<c:when test="${sessionScope.admin == 'y' || sessionScope.userid == row.writer}">
+		<tr>
+	         <td>${row.bno}</td>      
+	         <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+	         <td>${row.name}(${row.writer})</td>
+	         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+	         <td style="text-align: center;">${row.viewcnt}</td>
+	      </tr>
 	</c:when>
+	<c:when test="${sessionScope.userid == requestScope.pre_writer && requestScope.pre_bno == row.ref}">
+		<tr>
+	         <td>${row.bno}</td>      
+	         <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+	         <td>${row.name}(${row.writer})</td>
+	         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+	         <td style="text-align: center;">${row.viewcnt}</td>
+	      </tr>
+	</c:when>
+	<c:otherwise>
+		<tr>
+         <td>${row.bno}</td>      
+         <td>${row.title}</td>
+         <td>${row.name}(${row.writer})</td>
+         <td><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/> </td>
+         <td style="text-align: center;">${row.viewcnt}</td>
+      	</tr>
+	</c:otherwise>
 	</c:choose>
+	<c:set var="pre_bno" value="${row.ref}" scope="request" />
+	<c:set var="pre_writer" value="${row.writer}" scope="request" />
+	</c:if><!-- show = 'y' -->
 </c:forEach>
 
-<tr>
+	<tr>
 		<td colspan="6" align="center">
 			<c:if test="${map.pager.curBlock > 1}">
 				<a href="#" onclick="list('1')"><i class="fa-solid fa-less-than"></i><i class="fa-solid fa-less-than"></i></a>&nbsp;&nbsp;
