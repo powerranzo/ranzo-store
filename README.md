@@ -53,13 +53,13 @@
 
 <br/>
 
-## 👀기능 구현 영상 
-[Youtube URL](https://youtu.be/qqKLcRuL82c)
+## 👀Youtube URL
+https://youtu.be/qqKLcRuL82c
 
 <br/><br/>
 
 ## 📅개발기간
-### 22.10.14~22.11.18 (총 36일)
+### 22.10.14~22.11.18
 
 <br/>
 
