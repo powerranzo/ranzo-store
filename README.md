@@ -1,5 +1,5 @@
 # 🎫Ranzo-Store
-2조 파워레인조
+power ranzo 파워레인조
 <br/><br/>
   
 ## ✔프로젝트 소개 Description
