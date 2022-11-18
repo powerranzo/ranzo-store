@@ -65,7 +65,7 @@ power ranzo 파워레인조
 
 ## ⚡팀원, 담당기능
 
-|송민지            |김수현           |김현아                             |윤소라          |최규리                 |
+|<img src="https://user-images.githubusercontent.com/106068296/202661621-8daf0423-fb67-47c5-8f36-f187bcf3b807.png" width="300"></br>송민지|<img src="https://user-images.githubusercontent.com/106068296/202666769-6c36ea6d-053e-4284-b880-eceddb223400.png" width="300"></br>김수현|<img src="https://user-images.githubusercontent.com/106068296/202665539-6d65ddce-815c-4435-b16e-858507c8c309.png" width="300"></br>김현아|<img src="https://user-images.githubusercontent.com/106068296/202663595-92e0e332-b5b9-494c-a0a9-ea75d37cbd8f.png" width="300"></br>윤소라|<img src="https://user-images.githubusercontent.com/106068296/202661861-80bbb574-a9ba-4f9a-bb48-db5a916f575a.png" width="300"></br>최규리|
 |------------------|----------------|-----------------------------------|----------------|----------------------|
 |팀장              |화면구성 및 설계 |데이터 베이스 설계                  |리뷰 게시판 CRUD|회원 가입·로그인       |
 |Github 관리       |메인 및 메뉴 관리|회원, QnA, 예매 목록 정렬 및 검색기능|QnA 게시판 CRUD|카카오 로그인           |
