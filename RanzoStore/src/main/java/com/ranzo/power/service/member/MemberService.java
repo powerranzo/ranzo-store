@@ -23,6 +23,10 @@ public interface MemberService {
 	public String getAccessToken(String authorize_code);
 	public MemberDTO getUserInfo(String access_Token);
 	public void kakaoLogout(String access_Token);
-	public List<QnaDTO> qnaList();
-	public List<ReviewDTO> reviewList();
+	public List<QnaDTO> qnaList(String userid, int start, int end);
+	public int countQna(String userid);
+	public List<ReviewDTO> reviewList(String userid, int start, int end);
+	public int countReview(String userid);
+	public List<ExhibitionDTO> wishlist(String userid);
+	public int emptyWish(String userid);
 }

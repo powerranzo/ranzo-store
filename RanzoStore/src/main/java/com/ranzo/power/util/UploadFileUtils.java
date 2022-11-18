@@ -2,21 +2,26 @@ package com.ranzo.power.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileUtils {
 	//로깅
 	private static final Logger logger=LoggerFactory.getLogger(UploadFileUtils.class);
-	
+
 	public static String uploadFile(String uploadPath, 
 			String originalName, byte[] fileData) throws Exception {
 		//uuid 발급
@@ -83,7 +88,7 @@ public class UploadFileUtils {
 		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
 		File newFile = new File(thumbnailName);
 		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-		
+
 		//썸네일 생성
 		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
 		//썸네일의 이름을 리턴
@@ -102,5 +107,52 @@ public class UploadFileUtils {
 		//리턴값을 따로 정할 수 있다.
 		return iconName.substring(uploadPath.length()).replace(
 				File.separatorChar, '/');
+	}
+
+	public static Map<String,Object> uploadFile2(MultipartFile file, 
+			HttpServletRequest request, String dirName) {
+
+		UUID uid=UUID.randomUUID();
+		String savedName = "";
+		//파일명에 "_" 가 포함된 경우 삭제
+		if(file.getOriginalFilename().indexOf("_")!=-1) 
+			savedName = uid.toString()+"_"+file.getOriginalFilename().replace("_", "");
+		else
+			savedName = uid.toString()+"_"+file.getOriginalFilename();
+
+		//... wtpwebapps\RanzoStore\resources\images\
+		String uploadPath = MediaUtils.getServerUploadPath(request);
+		
+		//상위 디렉토리가 없는 경우를 위함
+		String[] dirNames = dirName.split("/");
+		String tmp = "";
+		for(int i=0; i<dirNames.length; i++) {
+			tmp += File.separator + dirNames[i];
+			UploadFileUtils.makeDir(uploadPath, tmp);
+		}
+		
+		File target=new File(uploadPath+dirName, savedName);
+
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Map<String,Object> fileInfo = new HashMap<String,Object>();
+		fileInfo.put("fileUrl", MediaUtils.getFileUrlPath(request)+dirName+"/"+savedName);
+		fileInfo.put("fileName", savedName);
+		fileInfo.put("fileSize", file.getSize());
+		return fileInfo;
+	}
+
+	public static void deleteServerFile(String fileName, 
+			HttpServletRequest request, String dirName) {
+		if(dirName==null) dirName="";
+		if(fileName != null && !fileName.equals("-")) {
+			File f=new File(MediaUtils.getServerUploadPath(request)+dirName+"/"+fileName);
+			if(f.exists()) 
+				f.delete(); 
+		}		 
 	}
 }

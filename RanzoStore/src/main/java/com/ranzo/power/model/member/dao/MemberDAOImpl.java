@@ -94,13 +94,31 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<QnaDTO> qnaList() {
-		return sqlSession.selectList("member.qnaList");
+	public List<QnaDTO> qnaList(String userid, int start, int end) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("member.qnaList", map);
 	}
 
 	@Override
-	public List<ReviewDTO> reviewList() {
-		return sqlSession.selectList("member.reviewList");
+	public int countQna(String userid) {
+		return sqlSession.selectOne("member.countQna", userid);
+	}
+	
+	@Override
+	public List<ReviewDTO> reviewList(String userid, int start, int end) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("member.reviewList", map);
+	}
+	
+	@Override
+	public int countReview(String userid) {
+		return sqlSession.selectOne("member.countReview", userid);
 	}
 
 }

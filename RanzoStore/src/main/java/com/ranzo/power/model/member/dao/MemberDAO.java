@@ -22,6 +22,10 @@ public interface MemberDAO {
 	public void tempPwd(Map<String, String> map);
 	public void kakaoinsert(HashMap<String, Object> userInfo);
 	public MemberDTO findkakao(HashMap<String, Object> userInfo);
-	public List<QnaDTO> qnaList();
-	public List<ReviewDTO> reviewList();
+	public List<QnaDTO> qnaList(String userid, int start, int end);
+	public int countQna(String userid);
+	public List<ReviewDTO> reviewList(String userid, int start, int end);
+	public int countReview(String userid);
+	public List<ExhibitionDTO> wishlist(String userid);
+	public int emptyWish(String userid);
 }

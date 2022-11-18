@@ -33,6 +33,12 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.updateShowN", map);
 	}
 
+	//테이블의 show 컬럼을 y로 변경
+	@Override
+	public void updateShowY(Map<String, Object> map) {
+		sqlSession.update("admin.updateShowY", map);
+		
+	}
 
 	//신규 가입 회원 수
 	@Override
@@ -71,7 +77,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.getMemberReserv", userid);
 	}
 	
-	//선택한 회원 탈퇴
+	//회원 탈퇴(목록)
 	@Override
 	public void deleteMember(Map<String, Object> map) {
 		sqlSession.update("admin.deleteMember", map);
@@ -84,7 +90,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectOne("admin.countExbIng", today);
 	}
 
-	//검색 전시 개수
+	//검색 대상 전시 수
 	@Override
 	public int countSearchExb(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchExb", map);
@@ -132,7 +138,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectOne("admin.countRsvPaid");
 	}
 	
-	//검색 예약 개수
+	//검색 대상 예약 개수
 	@Override
 	public int countSearchRsv(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchRsv", map);
@@ -144,73 +150,79 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.getReservList", map);
 	}
 	
-	//신규 QnA 개수
+	//답변이 필요한 QnA 개수
 	@Override
 	public int countQnaNew() {
 		return sqlSession.selectOne("admin.countQnaNew");
 	}
 	
-	//삭제된 QnA 개수
+	//오늘 등록된 QnA 개수
 	@Override
 	public int countQnaToday(String today) {
 		return sqlSession.selectOne("admin.countQnaToday", today);
 	}
 	
+	//검색 대상 QnA 개수
 	@Override
 	public int countSearchQna(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchQna", map);
 	}
 
+	//검색 QnA 목록
 	@Override
 	public List<QnaDTO> getQnaList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getQnaList", map);
 	}
 
+	//검색 대상 팝업 개수
 	@Override
 	public int countSearchPopup(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.countSearchPopup", map);
 	}
 
+	//검색 팝업 목록
 	@Override
 	public List<PopupDTO> getPopupList(Map<String, Object> map) {
 		return sqlSession.selectList("admin.getPopupList", map);
 	}
 
+	//팝업 상세(수정페이지)
 	@Override
 	public PopupDTO getPopupView(int no) {
 		return sqlSession.selectOne("admin.getPopupView", no);
 	}
 
+	//팝업 등록
 	@Override
 	public void insertPopup(PopupDTO dto) {
 		sqlSession.insert("admin.insertPopup", dto);
 	}
-
+	
+	//팝업 수정
+	@Override
+	public void updatePopup(PopupDTO dto) {
+		sqlSession.update("admin.updatePopup",dto);
+	}
+	
+	//팝업 파일정보 삭제
 	@Override
 	public void deletePopupFile(int no) {
 		sqlSession.update("admin.deletePopupFile",no);
 	}
 
-	@Override
-	public void updatePopup(PopupDTO dto) {
-		sqlSession.update("admin.updatePopup",dto);
-	}
-
-	@Override
-	public void popupShow(int no) {
-		sqlSession.update("admin.popupShow", no);
-	}
-
+	//노출 중인 팝업 목록
 	@Override
 	public List<PopupDTO> getPopupOn(String today) {
 		return sqlSession.selectList("admin.getPopupOn", today);
 	}
 
+	//전시 정보 등록 - 개별 테이블
 	@Override
 	public void insertProductInfo(ProductInfoDTO idto) {
 		sqlSession.insert("admin.insertProductInfo", idto);
 	}
 
+	//전시 정보 수정 - 개별 테이블
 	@Override
 	public void updateProductInfo(ProductInfoDTO idto) {
 		sqlSession.update("admin.updateProductInfo", idto);

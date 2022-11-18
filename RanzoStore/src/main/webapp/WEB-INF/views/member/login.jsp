@@ -67,15 +67,15 @@ body {
 	flex: 1;
 }
 .input-field1 {
-	width: 300px;
-	height: 40px;
+	width: 320px;
+	height: 50px;
 	border: 1px solid gray;
 	padding: 0 10px;
 	margin: 30px 0 10px 0;
 }
 .input-field2 {
-	width: 300px;
-	height: 40px;
+	width: 320px;
+	height: 50px;
 	border: 1px solid gray;
 	padding: 0 10px;
 	margin-bottom: 35px;

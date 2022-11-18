@@ -16,7 +16,7 @@
 .review{
 	margin: auto;
 	width: 80%;
-	margin-top: 10px;
+	margin-top: 10px; 
 }
 h2 a:link{text-decoration: none; color: black;}
 h2 a:visited{text-decoration: none; color: black;}
@@ -189,6 +189,11 @@ td {
    <td colspan="2">${row.name}(${row.writer})</td>
   </tr>
   <tr>
+   <td><span style="color: gray;">
+   <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/></span></td>
+   <td style="text-align: right; font-size: 12px;">| 조회수:${row.viewcnt}</td> 
+  </tr>
+  <tr>
    <td colspan="2"><img src="${row.thumnail}" width="80px"></td>
   </tr>
    <tr>
@@ -203,11 +208,7 @@ td {
 				</c:if>
 			</td>
   </tr>
-  <tr>
-   <td><span style="color: gray;">
-   <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd"/></span></td>
-   <td style="text-align: right; font-size: 12px;">| 조회수:${row.viewcnt}</td> 
-  </tr>
+  
  
  </table>
 </div>

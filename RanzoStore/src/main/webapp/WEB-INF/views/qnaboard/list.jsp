@@ -150,8 +150,11 @@ td {
       <tr>
          <td>${row.bno}</td>
          <c:choose>
-          <c:when test="${row.writer=='admin'}">
-           <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td>
+         <c:when test="${row.writer=='admin'}">
+         <%-- 	<c:when test="${sessionScope.userid == row.writer || sessionScope.admin == 'y' || row.writer=='admin'}">  --%>
+           <td>${row.title}</td>
+         <%--  <c:when test="${row.writer=='admin'}">
+          <td><a href="${path}/board/qna/view.do?bno=${row.bno}">${row.title}</a></td> --%>
           </c:when>
           <c:otherwise>          
             <td>비밀글입니다.</td>

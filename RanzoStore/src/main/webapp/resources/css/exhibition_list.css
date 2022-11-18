@@ -17,6 +17,10 @@
 	height: 100%;
 }
 
+.sec-exhibition .shop-list li a:hover {
+	text-decoration: none;
+}
+
 .sec-exhibition .shop-list li a .prd-info {
 	padding: 15px;
 	flex: 2;

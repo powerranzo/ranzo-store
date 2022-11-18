@@ -82,7 +82,7 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">전시코드</th>
+			<th width="15%">전시명</th>
 			<td>				
 				<select id="product" name="product">
 					<option value="testcode01">루이스 웨인展 in 일산</option>
@@ -92,12 +92,12 @@ $(function(){
 					<option value="testcode06">장 줄리앙</option>
 					<option value="testcode07">화중서가(畵中抒歌) 환기의 노래, 그림이 되다</option>
 					<option value="testcode08">어노니머스 프로젝트</option>
-					<option value="testcode09">2022년 10,11,12월-어둠속의대화(DIALOGUE IN THE DARK)</option>
+					<option value="testcode09">(북촌)2022년 10,11,12월-어둠속의대화(DIALOGUE IN THE DARK)</option>
 					<option value="testcode10">나탈리 카르푸셴코 사진전</option>
 					<option value="testcode11">프랑코 폰타나：컬러 인 라이프</option>
 					<option value="testcode12">모네 인사이드</option>
 					<option value="testcode13">빈센트 발 : The Art of Shadow</option>
-					<option value="testcode14">2022년 10,11,12월-어둠속의대화(DIALOGUE IN THE DARK)</option>
+					<option value="testcode14">(동탄)2022년 10,11,12월-어둠속의대화(DIALOGUE IN THE DARK)</option>
 					<option value="testcode15">영천시 보현산천문과학관</option>
 					<option value="testcode16">하리보 골드베렌 100주년 생일 기념전</option>
 					<option value="testcode17">외규장각 의궤, 그 고귀함의 의미</option>
@@ -117,7 +117,7 @@ $(function(){
 					<option value="testcode31">뒤뷔페전 - 프랑스 현대미술의 거장</option>
 					<option value="testcode32">내셔널지오그래픽 사진전 〈포토아크, 너의 이름은〉</option>
 					<option value="testcode33">63아트 에릭요한슨 사진전</option>
-					<option value="testcode34">아르떼뮤지엄</option>
+					<option value="testcode34">(강릉)아르떼뮤지엄</option>
 					<option value="testcode35">강릉 참소리축음기＆에디슨과학박물관</option>
 					<option value="testcode36">프랑스 자연사박물관 특별전 〈바다, 미지로의 탐험2〉</option>
 					<option value="testcode37">원더래빗 입장권</option>
@@ -131,7 +131,7 @@ $(function(){
 					<option value="testcode45">ZiBEZI IN 지비지 개인전 : 부산</option>
 					<option value="testcode46">K-핸드메이드페어 2022</option>
 					<option value="testcode47">덕수궁 야경투어</option>
-					<option value="testcode48">아르떼뮤지엄</option>
+					<option value="testcode48">(여수)아르떼뮤지엄</option>
 					<option value="testcode49">조선셰프 서유구</option>
 					<option value="testcode50">그리스신화박물관＆트릭아이미술관</option>
 					<option value="testcode51">고흐의 정원</option>
