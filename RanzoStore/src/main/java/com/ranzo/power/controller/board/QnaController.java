@@ -15,13 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.QnaDTO;
+import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.QnaService;
 
@@ -61,13 +61,9 @@ public class QnaController {
 		return mav;		
 	}
 	
-	@RequestMapping(value ={"write.do", "write.do/{exhibitionCode}"})
-	public ModelAndView write(@PathVariable(required=false) String exhibitionCode) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exhibitionCode", exhibitionCode);
-		mav.setViewName("qnaboard/write");
-		logger.info("###write.do/{code}/mav="+mav);
-		return mav; 
+	@RequestMapping("write.do")
+	public String write() {
+		return "qnaboard/write";
 	}
 
 	@RequestMapping("insert.do")
@@ -92,7 +88,7 @@ public class QnaController {
 				e.printStackTrace();
 			}
 		} else {
-			fileName="-";
+			fileName="(null)";
 		}
 		dto.setFileName(fileName);
 		
@@ -193,13 +189,7 @@ public class QnaController {
 		qnaService.update_reply(dto);
 		//레코드 저장
 		qnaService.create_reply(dto);
-		//관리자 확인
-		String admin = (String)session.getAttribute("admin");
-		if(admin.equals("y")) {
-			return "redirect:/admin/qna_list.do";
-		}else {
-			return "redirect:/board/qna/list.do";	
-		}
+		return "redirect:/board/qna/list.do";	
 	}
 	
 	@RequestMapping("getQnaInfo")
@@ -210,10 +200,9 @@ public class QnaController {
 		int count = qnaService.countArticle(code);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("code", code); 
-		map.put("qnaInfo", qnaInfo); 
-		map.put("count", count); 
-		mav.addObject("map", map); 	
+		map.put("qnaInfo", qnaInfo); // map에 자료 저장
+		map.put("count", count); //레코드 개수 파일
+		mav.addObject("map", map); // 보낼 데이터		
 		mav.setViewName("shop/exhibition_detail_qna");
 		logger.info("### qnController/getQnaInfo/qnaInfo {}. " + qnaInfo);
 		logger.info("### qnController/getQnaInfo/mav {}. " + mav);

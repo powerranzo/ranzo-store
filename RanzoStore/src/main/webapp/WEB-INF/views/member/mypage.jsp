@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="${path}/resources/css/CommonDashboard.css">
 <style type="text/css">
 *{
 	margin: 0;
@@ -31,19 +32,10 @@ section {
 	flex: 1;
 }
 .profile {
-	margin: 8% 0 0 8%;
-	width: 77%;
-	height: 30%;
-	background-color: #ecedf2;
-	display: flex;
-	justify-content: space-between;
-	padding: 50px;
+	width: 90%;
+	height: 200px;
+	background-color: rgb(230, 230, 230);
 }
-
-.profile2 {
-	margin: 1% 0 0 8%;
-}
-
 .welcome {
 	font-size: 30px;
 	margin-top: 40px;
@@ -66,21 +58,6 @@ section {
 	width: 350px;
 }
 
-@media screen and (max-width: 1100px) {
-	.profile{
-		display: block;	
-		height: 400px;
-		background-color: #ecedf2;
-	}
-	.recentOrder, .recentWish {
-		display: block;
-		width: 100%;
-		height: 300px;
-		margin: 20px;
-		
-	}
-}
-hr{margin-top:0;}
 
 @media screen and (max-width: 800px) {
 	/* .content{
@@ -89,7 +66,7 @@ hr{margin-top:0;}
 	} */
 	.profile{
 		width: 100%;
-	}
+
 
 .recentWish {
 	margin: 20px 10px 10px 30px;
@@ -140,23 +117,21 @@ function orderlist(){
 		<article class="recentOrder">
 			<div class="title-s">
 			<img src="${path}/resources/images/ticket_icon.png" height="25">
-			<a class="a2" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a>
- 			<hr noshade size="1px" color="#ecedf2"> 
+			<a class="a1" href="${path}/reserv/list.do/${sessionScope.userid}">최근 예매 내역 ></a></div>
+ 			<hr noshade size="1px" color="black"> 
  			<div id="resultList"></div>
 		</article>
 		<article class="recentWish">
 			<div class="title-s">
 			<img src="${path}/resources/images/favorite1.png" height="25">
-			<a class="a2" href="${path}/member/wishlist.do">최근 찜한 상품 ></a>
- 			<hr noshade size="1px" color="#ecedf2"> 
- 		<div id="miniWish"></div>
-		</div>
-		</div>
-		</section>
-	</div>
-
-
-	<footer>
+			<a class="a1" href="#">최근 찜한 상품 ></a></div>
+ 			<hr noshade size="1px" color="black"> 
+ 			<div>아직</div>
+		</article>
+	 </div>
+	</section>
+</div>
+<footer>
 <%@ include file="../include/footer.jsp" %>
 </footer>
 </body>

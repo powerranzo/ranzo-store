@@ -98,43 +98,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 마이페이지 - 상품 문의 -->
 	<select id="qnaList" resultType="com.ranzo.power.model.board.dto.QnaDTO">
-		select *
-			from (
-				select rownum as rn, A.*
-					from (
-						select bno, title, writer, reg_date, viewcnt, re_depth, show
-						from qna_tb
-						where writer = #{userid}
-						order by ref desc, re_depth asc
-					) A
-				) where rn between #{start} and #{end} 
-	</select>
-	
-	<!-- 상품 문의 레코드 계산 -->
-	<select id="countQna" resultType="int">
-		select count(*) from qna_tb
-		where writer = #{userid}
+		select * from ( 
+				select bno, title, content, writer, reg_date, viewcnt, show 
+				from qna_tb
+				order by ref desc, re_depth asc) 
 	</select>
 	
 	<!-- 마이페이지 - 고객 리뷰 -->
 	<select id="reviewList" resultType="com.ranzo.power.model.board.dto.ReviewDTO">
-		select *
-         from (
-             select rownum as rn, A.*
-             from (
-                     select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, r.reg_date, r.viewcnt, r.show
-                     ,(select count(*) from review_reply_tb where bno=r.bno) cnt
-                     from review_tb r, exhibition_tb e
-                     where r.writer=#{userid} and r.product=e.code
-                     order by r.bno desc
-             ) A    
-         ) where rn between #{start} and #{end}
-	</select>
-	
-	<!-- 고객 리뷰 레코드 계산 -->
-	<select id="countReview" resultType="int">
-		select count(*) from review_tb
-		where writer = #{userid}
+		select * from ( 
+				select r.bno, r.rating, r.product, e.title, r.subject, r.content, r.writer, r.reg_date, r.viewcnt, r.show,
+					(select count(*) from review_reply_tb where bno=r.bno) cnt
+				from review_tb r, member_tb m, exhibition_tb e
+				where r.writer=m.userid and r.product=e.code) 
 	</select>
 	
 </mapper>

@@ -36,15 +36,12 @@ public class ReservDTO {
 	private String strDate; //시작날짜
 	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private String endDate; //끝날짜
-	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	private Date reg_date;
 	
 	
 
 	
 
-	
-	private String show;
 	
 	public ReservDTO() {
 
@@ -57,6 +54,8 @@ public class ReservDTO {
 		this.kids = kids;
 		this.res_date = res_date;
 	}
+	
+
 
 	public Date getReg_date() {
 		return reg_date;
@@ -287,20 +286,11 @@ public class ReservDTO {
 	public void setEdit(int edit) {
 		this.edit = edit;
 	}
-	
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
 
 	public ReservDTO(int no, String userid, String code, Date res_date, int adult, int teen, int kids, int quantity,
 			int sub_total, String title, String gallery, String name, String pay, String thumnail, String zipcode,
 			String addr1, String addr2, String hp, String r_name, String r_zipcode, String r_addr1, String r_addr2,
-			String r_hp, int edit, String filterDate, String strDate, String endDate, String show) {
+			String r_hp, int edit, String filterDate, String strDate, String endDate) {
 		super();
 		this.no = no;
 		this.userid = userid;
@@ -329,7 +319,6 @@ public class ReservDTO {
 		this.filterDate = filterDate;
 		this.strDate = strDate;
 		this.endDate = endDate;
-		this.show = show;
 	}
 
 	@Override
@@ -340,6 +329,8 @@ public class ReservDTO {
 				+ thumnail + ", zipcode=" + zipcode + ", addr1=" + addr1 + ", addr2=" + addr2 + ", hp=" + hp
 				+ ", r_name=" + r_name + ", r_zipcode=" + r_zipcode + ", r_addr1=" + r_addr1 + ", r_addr2=" + r_addr2
 				+ ", r_hp=" + r_hp + ", edit=" + edit + ", filterDate=" + filterDate + ", strDate=" + strDate
-				+ ", endDate=" + endDate + ", show=" + show + "]";
+				+ ", endDate=" + endDate + "]";
 	}
+
+	
 }

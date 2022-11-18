@@ -83,10 +83,7 @@ $(function(){ //페이지가 뜨자마자 실행
 	<c:if test="${dto.fileName ne null}">
 			<tr>
 				<th>업로드된 파일</th>
-				<td>
-					<a href="${path}/board/download/fileDownload.do?fileName=${dto.fileName}">${dto.fileName}</a>
-				</td>
-
+				<td><a href="${path}/board/download/fileDownload.do?fileName=${dto.fileName}">${dto.fileName}</a></td>
 			</tr>
 	</c:if>
  </table>	

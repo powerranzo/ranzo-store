@@ -92,11 +92,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into qna_tb (bno,title,content,writer,ref,re_order,re_depth, reply_state) values
 	  (seq_qna.nextval, #{title}, #{content}, #{writer}, #{bno}, #{re_order}+1, #{re_depth}+1, 'y')
 	</insert>
-	
-	<update id="update_state">
-		update qna_tb set reply_state='y'
-		where bno=#{bno}
-	</update>
 
 	<select id="countArticleExhibition" resultType="int">
 		select count(*)

@@ -71,12 +71,6 @@ public class QnaDAOImpl implements QnaDAO {
 		sqlSession.insert("qna.insert_reply", dto);
 	}
 
-	//원글 수정
-	@Override
-	public void update_state(int bno) {
-		sqlSession.update("qna.update_state", bno);
-	}
-	
 	//답글 순서 조정
 	@Override
 	public void update_reply(QnaDTO dto) throws Exception {
@@ -96,4 +90,5 @@ public class QnaDAOImpl implements QnaDAO {
 		logger.info("### QnaDAO/count" + count);
 		return count;
 	}
+
 }

@@ -61,10 +61,10 @@ function nameChk() {
 function valid(){
 	if(checking == false){
 		if(pwdChecking == false){
-			alert("비밀번호를 다시 한 번 확인해주세요.");
+			alertify.alert("비밀번호를 다시 한 번 확인해주세요.");
 			checking = false;
 		}else if(nameChecking == false){
-			alert("이름을 입력해주세요.");
+			alertify.alert("이름을 입력해주세요.");
 			checking = false;
 		}else {
 			checking = true;

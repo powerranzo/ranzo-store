@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ranzo.power.model.board.dto.ReviewDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
 import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.board.ReviewService;
 
@@ -55,13 +54,9 @@ public class ReviewController {
 		return mav;
 	}
 
-	@RequestMapping(value ={"write.do", "write.do/{exhibitionCode}"})
-	public ModelAndView write(@PathVariable(required=false) String exhibitionCode) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("exhibitionCode", exhibitionCode);
-		mav.setViewName("reviewboard/write");
-		logger.info("###write.do/{code}/mav="+mav);
-		return mav; 
+	@RequestMapping("write.do")
+	public String write() {
+		return "reviewboard/write";
 	}
 
 	@RequestMapping("insert.do")
@@ -134,10 +129,9 @@ public class ReviewController {
 		logger.info("### getReviewInfo/count = " + count);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("code", code); 
-		map.put("reviewInfo", reviewInfo); 
-		map.put("count", count);
-		map.put("avgRating", avgRating); 
+		map.put("reviewInfo", reviewInfo); // map에 자료 저장
+		map.put("count", count); //레코드 개수 파일
+		map.put("avgRating", avgRating); //레코드 개수 파일
 		mav.addObject("map", map); // 보낼 데이터
 		
 		mav.setViewName("shop/exhibition_detail_review");

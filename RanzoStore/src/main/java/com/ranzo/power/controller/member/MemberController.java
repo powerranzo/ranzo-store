@@ -21,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ranzo.power.model.board.dto.QnaDTO;
 import com.ranzo.power.model.board.dto.ReviewDTO;
 import com.ranzo.power.model.member.dto.MemberDTO;
-import com.ranzo.power.model.shop.dto.ExhibitionDTO;
-import com.ranzo.power.service.board.Pager;
 import com.ranzo.power.service.member.MemberService;
 
 @Controller
@@ -250,49 +248,25 @@ public class MemberController {
 	
 	//마이페이지 - 상품 문의
 	@RequestMapping("myInquiry.do")
-	public ModelAndView myInquiry(
-			@RequestParam(defaultValue = "1") int curPage, 
-			HttpSession session) throws Exception {
-		//레코드 개수 계산
-		String userid = (String) session.getAttribute("userid");
-		int count = memberService.countQna(userid);
-		//페이지 관련 설정
-		Pager pager = new Pager(count, curPage);
-		int start = pager.getPageBegin();
-		int end = pager.getPageEnd();
-				
-		List<QnaDTO> list = memberService.qnaList(userid,start,end);
+	public ModelAndView myInquiry() {
+		List<QnaDTO> list=memberService.qnaList();
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<>();
-		map.put("list", list); //map에 자료 저장
-		map.put("count", count); //레코드 개수 파일
-		map.put("pager", pager); //페이지 네비게이션을 위한 변수
+		map.put("list", list); 
 		mav.setViewName("member/myInquiry");
-		mav.addObject("map", map); //보낼 데이터
+		mav.addObject("map", map);
 		return mav;
 	}
 	
 	//마이페이지 - 상품 문의
 	@RequestMapping("myReview.do")
-	public ModelAndView myReview(
-			@RequestParam(defaultValue = "1") int curPage, 
-			HttpSession session) throws Exception {
-		//레코드 개수 계산
-		String userid = (String) session.getAttribute("userid");
-		int count = memberService.countReview(userid);
-		//페이지 관련 설정
-		Pager pager = new Pager(count, curPage);
-		int start = pager.getPageBegin();
-		int end = pager.getPageEnd();
-		
-		List<ReviewDTO> list=memberService.reviewList(userid,start,end);
+	public ModelAndView myReview() {
+		List<ReviewDTO> list=memberService.reviewList();
 		logger.info(list.toString());
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<>();
 		map.put("list", list); 
-		map.put("count", count); //레코드 개수 파일
-		map.put("pager", pager); //페이지 네비게이션을 위한 변수
 		mav.setViewName("member/myReview");
 		mav.addObject("map", map);
 		return mav;

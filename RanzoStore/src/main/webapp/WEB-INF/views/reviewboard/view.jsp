@@ -98,8 +98,8 @@ function listReply(){
 			</td>
 		</tr>
 		<tr>
-			<th width="15%">전시명</th>
-			<td><a href="${path}/shop/exhibition/detail/${dto.product}">${dto.title}</a></td>
+			<th width="15%">전시코드</th>
+			<td>${dto.product}</td>
 		</tr>
 		<tr>
 			<th width="15%">제목</th>

@@ -316,23 +316,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<QnaDTO> qnaList(String userid, int start, int end) {
-		return memberDao.qnaList(userid, start, end);
-	}
-	
-	@Override
-	public int countQna(String userid) {
-		return memberDao.countQna(userid);
+	public List<QnaDTO> qnaList() {
+		return memberDao.qnaList();
 	}
 
 	@Override
-	public List<ReviewDTO> reviewList(String userid, int start, int end) {
-		return memberDao.reviewList(userid, start, end);
-	}
-	
-	@Override
-	public int countReview(String userid) {
-		return memberDao.countReview(userid);
+	public List<ReviewDTO> reviewList() {
+		return memberDao.reviewList();
 	}
 
 }

@@ -19,6 +19,5 @@ public interface QnaDAO {
 	
 	public List<QnaDTO> getQnaInfo(String code);
 	public int countArticle(String code);
-	public void update_state(int bno);
 
 }
