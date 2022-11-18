@@ -53,8 +53,8 @@
 
 <br/>
 
-## 👀Youtube URL
-https://youtu.be/qqKLcRuL82c
+## 👀기능 구현 영상 
+[Youtube URL](https://youtu.be/qqKLcRuL82c)
 
 <br/><br/>
 
