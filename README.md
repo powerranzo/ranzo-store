@@ -1,7 +1,7 @@
 # 🎫Ranzo-Store
-power ranzo 파워레인조
-<br/><br/>
-  
+### power ranzo 파워레인조
+<br/>
+
 ## ✔프로젝트 소개 Description
 
 - 프로젝트 주제 : </br>
@@ -59,7 +59,7 @@ power ranzo 파워레인조
 <br/><br/>
 
 ## 📅개발기간
-22.10.14~22.11.18
+### 22.10.14~22.11.18
 
 <br/>
 
